@@ -4,8 +4,8 @@ import { locale as portugues } from './../i18n/pt-br';
 
 @Component({
     selector: 'curso',
-    templateUrl: './curso.component.html',
-    styleUrls: ['./curso.component.scss']
+    templateUrl: './view/curso.component.html',
+    styleUrls: ['./view/curso.component.scss']
 })
 export class CursoComponent {
     constructor(

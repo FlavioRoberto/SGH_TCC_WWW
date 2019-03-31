@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
-import { locale as portugues } from './../i18n/pt-br';
+import { locale as portugues } from '../i18n/pt-br';
 
 @Component({
     selector: 'turno',
-    templateUrl: './turno.component.html',
-    styleUrls: ['./turno.component.scss']
+    templateUrl: './view/turno.component.html',
+    styleUrls: ['./view/turno.component.scss']
 })
 export class TurnoComponent {
     datasource: [any] = [{}];

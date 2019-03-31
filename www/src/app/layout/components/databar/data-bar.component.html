@@ -67,7 +67,15 @@
             </button>
             <!-- BTN_REMOVER -->
 
-            <span class="status">{{ status }}</span>
+            <button
+                *ngIf="status"
+                mat-button
+                color="primary"
+                class="mr-8"
+                matTooltip="Ação no momento"
+            >
+                <span class="status">{{ status }}</span>
+            </button>
         </div>
 
         <div fxLayout="row" fxLayoutAlign="center center">
