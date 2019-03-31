@@ -1,0 +1,30 @@
+<!-- HEADER -->
+<div
+    class="header accent p-24 h-160"
+    fxLayout="row"
+    fxLayoutAlign="start center"
+    style="width: 100%"
+>
+    <div fxLayout="column" fxLayoutAlign="center start">
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <mat-icon class="secondary-text s-18">home</mat-icon>
+                <mat-icon class="secondary-text s-16">chevron_right</mat-icon>
+            </div>
+            <div
+                fxLayout="row"
+                *ngFor="let nav of navegacao; index as i"
+                fxLayoutAlign="center center"
+            >
+                <span class="secondary-text">{{ nav }}</span>
+                <mat-icon
+                    class="secondary-text s-16"
+                    *ngIf="navegacao.length - 1 > i"
+                    >chevron_right</mat-icon
+                >
+            </div>
+        </div>
+        <div class="h2 mt-16">{{ titulo }}</div>
+    </div>
+</div>
+<!-- / HEADER -->

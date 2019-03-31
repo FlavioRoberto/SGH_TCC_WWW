@@ -5,6 +5,7 @@ import { CurriculoModule } from './curriculo/curriculo.module';
 import { CursoModule } from './curso/curso.module';
 import { DisciplinaModule } from './disciplina/disciplina.module';
 import { TurnoModule } from './turno/turno.module';
+import { MatIconModule } from '@angular/material';
 
 @NgModule({
     imports: [

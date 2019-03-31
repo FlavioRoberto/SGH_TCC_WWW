@@ -5,6 +5,11 @@ import { SampleModule } from './sample/sample.module';
 import { GerenciamentoModule } from './gerenciamento/gerenciamento.module';
 
 @NgModule({
-    imports: [TranslateModule, FuseSharedModule, SampleModule,GerenciamentoModule]
+    imports: [
+        TranslateModule,
+        FuseSharedModule,
+        SampleModule,
+        GerenciamentoModule
+    ]
 })
 export class MainModule {}

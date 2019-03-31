@@ -35,7 +35,6 @@ const appRoutes: Routes = [
         HttpClientModule,
         RouterModule.forRoot(appRoutes),
         TranslateModule.forRoot(),
-        MaterialModule,
         // Fuse modules
         FuseModule.forRoot(fuseConfig),
         FuseProgressBarModule,

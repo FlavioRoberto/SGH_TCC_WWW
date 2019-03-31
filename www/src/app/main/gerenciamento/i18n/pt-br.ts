@@ -1,6 +1,11 @@
 export const locale = {
     lang: 'pt-br',
     data: {
-        GERENCIAMENTO: {}
+        GERENCIAMENTO: {
+            TITULO: 'Gerenciamento',
+            TURNO: {
+                TITULO: 'Turno'
+            }
+        }
     }
 };

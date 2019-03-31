@@ -8,6 +8,7 @@ import { locale as portugues } from './../i18n/pt-br';
     styleUrls: ['./turno.component.scss']
 })
 export class TurnoComponent {
+    private navegacao: [String] = ['Gerenciamento'];
     constructor(
         private _fuseTranslationLoaderService: FuseTranslationLoaderService
     ) {
