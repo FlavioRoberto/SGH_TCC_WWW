@@ -27,7 +27,7 @@ export const navigation: FuseNavigation[] = [
                         title: 'Currículo',
                         translate: 'NAV.GERENCIAMENTO.CURRICULO',
                         type: 'item',
-                        icon: 'library_add',
+                        icon: 'list_alt',
                         url: '/gerenciamento/curriculo'
                     },
                     {
@@ -35,7 +35,7 @@ export const navigation: FuseNavigation[] = [
                         title: 'Disciplina',
                         translate: 'NAV.GERENCIAMENTO.DISCIPLINA',
                         type: 'item',
-                        icon: 'library_add',
+                        icon: 'collections_bookmark',
                         url: '/gerenciamento/disciplina'
                     },
                     {
