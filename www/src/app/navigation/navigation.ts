@@ -2,10 +2,11 @@ import { FuseNavigation } from '@fuse/types';
 
 export const navigation: FuseNavigation[] = [
     {
-        id: 'aplicacao',
+        id: 'applications',
         title: 'Aplicação',
         translate: 'NAV.APPLICATIONS',
         type: 'group',
+        icon: 'apps',
         children: [
             {
                 id: 'gerenciamento',
