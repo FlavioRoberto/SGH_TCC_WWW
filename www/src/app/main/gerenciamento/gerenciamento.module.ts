@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FuseSharedModule } from '@fuse/shared.module';
-
-const routes = [
-    // {
-    //     path: 'turno',
-    //     //component: SampleComponent
-    // }
-];
+import { CurriculoModule } from './curriculo/curriculo.module';
+import { CursoModule } from './curso/curso.module';
+import { DisciplinaModule } from './disciplina/disciplina.module';
+import { TurnoModule } from './turno/turno.module';
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), TranslateModule, FuseSharedModule]  
+    imports: [
+        TranslateModule,
+        FuseSharedModule,
+        CurriculoModule,
+        CursoModule,
+        DisciplinaModule,
+        TurnoModule
+    ]
 })
 export class GerenciamentoModule {}

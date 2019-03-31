@@ -15,20 +15,20 @@ export const navigation: FuseNavigation[] = [
                 icon: 'library_add',
                 children: [
                     {
-                        id: 'turno',
-                        title: 'Turno',
-                        translate: 'NAV.GERENCIAMENTO.TURNO',
-                        type: 'item',
-                        icon: 'access_time',
-                        url: '/gerenciamento/turno'
-                    },
-                    {
                         id: 'curso',
                         title: 'Curso',
                         translate: 'NAV.GERENCIAMENTO.CURSO',
                         type: 'item',
                         icon: 'school',
                         url: '/gerenciamento/curso'
+                    },
+                    {
+                        id: 'curriculo',
+                        title: 'Currículo',
+                        translate: 'NAV.GERENCIAMENTO.CURRICULO',
+                        type: 'item',
+                        icon: 'library_add',
+                        url: '/gerenciamento/curriculo'
                     },
                     {
                         id: 'disciplina',
@@ -39,12 +39,12 @@ export const navigation: FuseNavigation[] = [
                         url: '/gerenciamento/disciplina'
                     },
                     {
-                        id: 'curriculo',
-                        title: 'Currículo',
-                        translate: 'NAV.GERENCIAMENTO.CURRICULO',
+                        id: 'turno',
+                        title: 'Turno',
+                        translate: 'NAV.GERENCIAMENTO.TURNO',
                         type: 'item',
-                        icon: 'library_add',
-                        url: '/gerenciamento/curriculo'
+                        icon: 'access_time',
+                        url: '/gerenciamento/turno'
                     }
                 ]
             }
