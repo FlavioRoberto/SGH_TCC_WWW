@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
     styleUrls: ['./header-descricao.component.scss']
 })
 export class HeaderDescricaoComponent {
-    @Input() public navegacao: [String];
+    @Input() navegacao: [String];
     @Input() titulo: String;
     constructor() {}
 }

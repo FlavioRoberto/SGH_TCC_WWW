@@ -5,6 +5,15 @@ export const locale = {
             TITULO: 'Gerenciamento',
             TURNO: {
                 TITULO: 'Turno'
+            },
+            DISCIPLINA: {
+                TITULO: 'Disciplina'
+            },
+            CURRICULO: {
+                TITULO: 'Currículo'
+            },
+            CURSO: {
+                TITULO: 'Curso'
             }
         }
     }
