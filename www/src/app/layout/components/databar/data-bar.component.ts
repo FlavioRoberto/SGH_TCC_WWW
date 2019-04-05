@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { IDataBarBind } from './contrato/IDataBarBind';
+
 
 @Component({
     selector: 'data-bar',
@@ -6,22 +8,30 @@ import { Component } from '@angular/core';
     styleUrls: ['./data-bar.component.scss']
 })
 export class DataBarComponent {
+    @Input() acoesViewModel: IDataBarBind<any>;
     status: String = '';
     paginaAtual: number = 1;
     paginaTotal: number = 10;
 
-    constructor() {}
+    constructor() {
+
+    }
 
     novaPesquisa(): void {
         this.status = 'Nova Pesquisa';
+
     }
 
     pesquisar(): void {
+
         this.status = 'Pesquisando';
+        this.acoesViewModel.ListarPor();
     }
 
     inserir(): void {
         this.status = 'Inserindo';
+        console.log(this.acoesViewModel);
+        this.acoesViewModel.Criar();
     }
 
     editar(): void {
