@@ -12,6 +12,7 @@ import {
 } from '@angular/material';
 import { HeaderDescricaoModule } from 'app/layout/components/header-descricao/header-descricao.module';
 import { DataBarModule } from 'app/layout/components/databar/data-bar.module';
+import { InputMaxLengthModule } from 'app/layout/components/app_components/input-max-length/input-max-length.module';
 
 const routes = [
     {
@@ -30,7 +31,8 @@ const routes = [
         MatTableModule,
         MatInputModule,
         HeaderDescricaoModule,
-        DataBarModule
+        DataBarModule,
+        InputMaxLengthModule
     ],
     exports: [TurnoComponent]
 })

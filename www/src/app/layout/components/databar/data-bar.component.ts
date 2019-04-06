@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { IDataBarBind } from './contrato/IDataBarBind';
+import { FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -9,36 +10,48 @@ import { IDataBarBind } from './contrato/IDataBarBind';
 })
 export class DataBarComponent {
     @Input() acoesViewModel: IDataBarBind<any>;
-    status: String = '';
-    paginaAtual: number = 1;
-    paginaTotal: number = 10;
+    @Input() form: FormGroup;
+    @Output() statusChanged = new EventEmitter<string>();
+    status: string = '';
+
+    public operacao;
+    paginaAtual = 1;
+    paginaTotal = 10;
 
     constructor() {
+        console.log(this.form);
+    }
 
+    private setStatus(status: string): void {
+        this.status = status;
+        this.statusChanged.emit(this.status);
     }
 
     novaPesquisa(): void {
-        this.status = 'Nova Pesquisa';
-
+        this.setStatus('Nova Pesquisa');
     }
 
     pesquisar(): void {
-
-        this.status = 'Pesquisando';
+        this.setStatus('Pesquisando');
         this.acoesViewModel.ListarPor();
     }
 
     inserir(): void {
-        this.status = 'Inserindo';
-        console.log(this.acoesViewModel);
-        this.acoesViewModel.Criar();
+        this.setStatus('Inserindo');
     }
 
     editar(): void {
-        this.status = 'Editando';
+        this.setStatus('Editando');
     }
 
     remover(): void {
-        this.status = 'Removendo';
+        this.setStatus('Removendo');
+    }
+
+    salvar(): void {
+        switch (this.status) {
+            case 'Inserindo': this.acoesViewModel.Criar(); break;
+            case 'Editando': break;
+        }
     }
 }

@@ -9,7 +9,8 @@ export const locale = {
                 CURSO: 'Curso',
                 DISCIPLINA: 'Disciplina',
                 CURRICULO: 'Currículo'
-            }
+            },
+            CAMPO_OBRIGATORIO: 'Campo obrigatório'
         }
     }
 };
