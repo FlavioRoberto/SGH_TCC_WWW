@@ -11,7 +11,8 @@ export class routesApi {
     getRoutes(): any {
         return {
             turno: {
-                listarPor: this.API + '/turno/listarPor'
+                listarTodos: this.API + '/turno',
+                criar: this.API + '/turno'
             }
         }
 

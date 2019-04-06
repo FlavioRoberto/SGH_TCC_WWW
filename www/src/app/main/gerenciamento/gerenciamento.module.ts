@@ -19,4 +19,4 @@ import { HeaderDescricaoModule } from 'app/layout/components/header-descricao/he
         TurnoModule
     ]
 })
-export class GerenciamentoModule {}
+export class GerenciamentoModule { }

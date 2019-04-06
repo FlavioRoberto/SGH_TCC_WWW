@@ -6,13 +6,11 @@ import { TurnoComponent } from './turno.component';
 import {
     MatIconModule,
     MatTableModule,
-    MatFormFieldModule,
-    MatFormFieldControl,
     MatInputModule
 } from '@angular/material';
 import { HeaderDescricaoModule } from 'app/layout/components/header-descricao/header-descricao.module';
-import { DataBarModule } from 'app/layout/components/databar/data-bar.module';
 import { InputMaxLengthModule } from 'app/layout/components/app_components/input-max-length/input-max-length.module';
+import { DataBarModule } from 'app/layout/components/app_components/databar/data-bar.module';
 
 const routes = [
     {
@@ -36,4 +34,4 @@ const routes = [
     ],
     exports: [TurnoComponent]
 })
-export class TurnoModule {}
+export class TurnoModule { }

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { locale as portugues } from '../i18n/pt-br';
-import { IDataBarBind } from 'app/layout/components/databar/contrato/IDataBarBind';
 import { ITurno } from './model/turno.interface';
 import { TurnoService } from './service/turno.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { EventEmitter } from 'protractor';
+import { IDataBarBind } from 'app/layout/components/app_components/databar/contrato/IDataBarBind';
 
 @Component({
     selector: 'turno',
@@ -22,9 +21,7 @@ export class TurnoComponent implements IDataBarBind<ITurno>{
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         private _turnoService: TurnoService,
         private _formBuilde: FormBuilder
-    ) {
-
-    }
+    ) { }
 
     ngOnInit(): void {
         this._fuseTranslationLoaderService.loadTranslations(portugues);
@@ -45,14 +42,18 @@ export class TurnoComponent implements IDataBarBind<ITurno>{
     }
 
     Criar(): void {
-        console.log('opa meu consagrado...');
+        let turno = this.turnoForm.getRawValue() as ITurno;
+        this._turnoService.criarTurno(turno)
+            .subscribe(success => console.log(success), error => console.log(error));
     }
 
     ListarPor(): void {
+        console.log('listando...')
         this._turnoService
-            .listarPeloCodigo(1)
+            .listarTodos()
             .subscribe((success: ITurno[]) => {
-                this.turno = success[0];
+                console.log(success)
+                this.turnoForm.setValue(success[0]);
             }, error => {
                 console.log(error);
             });

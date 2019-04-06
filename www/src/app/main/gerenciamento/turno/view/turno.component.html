@@ -1,4 +1,4 @@
-<div class="page-layout simple fullwidth">
+<div class="page-layout simple fullwidth" style="background: white">
     <!-- HEADER -->
     <header-descricao [navegacao]="['Gerenciamento']" titulo="{{ 'GERENCIAMENTO.TURNO.TITULO' | translate }}">
     </header-descricao>
@@ -12,8 +12,8 @@
             <!-- CODIGO -->
             <mat-form-field *ngIf="statusNavBar != 'Inserindo'" appearance="outline" class="pr-sm-8" fxFlex="20">
                 <mat-label>Código</mat-label>
-                <input [disabled]="statusNavBar == 'Editando'" matInput class="primary-color-input border-radius-4"
-                    name="primary color" formControlName="codigo" />
+                <input [disabled]="true" matInput class="primary-color-input border-radius-4" name="primary color"
+                    formControlName="codigo" />
             </mat-form-field>
             <!-- CODIGO -->
 

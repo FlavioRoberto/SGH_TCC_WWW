@@ -6,11 +6,15 @@ import { BaseService } from 'app/compartilhado/services/base.service';
 @Injectable({
     providedIn: 'root'
 })
-export class TurnoService extends BaseService {
+export class TurnoService extends BaseService<ITurno> {
 
-    listarPeloCodigo(codigo: number): Observable<ITurno[]> {
-        return this.http.get<ITurno[]>(
-            this.rota.listarPor + '/' + codigo
-        );
+    listarTodos() {
+        return this.getAll(this.rota.turno.listarTodos);
     }
+
+    criarTurno(turno: ITurno) {
+        console.log(turno)
+        return this.post(turno, this.rota.turno.criar);
+    }
+
 }

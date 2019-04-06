@@ -29,6 +29,7 @@ export class DataBarComponent {
 
     novaPesquisa(): void {
         this.setStatus('Nova Pesquisa');
+        this.form.reset();
     }
 
     pesquisar(): void {
@@ -38,6 +39,7 @@ export class DataBarComponent {
 
     inserir(): void {
         this.setStatus('Inserindo');
+        this.form.reset();
     }
 
     editar(): void {
