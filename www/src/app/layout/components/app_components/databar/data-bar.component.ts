@@ -28,14 +28,20 @@ export class DataBarComponent {
         this.statusChanged.emit(this.status);
     }
 
+    private _getEntidade(): any {
+        return this.form.getRawValue();
+    }
+
     novaPesquisa(): void {
         this.setStatus('Nova Pesquisa');
         this.form.reset();
-        this.entidadePaginada = null;
+        this.entidadePaginada.posicao = 0;
+        this.entidadePaginada.total = 0;
     }
 
     pesquisar(): void {
         this.setStatus('Pesquisando');
+        this.entidadePaginada.entidade = this._getEntidade();
         this.acoesViewModel.ListarPaginacao();
     }
 
@@ -59,23 +65,35 @@ export class DataBarComponent {
         }
     }
 
-    proximo(): void {
+    private _paginar(acao: string): void {
         this.setStatus('Pesquisando');
-        this.acoesViewModel.ListarProximo();
+        this.entidadePaginada.entidade = null;
+
+        switch (acao) {
+            case 'primeiro': this.entidadePaginada.posicao = 1; break;
+            case 'ultimo': this.entidadePaginada.posicao = this.entidadePaginada.total; break;
+            case 'proximo': this.entidadePaginada.posicao++; break;
+            case 'anterior': this.entidadePaginada.posicao--; break;
+        }
+
+        this.acoesViewModel.ListarPaginacao();
+    }
+
+    proximo(): void {
+        this._paginar('proximo');
     }
 
     anterior(): void {
-        this.setStatus('Pesquisando');
-        this.acoesViewModel.ListarAnterior();
+        this._paginar('anterior');
     }
 
     ultimo(): void {
-        this.setStatus('Pesquisando');
-        this.acoesViewModel.Ultimo();
+        this._paginar('ultimo');
     }
 
     primeiro(): void {
-        this.setStatus('Pesquisando');
-        this.acoesViewModel.Primeiro();
+        this._paginar('primeiro');
     }
+
+
 }

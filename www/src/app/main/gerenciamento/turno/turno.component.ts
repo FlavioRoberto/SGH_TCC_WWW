@@ -62,41 +62,12 @@ export class TurnoComponent implements IDataBarBind {
             }, error => console.log(error));
     }
 
-    private _listarPaginado() {
+    ListarPaginacao(): void {
         this._turnoService.listarPaginacao(this.turnoPaginacao)
             .subscribe(success => {
                 this.turnoPaginacao = success;
                 this._setTurno(success.entidade);
             }, error => console.log(error));
-    }
-
-    ListarPaginacao(): void {
-        this.turnoPaginacao.entidade = this._getTurno();
-        this._listarPaginado();
-    }
-
-    ListarProximo(): void {
-        this.turnoPaginacao.posicao++;
-        this.turnoPaginacao.entidade = null;
-        this._listarPaginado();
-    }
-
-    ListarAnterior(): void {
-        this.turnoPaginacao.posicao--;
-        this.turnoPaginacao.entidade = null;
-        this._listarPaginado();
-    }
-
-    Ultimo(): void {
-        this.turnoPaginacao.posicao = this.turnoPaginacao.total;
-        this.turnoPaginacao.entidade = null;
-        this._listarPaginado();
-    }
-
-    Primeiro(): void {
-        this.turnoPaginacao.posicao = 1;
-        this.turnoPaginacao.entidade = null;
-        this._listarPaginado();
     }
 
 }
