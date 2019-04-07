@@ -13,8 +13,8 @@ import { TurnoPaginado } from './model/turno.paginacao';
     templateUrl: './view/turno.component.html',
     styleUrls: ['./view/turno.component.scss']
 })
-export class TurnoComponent implements IDataBarBind {
-    acoesViewModel: IDataBarBind;
+export class TurnoComponent implements IDataBarBind<ITurno> {
+    acoesViewModel: IDataBarBind<ITurno>;
     turnoForm: FormGroup;
     turnoPaginacao: TurnoPaginado;
     public statusNavBar: string;
@@ -29,8 +29,8 @@ export class TurnoComponent implements IDataBarBind {
         this._fuseTranslationLoaderService.loadTranslations(portugues);
         this.acoesViewModel = this;
         this.turnoForm = this._formBuilde.group({
-            codigo: [''],
-            descricao: ['', [
+            codigo: [null],
+            descricao: [null, [
                 Validators.required,
                 Validators.maxLength(50),
                 Validators.minLength(1)]

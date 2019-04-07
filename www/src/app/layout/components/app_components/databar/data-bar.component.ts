@@ -9,8 +9,8 @@ import { IDataEntidadePaginada } from './contrato/IDataEntidadePaginada';
     templateUrl: './data-bar.component.html',
     styleUrls: ['./data-bar.component.scss']
 })
-export class DataBarComponent {
-    @Input() acoesViewModel: IDataBarBind;
+export class DataBarComponent<T> {
+    @Input() acoesViewModel: IDataBarBind<T>;
     @Input() form: FormGroup;
     @Input() entidadePaginada: IDataEntidadePaginada<any>;
     @Output() statusChanged = new EventEmitter<string>();
@@ -18,9 +18,7 @@ export class DataBarComponent {
 
     public operacao;
 
-
     constructor() {
-        console.log(this.form);
     }
 
     private setStatus(status: string): void {
@@ -28,8 +26,10 @@ export class DataBarComponent {
         this.statusChanged.emit(this.status);
     }
 
-    private _getEntidade(): any {
-        return this.form.getRawValue();
+    private _getEntidade(): T {
+        const result = this.form.value as T;
+        console.log(result);
+        return result;
     }
 
     novaPesquisa(): void {
