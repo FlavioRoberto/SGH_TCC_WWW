@@ -50,28 +50,34 @@
 
         <div fxLayout="row" fxLayoutAlign="center center">
             <!-- BTN_PRIMEIRO -->
-            <button mat-button color="primary" class="mr-8" (click)="irParaPrimeiro()" matTooltip="Primeiro Item">
+            <button [disabled]="entidadePaginada?.posicao <=1" mat-button color="primary" class="mr-8"
+                (click)="primeiro()" matTooltip="Primeiro Item">
                 <mat-icon color="accent">first_page</mat-icon>
             </button>
             <!-- BTN_PRIMEIRO -->
 
             <!-- BTN_ANTERIOR -->
-            <button mat-button color="primary" class="mr-8" (click)="irParaAnterior()" matTooltip="Anterior">
+            <button [disabled]="entidadePaginada?.posicao <=1" mat-button color="primary" class="mr-8"
+                (click)="anterior()" matTooltip="Anterior">
                 <mat-icon color="accent">navigate_before</mat-icon>
             </button>
             <!-- BTN_ANTERIOR -->
 
-            <button mat-button color="primary" class="mr-8" matTooltip="Página Atual">
-                {{ paginaAtual }} de {{ paginaTotal }}
+            <button *ngIf="entidadePaginada?.posicao>0" mat-button color="primary" class="mr-8"
+                matTooltip="Página Atual">
+                {{ entidadePaginada.posicao }} de {{ entidadePaginada.total }}
             </button>
+
             <!-- BTN_PROXIMO -->
-            <button mat-button color="primary" class="mr-8" (click)="irParaProximo()" matTooltip="Próximo">
+            <button [disabled]="entidadePaginada?.posicao >= entidadePaginada?.total" mat-button color="primary"
+                class="mr-8" (click)="proximo()" matTooltip="Próximo">
                 <mat-icon color="accent">navigate_next</mat-icon>
             </button>
             <!-- BTN_PROXIMO -->
 
             <!-- BTN_ULTIMO -->
-            <button mat-button color="primary" class="mr-8" (click)="irParaUltimo()" matTooltip="Último">
+            <button [disabled]="entidadePaginada?.posicao >= entidadePaginada?.total" mat-button color="primary"
+                class="mr-8" (click)="ultimo()" matTooltip="Último">
                 <mat-icon color="accent">last_page</mat-icon>
             </button>
             <!-- BTN_ULTIMO -->

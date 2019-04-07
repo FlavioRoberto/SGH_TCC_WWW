@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { IDataBarBind } from './contrato/IDataBarBind';
 import { FormGroup } from '@angular/forms';
+import { IDataEntidadePaginada } from './contrato/IDataEntidadePaginada';
 
 
 @Component({
@@ -9,14 +10,14 @@ import { FormGroup } from '@angular/forms';
     styleUrls: ['./data-bar.component.scss']
 })
 export class DataBarComponent {
-    @Input() acoesViewModel: IDataBarBind<any>;
+    @Input() acoesViewModel: IDataBarBind;
     @Input() form: FormGroup;
+    @Input() entidadePaginada: IDataEntidadePaginada<any>;
     @Output() statusChanged = new EventEmitter<string>();
     status: string = '';
 
     public operacao;
-    paginaAtual = 1;
-    paginaTotal = 10;
+
 
     constructor() {
         console.log(this.form);
@@ -30,11 +31,12 @@ export class DataBarComponent {
     novaPesquisa(): void {
         this.setStatus('Nova Pesquisa');
         this.form.reset();
+        this.entidadePaginada = null;
     }
 
     pesquisar(): void {
         this.setStatus('Pesquisando');
-        this.acoesViewModel.ListarPor();
+        this.acoesViewModel.ListarPaginacao();
     }
 
     inserir(): void {
@@ -55,5 +57,25 @@ export class DataBarComponent {
             case 'Inserindo': this.acoesViewModel.Criar(); break;
             case 'Editando': break;
         }
+    }
+
+    proximo(): void {
+        this.setStatus('Pesquisando');
+        this.acoesViewModel.ListarProximo();
+    }
+
+    anterior(): void {
+        this.setStatus('Pesquisando');
+        this.acoesViewModel.ListarAnterior();
+    }
+
+    ultimo(): void {
+        this.setStatus('Pesquisando');
+        this.acoesViewModel.Ultimo();
+    }
+
+    primeiro(): void {
+        this.setStatus('Pesquisando');
+        this.acoesViewModel.Primeiro();
     }
 }

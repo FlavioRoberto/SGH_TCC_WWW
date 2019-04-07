@@ -1,14 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { routesApi } from 'app/routes/routes.api';
-import { ITurno } from 'app/main/gerenciamento/turno/model/turno.interface';
 import { Observable } from 'rxjs';
-import { url } from 'inspector';
+import { IDataEntidadePaginada } from 'app/layout/components/app_components/databar/contrato/IDataEntidadePaginada';
 
 @Injectable({
     providedIn: 'root'
 })
-export abstract class BaseService<T> {
+export abstract class HttpBaseService<T> {
     protected rota: any;
     protected headers_object;
 
@@ -26,9 +25,18 @@ export abstract class BaseService<T> {
         });
     }
 
-    protected post(entidade: T, rota: string) {
-        console.log(JSON.stringify(entidade));
-        return this.http.post(
+    protected post(entidade: T, rota: string): Observable<T> {
+        return this.http.post<T>(
+            rota,
+            JSON.stringify(entidade),
+            {
+                headers: this.headers_object
+            }
+        );
+    }
+
+    protected postPaginacao(entidade: IDataEntidadePaginada<T>, rota: string): Observable<IDataEntidadePaginada<T>> {
+        return this.http.post<IDataEntidadePaginada<T>>(
             rota,
             JSON.stringify(entidade),
             {

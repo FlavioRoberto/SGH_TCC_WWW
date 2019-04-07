@@ -5,16 +5,18 @@ import { ITurno } from './model/turno.interface';
 import { TurnoService } from './service/turno.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IDataBarBind } from 'app/layout/components/app_components/databar/contrato/IDataBarBind';
+import { getMatInputUnsupportedTypeError } from '@angular/material';
+import { TurnoPaginado } from './model/turno.paginacao';
 
 @Component({
     selector: 'turno',
     templateUrl: './view/turno.component.html',
     styleUrls: ['./view/turno.component.scss']
 })
-export class TurnoComponent implements IDataBarBind<ITurno>{
-    acoesViewModel: IDataBarBind<ITurno>;
+export class TurnoComponent implements IDataBarBind {
+    acoesViewModel: IDataBarBind;
     turnoForm: FormGroup;
-    turno: ITurno;
+    turnoPaginacao: TurnoPaginado;
     public statusNavBar: string;
 
     constructor(
@@ -35,28 +37,66 @@ export class TurnoComponent implements IDataBarBind<ITurno>{
             ]
         });
 
+        this.turnoPaginacao = new TurnoPaginado();
+
     }
 
-    setStatusNavBar(status): void {
+    private _getTurno(): ITurno {
+        return this.turnoForm.getRawValue() as ITurno
+    }
+
+    private _setTurno(turno: ITurno) {
+        this.turnoForm.setValue(turno);
+    }
+
+    private setStatusNavBar(status): void {
         this.statusNavBar = status;
     }
 
     Criar(): void {
-        let turno = this.turnoForm.getRawValue() as ITurno;
+        const turno = this._getTurno();
         this._turnoService.criarTurno(turno)
-            .subscribe(success => console.log(success), error => console.log(error));
+            .subscribe(success => {
+                this._setTurno(success);
+                this.setStatusNavBar('');
+            }, error => console.log(error));
     }
 
-    ListarPor(): void {
-        console.log('listando...')
-        this._turnoService
-            .listarTodos()
-            .subscribe((success: ITurno[]) => {
-                console.log(success)
-                this.turnoForm.setValue(success[0]);
-            }, error => {
-                console.log(error);
-            });
+    private _listarPaginado() {
+        this._turnoService.listarPaginacao(this.turnoPaginacao)
+            .subscribe(success => {
+                this.turnoPaginacao = success;
+                this._setTurno(success.entidade);
+            }, error => console.log(error));
+    }
+
+    ListarPaginacao(): void {
+        this.turnoPaginacao.entidade = this._getTurno();
+        this._listarPaginado();
+    }
+
+    ListarProximo(): void {
+        this.turnoPaginacao.posicao++;
+        this.turnoPaginacao.entidade = null;
+        this._listarPaginado();
+    }
+
+    ListarAnterior(): void {
+        this.turnoPaginacao.posicao--;
+        this.turnoPaginacao.entidade = null;
+        this._listarPaginado();
+    }
+
+    Ultimo(): void {
+        this.turnoPaginacao.posicao = this.turnoPaginacao.total;
+        this.turnoPaginacao.entidade = null;
+        this._listarPaginado();
+    }
+
+    Primeiro(): void {
+        this.turnoPaginacao.posicao = 1;
+        this.turnoPaginacao.entidade = null;
+        this._listarPaginado();
     }
 
 }

@@ -1,19 +1,22 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ITurno } from '../model/turno.interface';
-import { BaseService } from 'app/compartilhado/services/base.service';
+import { HttpBaseService } from 'app/compartilhado/services/http-base.service';
+import { TurnoPaginado } from '../model/turno.paginacao';
 
 @Injectable({
     providedIn: 'root'
 })
-export class TurnoService extends BaseService<ITurno> {
+export class TurnoService extends HttpBaseService<ITurno> {
 
-    listarTodos() {
-        return this.getAll(this.rota.turno.listarTodos);
+    listarPaginacao(turno: TurnoPaginado) {
+        console.log(turno);
+        return this.postPaginacao(turno, this.rota.turno.listarPaginacao);
     }
 
     criarTurno(turno: ITurno) {
-        console.log(turno)
+        if (turno.codigo == null)
+            turno.codigo = 0;
         return this.post(turno, this.rota.turno.criar);
     }
 
