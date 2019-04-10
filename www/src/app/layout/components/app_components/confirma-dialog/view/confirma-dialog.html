@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>{{titulo}}</h2>
+
+<mat-dialog-content>
+    <p>{{mensagem}}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button class="mat-raised-button" (click)="close()">Cancelar</button>
+    <button class="mat-raised-button mat-accent" (click)="ok()">Ok</button>
+</mat-dialog-actions>

@@ -9,15 +9,26 @@ import { TurnoPaginado } from '../model/turno.paginacao';
 })
 export class TurnoService extends HttpBaseService<ITurno> {
 
-    listarPaginacao(turno: TurnoPaginado) {
+    private rotaTurno = this.rota.turno;
+
+    listarPaginacao(turno: TurnoPaginado): Observable<TurnoPaginado> {
         console.log(turno);
-        return this.postPaginacao(turno, this.rota.turno.listarPaginacao);
+        return this.postPaginacao(turno, this.rotaTurno.listarPaginacao);
     }
 
-    criarTurno(turno: ITurno) {
-        if (turno.codigo == null)
+    criarTurno(turno: ITurno): Observable<ITurno> {
+        if (turno.codigo == null) {
             turno.codigo = 0;
-        return this.post(turno, this.rota.turno.criar);
+        }
+        return this.post(turno, this.rotaTurno.criar);
+    }
+
+    editarTurno(turno: ITurno): Observable<ITurno> {
+        return this.put(turno, this.rotaTurno.editar);
+    }
+
+    removerTurno(codigo: number): Observable<any> {
+        return this.delete(this.rotaTurno.remover + codigo);
     }
 
 }

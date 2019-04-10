@@ -29,7 +29,7 @@
 
             <!-- BTN_REMOVER -->
 
-            <button *ngIf="form.controls.length > 0" mat-button color="primary" class="mr-8" matTooltip="Remover"
+            <button mat-button *ngIf="entidadePaginada?.entidade" color="primary" class="mr-8" matTooltip="Remover"
                 (click)="remover()">
                 <mat-icon color="accent">delete_forever</mat-icon>
             </button>

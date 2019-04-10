@@ -2,12 +2,14 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { IDataBarBind } from './contrato/IDataBarBind';
 import { FormGroup } from '@angular/forms';
 import { IDataEntidadePaginada } from './contrato/IDataEntidadePaginada';
+import { DialogService } from 'app/compartilhado/services/dialog.service';
+import { ConfirmaDialogComponent } from '../confirma-dialog/confirma-dialog.component';
 
 
 @Component({
     selector: 'data-bar',
-    templateUrl: './data-bar.component.html',
-    styleUrls: ['./data-bar.component.scss']
+    templateUrl: './view/data-bar.component.html',
+    styleUrls: ['./view/data-bar.component.scss']
 })
 export class DataBarComponent<T> {
     @Input() acoesViewModel: IDataBarBind<T>;
@@ -18,7 +20,7 @@ export class DataBarComponent<T> {
 
     public operacao;
 
-    constructor() {
+    constructor(private _dialog: DialogService) {
     }
 
     private setStatus(status: string): void {
@@ -56,13 +58,28 @@ export class DataBarComponent<T> {
 
     remover(): void {
         this.setStatus('Removendo');
+        this._exibirDialogConfirmacao();
     }
 
     salvar(): void {
         switch (this.status) {
             case 'Inserindo': this.acoesViewModel.Criar(); break;
-            case 'Editando': break;
+            case 'Editando': this.acoesViewModel.Editar(); break;
         }
+    }
+
+    private _exibirDialogConfirmacao() {
+        this._dialog.mensagem = "Você realmente deseja excluir este registro?";
+        this._dialog.titulo = "Atenção";
+        this._dialog.acaoOk = () => this.acoesViewModel
+            .Remover()
+            .subscribe(success => {
+                console.log(success);
+                this._dialog.closeDialog();
+                this.acoesViewModel.ListarPaginacao();
+            }, error => console.log(error));
+        this._dialog.courseDialogComponent = ConfirmaDialogComponent;
+        this._dialog.openDialog();
     }
 
     private _paginar(acao: string): void {
@@ -94,6 +111,7 @@ export class DataBarComponent<T> {
     primeiro(): void {
         this._paginar('primeiro');
     }
+
 
 
 }

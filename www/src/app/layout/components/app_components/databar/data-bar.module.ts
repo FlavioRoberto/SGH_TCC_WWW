@@ -9,6 +9,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { DataBarComponent } from './data-bar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
+import { ConfirmaDialogModule } from '../confirma-dialog/confirma-dialog.module';
 
 @NgModule({
     declarations: [DataBarComponent],
@@ -19,8 +20,9 @@ import { BrowserModule } from '@angular/platform-browser';
         MatTooltipModule,
         FuseSharedModule,
         BrowserModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        ConfirmaDialogModule
     ],
     exports: [DataBarComponent]
 })
-export class DataBarModule {}
+export class DataBarModule { }

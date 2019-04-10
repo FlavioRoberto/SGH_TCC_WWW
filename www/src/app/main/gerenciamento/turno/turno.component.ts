@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IDataBarBind } from 'app/layout/components/app_components/databar/contrato/IDataBarBind';
 import { getMatInputUnsupportedTypeError } from '@angular/material';
 import { TurnoPaginado } from './model/turno.paginacao';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'turno',
@@ -47,6 +48,7 @@ export class TurnoComponent implements IDataBarBind<ITurno> {
 
     private _setTurno(turno: ITurno) {
         this.turnoForm.setValue(turno);
+        this.setStatusNavBar('');
     }
 
     private setStatusNavBar(status): void {
@@ -58,7 +60,6 @@ export class TurnoComponent implements IDataBarBind<ITurno> {
         this._turnoService.criarTurno(turno)
             .subscribe(success => {
                 this._setTurno(success);
-                this.setStatusNavBar('');
             }, error => console.log(error));
     }
 
@@ -68,6 +69,18 @@ export class TurnoComponent implements IDataBarBind<ITurno> {
                 this.turnoPaginacao = success;
                 this._setTurno(success.entidade);
             }, error => console.log(error));
+    }
+
+    Editar(): void {
+        this._turnoService.editarTurno(this._getTurno())
+            .subscribe(success => {
+                this._setTurno(success);
+            }, error => console.log(error));
+    }
+
+    Remover(): Observable<any> {
+        return this._turnoService
+            .removerTurno(this._getTurno().codigo);
     }
 
 }

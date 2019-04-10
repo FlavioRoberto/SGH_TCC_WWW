@@ -12,7 +12,9 @@ export class routesApi {
         return {
             turno: {
                 listarPaginacao: this.API + '/turno/listarPaginacao',
-                criar: this.API + '/turno/criar'
+                criar: this.API + '/turno/criar',
+                editar: this.API + '/turno/editar',
+                remover: this.API + '/turno/remover?codigo='
             }
         }
 

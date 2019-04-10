@@ -13,8 +13,13 @@ export abstract class HttpBaseService<T> {
 
     constructor(protected http: HttpClient) {
         this.rota = new routesApi().getRoutes();
-        this.headers_object = new HttpHeaders()
-            .append('Content-Type', 'application/json');
+        this.headers_object = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+            'Access-Control-Allow-Headers':
+                'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
+        });
     }
 
 
@@ -45,4 +50,16 @@ export abstract class HttpBaseService<T> {
         );
     }
 
+    protected put(entidade: T, rota: string): Observable<T> {
+        return this.http.put<T>(
+            rota,
+            JSON.stringify(entidade),
+            {
+                headers: this.headers_object
+            });
+    }
+
+    protected delete(url: string): Observable<any> {
+        return this.http.delete(url);
+    }
 }
