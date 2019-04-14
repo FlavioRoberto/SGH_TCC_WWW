@@ -46,36 +46,17 @@ export class TurnoComponent implements IDataBarBind<ITurno> {
         return this.turnoForm.getRawValue() as ITurno
     }
 
-    private _setTurno(turno: ITurno) {
-        this.turnoForm.setValue(turno);
-        this.setStatusNavBar('');
-    }
-
-    private setStatusNavBar(status): void {
-        this.statusNavBar = status;
-    }
-
-    Criar(): void {
+    Criar(): Observable<ITurno> {
         const turno = this._getTurno();
-        this._turnoService.criarTurno(turno)
-            .subscribe(success => {
-                this._setTurno(success);
-            }, error => console.log(error));
+        return this._turnoService.criarTurno(turno);
     }
 
-    ListarPaginacao(): void {
-        this._turnoService.listarPaginacao(this.turnoPaginacao)
-            .subscribe(success => {
-                this.turnoPaginacao = success;
-                this._setTurno(success.entidade);
-            }, error => console.log(error));
+    ListarPaginacao(): Observable<TurnoPaginado> {
+        return this._turnoService.listarPaginacao(this.turnoPaginacao);
     }
 
-    Editar(): void {
-        this._turnoService.editarTurno(this._getTurno())
-            .subscribe(success => {
-                this._setTurno(success);
-            }, error => console.log(error));
+    Editar(): Observable<ITurno> {
+        return this._turnoService.editarTurno(this._getTurno());
     }
 
     Remover(): Observable<any> {

@@ -12,7 +12,6 @@ export class TurnoService extends HttpBaseService<ITurno> {
     private rotaTurno = this.rota.turno;
 
     listarPaginacao(turno: TurnoPaginado): Observable<TurnoPaginado> {
-        console.log(turno);
         return this.postPaginacao(turno, this.rotaTurno.listarPaginacao);
     }
 

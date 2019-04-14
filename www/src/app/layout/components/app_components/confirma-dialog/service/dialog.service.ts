@@ -1,5 +1,6 @@
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { Injectable } from '@angular/core';
+import { ConfirmaDialogComponent } from '../confirma-dialog.component';
 
 @Injectable({
     providedIn: 'root'
@@ -8,7 +9,6 @@ export abstract class DialogService {
 
     titulo: string;
     mensagem: string;
-    courseDialogComponent: any;
     acaoOk: any;
 
     constructor(private dialog: MatDialog) { }
@@ -23,7 +23,7 @@ export abstract class DialogService {
             mensagem: this.mensagem,
             acaoOk: this.acaoOk
         };
-        this.dialog.open(this.courseDialogComponent, dialogConfig);
+        this.dialog.open(ConfirmaDialogComponent, dialogConfig);
 
     }
 

@@ -16,13 +16,15 @@
             <!-- BTN_PESQUISAR -->
 
             <!-- BTN_ADICIONAR -->
-            <button mat-button color="primary" class="mr-8" matTooltip="Adicionar" (click)="inserir()">
+            <button mat-button *ngIf="status != 'Editando'" color="primary" class="mr-8" matTooltip="Adicionar"
+                (click)="inserir()">
                 <mat-icon color="accent">add_circle</mat-icon>
             </button>
             <!-- BTN_ADICIONAR -->
 
             <!-- BTN_EDITAR -->
-            <button mat-button color="primary" class="mr-8" matTooltip="Editar" (click)="editar()">
+            <button mat-button *ngIf="status != 'Inserindo'" color="primary" class="mr-8" matTooltip="Editar"
+                (click)="editar()">
                 <mat-icon color="accent">edit</mat-icon>
             </button>
             <!-- BTN_EDITAR -->
@@ -63,8 +65,7 @@
             </button>
             <!-- BTN_ANTERIOR -->
 
-            <button *ngIf="entidadePaginada?.posicao>0" mat-button color="primary" class="mr-8"
-                matTooltip="Página Atual">
+            <button mat-button color="primary" class="mr-8" matTooltip="Página Atual">
                 {{ entidadePaginada.posicao }} de {{ entidadePaginada.total }}
             </button>
 

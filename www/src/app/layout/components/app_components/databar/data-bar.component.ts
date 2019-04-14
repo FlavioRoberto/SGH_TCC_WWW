@@ -2,8 +2,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { IDataBarBind } from './contrato/IDataBarBind';
 import { FormGroup } from '@angular/forms';
 import { IDataEntidadePaginada } from './contrato/IDataEntidadePaginada';
-import { DialogService } from 'app/compartilhado/services/dialog.service';
 import { ConfirmaDialogComponent } from '../confirma-dialog/confirma-dialog.component';
+import { DialogService } from '../confirma-dialog/service/dialog.service';
 
 
 @Component({
@@ -21,6 +21,7 @@ export class DataBarComponent<T> {
     public operacao;
 
     constructor(private _dialog: DialogService) {
+        this.setStatus('Nova Pesquisa');
     }
 
     private setStatus(status: string): void {
@@ -37,6 +38,7 @@ export class DataBarComponent<T> {
     novaPesquisa(): void {
         this.setStatus('Nova Pesquisa');
         this.form.reset();
+        this.entidadePaginada.entidade = this.form.value;
         this.entidadePaginada.posicao = 0;
         this.entidadePaginada.total = 0;
     }
@@ -44,7 +46,7 @@ export class DataBarComponent<T> {
     pesquisar(): void {
         this.setStatus('Pesquisando');
         this.entidadePaginada.entidade = this._getEntidade();
-        this.acoesViewModel.ListarPaginacao();
+        this._paginar();
     }
 
     inserir(): void {
@@ -63,8 +65,18 @@ export class DataBarComponent<T> {
 
     salvar(): void {
         switch (this.status) {
-            case 'Inserindo': this.acoesViewModel.Criar(); break;
-            case 'Editando': this.acoesViewModel.Editar(); break;
+            case 'Inserindo': this.acoesViewModel
+                .Criar()
+                .subscribe(success => {
+                    console.log(success);
+                    this.form.setValue(success);
+                    this.setStatus('Nova Pesquisa');
+                }, error => console.log(error)); break;
+            case 'Editando': this.acoesViewModel.Editar()
+                .subscribe(success => {
+                    this.form.setValue(success);
+                    this.setStatus('Nova Pesquisa');
+                }, error => console.log(error)); break;
         }
     }
 
@@ -74,15 +86,14 @@ export class DataBarComponent<T> {
         this._dialog.acaoOk = () => this.acoesViewModel
             .Remover()
             .subscribe(success => {
-                console.log(success);
                 this._dialog.closeDialog();
-                this.acoesViewModel.ListarPaginacao();
+                this._resetForm();
+                this.setStatus('Nova Pesquisa');
             }, error => console.log(error));
-        this._dialog.courseDialogComponent = ConfirmaDialogComponent;
         this._dialog.openDialog();
     }
 
-    private _paginar(acao: string): void {
+    private _paginar(acao?: string): void {
         this.setStatus('Pesquisando');
         this.entidadePaginada.entidade = null;
 
@@ -91,9 +102,22 @@ export class DataBarComponent<T> {
             case 'ultimo': this.entidadePaginada.posicao = this.entidadePaginada.total; break;
             case 'proximo': this.entidadePaginada.posicao++; break;
             case 'anterior': this.entidadePaginada.posicao--; break;
+            default: this.entidadePaginada.posicao = 0; break;
         }
 
-        this.acoesViewModel.ListarPaginacao();
+        this.acoesViewModel.ListarPaginacao()
+            .subscribe(
+                success => {
+                    if (success.entidade == null) {
+                        this._resetForm();
+                        return;
+                    }
+                    this.setStatus('Nova Pesquisa');
+                    this.entidadePaginada = success;
+                    this.form.setValue(success.entidade);
+                }, error => {
+                    this.setStatus('Nova Pesquisa');
+                });
     }
 
     proximo(): void {
@@ -112,6 +136,10 @@ export class DataBarComponent<T> {
         this._paginar('primeiro');
     }
 
-
-
+    private _resetForm(): void {
+        this.form.reset();
+        this.entidadePaginada.entidade = null;
+        this.entidadePaginada.posicao = 0;
+        this.entidadePaginada.total = 0;
+    }
 }

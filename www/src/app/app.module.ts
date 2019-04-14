@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -16,7 +15,6 @@ import { fuseConfig } from 'app/fuse-config';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { MainModule } from './main/main.module';
-
 const appRoutes: Routes = [
     {
         path: '**',
@@ -29,7 +27,6 @@ const appRoutes: Routes = [
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        HttpClientModule,
         RouterModule.forRoot(appRoutes),
         TranslateModule.forRoot(),
         // Fuse modules
@@ -44,4 +41,4 @@ const appRoutes: Routes = [
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
