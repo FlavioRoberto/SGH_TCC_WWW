@@ -6,7 +6,7 @@ import { IDataEntidadePaginada } from './IDataEntidadePaginada';
 export interface IDataBarBind<T> extends OnInit {
     statusChanged(status: string): void;
     Criar(): Observable<T>;
-    ListarPaginacao(): Observable<IDataEntidadePaginada<T>>;
+    ListarPaginacao(paginacao: IDataEntidadePaginada<T>): Observable<IDataEntidadePaginada<T>>;
     Editar(): Observable<T>;
     Remover(): Observable<any>;
 }

@@ -4,8 +4,8 @@
             fxFlex>
             <div fxLayout="row" fxLayoutAlign="center center">
                 <!-- BTN_NOVA_PESQUISA -->
-                <button mat-button *ngIf="status" color="primary" class="mr-8" (click)="novaPesquisa()"
-                    matTooltip="Nova Pesquisa">
+                <button mat-button *ngIf="status != 'Nova Pesquisa' && status != 'Executar Ação'" color="primary"
+                    class="mr-8" (click)="novaPesquisa()" matTooltip="Nova Pesquisa">
                     <mat-icon color="accent">restore_page</mat-icon>
                 </button>
                 <!-- BTN_NOVA_PESQUISA -->
@@ -25,16 +25,16 @@
                 <!-- BTN_ADICIONAR -->
 
                 <!-- BTN_EDITAR -->
-                <button mat-button *ngIf="status != 'Inserindo'" color="primary" class="mr-8" matTooltip="Editar"
-                    (click)="editar()">
+                <button mat-button *ngIf="status != 'Inserindo' && status != 'Nova Pesquisa'" color="primary"
+                    class="mr-8" matTooltip="Editar" (click)="editar()">
                     <mat-icon color="accent">edit</mat-icon>
                 </button>
                 <!-- BTN_EDITAR -->
 
                 <!-- BTN_REMOVER -->
 
-                <button mat-button *ngIf="entidadePaginada?.entidade" color="primary" class="mr-8" matTooltip="Remover"
-                    (click)="remover()">
+                <button mat-button *ngIf="entidadePaginada?.entidade && status == 'Dados Carregados'" color="primary"
+                    class="mr-8" matTooltip="Remover" (click)="remover()">
                     <mat-icon color="accent">delete_forever</mat-icon>
                 </button>
                 <!-- BTN_REMOVER -->

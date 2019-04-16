@@ -2,7 +2,6 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { IDataBarBind } from './contrato/IDataBarBind';
 import { FormGroup } from '@angular/forms';
 import { IDataEntidadePaginada } from './contrato/IDataEntidadePaginada';
-import { ConfirmaDialogComponent } from '../confirma-dialog/confirma-dialog.component';
 import { DialogService } from '../confirma-dialog/service/dialog.service';
 
 
@@ -26,7 +25,7 @@ export class DataBarComponent<T> implements OnInit {
     }
 
     ngOnInit(): void {
-        this.setStatus('Nova Pesquisa');
+        this.setStatus('Executar Ação');
         this.setProgresso(false);
     }
 
@@ -113,7 +112,6 @@ export class DataBarComponent<T> implements OnInit {
     private _paginar(acao?: string): void {
         this.setStatus('Pesquisando');
         this.entidadePaginada.entidade = null;
-
         switch (acao) {
             case 'primeiro': this.entidadePaginada.posicao = 1; break;
             case 'ultimo': this.entidadePaginada.posicao = this.entidadePaginada.total; break;
@@ -123,14 +121,14 @@ export class DataBarComponent<T> implements OnInit {
         }
 
         this.setProgresso(true);
-        this.acoesViewModel.ListarPaginacao()
+        this.acoesViewModel.ListarPaginacao(this.entidadePaginada)
             .subscribe(
                 success => {
                     if (success.entidade == null) {
                         this._resetForm();
                         return;
                     }
-                    this.setStatus('Nova Pesquisa');
+                    this.setStatus('Dados Carregados');
                     this.entidadePaginada = success;
                     this.form.setValue(success.entidade);
                     this.setProgresso(false);
