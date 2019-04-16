@@ -78,12 +78,16 @@ export class DataBarComponent<T> implements OnInit {
 
     salvar(): void {
         switch (this.status) {
-            case 'Inserindo': this.setProgresso(true); this.acoesViewModel
-                .Criar()
-                .subscribe(success => {
-                    this.setProgresso(false);
-                    this.setStatus('Nova Pesquisa');
-                }, error => this.setProgresso(false)); break;
+            case 'Inserindo':
+                this.setProgresso(true);
+                this.acoesViewModel
+                    .Criar()
+                    .subscribe(success => {
+                        this.setProgresso(false);
+                        this.form.setValue(success);
+                        this.setStatus('Nova Pesquisa');
+                    }, error => this.setProgresso(false)); break;
+
             case 'Editando':
                 this.setProgresso(true);
                 this.acoesViewModel.Editar()
