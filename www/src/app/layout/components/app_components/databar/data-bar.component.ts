@@ -3,6 +3,7 @@ import { IDataBarBind } from './contrato/IDataBarBind';
 import { FormGroup } from '@angular/forms';
 import { IDataEntidadePaginada } from './contrato/IDataEntidadePaginada';
 import { DialogService } from '../confirma-dialog/service/dialog.service';
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class DataBarComponent<T> implements OnInit {
 
     public operacao;
 
-    constructor(private _dialog: DialogService) {
+    constructor(private _dialog: DialogService, private snackBar: MatSnackBar) {
     }
 
     ngOnInit(): void {
@@ -35,6 +36,13 @@ export class DataBarComponent<T> implements OnInit {
             this.form.disable();
         else
             this.form.enable();
+    }
+
+    private openSnackBar(message: string, classe: string) {
+        this.snackBar.open(message, "OK", {
+            duration: 3000,
+            panelClass: classe
+        });
     }
 
     private setStatus(status: string): void {
@@ -109,7 +117,9 @@ export class DataBarComponent<T> implements OnInit {
                 this._dialog.closeDialog();
                 this._resetForm();
                 this.setStatus('Nova Pesquisa');
-            }, error => console.log(error));
+                this._dialog.emProgresso = false;
+                this.openSnackBar("Removido com sucesso", "sucesso");
+            }, error => this._dialog.emProgresso = false);
         this._dialog.openDialog();
     }
 

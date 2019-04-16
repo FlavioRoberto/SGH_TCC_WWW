@@ -4,7 +4,8 @@ import {
     MatIconModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSnackBarModule
 } from '@angular/material';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { DataBarComponent } from './data-bar.component';
@@ -21,6 +22,7 @@ import { ApProgressBarModule } from '../ap-progress-bar/ap-progress-bar.module';
         MatIconModule,
         MatToolbarModule,
         MatTooltipModule,
+        MatSnackBarModule,
         FuseSharedModule,
         BrowserModule,
         FlexLayoutModule,

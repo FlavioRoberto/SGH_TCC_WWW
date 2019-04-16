@@ -1,3 +1,5 @@
+<ap-progress-bar [visivel]="emProgresso"></ap-progress-bar>
+
 <h2 mat-dialog-title>{{titulo}}</h2>
 
 <mat-dialog-content>
@@ -5,6 +7,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-    <button class="mat-raised-button" (click)="close()">Cancelar</button>
-    <button class="mat-raised-button mat-accent" (click)="ok()">Ok</button>
+    <button [disabled]="emProgresso" class="mat-raised-button" (click)="close()">Cancelar</button>
+    <button [disabled]="emProgresso" class="mat-raised-button mat-accent" (click)="ok()">Ok</button>
 </mat-dialog-actions>

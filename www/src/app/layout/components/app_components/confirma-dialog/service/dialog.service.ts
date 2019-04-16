@@ -10,6 +10,7 @@ export abstract class DialogService {
     titulo: string;
     mensagem: string;
     acaoOk: any;
+    emProgresso: boolean;
 
     constructor(private dialog: MatDialog) { }
 
@@ -21,7 +22,8 @@ export abstract class DialogService {
         dialogConfig.data = {
             titulo: this.titulo,
             mensagem: this.mensagem,
-            acaoOk: this.acaoOk
+            acaoOk: this.acaoOk,
+            emProgresso: this.emProgresso
         };
         this.dialog.open(ConfirmaDialogComponent, dialogConfig);
 
