@@ -4,7 +4,8 @@
     </header-descricao>
     <!-- HEADER -->
 
-    <data-bar [acoesViewModel]="acoesViewModel" [entidadePaginada]="turnoPaginacao" [form]="turnoForm"></data-bar>
+    <data-bar [acoesViewModel]="acoesViewModel" [entidadePaginada]="turnoPaginacao" [form]="turnoForm"
+        (statusChanged)="statusChanged($event)"></data-bar>
 
     <!-- CONTENT -->
     <div class="content p-24">

@@ -15,10 +15,11 @@ import { Observable } from 'rxjs';
     styleUrls: ['./view/turno.component.scss']
 })
 export class TurnoComponent implements IDataBarBind<ITurno> {
+
     acoesViewModel: IDataBarBind<ITurno>;
     turnoForm: FormGroup;
     turnoPaginacao: TurnoPaginado;
-    public statusNavBar: string;
+    statusNavBar: string;
 
     constructor(
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
@@ -40,6 +41,11 @@ export class TurnoComponent implements IDataBarBind<ITurno> {
 
         this.turnoPaginacao = new TurnoPaginado();
 
+    }
+
+    statusChanged(status: string): void {
+        console.log('status', status)
+        this.statusNavBar = status;
     }
 
     private _getTurno(): ITurno {

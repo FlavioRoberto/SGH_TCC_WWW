@@ -3,13 +3,16 @@ import {
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressBarModule
 } from '@angular/material';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { DataBarComponent } from './data-bar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { ConfirmaDialogModule } from '../confirma-dialog/confirma-dialog.module';
+import { FuseProgressBarModule } from '@fuse/components';
+import { ApProgressBarModule } from '../ap-progress-bar/ap-progress-bar.module';
 
 @NgModule({
     declarations: [DataBarComponent],
@@ -21,7 +24,9 @@ import { ConfirmaDialogModule } from '../confirma-dialog/confirma-dialog.module'
         FuseSharedModule,
         BrowserModule,
         FlexLayoutModule,
-        ConfirmaDialogModule
+        ConfirmaDialogModule,
+        FuseProgressBarModule,
+        ApProgressBarModule
     ],
     exports: [DataBarComponent]
 })

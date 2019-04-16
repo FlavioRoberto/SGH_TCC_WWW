@@ -26,6 +26,7 @@ export class RequestInterceptor implements HttpInterceptor {
                 if (err instanceof HttpErrorResponse) {
                     if (err.status >= 400) {
                         this.dialogService.mensagem = err.error;
+                        console.log(err);
                         this.dialogService.titulo = "Atenção";
                         this.dialogService.openDialog();
                     }

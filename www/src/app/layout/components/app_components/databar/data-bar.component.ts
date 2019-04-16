@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { IDataBarBind } from './contrato/IDataBarBind';
 import { FormGroup } from '@angular/forms';
 import { IDataEntidadePaginada } from './contrato/IDataEntidadePaginada';
@@ -11,17 +11,31 @@ import { DialogService } from '../confirma-dialog/service/dialog.service';
     templateUrl: './view/data-bar.component.html',
     styleUrls: ['./view/data-bar.component.scss']
 })
-export class DataBarComponent<T> {
+export class DataBarComponent<T> implements OnInit {
+
     @Input() acoesViewModel: IDataBarBind<T>;
     @Input() form: FormGroup;
     @Input() entidadePaginada: IDataEntidadePaginada<any>;
     @Output() statusChanged = new EventEmitter<string>();
     status: string = '';
+    emProgresso: boolean;
 
     public operacao;
 
     constructor(private _dialog: DialogService) {
+    }
+
+    ngOnInit(): void {
         this.setStatus('Nova Pesquisa');
+        this.setProgresso(false);
+    }
+
+    private setProgresso(progresso: boolean) {
+        this.emProgresso = progresso;
+        if (progresso)
+            this.form.disable();
+        else
+            this.form.enable();
     }
 
     private setStatus(status: string): void {
@@ -65,18 +79,21 @@ export class DataBarComponent<T> {
 
     salvar(): void {
         switch (this.status) {
-            case 'Inserindo': this.acoesViewModel
+            case 'Inserindo': this.setProgresso(true); this.acoesViewModel
                 .Criar()
                 .subscribe(success => {
-                    console.log(success);
-                    this.form.setValue(success);
+                    this.setProgresso(false);
                     this.setStatus('Nova Pesquisa');
-                }, error => console.log(error)); break;
-            case 'Editando': this.acoesViewModel.Editar()
-                .subscribe(success => {
-                    this.form.setValue(success);
-                    this.setStatus('Nova Pesquisa');
-                }, error => console.log(error)); break;
+                }, error => this.setProgresso(false)); break;
+            case 'Editando':
+                this.setProgresso(true);
+                this.acoesViewModel.Editar()
+                    .subscribe(success => {
+                        this.setProgresso(false);
+                        this.form.setValue(success);
+                        this.setStatus('Nova Pesquisa');
+                    }, error => this.setProgresso(false)
+                    ); break;
         }
     }
 
@@ -105,6 +122,7 @@ export class DataBarComponent<T> {
             default: this.entidadePaginada.posicao = 0; break;
         }
 
+        this.setProgresso(true);
         this.acoesViewModel.ListarPaginacao()
             .subscribe(
                 success => {
@@ -115,8 +133,10 @@ export class DataBarComponent<T> {
                     this.setStatus('Nova Pesquisa');
                     this.entidadePaginada = success;
                     this.form.setValue(success.entidade);
+                    this.setProgresso(false);
                 }, error => {
                     this.setStatus('Nova Pesquisa');
+                    this.setProgresso(false);
                 });
     }
 

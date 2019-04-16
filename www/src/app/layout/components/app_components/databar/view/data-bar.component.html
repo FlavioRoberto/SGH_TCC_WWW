@@ -1,87 +1,94 @@
-<mat-toolbar>
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutAlign.gt-xs="center center" fxFlex>
-        <div fxLayout="row" fxLayoutAlign="center center">
-            <!-- BTN_NOVA_PESQUISA -->
-            <button mat-button *ngIf="status" color="primary" class="mr-8" (click)="novaPesquisa()"
-                matTooltip="Nova Pesquisa">
-                <mat-icon color="accent">restore_page</mat-icon>
-            </button>
-            <!-- BTN_NOVA_PESQUISA -->
+<div fxLayout="column" fxFlex>
+    <mat-toolbar>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutAlign.gt-xs="center center"
+            fxFlex>
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <!-- BTN_NOVA_PESQUISA -->
+                <button mat-button *ngIf="status" color="primary" class="mr-8" (click)="novaPesquisa()"
+                    matTooltip="Nova Pesquisa">
+                    <mat-icon color="accent">restore_page</mat-icon>
+                </button>
+                <!-- BTN_NOVA_PESQUISA -->
 
-            <!-- BTN_PESQUISAR -->
-            <button *ngIf="(status != 'Inserindo' && status != 'Editando' )" mat-button color="primary" class="mr-8"
-                (click)="pesquisar()" matTooltip="Pesquisar">
-                <mat-icon color="accent">search</mat-icon>
-            </button>
-            <!-- BTN_PESQUISAR -->
+                <!-- BTN_PESQUISAR -->
+                <button *ngIf="(status != 'Inserindo' && status != 'Editando' )" mat-button color="primary" class="mr-8"
+                    (click)="pesquisar()" matTooltip="Pesquisar">
+                    <mat-icon color="accent">search</mat-icon>
+                </button>
+                <!-- BTN_PESQUISAR -->
 
-            <!-- BTN_ADICIONAR -->
-            <button mat-button *ngIf="status != 'Editando'" color="primary" class="mr-8" matTooltip="Adicionar"
-                (click)="inserir()">
-                <mat-icon color="accent">add_circle</mat-icon>
-            </button>
-            <!-- BTN_ADICIONAR -->
+                <!-- BTN_ADICIONAR -->
+                <button mat-button *ngIf="status != 'Editando'" color="primary" class="mr-8" matTooltip="Adicionar"
+                    (click)="inserir()">
+                    <mat-icon color="accent">add_circle</mat-icon>
+                </button>
+                <!-- BTN_ADICIONAR -->
 
-            <!-- BTN_EDITAR -->
-            <button mat-button *ngIf="status != 'Inserindo'" color="primary" class="mr-8" matTooltip="Editar"
-                (click)="editar()">
-                <mat-icon color="accent">edit</mat-icon>
-            </button>
-            <!-- BTN_EDITAR -->
+                <!-- BTN_EDITAR -->
+                <button mat-button *ngIf="status != 'Inserindo'" color="primary" class="mr-8" matTooltip="Editar"
+                    (click)="editar()">
+                    <mat-icon color="accent">edit</mat-icon>
+                </button>
+                <!-- BTN_EDITAR -->
 
-            <!-- BTN_REMOVER -->
+                <!-- BTN_REMOVER -->
 
-            <button mat-button *ngIf="entidadePaginada?.entidade" color="primary" class="mr-8" matTooltip="Remover"
-                (click)="remover()">
-                <mat-icon color="accent">delete_forever</mat-icon>
-            </button>
-            <!-- BTN_REMOVER -->
+                <button mat-button *ngIf="entidadePaginada?.entidade" color="primary" class="mr-8" matTooltip="Remover"
+                    (click)="remover()">
+                    <mat-icon color="accent">delete_forever</mat-icon>
+                </button>
+                <!-- BTN_REMOVER -->
 
-            <!-- BTN_SALVAR -->
-            <button [disabled]="form.invalid" *ngIf="!form.invalid && (status == 'Inserindo' || status == 'Editando' )"
-                mat-button class="mr-8" matTooltip="Salvar" (click)="salvar()">
-                <mat-icon color="accent">save</mat-icon>
-            </button>
-            <!-- BTN_REMOVER -->
+                <!-- BTN_SALVAR -->
+                <button [disabled]="form.invalid"
+                    *ngIf="!form.invalid && (status == 'Inserindo' || status == 'Editando' )" mat-button class="mr-8"
+                    matTooltip="Salvar" (click)="salvar()">
+                    <mat-icon color="accent">save</mat-icon>
+                </button>
+                <!-- BTN_REMOVER -->
 
 
-            <button *ngIf="status" mat-button color="primary" class="mr-8" matTooltip="Ação no momento">
-                <span class="status">{{ status }}</span>
-            </button>
+                <button *ngIf="status" mat-button color="primary" class="mr-8" matTooltip="Ação no momento">
+                    <span class="status">{{ status }}</span>
+                </button>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <!-- BTN_PRIMEIRO -->
+                <button [disabled]="entidadePaginada?.posicao <=1" mat-button color="primary" class="mr-8"
+                    (click)="primeiro()" matTooltip="Primeiro Item">
+                    <mat-icon color="accent">first_page</mat-icon>
+                </button>
+                <!-- BTN_PRIMEIRO -->
+
+                <!-- BTN_ANTERIOR -->
+                <button [disabled]="entidadePaginada?.posicao <=1" mat-button color="primary" class="mr-8"
+                    (click)="anterior()" matTooltip="Anterior">
+                    <mat-icon color="accent">navigate_before</mat-icon>
+                </button>
+                <!-- BTN_ANTERIOR -->
+
+                <button mat-button color="primary" class="mr-8" matTooltip="Página Atual">
+                    {{ entidadePaginada.posicao }} de {{ entidadePaginada.total }}
+                </button>
+
+                <!-- BTN_PROXIMO -->
+                <button [disabled]="entidadePaginada?.posicao >= entidadePaginada?.total" mat-button color="primary"
+                    class="mr-8" (click)="proximo()" matTooltip="Próximo">
+                    <mat-icon color="accent">navigate_next</mat-icon>
+                </button>
+                <!-- BTN_PROXIMO -->
+
+                <!-- BTN_ULTIMO -->
+                <button [disabled]="entidadePaginada?.posicao >= entidadePaginada?.total" mat-button color="primary"
+                    class="mr-8" (click)="ultimo()" matTooltip="Último">
+                    <mat-icon color="accent">last_page</mat-icon>
+                </button>
+                <!-- BTN_ULTIMO -->
+            </div>
         </div>
+    </mat-toolbar>
 
-        <div fxLayout="row" fxLayoutAlign="center center">
-            <!-- BTN_PRIMEIRO -->
-            <button [disabled]="entidadePaginada?.posicao <=1" mat-button color="primary" class="mr-8"
-                (click)="primeiro()" matTooltip="Primeiro Item">
-                <mat-icon color="accent">first_page</mat-icon>
-            </button>
-            <!-- BTN_PRIMEIRO -->
+    <ap-progress-bar [visivel]="emProgresso"></ap-progress-bar>
 
-            <!-- BTN_ANTERIOR -->
-            <button [disabled]="entidadePaginada?.posicao <=1" mat-button color="primary" class="mr-8"
-                (click)="anterior()" matTooltip="Anterior">
-                <mat-icon color="accent">navigate_before</mat-icon>
-            </button>
-            <!-- BTN_ANTERIOR -->
-
-            <button mat-button color="primary" class="mr-8" matTooltip="Página Atual">
-                {{ entidadePaginada.posicao }} de {{ entidadePaginada.total }}
-            </button>
-
-            <!-- BTN_PROXIMO -->
-            <button [disabled]="entidadePaginada?.posicao >= entidadePaginada?.total" mat-button color="primary"
-                class="mr-8" (click)="proximo()" matTooltip="Próximo">
-                <mat-icon color="accent">navigate_next</mat-icon>
-            </button>
-            <!-- BTN_PROXIMO -->
-
-            <!-- BTN_ULTIMO -->
-            <button [disabled]="entidadePaginada?.posicao >= entidadePaginada?.total" mat-button color="primary"
-                class="mr-8" (click)="ultimo()" matTooltip="Último">
-                <mat-icon color="accent">last_page</mat-icon>
-            </button>
-            <!-- BTN_ULTIMO -->
-        </div>
-    </div>
-</mat-toolbar>
+</div>
