@@ -111,6 +111,7 @@ export class DataBarComponent<T> implements OnInit {
     private _exibirDialogConfirmacao() {
         this._dialog.mensagem = "Você realmente deseja excluir este registro?";
         this._dialog.titulo = "Atenção";
+        this._dialog.acaoMensagem = "Removendo registro...";
         this._dialog.acaoOk = () => this.acoesViewModel
             .Remover()
             .subscribe(success => {

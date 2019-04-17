@@ -4,7 +4,6 @@ import {
     MatIconModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatProgressBarModule,
     MatSnackBarModule
 } from '@angular/material';
 import { FuseSharedModule } from '@fuse/shared.module';

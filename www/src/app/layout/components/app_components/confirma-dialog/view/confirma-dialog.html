@@ -1,12 +1,25 @@
-<ap-progress-bar [visivel]="emProgresso"></ap-progress-bar>
+<div fxLayout="column" fxFlex>
+    <h2 *ngIf="!emProgresso" mat-dialog-title>{{titulo}}</h2>
 
-<h2 mat-dialog-title>{{titulo}}</h2>
+    <mat-dialog-content style="overflow: hidden;">
+        <p *ngIf="!emProgresso">{{mensagem}}</p>
+        <div *ngIf="emProgresso" fxflex fxLayout="row" fxLayoutAlign="center center">
+            <div fxLayout="column" fxflex="20" fxLayoutAlign="center center">
+                <ap-spinner diametro="40" [visivel]="emProgresso"></ap-spinner>
+            </div>
 
-<mat-dialog-content>
-    <p>{{mensagem}}</p>
-</mat-dialog-content>
+            <div fxLayout="column" fxFlexOffset="5%" fxflex fxLayoutAlign="center center">
+                <p> {{acaoMensagem}}</p>
+            </div>
+        </div>
+    </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-    <button [disabled]="emProgresso" class="mat-raised-button" (click)="close()">Cancelar</button>
-    <button [disabled]="emProgresso" class="mat-raised-button mat-accent" (click)="ok()">Ok</button>
-</mat-dialog-actions>
+    <mat-dialog-actions align="end" *ngIf="!emProgresso">
+        <button [disabled]="emProgresso" class="mat-raised-button" (click)="close()">Cancelar</button>
+        <button fxLayout="row" fxLayoutAlign="center center" [disabled]="emProgresso"
+            class="mat-raised-button mat-accent" (click)="ok()">
+            <span>Ok</span>
+        </button>
+
+    </mat-dialog-actions>
+</div>

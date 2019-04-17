@@ -12,6 +12,7 @@ export class ConfirmaDialogComponent implements OnInit {
     titulo: string;
     acaoOk: any;
     emProgresso: boolean;
+    acaoMensagem: string;
 
     constructor(
         private dialogRef: MatDialogRef<ConfirmaDialogComponent>,
@@ -21,6 +22,7 @@ export class ConfirmaDialogComponent implements OnInit {
         this.titulo = data.titulo;
         this.acaoOk = data.acaoOk;
         this.emProgresso = data.emProgresso;
+        this.acaoMensagem = data.acaoMensagem;
     }
 
     ngOnInit() {

@@ -3,6 +3,8 @@ import { ConfirmaDialogComponent } from './confirma-dialog.component';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material';
 import { ApProgressBarModule } from '../ap-progress-bar/ap-progress-bar.module';
+import { ApSpinnerModule } from '../ap-spinner/ap-spinner.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -10,7 +12,8 @@ import { ApProgressBarModule } from '../ap-progress-bar/ap-progress-bar.module';
     imports: [
         MatDialogModule,
         CommonModule,
-        ApProgressBarModule
+        FlexLayoutModule,
+        ApSpinnerModule
     ],
     exports: [ConfirmaDialogComponent],
     entryComponents: [ConfirmaDialogComponent]

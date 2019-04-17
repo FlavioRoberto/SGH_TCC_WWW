@@ -11,6 +11,7 @@ export abstract class DialogService {
     mensagem: string;
     acaoOk: any;
     emProgresso: boolean;
+    acaoMensagem: string;
 
     constructor(private dialog: MatDialog) { }
 
@@ -18,12 +19,15 @@ export abstract class DialogService {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
+        dialogConfig.width = '300px';
+        dialogConfig.maxWidth = '400px';
 
         dialogConfig.data = {
             titulo: this.titulo,
             mensagem: this.mensagem,
             acaoOk: this.acaoOk,
-            emProgresso: this.emProgresso
+            emProgresso: this.emProgresso,
+            acaoMensagem: this.acaoMensagem
         };
         this.dialog.open(ConfirmaDialogComponent, dialogConfig);
 
