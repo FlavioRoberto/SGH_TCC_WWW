@@ -1,0 +1,25 @@
+<div class="page-layout simple fullwidth" style="background: white">
+
+    <data-bar [acoesViewModel]="acoesViewModel" [entidadePaginada]="tipoPaginado" [form]="tipoForm"
+        (statusChanged)="statusChanged($event)"></data-bar>
+
+    <!-- CONTENT -->
+    <div class="content p-24">
+        <form [formGroup]="tipoForm" fxLayout.xs="column" class="turno-form">
+            <!-- CODIGO -->
+            <mat-form-field *ngIf="statusNavBar != 'Inserindo'" appearance="outline" class="pr-sm-8" fxFlex="20">
+                <mat-label>Código</mat-label>
+                <input [disabled]="true" matInput class="primary-color-input border-radius-4" name="primary color"
+                    formControlName="codigo" />
+            </mat-form-field>
+            <!-- CODIGO -->
+
+            <!-- DESCRICAO -->
+            <input-max-length fxFlex [maxlength]="50" label="Descrição" [minlength]="1" controlName="descricao"
+                [form]="tipoForm" name="descricao" [condicaoErro]="tipoForm.get('descricao').errors?.required">
+            </input-max-length>
+            <!-- DESCRICAO -->
+        </form>
+    </div>
+    <!-- / CONTENT -->
+</div>

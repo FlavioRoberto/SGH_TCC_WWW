@@ -7,7 +7,8 @@ export const locale = {
                 TITULO: 'Turno'
             },
             DISCIPLINA: {
-                TITULO: 'Disciplina'
+                TITULO: 'Disciplina',
+                TIPO: 'Tipo'
             },
             CURRICULO: {
                 TITULO: 'Currículo'
