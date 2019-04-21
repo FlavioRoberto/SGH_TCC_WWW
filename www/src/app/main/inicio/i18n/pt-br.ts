@@ -1,7 +1,7 @@
 export const locale = {
     lang: 'pt-br',
     data: {
-        'SAMPLE': {
+        'INICIO': {
             'HELLO': 'Bem vindo!'
         }
     }

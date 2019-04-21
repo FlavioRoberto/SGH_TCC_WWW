@@ -2,18 +2,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FuseSharedModule } from '@fuse/shared.module';
-import { SampleComponent } from './sample.component';
+import { InicioComponent } from './inicio.component';
 
 const routes = [
     {
         path: 'inicio',
-        component: SampleComponent
+        component: InicioComponent
     }
 ];
 
 @NgModule({
-    declarations: [SampleComponent],
+    declarations: [InicioComponent],
     imports: [RouterModule.forChild(routes), TranslateModule, FuseSharedModule],
-    exports: [SampleComponent]
+    exports: [InicioComponent]
 })
-export class SampleModule {}
+export class InicioModule { }

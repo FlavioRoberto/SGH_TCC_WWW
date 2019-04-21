@@ -3,11 +3,11 @@ import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.
 import { locale as portugues } from './i18n/pt-br';
 
 @Component({
-    selector: 'sample',
-    templateUrl: './sample.component.html',
-    styleUrls: ['./sample.component.scss']
+    selector: 'inicio',
+    templateUrl: './view/inicio.component.html',
+    styleUrls: ['./view/inicio.component.scss']
 })
-export class SampleComponent {
+export class InicioComponent {
     dataHora: String = new Date().toLocaleString('pt-Br');
     constructor(
         private _fuseTranslationLoaderService: FuseTranslationLoaderService
