@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { IDataBarBind } from './contrato/IDataBarBind';
 import { FormGroup } from '@angular/forms';
 import { IDataEntidadePaginada } from './contrato/IDataEntidadePaginada';
-import { DialogService } from '../confirma-dialog/service/dialog.service';
+import { DialogService } from '../dialogs/confirma-dialog/service/dialog.service';
 import { MatSnackBar } from '@angular/material';
 
 
@@ -126,7 +126,10 @@ export class DataBarComponent<T> implements OnInit {
 
     private _paginar(acao?: string): void {
         this.setStatus('Pesquisando');
-        this.entidadePaginada.entidade = null;
+
+        if (this.entidadePaginada.entidade == null)
+            this.entidadePaginada.entidade = this._getEntidade();
+
         switch (acao) {
             case 'primeiro': this.entidadePaginada.posicao = 1; break;
             case 'ultimo': this.entidadePaginada.posicao = this.entidadePaginada.total; break;
@@ -144,7 +147,14 @@ export class DataBarComponent<T> implements OnInit {
                         return;
                     }
                     this.setStatus('Dados Carregados');
-                    this.entidadePaginada = success;
+
+                    if (!this.entidadePaginada.entidade) {
+                        this.entidadePaginada = success;
+                    }
+                    else {
+                        this.entidadePaginada.total = success.total;
+                        this.entidadePaginada.posicao = success.posicao;
+                    }
                     this.form.setValue(success.entidade);
                     this.setProgresso(false);
                 }, error => {

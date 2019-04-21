@@ -10,7 +10,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { DataBarComponent } from './data-bar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
-import { ConfirmaDialogModule } from '../confirma-dialog/confirma-dialog.module';
+import { ConfirmaDialogModule } from '../dialogs/confirma-dialog/confirma-dialog.module';
 import { FuseProgressBarModule } from '@fuse/components';
 import { ApProgressBarModule } from '../ap-progress-bar/ap-progress-bar.module';
 

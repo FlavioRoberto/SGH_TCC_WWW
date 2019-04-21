@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import { ErrorDialogService } from 'app/layout/components/app_components/error-dialog/service/error-dialog.service';
+import { ErrorDialogService } from 'app/layout/components/app_components/dialogs/error-dialog/service/error-dialog.service';
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {

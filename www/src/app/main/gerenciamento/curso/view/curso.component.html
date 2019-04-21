@@ -1,12 +1,28 @@
-<div class="page-layout simple fullwidth">
+<div class="page-layout simple fullwidth" style="background: white">
     <!-- HEADER -->
-    <header-descricao
-        [navegacao]="['Gerenciamento']"
-        titulo="{{ 'GERENCIAMENTO.CURSO.TITULO' | translate }}"
-    ></header-descricao>
+    <header-descricao [navegacao]="['Gerenciamento']" titulo="{{ 'GERENCIAMENTO.CURSO.TITULO' | translate }}">
+    </header-descricao>
     <!-- HEADER -->
+    <data-bar [acoesViewModel]="acoesViewModel" [entidadePaginada]="this.cursoPaginacao" [form]="cursoForm"
+        (statusChanged)="statusChanged($event)"></data-bar>
 
     <!-- CONTENT -->
-    <div class="content p-24"></div>
+    <div class="content p-24">
+        <form [formGroup]="cursoForm" fxLayout.xs="column" class="turno-form">
+            <!-- CODIGO -->
+            <mat-form-field *ngIf="statusNavBar != 'Inserindo'" appearance="outline" class="pr-sm-8" fxFlex="20">
+                <mat-label>Código</mat-label>
+                <input [disabled]="true" matInput class="primary-color-input border-radius-4" name="primary color"
+                    formControlName="codigo" />
+            </mat-form-field>
+            <!-- CODIGO -->
+
+            <!-- DESCRICAO -->
+            <input-max-length fxFlex [maxlength]="50" label="Descrição" [minlength]="1" controlName="descricao"
+                [form]="cursoForm" name="descricao" [condicaoErro]="cursoForm.get('descricao').errors?.required">
+            </input-max-length>
+            <!-- DESCRICAO -->
+        </form>
+    </div>
     <!-- / CONTENT -->
 </div>
