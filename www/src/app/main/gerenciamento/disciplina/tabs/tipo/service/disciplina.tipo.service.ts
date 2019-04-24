@@ -6,7 +6,7 @@ import { routesApi } from 'app/routes/routes.api';
 @Injectable({
     providedIn: 'root'
 })
-export class DisciplinaTipoServiceo extends BaseService<ITipo>{
+export class DisciplinaTipoService extends BaseService<ITipo>{
     getRota(): string {
         return new routesApi().getRoutes().disciplina.tipo;
     }

@@ -6,6 +6,7 @@ import { IDataBarBind } from 'app/layout/components/app_components/databar/contr
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TipoPaginado } from './model/tipo.paginacao';
 import { Observable } from 'rxjs';
+import { DisciplinaTipoService } from './service/disciplina.tipo.service';
 
 @Component({
     selector: 'disciplinaTipo',
@@ -22,7 +23,8 @@ export class DisciplinaTipoComponent implements IDataBarBind<ITipo> {
 
     constructor(
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
-        private _formBuilde: FormBuilder
+        private _formBuilde: FormBuilder,
+        private _servico: DisciplinaTipoService
     ) { }
 
     ngOnInit(): void {
@@ -46,25 +48,27 @@ export class DisciplinaTipoComponent implements IDataBarBind<ITipo> {
         this.statusNavBar = status;
     }
 
-    private _getTurno(): ITipo {
-        return this.tipoForm.getRawValue() as ITipo
+    private _getDisciplinaTipo(): ITipo {
+        return this.tipoForm.getRawValue() as ITipo;
     }
 
     Criar(): Observable<ITipo> {
-        throw new Error('Method not implemented.');
+        const disciplinaTipo = this._getDisciplinaTipo();
+        return this._servico.criar(disciplinaTipo);
     }
 
     ListarPaginacao(tipo: TipoPaginado): Observable<TipoPaginado> {
-        throw new Error('Method not implemented.');
+        return this._servico.listarPaginacao(tipo);
     }
 
     Editar(): Observable<ITipo> {
-        throw new Error('Method not implemented.');
+        const disciplinaTipo = this._getDisciplinaTipo();
+        return this._servico.editar(disciplinaTipo);
     }
     Remover(): Observable<any> {
-        throw new Error('Method not implemented.');
+        const codigo = this._getDisciplinaTipo().codigo;
+        return this._servico.remover(codigo);
     }
-
 
 }
 
