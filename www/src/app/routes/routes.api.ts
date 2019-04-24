@@ -8,21 +8,23 @@ export class routesApi {
         this.API = `${environment.url}api`;
     }
 
+    private construitRotaPadrao(rota: string): any {
+        return {
+            listarPaginacao: this.API + '/turno/listarPaginacao',
+            criar: this.API + '/turno/criar',
+            editar: this.API + '/turno/editar',
+            remover: this.API + '/turno/remover?codigo='
+        };
+    }
+
     getRoutes(): any {
         return {
-            turno: {
-                listarPaginacao: this.API + '/turno/listarPaginacao',
-                criar: this.API + '/turno/criar',
-                editar: this.API + '/turno/editar',
-                remover: this.API + '/turno/remover?codigo='
-            },
-            curso: {
-                listarPaginacao: this.API + '/curso/listarPaginacao',
-                criar: this.API + '/curso/criar',
-                editar: this.API + '/curso/editar',
-                remover: this.API + '/curso/remover?codigo='
+            turno: this.construitRotaPadrao('turno'),
+            curso: this.construitRotaPadrao('curso'),
+            disciplina: {
+                tipo: this.construitRotaPadrao('tipo')
             }
-        }
+        };
 
     }
 }

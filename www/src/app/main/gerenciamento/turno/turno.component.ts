@@ -54,7 +54,7 @@ export class TurnoComponent implements IDataBarBind<ITurno> {
 
     Criar(): Observable<ITurno> {
         const turno = this._getTurno();
-        return this._turnoService.criarTurno(turno);
+        return this._turnoService.criar(turno);
     }
 
     ListarPaginacao(paginacao: TurnoPaginado): Observable<TurnoPaginado> {
@@ -62,12 +62,12 @@ export class TurnoComponent implements IDataBarBind<ITurno> {
     }
 
     Editar(): Observable<ITurno> {
-        return this._turnoService.editarTurno(this._getTurno());
+        return this._turnoService.editar(this._getTurno());
     }
 
     Remover(): Observable<any> {
         return this._turnoService
-            .removerTurno(this._getTurno().codigo);
+            .remover(this._getTurno().codigo);
     }
 
 }

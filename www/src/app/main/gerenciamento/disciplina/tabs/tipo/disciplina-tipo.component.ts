@@ -54,7 +54,7 @@ export class DisciplinaTipoComponent implements IDataBarBind<ITipo> {
         throw new Error('Method not implemented.');
     }
 
-    ListarPaginacao(paginacao: import("../../../../../layout/components/app_components/databar/contrato/IDataEntidadePaginada").IDataEntidadePaginada<ITipo>): Observable<import("../../../../../layout/components/app_components/databar/contrato/IDataEntidadePaginada").IDataEntidadePaginada<ITipo>> {
+    ListarPaginacao(tipo: TipoPaginado): Observable<TipoPaginado> {
         throw new Error('Method not implemented.');
     }
 

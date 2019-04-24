@@ -8,11 +8,11 @@ import { IDataEntidadePaginada } from 'app/layout/components/app_components/data
     providedIn: 'root'
 })
 export abstract class HttpBaseService<T> {
-    protected rota: any;
 
-    constructor(protected http: HttpClient) {
-        this.rota = new routesApi().getRoutes();
+    private http: HttpClient;
 
+    constructor(http: HttpClient) {
+        this.http = http;
     }
 
     protected getAll(rota: string): Observable<T[]> {

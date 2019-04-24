@@ -49,7 +49,7 @@ export class CursoComponent implements IDataBarBind<ICurso>{
     }
 
     Criar(): Observable<ICurso> {
-        return this._servico.criarcurso(this._getCurso());
+        return this._servico.criar(this._getCurso());
     }
 
     ListarPaginacao(paginacao: CursoPaginado): Observable<CursoPaginado> {
@@ -57,10 +57,10 @@ export class CursoComponent implements IDataBarBind<ICurso>{
     }
 
     Editar(): Observable<ICurso> {
-        return this._servico.editarcurso(this._getCurso());
+        return this._servico.editar(this._getCurso());
     }
 
     Remover(): Observable<any> {
-        return this._servico.removercurso(this._getCurso().codigo);
+        return this._servico.remover(this._getCurso().codigo);
     }
 }
