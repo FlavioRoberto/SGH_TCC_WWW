@@ -17,8 +17,8 @@ export class CursoComponent implements IDataBarBind<ICurso>{
 
     statusNavBar: string;
     acoesViewModel: IDataBarBind<ICurso>;
-    cursoPaginacao: CursoPaginado;
-    cursoForm: FormGroup;
+    entidadePaginada: CursoPaginado;
+    form: FormGroup;
 
     constructor(
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
@@ -29,8 +29,8 @@ export class CursoComponent implements IDataBarBind<ICurso>{
     ngOnInit(): void {
         this._fuseTranslationLoaderService.loadTranslations(portugues);
         this.acoesViewModel = this;
-        this.cursoPaginacao = new CursoPaginado();
-        this.cursoForm = this._formBuilder.group({
+        this.entidadePaginada = new CursoPaginado();
+        this.form = this._formBuilder.group({
             codigo: [null],
             descricao: [null, [
                 Validators.required,
@@ -41,7 +41,7 @@ export class CursoComponent implements IDataBarBind<ICurso>{
     }
 
     private _getCurso(): ICurso {
-        return this.cursoForm.getRawValue() as ICurso;
+        return this.form.getRawValue() as ICurso;
     }
 
     statusChanged(status: string): void {

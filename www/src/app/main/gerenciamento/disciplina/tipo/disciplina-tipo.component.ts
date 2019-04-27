@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
-import { locale as portugues } from './../../../i18n/pt-br';
+import { locale as portugues } from '../../i18n/pt-br';
 import { ITipo } from './model/ITipo';
 import { IDataBarBind } from 'app/layout/components/app_components/databar/contrato/IDataBarBind';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -14,11 +14,9 @@ import { DisciplinaTipoService } from './service/disciplina.tipo.service';
     styleUrls: ['./view/disciplina-tipo.scss']
 })
 export class DisciplinaTipoComponent implements IDataBarBind<ITipo> {
-
-
     acoesViewModel: IDataBarBind<ITipo>;
-    tipoForm: FormGroup;
-    tipoPaginado: TipoPaginado;
+    form: FormGroup;
+    entidadePaginada: TipoPaginado;
     statusNavBar: string;
 
     constructor(
@@ -30,7 +28,7 @@ export class DisciplinaTipoComponent implements IDataBarBind<ITipo> {
     ngOnInit(): void {
         this._fuseTranslationLoaderService.loadTranslations(portugues);
         this.acoesViewModel = this;
-        this.tipoForm = this._formBuilde.group({
+        this.form = this._formBuilde.group({
             codigo: [null],
             descricao: [null, [
                 Validators.required,
@@ -39,7 +37,7 @@ export class DisciplinaTipoComponent implements IDataBarBind<ITipo> {
             ]
         });
 
-        this.tipoPaginado = new TipoPaginado();
+        this.entidadePaginada = new TipoPaginado();
 
     }
 
@@ -49,7 +47,7 @@ export class DisciplinaTipoComponent implements IDataBarBind<ITipo> {
     }
 
     private _getDisciplinaTipo(): ITipo {
-        return this.tipoForm.getRawValue() as ITipo;
+        return this.form.getRawValue() as ITipo;
     }
 
     Criar(): Observable<ITipo> {

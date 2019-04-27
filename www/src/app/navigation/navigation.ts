@@ -34,10 +34,25 @@ export const navigation: FuseNavigation[] = [
                     {
                         id: 'disciplina',
                         title: 'Disciplina',
-                        translate: 'NAV.GERENCIAMENTO.DISCIPLINA',
-                        type: 'item',
+                        translate: 'NAV.GERENCIAMENTO.DISCIPLINA.TITULO',
                         icon: 'collections_bookmark',
-                        url: '/gerenciamento/disciplina'
+                        type: 'collapsable',
+                        children: [
+                            {
+                                id: 'disciplina.cadastrar',
+                                title: 'Cadastro',
+                                translate: 'NAV.GERENCIAMENTO.DISCIPLINA.CADASTRO',
+                                type: 'item',
+                                url: '/gerenciamento/disciplina/cadastro',
+                            },
+                            {
+                                id: 'disciplina.tipo',
+                                title: 'Tipo',
+                                translate: 'NAV.GERENCIAMENTO.DISCIPLINA.TIPO',
+                                type: 'item',
+                                url: '/gerenciamento/disciplina/tipo',
+                            }
+                        ]
                     },
                     {
                         id: 'turno',

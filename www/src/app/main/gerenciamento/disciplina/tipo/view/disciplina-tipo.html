@@ -1,11 +1,17 @@
 <div class="page-layout simple fullwidth" style="background: white">
 
-    <data-bar [acoesViewModel]="acoesViewModel" [entidadePaginada]="tipoPaginado" [form]="tipoForm"
+    <!-- HEADER -->
+    <header-descricao [navegacao]="['Gerenciamento','Disciplina']"
+        titulo="{{ 'GERENCIAMENTO.DISCIPLINA.TIPO' | translate }}">
+    </header-descricao>
+    <!-- HEADER -->
+
+    <data-bar [acoesViewModel]="acoesViewModel" [entidadePaginada]="entidadePaginada" [form]="form"
         (statusChanged)="statusChanged($event)"></data-bar>
 
     <!-- CONTENT -->
     <div class="content p-24">
-        <form [formGroup]="tipoForm" fxLayout.xs="column" class="turno-form">
+        <form [formGroup]="form" fxLayout.xs="column" class="turno-form">
             <!-- CODIGO -->
             <mat-form-field *ngIf="statusNavBar != 'Inserindo'" appearance="outline" class="pr-sm-8" fxFlex="20">
                 <mat-label>Código</mat-label>
@@ -16,7 +22,7 @@
 
             <!-- DESCRICAO -->
             <input-max-length fxFlex [maxlength]="50" label="Descrição" [minlength]="1" controlName="descricao"
-                [form]="tipoForm" name="descricao" [condicaoErro]="tipoForm.get('descricao').errors?.required">
+                [form]="form" name="descricao" [condicaoErro]="form.get('descricao').errors?.required">
             </input-max-length>
             <!-- DESCRICAO -->
         </form>

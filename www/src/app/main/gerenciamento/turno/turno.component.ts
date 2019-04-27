@@ -17,8 +17,8 @@ import { Observable } from 'rxjs';
 export class TurnoComponent implements IDataBarBind<ITurno> {
 
     acoesViewModel: IDataBarBind<ITurno>;
-    turnoForm: FormGroup;
-    turnoPaginacao: TurnoPaginado;
+    form: FormGroup;
+    entidadePaginada: TurnoPaginado;
     statusNavBar: string;
 
     constructor(
@@ -30,7 +30,7 @@ export class TurnoComponent implements IDataBarBind<ITurno> {
     ngOnInit(): void {
         this._fuseTranslationLoaderService.loadTranslations(portugues);
         this.acoesViewModel = this;
-        this.turnoForm = this._formBuilde.group({
+        this.form = this._formBuilde.group({
             codigo: [null],
             descricao: [null, [
                 Validators.required,
@@ -39,7 +39,7 @@ export class TurnoComponent implements IDataBarBind<ITurno> {
             ]
         });
 
-        this.turnoPaginacao = new TurnoPaginado();
+        this.entidadePaginada = new TurnoPaginado();
 
     }
 
@@ -49,7 +49,7 @@ export class TurnoComponent implements IDataBarBind<ITurno> {
     }
 
     private _getTurno(): ITurno {
-        return this.turnoForm.getRawValue() as ITurno
+        return this.form.getRawValue() as ITurno
     }
 
     Criar(): Observable<ITurno> {

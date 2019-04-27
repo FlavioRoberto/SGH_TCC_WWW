@@ -7,7 +7,11 @@ export const locale = {
                 TITULO: 'Gerenciamento',
                 TURNO: 'Turno',
                 CURSO: 'Curso',
-                DISCIPLINA: 'Disciplina',
+                DISCIPLINA: {
+                    TITULO: "Disciplina",
+                    CADASTRO: 'Cadastro',
+                    TIPO: "Tipo"
+                },
                 CURRICULO: 'Currículo'
             },
             CAMPO_OBRIGATORIO: 'Campo obrigatório'

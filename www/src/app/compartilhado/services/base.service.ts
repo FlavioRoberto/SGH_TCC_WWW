@@ -2,7 +2,6 @@ import { HttpBaseService } from './http-base.service';
 import { Injectable, OnInit } from '@angular/core';
 import { IDataEntidadePaginada } from 'app/layout/components/app_components/databar/contrato/IDataEntidadePaginada';
 import { Observable } from 'rxjs';
-import { routesApi } from 'app/routes/routes.api';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -14,6 +13,10 @@ export abstract class BaseService<T> extends HttpBaseService<T> {
 
     constructor(private httpInjection: HttpClient) {
         super(httpInjection);
+    }
+
+    listarTodos(): Observable<T[]> {
+        return this.getAll(this.getRota().listarTodos);
     }
 
     public listarPaginacao(entidade: IDataEntidadePaginada<T>): Observable<IDataEntidadePaginada<T>> {

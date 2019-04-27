@@ -4,12 +4,12 @@
     </header-descricao>
     <!-- HEADER -->
 
-    <data-bar [acoesViewModel]="acoesViewModel" [entidadePaginada]="turnoPaginacao" [form]="turnoForm"
+    <data-bar [acoesViewModel]="acoesViewModel" [entidadePaginada]="entidadePaginada" [form]="form"
         (statusChanged)="statusChanged($event)"></data-bar>
 
     <!-- CONTENT -->
     <div class="content p-24">
-        <form [formGroup]="turnoForm" fxLayout.xs="column" class="turno-form">
+        <form [formGroup]="form" fxLayout.xs="column" class="turno-form">
             <!-- CODIGO -->
             <mat-form-field *ngIf="statusNavBar != 'Inserindo'" appearance="outline" class="pr-sm-8" fxFlex="20">
                 <mat-label>Código</mat-label>
@@ -20,7 +20,7 @@
 
             <!-- DESCRICAO -->
             <input-max-length fxFlex [maxlength]="50" label="Descrição" [minlength]="1" controlName="descricao"
-                [form]="turnoForm" name="descricao" [condicaoErro]="turnoForm.get('descricao').errors?.required">
+                [form]="form" name="descricao" [condicaoErro]="form.get('descricao').errors?.required">
             </input-max-length>
             <!-- DESCRICAO -->
         </form>

@@ -13,7 +13,8 @@ export class routesApi {
             listarPaginacao: this.API + `/${rota}/listarPaginacao`,
             criar: this.API + `/${rota}/criar`,
             editar: this.API + `/${rota}/editar`,
-            remover: this.API + `/${rota}/remover?codigo=`
+            remover: this.API + `/${rota}/remover?codigo=`,
+            listarTodos: this.API + `/${rota}/listarTodos`,
         };
     }
 
@@ -22,7 +23,8 @@ export class routesApi {
             turno: this.construitRotaPadrao('turno'),
             curso: this.construitRotaPadrao('curso'),
             disciplina: {
-                tipo: this.construitRotaPadrao('disciplinaTipo')
+                tipo: this.construitRotaPadrao('disciplinaTipo'),
+                disciplina: this.construitRotaPadrao('disciplina')
             }
         };
 

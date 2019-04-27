@@ -1,23 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { MatTabsModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatTableModule, MatInputModule } from '@angular/material';
+import { MatTabsModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatTableModule, MatInputModule, MatOptionModule, MatSelectModule } from '@angular/material';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { HeaderDescricaoModule } from 'app/layout/components/header-descricao/header-descricao.module';
-import { DisciplinaTipoComponent } from './tabs/tipo/disciplina-tipo.component';
-import { DisciplinaMenuComponent } from './disciplina-menu.component';
 import { DataBarModule } from 'app/layout/components/app_components/databar/data-bar.module';
 import { InputMaxLengthModule } from 'app/layout/components/app_components/input-max-length/input-max-length.module';
+import { DisciplinaTipoComponent } from './disciplina-tipo.component';
 
 const routes = [
     {
-        path: 'gerenciamento/disciplina',
-        component: DisciplinaMenuComponent
+        path: 'gerenciamento/disciplina/tipo',
+        component: DisciplinaTipoComponent
     }
 ];
 
 @NgModule({
-    declarations: [DisciplinaMenuComponent, DisciplinaTipoComponent],
+    declarations: [DisciplinaTipoComponent],
     imports: [
         MatTabsModule,
         RouterModule.forChild(routes),
@@ -26,10 +25,11 @@ const routes = [
         MatIconModule,
         MatTableModule,
         MatInputModule,
+        MatSelectModule,
         HeaderDescricaoModule,
         DataBarModule,
         InputMaxLengthModule
     ],
-    exports: [DisciplinaMenuComponent]
+    exports: [DisciplinaTipoComponent]
 })
-export class DisciplinaModule { }
+export class DisciplinaTipoModule { }

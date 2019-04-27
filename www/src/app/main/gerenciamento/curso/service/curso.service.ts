@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ICurso } from '../model/curso.model';
-import { routesApi } from 'app/routes/routes.api';
 import { BaseService } from 'app/compartilhado/services/base.service';
+import { routesApi } from 'app/routes/api.routes';
 
 @Injectable({
     providedIn: 'root'

@@ -15,7 +15,8 @@ import { fuseConfig } from 'app/fuse-config';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { MainModule } from './main/main.module';
-const appRoutes: Routes = [
+
+const routes = [
     {
         path: '**',
         redirectTo: 'inicio'
@@ -27,7 +28,7 @@ const appRoutes: Routes = [
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        RouterModule.forRoot(appRoutes),
+        RouterModule.forRoot(routes),
         TranslateModule.forRoot(),
         // Fuse modules
         FuseModule.forRoot(fuseConfig),
