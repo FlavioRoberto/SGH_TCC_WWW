@@ -1,2 +1,5 @@
-<mat-progress-bar color="primary" mode="indeterminate" *ngIf="visivel">
+<mat-progress-bar color="primary" mode="indeterminate" *ngIf="visivel && !circular">
 </mat-progress-bar>
+
+<mat-progress-spinner color="accent" [diameter]="diametro" mode="indeterminate" *ngIf="visivel && circular">
+</mat-progress-spinner>

@@ -45,10 +45,14 @@
                     matTooltip="Salvar" (click)="salvar()">
                     <mat-icon color="accent">save</mat-icon>
                 </button>
-                <!-- BTN_REMOVER -->
+                <!-- BTN_SALVAR -->
 
+                <!-- PROGRESS -->
+                <ap-progress-bar circular="true" diametro="20" [visivel]="emProgresso"></ap-progress-bar>
+                <!-- PROGRESS -->
 
-                <button *ngIf="status" mat-button color="primary" class="mr-8" matTooltip="Ação no momento">
+                <button *ngIf="status && !emProgresso" mat-button color="primary" class="mr-8"
+                    matTooltip="Ação no momento">
                     <span class="status">{{ status }}</span>
                 </button>
             </div>
@@ -89,6 +93,5 @@
         </div>
     </mat-toolbar>
 
-    <ap-progress-bar [visivel]="emProgresso"></ap-progress-bar>
 
 </div>

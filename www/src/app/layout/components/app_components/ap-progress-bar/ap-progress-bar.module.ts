@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatProgressBarModule } from '@angular/material';
+import { MatProgressBarModule, MatProgressSpinnerModule } from '@angular/material';
 import { ApProgressBarComponent } from './ap-progress-bar.component';
 
 
@@ -8,7 +8,8 @@ import { ApProgressBarComponent } from './ap-progress-bar.component';
     declarations: [ApProgressBarComponent],
     imports: [
         CommonModule,
-        MatProgressBarModule
+        MatProgressBarModule,
+        MatProgressSpinnerModule
     ],
     exports: [ApProgressBarComponent],
 })

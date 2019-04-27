@@ -7,4 +7,6 @@ import { Component, Input } from '@angular/core';
 export class ApProgressBarComponent {
 
     @Input() visivel: boolean;
+    @Input() circular: boolean;
+    @Input() diametro: number;
 }
