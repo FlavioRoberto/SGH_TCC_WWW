@@ -3,6 +3,7 @@ export const locale = {
     data: {
         GERENCIAMENTO: {
             CAMPO_OBRIGATORIO: 'Campo obrigatório',
+            ANO_INVALIDO: 'Ano inválido o ano deve ter o formado: 9999',
             TITULO: 'Gerenciamento',
             TURNO: {
                 TITULO: 'Turno'
@@ -13,7 +14,8 @@ export const locale = {
                 CADASTRO: 'Cadastro'
             },
             CURRICULO: {
-                TITULO: 'Currículo'
+                TITULO: 'Currículo',
+                VALOR_MINIMO_PERIODO: "Valor mínimo é 1"
             },
             CURSO: {
                 TITULO: 'Curso'

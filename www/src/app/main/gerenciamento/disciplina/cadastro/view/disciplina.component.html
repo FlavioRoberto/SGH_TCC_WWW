@@ -30,6 +30,7 @@
             </div>
 
             <mat-form-field appearance="outline">
+                <mat-label>Tipo</mat-label>
                 <mat-select placeholder="Tipo" formControlName="codigoTipo">
                     <mat-option *ngFor="let tipo of tipos" [value]="tipo.codigo">
                         {{tipo.descricao}}

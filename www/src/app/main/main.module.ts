@@ -9,6 +9,7 @@ import { RequestInterceptor } from 'app/compartilhado/Interceptors/request.inter
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorDialogModule } from 'app/layout/components/app_components/dialogs/error-dialog/error-dialog.module';
 
+
 @NgModule({
     imports: [
         ReactiveFormsModule,

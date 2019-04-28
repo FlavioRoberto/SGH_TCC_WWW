@@ -1,12 +1,91 @@
-<div class="page-layout simple fullwidth">
+<div class="page-layout simple fullwidth" style="background: white">
     <!-- HEADER -->
-    <header-descricao
-        [navegacao]="['Gerenciamento']"
-        titulo="{{ 'GERENCIAMENTO.CURRICULO.TITULO' | translate }}"
-    ></header-descricao>
+    <header-descricao [navegacao]="['Gerenciamento']" titulo="{{ 'GERENCIAMENTO.CURRICULO.TITULO' | translate }}">
+    </header-descricao>
     <!-- HEADER -->
+    <data-bar [acoesViewModel]="acoesViewModel" [entidadePaginada]="entidadePaginada" [form]="form"
+        (statusChanged)="statusChanged($event)"></data-bar>
 
     <!-- CONTENT -->
-    <div class="content p-24"></div>
+    <div class="content p-24">
+        <form [formGroup]="form" fxLayout.xs="column" class="turno-form">
+
+            <!-- ROW 1 -->
+            <div fxLayout.gt-sm="row">
+                <!-- CODIGO -->
+                <mat-form-field *ngIf="statusNavBar != 'Inserindo'" appearance="outline" class="pr-sm-8" fxFlex="20">
+                    <mat-label>Código</mat-label>
+                    <input [disabled]="true" matInput class="primary-color-input border-radius-4" name="primary color"
+                        formControlName="codigo" />
+                </mat-form-field>
+                <!-- CODIGO -->
+
+                <!-- PERIODO -->
+                <mat-form-field fxFlex appearance="outline" class="pr-sm-8">
+                    <mat-select placeholder="Período" formControlName="periodo">
+                        <mat-option *ngFor="let periodo of periodos" [value]="periodo.codigo">
+                            {{periodo.descricao}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.get('periodo').errors?.required">
+                        {{'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate}}
+                    </mat-error>
+                </mat-form-field>
+                <!-- PERIODO -->
+
+                <!-- ANO -->
+                <mat-form-field appearance="outline" class="pr-sm-8">
+                    <mat-label>Ano</mat-label>
+                    <input matInput class="primary-color-input border-radius-4" name="primary color" mask="0000"
+                        formControlName="ano" />
+                    <mat-error *ngIf="form.get('ano').errors?.required">
+                        {{'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate}}
+                    </mat-error>
+                    <mat-error *ngIf="form.get('ano').errors?.pattern">
+                        {{'GERENCIAMENTO.ANO_INVALIDO' | translate}}
+                    </mat-error>
+                </mat-form-field>
+                <!-- ANO -->
+
+
+            </div>
+            <!-- ROW 1 -->
+
+            <!-- ROW 2 -->
+            <div fxLayout.gt-sm="row">
+                <!-- CURSO -->
+                <mat-form-field fxFlex appearance="outline" class="pr-sm-8">
+                    <mat-label>Curso</mat-label>
+                    <mat-select placeholder="Período" formControlName="codigoCurso">
+                        <mat-option *ngFor="let curso of cursos" [value]="curso.codigo">
+                            {{curso.descricao}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.get('codigoCurso').errors?.required">
+                        {{'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate}}
+                    </mat-error>
+                </mat-form-field>
+                <!-- CURSO -->
+
+                <!-- TURNO -->
+                <mat-form-field fxFlex appearance="outline" class="pr-sm-8">
+                    <mat-label>Turno</mat-label>
+                    <mat-select placeholder="Turno" formControlName="codigoTurno">
+                        <mat-option *ngFor="let turno of turnos" [value]="turno.codigo">
+                            {{turno.descricao}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.get('codigoTurno').errors?.required">
+                        {{'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate}}
+                    </mat-error>
+                </mat-form-field>
+                <!-- TURNO -->
+
+            </div>
+            <!-- ROW 2 -->
+
+
+        </form>
+    </div>
     <!-- / CONTENT -->
 </div>
