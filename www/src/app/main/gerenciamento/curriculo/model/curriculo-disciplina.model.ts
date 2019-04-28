@@ -1,11 +1,13 @@
 export class ICurriculoDisciplina {
     codigo: number;
     codigoDisciplina: number;
+    nomeDisciplina: string;
     codigoCurriculo: number;
-    CargaHorariaSemanalTeorica: number;
-    CargaHorariaSemanalPratica: number;
-    CargaHorariaSemanalTotal: number;
-    HoraAulaTotal: number;
-    HoraTotal: number;
-    Credito: number;
+    cargaHorariaSemanalTeorica: number;
+    cargaHorariaSemanalPratica: number;
+    cargaHorariaSemanalTotal: number;
+    horaAulaTotal: number;
+    horaTotal: number;
+    credito: number;
+    preRequisito: boolean;
 }

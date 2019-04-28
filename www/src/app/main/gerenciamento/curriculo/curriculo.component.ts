@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { locale as portugues } from './../i18n/pt-br';
 import { IDataBarBind } from 'app/layout/components/app_components/databar/contrato/IDataBarBind';
@@ -10,6 +10,9 @@ import { ICurso } from '../curso/model/curso.model';
 import { ITurno } from '../turno/model/turno.interface';
 import { CursoService } from '../curso/service/curso.service';
 import { TurnoService } from '../turno/service/turno.service';
+import { IDisciplina } from '../disciplina/cadastro/model/IDisciplina';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { ICurriculoDisciplina } from './model/curriculo-disciplina.model';
 
 @Component({
     selector: 'curriculo',
@@ -25,6 +28,10 @@ export class CurriculoComponent implements IDataBarBind<ICurriculo> {
     periodos: any[];
     cursos: ICurso[] = [];
     turnos: ITurno[] = [];
+
+    displayedColumns: string[] = ['nomeDisciplina', 'horaAulaTotal', 'credito', 'preRequisito', 'acao'];
+    dataSource: MatTableDataSource<ICurriculoDisciplina>;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
 
     constructor(
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
@@ -44,6 +51,17 @@ export class CurriculoComponent implements IDataBarBind<ICurriculo> {
             codigoCurso: [null, [Validators.required]],
             codigoTurno: [null, [Validators.required]]
         });
+
+
+        this.dataSource = new MatTableDataSource([{
+            nomeDisciplina: 'Interface Homem máquina',
+            horaAulaTotal: 40,
+            credito: 100,
+            preRequisito: true
+        }] as ICurriculoDisciplina[]);
+
+        this.dataSource.paginator = this.paginator;
+
         this._carregarPeriodos();
 
         this._serviceCurso.listarTodos().subscribe(success => {
@@ -71,7 +89,7 @@ export class CurriculoComponent implements IDataBarBind<ICurriculo> {
     }
 
     statusChanged(status: string): void {
-        throw new Error('Method not implemented.');
+        this.statusNavBar = status
     }
     criar(): import("rxjs").Observable<ICurriculo> {
         throw new Error('Method not implemented.');
