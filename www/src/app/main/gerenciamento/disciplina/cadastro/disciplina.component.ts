@@ -8,6 +8,7 @@ import { ITipo } from '../tipo/model/ITipo';
 import { DisciplinaTipoService } from '../tipo/service/disciplina.tipo.service';
 import { DisciplinaService } from './service/disciplina.service';
 import { IDisciplina } from './model/IDisciplina';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'disciplina',
@@ -49,19 +50,24 @@ export class DisciplinaComponent implements IDataBarBind<IDisciplina> {
         });
     }
 
+    private _getEntidade(): IDisciplina {
+        return this.form.getRawValue();
+    }
+
     statusChanged(status: string): void {
-        throw new Error('Method not implemented.');
+        this.statusNavBar = status;
     }
-    Criar(): import("rxjs").Observable<IDisciplina> {
-        throw new Error('Method not implemented.');
+    criar(): Observable<IDisciplina> {
+        console.log(this._getEntidade());
+        return this._servicoDisciplina.criar(this._getEntidade())
     }
-    ListarPaginacao(paginacao: import("../../../../layout/components/app_components/databar/contrato/IDataEntidadePaginada").IDataEntidadePaginada<IDisciplina>): import("rxjs").Observable<import("../../../../layout/components/app_components/databar/contrato/IDataEntidadePaginada").IDataEntidadePaginada<IDisciplina>> {
-        throw new Error('Method not implemented.');
+    listarPaginacao(paginacao: DisciplinaPaginado): Observable<DisciplinaPaginado> {
+        return this._servicoDisciplina.listarPaginacao(paginacao);
     }
-    Editar(): import("rxjs").Observable<IDisciplina> {
-        throw new Error('Method not implemented.');
+    editar(): Observable<IDisciplina> {
+        return this._servicoDisciplina.editar(this._getEntidade());
     }
-    Remover(): import("rxjs").Observable<any> {
-        throw new Error('Method not implemented.');
+    remover(): Observable<any> {
+        return this._servicoDisciplina.remover(this._getEntidade().codigo);
     }
 }

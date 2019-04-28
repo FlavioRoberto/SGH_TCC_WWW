@@ -48,19 +48,19 @@ export class CursoComponent implements IDataBarBind<ICurso>{
         this.statusNavBar = status;
     }
 
-    Criar(): Observable<ICurso> {
+    criar(): Observable<ICurso> {
         return this._servico.criar(this._getCurso());
     }
 
-    ListarPaginacao(paginacao: CursoPaginado): Observable<CursoPaginado> {
+    listarPaginacao(paginacao: CursoPaginado): Observable<CursoPaginado> {
         return this._servico.listarPaginacao(paginacao);
     }
 
-    Editar(): Observable<ICurso> {
+    editar(): Observable<ICurso> {
         return this._servico.editar(this._getCurso());
     }
 
-    Remover(): Observable<any> {
+    remover(): Observable<any> {
         return this._servico.remover(this._getCurso().codigo);
     }
 }

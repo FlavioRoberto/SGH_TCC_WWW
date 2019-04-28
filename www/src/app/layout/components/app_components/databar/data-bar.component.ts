@@ -89,7 +89,7 @@ export class DataBarComponent<T> implements OnInit {
             case 'Inserindo':
                 this.setProgresso(true);
                 this.acoesViewModel
-                    .Criar()
+                    .criar()
                     .subscribe(success => {
                         this.setProgresso(false);
                         this.form.setValue(success);
@@ -98,7 +98,7 @@ export class DataBarComponent<T> implements OnInit {
 
             case 'Editando':
                 this.setProgresso(true);
-                this.acoesViewModel.Editar()
+                this.acoesViewModel.editar()
                     .subscribe(success => {
                         this.setProgresso(false);
                         this.form.setValue(success);
@@ -113,7 +113,7 @@ export class DataBarComponent<T> implements OnInit {
         this._dialog.titulo = "Atenção";
         this._dialog.acaoMensagem = "Removendo registro...";
         this._dialog.acaoOk = () => this.acoesViewModel
-            .Remover()
+            .remover()
             .subscribe(success => {
                 this._dialog.closeDialog();
                 this._resetForm();
@@ -139,7 +139,7 @@ export class DataBarComponent<T> implements OnInit {
         }
 
         this.setProgresso(true);
-        this.acoesViewModel.ListarPaginacao(this.entidadePaginada)
+        this.acoesViewModel.listarPaginacao(this.entidadePaginada)
             .subscribe(
                 success => {
                     if (success.entidade == null) {

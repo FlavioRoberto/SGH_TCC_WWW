@@ -50,20 +50,20 @@ export class DisciplinaTipoComponent implements IDataBarBind<ITipo> {
         return this.form.getRawValue() as ITipo;
     }
 
-    Criar(): Observable<ITipo> {
+    criar(): Observable<ITipo> {
         const disciplinaTipo = this._getDisciplinaTipo();
         return this._servico.criar(disciplinaTipo);
     }
 
-    ListarPaginacao(tipo: TipoPaginado): Observable<TipoPaginado> {
+    listarPaginacao(tipo: TipoPaginado): Observable<TipoPaginado> {
         return this._servico.listarPaginacao(tipo);
     }
 
-    Editar(): Observable<ITipo> {
+    editar(): Observable<ITipo> {
         const disciplinaTipo = this._getDisciplinaTipo();
         return this._servico.editar(disciplinaTipo);
     }
-    Remover(): Observable<any> {
+    remover(): Observable<any> {
         const codigo = this._getDisciplinaTipo().codigo;
         return this._servico.remover(codigo);
     }

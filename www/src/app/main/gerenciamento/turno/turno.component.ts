@@ -52,20 +52,20 @@ export class TurnoComponent implements IDataBarBind<ITurno> {
         return this.form.getRawValue() as ITurno
     }
 
-    Criar(): Observable<ITurno> {
+    criar(): Observable<ITurno> {
         const turno = this._getTurno();
         return this._turnoService.criar(turno);
     }
 
-    ListarPaginacao(paginacao: TurnoPaginado): Observable<TurnoPaginado> {
+    listarPaginacao(paginacao: TurnoPaginado): Observable<TurnoPaginado> {
         return this._turnoService.listarPaginacao(paginacao);
     }
 
-    Editar(): Observable<ITurno> {
+    editar(): Observable<ITurno> {
         return this._turnoService.editar(this._getTurno());
     }
 
-    Remover(): Observable<any> {
+    remover(): Observable<any> {
         return this._turnoService
             .remover(this._getTurno().codigo);
     }
