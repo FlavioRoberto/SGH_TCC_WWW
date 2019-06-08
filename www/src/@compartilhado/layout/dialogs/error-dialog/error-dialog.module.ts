@@ -7,8 +7,7 @@ import { ErrorDialogComponent } from './error-dialog.component';
 @NgModule({
     declarations: [ErrorDialogComponent],
     imports: [
-        MatDialogModule,
-        CommonModule
+        MatDialogModule
     ],
     exports: [ErrorDialogComponent],
     entryComponents: [ErrorDialogComponent]

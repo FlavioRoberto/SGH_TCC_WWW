@@ -1,8 +1,8 @@
 import { HttpBaseService } from './http-base.service';
 import { Injectable, OnInit } from '@angular/core';
-import { IDataEntidadePaginada } from 'app/layout/components/app_components/databar/contrato/IDataEntidadePaginada';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { IDataEntidadePaginada } from '@compartilhado/layout/databar/contrato/IDataEntidadePaginada';
 
 @Injectable({
     providedIn: 'root'

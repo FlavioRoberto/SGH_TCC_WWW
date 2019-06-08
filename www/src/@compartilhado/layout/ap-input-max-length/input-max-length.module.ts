@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
-import { InputMaxLength } from './input-max-length.component';
-import {  MatFormFieldModule, MatInputModule } from '@angular/material';
+import { ApInputMaxLength } from './input-max-length.component';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 
 @NgModule({
-    declarations: [InputMaxLength],
+    declarations: [ApInputMaxLength],
     imports: [
         CommonModule,
         MatFormFieldModule,
@@ -15,6 +15,6 @@ import { FuseSharedModule } from '@fuse/shared.module';
         FuseSharedModule,
         TranslateModule
     ],
-    exports: [InputMaxLength]
+    exports: [ApInputMaxLength]
 })
 export class InputMaxLengthModule { }

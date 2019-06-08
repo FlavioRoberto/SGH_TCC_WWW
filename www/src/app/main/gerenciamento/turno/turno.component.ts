@@ -4,19 +4,17 @@ import { locale as portugues } from '../i18n/pt-br';
 import { ITurno } from './model/turno.interface';
 import { TurnoService } from './service/turno.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { IDataBarBind } from 'app/layout/components/app_components/databar/contrato/IDataBarBind';
-import { getMatInputUnsupportedTypeError } from '@angular/material';
 import { TurnoPaginado } from './model/turno.paginacao';
-import { Observable } from 'rxjs';
+import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/IDataBarBind';
+import { TurnoDataBarService } from './service/turno-databar.service';
 
 @Component({
     selector: 'turno',
     templateUrl: './view/turno.component.html',
     styleUrls: ['./view/turno.component.scss']
 })
-export class TurnoComponent implements IDataBarBind<ITurno> {
-
-    acoesViewModel: IDataBarBind<ITurno>;
+export class TurnoComponent implements IDataBarBindComponent<ITurno> {
+    servicoDataBarBind: TurnoDataBarService;
     form: FormGroup;
     entidadePaginada: TurnoPaginado;
     statusNavBar: string;
@@ -29,7 +27,6 @@ export class TurnoComponent implements IDataBarBind<ITurno> {
 
     ngOnInit(): void {
         this._fuseTranslationLoaderService.loadTranslations(portugues);
-        this.acoesViewModel = this;
         this.form = this._formBuilde.group({
             codigo: [null],
             descricao: [null, [
@@ -38,6 +35,8 @@ export class TurnoComponent implements IDataBarBind<ITurno> {
                 Validators.minLength(1)]
             ]
         });
+
+        this.servicoDataBarBind = new TurnoDataBarService(this.form, this._turnoService);
 
         this.entidadePaginada = new TurnoPaginado();
 
@@ -48,26 +47,5 @@ export class TurnoComponent implements IDataBarBind<ITurno> {
         this.statusNavBar = status;
     }
 
-    private _getTurno(): ITurno {
-        return this.form.getRawValue() as ITurno
-    }
-
-    criar(): Observable<ITurno> {
-        const turno = this._getTurno();
-        return this._turnoService.criar(turno);
-    }
-
-    listarPaginacao(paginacao: TurnoPaginado): Observable<TurnoPaginado> {
-        return this._turnoService.listarPaginacao(paginacao);
-    }
-
-    editar(): Observable<ITurno> {
-        return this._turnoService.editar(this._getTurno());
-    }
-
-    remover(): Observable<any> {
-        return this._turnoService
-            .remover(this._getTurno().codigo);
-    }
 
 }

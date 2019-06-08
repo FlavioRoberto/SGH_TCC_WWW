@@ -1,8 +1,7 @@
 import { ITipo } from '../model/ITipo';
 import { Injectable } from '@angular/core';
-import { BaseService } from 'app/compartilhado/services/base.service';
 import { routesApi } from 'app/routes/api.routes';
-import { Observable } from 'rxjs';
+import { BaseService } from '@compartilhado/services/base.service';
 
 @Injectable({
     providedIn: 'root'

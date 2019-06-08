@@ -1,7 +1,7 @@
-import { BaseService } from 'app/compartilhado/services/base.service';
 import { IDisciplina } from '../model/IDisciplina';
 import { Injectable } from '@angular/core';
 import { routesApi } from 'app/routes/api.routes';
+import { BaseService } from '@compartilhado/services/base.service';
 
 @Injectable({
     providedIn: 'root'

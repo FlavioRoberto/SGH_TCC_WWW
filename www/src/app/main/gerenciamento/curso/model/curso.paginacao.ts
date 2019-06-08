@@ -1,5 +1,5 @@
-import { IDataEntidadePaginada } from 'app/layout/components/app_components/databar/contrato/IDataEntidadePaginada';
 import { ICurso } from './curso.model';
+import { IDataEntidadePaginada } from '@compartilhado/layout/databar/contrato/IDataEntidadePaginada';
 
 export class CursoPaginado implements IDataEntidadePaginada<ICurso>
 {

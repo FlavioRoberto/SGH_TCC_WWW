@@ -1,9 +1,9 @@
 <div class="page-layout simple fullwidth" style="background: white">
     <!-- HEADER -->
-    <header-descricao [navegacao]="['Gerenciamento']" titulo="{{ 'GERENCIAMENTO.CURRICULO.TITULO' | translate }}">
-    </header-descricao>
+    <ap-header-descricao [navegacao]="['Gerenciamento']" titulo="{{ 'GERENCIAMENTO.CURRICULO.TITULO' | translate }}">
+    </ap-header-descricao>
     <!-- HEADER -->
-    <data-bar [acoesViewModel]="acoesViewModel" [entidadePaginada]="entidadePaginada" [form]="form"
+    <data-bar [servicoBind]="servicoDataBarBind" [entidadePaginada]="entidadePaginada" [form]="form"
         (statusChanged)="statusChanged($event)"></data-bar>
 
     <!-- CONTENT -->

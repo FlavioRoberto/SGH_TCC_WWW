@@ -2,19 +2,19 @@ import { Component } from '@angular/core';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { locale as portugues } from '../../i18n/pt-br';
 import { ITipo } from './model/ITipo';
-import { IDataBarBind } from 'app/layout/components/app_components/databar/contrato/IDataBarBind';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TipoPaginado } from './model/tipo.paginacao';
-import { Observable } from 'rxjs';
 import { DisciplinaTipoService } from './service/disciplina.tipo.service';
+import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/IDataBarBind';
+import { DisciplinaTipoDataBarService } from './service/disciplina.tipo-databar.service';
 
 @Component({
     selector: 'disciplinaTipo',
     templateUrl: './view/disciplina-tipo.html',
     styleUrls: ['./view/disciplina-tipo.scss']
 })
-export class DisciplinaTipoComponent implements IDataBarBind<ITipo> {
-    acoesViewModel: IDataBarBind<ITipo>;
+export class DisciplinaTipoComponent implements IDataBarBindComponent<ITipo> {
+    servicoDataBarBind: DisciplinaTipoDataBarService;
     form: FormGroup;
     entidadePaginada: TipoPaginado;
     statusNavBar: string;
@@ -27,7 +27,6 @@ export class DisciplinaTipoComponent implements IDataBarBind<ITipo> {
 
     ngOnInit(): void {
         this._fuseTranslationLoaderService.loadTranslations(portugues);
-        this.acoesViewModel = this;
         this.form = this._formBuilde.group({
             codigo: [null],
             descricao: [null, [
@@ -37,6 +36,7 @@ export class DisciplinaTipoComponent implements IDataBarBind<ITipo> {
             ]
         });
 
+        this.servicoDataBarBind = new DisciplinaTipoDataBarService(this.form, this._servico);
         this.entidadePaginada = new TipoPaginado();
 
     }
@@ -44,28 +44,6 @@ export class DisciplinaTipoComponent implements IDataBarBind<ITipo> {
     statusChanged(status: string): void {
         console.log('status', status)
         this.statusNavBar = status;
-    }
-
-    private _getDisciplinaTipo(): ITipo {
-        return this.form.getRawValue() as ITipo;
-    }
-
-    criar(): Observable<ITipo> {
-        const disciplinaTipo = this._getDisciplinaTipo();
-        return this._servico.criar(disciplinaTipo);
-    }
-
-    listarPaginacao(tipo: TipoPaginado): Observable<TipoPaginado> {
-        return this._servico.listarPaginacao(tipo);
-    }
-
-    editar(): Observable<ITipo> {
-        const disciplinaTipo = this._getDisciplinaTipo();
-        return this._servico.editar(disciplinaTipo);
-    }
-    remover(): Observable<any> {
-        const codigo = this._getDisciplinaTipo().codigo;
-        return this._servico.remover(codigo);
     }
 
 }

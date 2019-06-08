@@ -5,9 +5,9 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { InicioModule } from './inicio/inicio.module';
 import { HttpClientModule } from '@angular/common/http';
 import { GerenciamentoModule } from './gerenciamento/gerenciamento.module';
-import { RequestInterceptor } from 'app/compartilhado/Interceptors/request.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ErrorDialogModule } from 'app/layout/components/app_components/dialogs/error-dialog/error-dialog.module';
+import { CompartilhadoModule } from '@compartilhado/compartilhado.module';
+import { RequestInterceptor } from '@compartilhado/interceptors/request.interceptor';
 
 
 @NgModule({
@@ -17,7 +17,7 @@ import { ErrorDialogModule } from 'app/layout/components/app_components/dialogs/
         HttpClientModule,
         FuseSharedModule,
         InicioModule,
-        ErrorDialogModule,
+        CompartilhadoModule,
         GerenciamentoModule
     ],
     providers: [{

@@ -1,10 +1,10 @@
 <div class="page-layout simple fullwidth" style="background: white">
     <!-- HEADER -->
-    <header-descricao [navegacao]="['Gerenciamento']" titulo="{{ 'GERENCIAMENTO.TURNO.TITULO' | translate }}">
-    </header-descricao>
+    <ap-header-descricao [navegacao]="['Gerenciamento']" titulo="{{ 'GERENCIAMENTO.TURNO.TITULO' | translate }}">
+    </ap-header-descricao>
     <!-- HEADER -->
 
-    <data-bar [acoesViewModel]="acoesViewModel" [entidadePaginada]="entidadePaginada" [form]="form"
+    <data-bar [servicoBind]="servicoDataBarBind" [entidadePaginada]="entidadePaginada" [form]="form"
         (statusChanged)="statusChanged($event)"></data-bar>
 
     <!-- CONTENT -->
@@ -13,15 +13,15 @@
             <!-- CODIGO -->
             <mat-form-field *ngIf="statusNavBar != 'Inserindo'" appearance="outline" class="pr-sm-8" fxFlex="20">
                 <mat-label>Código</mat-label>
-                <input [disabled]="true" matInput class="primary-color-input border-radius-4" name="primary color"
-                    formControlName="codigo" />
+                <input [attr.disabled]="statusNavBar == 'Editando'" matInput class="primary-color-input border-radius-4"
+                    name="primary color" formControlName="codigo" />
             </mat-form-field>
             <!-- CODIGO -->
 
             <!-- DESCRICAO -->
-            <input-max-length fxFlex [maxlength]="50" label="Descrição" [minlength]="1" controlName="descricao"
+            <ap-input-max-length fxFlex [maxlength]="50" label="Descrição" [minlength]="1" controlName="descricao"
                 [form]="form" name="descricao" [condicaoErro]="form.get('descricao').errors?.required">
-            </input-max-length>
+            </ap-input-max-length>
             <!-- DESCRICAO -->
         </form>
     </div>

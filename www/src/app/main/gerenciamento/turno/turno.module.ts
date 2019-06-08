@@ -8,9 +8,7 @@ import {
     MatTableModule,
     MatInputModule
 } from '@angular/material';
-import { HeaderDescricaoModule } from 'app/layout/components/header-descricao/header-descricao.module';
-import { InputMaxLengthModule } from 'app/layout/components/app_components/input-max-length/input-max-length.module';
-import { DataBarModule } from 'app/layout/components/app_components/databar/data-bar.module';
+import { CompartilhadoModule } from '@compartilhado/compartilhado.module';
 
 const routes = [
     {
@@ -28,9 +26,7 @@ const routes = [
         MatIconModule,
         MatTableModule,
         MatInputModule,
-        HeaderDescricaoModule,
-        DataBarModule,
-        InputMaxLengthModule
+        CompartilhadoModule
     ],
     exports: [TurnoComponent]
 })

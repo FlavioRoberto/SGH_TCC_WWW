@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { HeaderDescricaoComponent } from './header-descricao.component';
+import { ApHeaderDescricaoComponent } from './ap-header-descricao.component';
 import { MatIconModule } from '@angular/material';
 import { CommonModule } from '@angular/common';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 @NgModule({
-    declarations: [HeaderDescricaoComponent],
+    declarations: [ApHeaderDescricaoComponent],
     imports: [MatIconModule, CommonModule, FuseSharedModule],
-    exports: [HeaderDescricaoComponent]
+    exports: [ApHeaderDescricaoComponent]
 })
-export class HeaderDescricaoModule {}
+export class ApHeaderDescricaoModule {}

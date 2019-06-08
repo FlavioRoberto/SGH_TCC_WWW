@@ -4,13 +4,13 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { CurriculoModule } from './curriculo/curriculo.module';
 import { CursoModule } from './curso/curso.module';
 import { TurnoModule } from './turno/turno.module';
-import { HeaderDescricaoModule } from 'app/layout/components/header-descricao/header-descricao.module';
 import { DisciplinaTipoModule } from './disciplina/tipo/disciplina-tipo.module';
 import { DisciplinaModule } from './disciplina/cadastro/disciplina.module';
+import { CompartilhadoModule } from '@compartilhado/compartilhado.module';
 
 @NgModule({
     imports: [
-        HeaderDescricaoModule,
+        CompartilhadoModule,
         TranslateModule,
         FuseSharedModule,
         CurriculoModule,

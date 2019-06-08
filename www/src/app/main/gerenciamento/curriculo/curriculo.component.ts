@@ -1,27 +1,26 @@
 import { Component, ViewChild } from '@angular/core';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { locale as portugues } from './../i18n/pt-br';
-import { IDataBarBind } from 'app/layout/components/app_components/databar/contrato/IDataBarBind';
 import { ICurriculo } from './model/curriculo.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { IDataEntidadePaginada } from 'app/layout/components/app_components/databar/contrato/IDataEntidadePaginada';
 import { CurriculoPaginado } from './model/curriculo.paginacao';
 import { ICurso } from '../curso/model/curso.model';
 import { ITurno } from '../turno/model/turno.interface';
 import { CursoService } from '../curso/service/curso.service';
 import { TurnoService } from '../turno/service/turno.service';
-import { IDisciplina } from '../disciplina/cadastro/model/IDisciplina';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { ICurriculoDisciplina } from './model/curriculo-disciplina.model';
+import { CurriculoModule } from './curriculo.module';
+import { CurriculoDataBarService } from './services/curriculo-databar.service';
+import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/IDataBarBind';
 
 @Component({
     selector: 'curriculo',
     templateUrl: './view/curriculo.component.html',
     styleUrls: ['./view/curriculo.component.scss']
 })
-export class CurriculoComponent implements IDataBarBind<ICurriculo> {
-
-    acoesViewModel: IDataBarBind<ICurriculo>;
+export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule> {
+    servicoDataBarBind: CurriculoDataBarService;
     form: FormGroup;
     entidadePaginada: CurriculoPaginado;
     statusNavBar: string;
@@ -42,7 +41,6 @@ export class CurriculoComponent implements IDataBarBind<ICurriculo> {
 
     ngOnInit(): void {
         this._fuseTranslationLoaderService.loadTranslations(portugues);
-        this.acoesViewModel = this;
         this.entidadePaginada = new CurriculoPaginado();
         this.form = this._formBuilder.group({
             codigo: [null],
@@ -52,6 +50,7 @@ export class CurriculoComponent implements IDataBarBind<ICurriculo> {
             codigoTurno: [null, [Validators.required]]
         });
 
+        this.servicoDataBarBind = new CurriculoDataBarService(this.form);
 
         this.dataSource = new MatTableDataSource([{
             nomeDisciplina: 'Interface Homem máquina',
@@ -91,18 +90,5 @@ export class CurriculoComponent implements IDataBarBind<ICurriculo> {
     statusChanged(status: string): void {
         this.statusNavBar = status
     }
-    criar(): import("rxjs").Observable<ICurriculo> {
-        throw new Error('Method not implemented.');
-    }
-    listarPaginacao(paginacao: import("../../../layout/components/app_components/databar/contrato/IDataEntidadePaginada").IDataEntidadePaginada<ICurriculo>): import("rxjs").Observable<import("../../../layout/components/app_components/databar/contrato/IDataEntidadePaginada").IDataEntidadePaginada<ICurriculo>> {
-        throw new Error('Method not implemented.');
-    }
-    editar(): import("rxjs").Observable<ICurriculo> {
-        throw new Error('Method not implemented.');
-    }
-    remover(): import("rxjs").Observable<any> {
-        throw new Error('Method not implemented.');
-    }
-
 
 }

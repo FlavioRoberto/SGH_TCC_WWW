@@ -1,9 +1,9 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { IDataBarBind } from './contrato/IDataBarBind';
 import { FormGroup } from '@angular/forms';
 import { IDataEntidadePaginada } from './contrato/IDataEntidadePaginada';
 import { DialogService } from '../dialogs/confirma-dialog/service/dialog.service';
 import { MatSnackBar } from '@angular/material';
+import { IDataBarBindService } from './contrato/IDataBarService';
 
 
 @Component({
@@ -13,7 +13,8 @@ import { MatSnackBar } from '@angular/material';
 })
 export class DataBarComponent<T> implements OnInit {
 
-    @Input() acoesViewModel: IDataBarBind<T>;
+
+    @Input() servicoBind: IDataBarBindService<T>;
     @Input() form: FormGroup;
     @Input() entidadePaginada: IDataEntidadePaginada<any>;
     @Output() statusChanged = new EventEmitter<string>();
@@ -88,7 +89,7 @@ export class DataBarComponent<T> implements OnInit {
         switch (this.status) {
             case 'Inserindo':
                 this.setProgresso(true);
-                this.acoesViewModel
+                this.servicoBind
                     .criar()
                     .subscribe(success => {
                         this.setProgresso(false);
@@ -98,7 +99,7 @@ export class DataBarComponent<T> implements OnInit {
 
             case 'Editando':
                 this.setProgresso(true);
-                this.acoesViewModel.editar()
+                this.servicoBind.editar()
                     .subscribe(success => {
                         this.setProgresso(false);
                         this.form.setValue(success);
@@ -112,7 +113,7 @@ export class DataBarComponent<T> implements OnInit {
         this._dialog.mensagem = "Você realmente deseja excluir este registro?";
         this._dialog.titulo = "Atenção";
         this._dialog.acaoMensagem = "Removendo registro...";
-        this._dialog.acaoOk = () => this.acoesViewModel
+        this._dialog.acaoOk = () => this.servicoBind
             .remover()
             .subscribe(success => {
                 this._dialog.closeDialog();
@@ -139,7 +140,7 @@ export class DataBarComponent<T> implements OnInit {
         }
 
         this.setProgresso(true);
-        this.acoesViewModel.listarPaginacao(this.entidadePaginada)
+        this.servicoBind.listarPaginacao(this.entidadePaginada)
             .subscribe(
                 success => {
                     if (success.entidade == null) {
