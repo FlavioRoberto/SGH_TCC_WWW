@@ -4,7 +4,8 @@
             fxFlex>
             <div fxLayout="row" fxLayoutAlign="center center">
                 <!-- BTN_NOVA_PESQUISA -->
-                <button mat-button [disabled]="status == 'Nova Pesquisa' || status == 'Executar Ação' || emProgresso"
+                <button mat-button
+                    [disabled]="status == EStatus.novaPesquisa || status == EStatus.executarAcao || emProgresso"
                     color="primary" class="mr-8" (click)="novaPesquisa()" matTooltip="Nova Pesquisa">
                     <mat-icon>restore_page</mat-icon>
                 </button>
@@ -18,15 +19,15 @@
                 <!-- BTN_PESQUISAR -->
 
                 <!-- BTN_ADICIONAR -->
-                <button mat-button [disabled]="status == 'Editando' || emProgresso" class="mr-8" matTooltip="Adicionar"
-                    (click)="inserir()" color="primary">
+                <button mat-button [disabled]="status == EStatus.editando|| emProgresso" class="mr-8"
+                    matTooltip="Adicionar" (click)="inserir()" color="primary">
                     <mat-icon>add_circle</mat-icon>
                 </button>
                 <!-- BTN_ADICIONAR -->
 
                 <!-- BTN_EDITAR -->
                 <button mat-button
-                    [disabled]="status == 'Inserindo' || status == 'Nova Pesquisa' || status == 'Executar Ação' || emProgresso"
+                    [disabled]="status == 'Inserindo' || status == EStatus.novaPesquisa || status == EStatus.executarAcao || emProgresso"
                     color="primary" class="mr-8" matTooltip="Editar" (click)="editar()">
                     <mat-icon>edit</mat-icon>
                 </button>
@@ -34,14 +35,15 @@
 
                 <!-- BTN_REMOVER -->
                 <button mat-button
-                    [disabled]="!entidadePaginada?.entidade || status != 'Dados Carregados' || emProgresso"
+                    [disabled]="!entidadePaginada?.entidade || status != EStatus.dadosCarregados || emProgresso"
                     color="primary" class="mr-8" matTooltip="Remover" (click)="remover()">
                     <mat-icon>delete_forever</mat-icon>
                 </button>
                 <!-- BTN_REMOVER -->
 
                 <!-- BTN_SALVAR -->
-                <button [disabled]="form.invalid || (status != 'Inserindo' && status != 'Editando') || emProgresso"
+                <button
+                    [disabled]="form.invalid || (status != EStatus.inserindo && status != EStatus.editando) || emProgresso"
                     mat-button class="mr-8" matTooltip="Salvar" (click)="salvar()">
                     <mat-icon>save</mat-icon>
                 </button>

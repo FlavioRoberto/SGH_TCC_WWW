@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CursoService } from './service/curso.service';
 import { CursoDataBarService } from './service/curso-databar.service';
 import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/IDataBarBind';
+import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 
 @Component({
     selector: 'curso',
@@ -18,6 +19,7 @@ export class CursoComponent implements IDataBarBindComponent<ICurso>{
     statusNavBar: string;
     entidadePaginada: CursoPaginado;
     form: FormGroup;
+    EStatus = EStatus;
 
     constructor(
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,

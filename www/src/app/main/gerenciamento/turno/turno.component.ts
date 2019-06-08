@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TurnoPaginado } from './model/turno.paginacao';
 import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/IDataBarBind';
 import { TurnoDataBarService } from './service/turno-databar.service';
+import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 
 @Component({
     selector: 'turno',
@@ -18,6 +19,7 @@ export class TurnoComponent implements IDataBarBindComponent<ITurno> {
     form: FormGroup;
     entidadePaginada: TurnoPaginado;
     statusNavBar: string;
+    public EStatus = EStatus;
 
     constructor(
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,

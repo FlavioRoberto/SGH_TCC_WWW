@@ -7,6 +7,7 @@ import { TipoPaginado } from './model/tipo.paginacao';
 import { DisciplinaTipoService } from './service/disciplina.tipo.service';
 import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/IDataBarBind';
 import { DisciplinaTipoDataBarService } from './service/disciplina.tipo-databar.service';
+import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 
 @Component({
     selector: 'disciplinaTipo',
@@ -18,6 +19,7 @@ export class DisciplinaTipoComponent implements IDataBarBindComponent<ITipo> {
     form: FormGroup;
     entidadePaginada: TipoPaginado;
     statusNavBar: string;
+    EStatus = EStatus;
 
     constructor(
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,

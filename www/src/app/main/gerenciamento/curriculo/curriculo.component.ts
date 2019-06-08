@@ -13,6 +13,7 @@ import { ICurriculoDisciplina } from './model/curriculo-disciplina.model';
 import { CurriculoModule } from './curriculo.module';
 import { CurriculoDataBarService } from './services/curriculo-databar.service';
 import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/IDataBarBind';
+import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 
 @Component({
     selector: 'curriculo',
@@ -27,7 +28,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     periodos: any[];
     cursos: ICurso[] = [];
     turnos: ITurno[] = [];
-
+    EStatus = EStatus;
     displayedColumns: string[] = ['nomeDisciplina', 'horaAulaTotal', 'credito', 'preRequisito', 'acao'];
     dataSource: MatTableDataSource<ICurriculoDisciplina>;
     @ViewChild(MatPaginator) paginator: MatPaginator;

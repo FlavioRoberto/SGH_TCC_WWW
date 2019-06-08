@@ -9,6 +9,7 @@ import { DisciplinaService } from './service/disciplina.service';
 import { IDisciplina } from './model/IDisciplina';
 import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/IDataBarBind';
 import { DisciplinaDataBarService } from './service/disciplina-databar.service';
+import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 
 @Component({
     selector: 'disciplina',
@@ -20,7 +21,7 @@ export class DisciplinaComponent implements IDataBarBindComponent<IDisciplina> {
     form: FormGroup;
     entidadePaginada: DisciplinaPaginado;
     statusNavBar: string;
-
+    EStatus = EStatus;
     tipos: ITipo[];
 
     constructor(

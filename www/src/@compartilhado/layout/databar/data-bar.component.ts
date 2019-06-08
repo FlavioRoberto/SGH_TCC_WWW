@@ -4,6 +4,7 @@ import { IDataEntidadePaginada } from './contrato/IDataEntidadePaginada';
 import { DialogService } from '../dialogs/confirma-dialog/service/dialog.service';
 import { MatSnackBar } from '@angular/material';
 import { IDataBarBindService } from './contrato/IDataBarService';
+import { EStatus } from './enum/estatus';
 
 
 @Component({
@@ -13,12 +14,12 @@ import { IDataBarBindService } from './contrato/IDataBarService';
 })
 export class DataBarComponent<T> implements OnInit {
 
-
     @Input() servicoBind: IDataBarBindService<T>;
     @Input() form: FormGroup;
     @Input() entidadePaginada: IDataEntidadePaginada<any>;
-    @Output() statusChanged = new EventEmitter<string>();
-    status: string = '';
+    @Output() statusChanged = new EventEmitter<EStatus>();
+    status: EStatus;
+    public EStatus = EStatus;
     emProgresso: boolean;
 
     public operacao;
@@ -27,7 +28,7 @@ export class DataBarComponent<T> implements OnInit {
     }
 
     ngOnInit(): void {
-        this.setStatus('Executar Ação');
+        this.setStatus(EStatus.novaPesquisa);
         this.setProgresso(false);
     }
 
@@ -46,7 +47,7 @@ export class DataBarComponent<T> implements OnInit {
         });
     }
 
-    private setStatus(status: string): void {
+    private setStatus(status: EStatus): void {
         this.status = status;
         this.statusChanged.emit(this.status);
     }
@@ -58,7 +59,7 @@ export class DataBarComponent<T> implements OnInit {
     }
 
     novaPesquisa(): void {
-        this.setStatus('Nova Pesquisa');
+        this.setStatus(EStatus.novaPesquisa);
         this.form.reset();
         this.entidadePaginada.entidade = this.form.value;
         this.entidadePaginada.posicao = 0;
@@ -66,44 +67,44 @@ export class DataBarComponent<T> implements OnInit {
     }
 
     pesquisar(): void {
-        this.setStatus('Pesquisando');
+        this.setStatus(EStatus.pesquisando);
         this.entidadePaginada.entidade = this._getEntidade();
         this._paginar();
     }
 
     inserir(): void {
-        this.setStatus('Inserindo');
+        this.setStatus(EStatus.inserindo);
         this.form.reset();
     }
 
     editar(): void {
-        this.setStatus('Editando');
+        this.setStatus(EStatus.editando);
     }
 
     remover(): void {
-        this.setStatus('Removendo');
+        this.setStatus(EStatus.removendo);
         this._exibirDialogConfirmacao();
     }
 
     salvar(): void {
         switch (this.status) {
-            case 'Inserindo':
+            case EStatus.inserindo:
                 this.setProgresso(true);
                 this.servicoBind
                     .criar()
                     .subscribe(success => {
                         this.setProgresso(false);
                         this.form.setValue(success);
-                        this.setStatus('Nova Pesquisa');
+                        this.setStatus(EStatus.novaPesquisa);
                     }, error => this.setProgresso(false)); break;
 
-            case 'Editando':
+            case EStatus.editando:
                 this.setProgresso(true);
                 this.servicoBind.editar()
                     .subscribe(success => {
                         this.setProgresso(false);
                         this.form.setValue(success);
-                        this.setStatus('Nova Pesquisa');
+                        this.setStatus(EStatus.novaPesquisa);
                     }, error => this.setProgresso(false)
                     ); break;
         }
@@ -118,7 +119,7 @@ export class DataBarComponent<T> implements OnInit {
             .subscribe(success => {
                 this._dialog.closeDialog();
                 this._resetForm();
-                this.setStatus('Nova Pesquisa');
+                this.setStatus(EStatus.novaPesquisa);
                 this._dialog.emProgresso = false;
                 this.openSnackBar("Removido com sucesso", "sucesso");
             }, error => this._dialog.emProgresso = false);
@@ -126,7 +127,7 @@ export class DataBarComponent<T> implements OnInit {
     }
 
     private _paginar(acao?: string): void {
-        this.setStatus('Pesquisando');
+        this.setStatus(EStatus.pesquisando);
 
         if (this.entidadePaginada.entidade == null)
             this.entidadePaginada.entidade = this._getEntidade();
@@ -147,7 +148,7 @@ export class DataBarComponent<T> implements OnInit {
                         this._resetForm();
                         return;
                     }
-                    this.setStatus('Dados Carregados');
+                    this.setStatus(EStatus.dadosCarregados);
 
                     if (!this.entidadePaginada.entidade) {
                         this.entidadePaginada = success;
@@ -159,7 +160,7 @@ export class DataBarComponent<T> implements OnInit {
                     this.form.setValue(success.entidade);
                     this.setProgresso(false);
                 }, error => {
-                    this.setStatus('Nova Pesquisa');
+                    this.setStatus(EStatus.novaPesquisa);
                     this.setProgresso(false);
                 });
     }

@@ -13,10 +13,11 @@
             <!-- ROW 1 -->
             <div fxLayout.gt-sm="row">
                 <!-- CODIGO -->
-                <mat-form-field *ngIf="statusNavBar != 'Inserindo'" appearance="outline" class="pr-sm-8" fxFlex="20">
+                <mat-form-field *ngIf="statusNavBar != EStatus.inserindo" appearance="outline" class="pr-sm-8"
+                    fxFlex="20">
                     <mat-label>Código</mat-label>
-                    <input [disabled]="true" matInput class="primary-color-input border-radius-4" name="primary color"
-                        formControlName="codigo" />
+                    <input [disabled]="statusNavBar == EStatus.inserindo || statusNavBar == EStatus.editando" matInput
+                        class="primary-color-input border-radius-4" name="primary color" formControlName="codigo" />
                 </mat-form-field>
                 <!-- CODIGO -->
 
