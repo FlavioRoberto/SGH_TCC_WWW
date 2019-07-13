@@ -4,11 +4,18 @@ import { ITipo } from '../model/ITipo';
 import { Observable } from 'rxjs';
 import { DisciplinaTipoService } from './disciplina.tipo.service';
 import { TipoPaginado } from '../model/tipo.paginacao';
+import { EventEmitter } from '@angular/core';
 
 export class DisciplinaTipoDataBarService implements IDataBarBindService<ITipo>{
-    onClickEnter: import("@angular/core").EventEmitter<ITipo>;
+    onClickEnter: EventEmitter<ITipo>;
 
-    constructor(public formgroup: FormGroup, private _servico: DisciplinaTipoService) { }
+    constructor(public formgroup: FormGroup, private _servico: DisciplinaTipoService) {
+        this.onClickEnter = new EventEmitter();
+    }
+
+    enviarFormComEnter(): void {
+        this.onClickEnter.emit(this.getEntidade());
+    }
 
     getEntidade(): ITipo {
         return this.formgroup.getRawValue() as ITipo;

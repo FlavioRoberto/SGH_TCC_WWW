@@ -1,31 +1,21 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+
 import { TranslateModule } from '@ngx-translate/core';
 import { FuseSharedModule } from '@fuse/shared.module';
-import { TurnoComponent } from './turno.component';
-import {
-    MatIconModule,
-    MatTableModule,
-    MatInputModule
-} from '@angular/material';
-import { CompartilhadoModule } from '@compartilhado/compartilhado.module';
 
-const routes = [
-    {
-        path: 'gerenciamento/turno',
-        component: TurnoComponent
-    }
-];
+import { CompartilhadoModule } from '@compartilhado/compartilhado.module';
+import { MaterialCoreModule } from '@compartilhado/material-core/material-core.module';
+
+import { TurnoComponent } from './turno.component';
+import { TurnoRoutingModule } from './turno.routes.module';
 
 @NgModule({
     declarations: [TurnoComponent],
     imports: [
-        RouterModule.forChild(routes),
+        TurnoRoutingModule,
         TranslateModule,
         FuseSharedModule,
-        MatIconModule,
-        MatTableModule,
-        MatInputModule,
+        MaterialCoreModule,
         CompartilhadoModule
     ],
     exports: [TurnoComponent]

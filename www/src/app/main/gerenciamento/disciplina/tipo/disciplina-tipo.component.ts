@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
+
+import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
+import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/IDataBarBind';
+
 import { locale as portugues } from '../../i18n/pt-br';
 import { ITipo } from './model/ITipo';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TipoPaginado } from './model/tipo.paginacao';
 import { DisciplinaTipoService } from './service/disciplina.tipo.service';
-import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/IDataBarBind';
 import { DisciplinaTipoDataBarService } from './service/disciplina.tipo-databar.service';
-import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
+
 
 @Component({
     selector: 'disciplinaTipo',

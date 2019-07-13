@@ -1,15 +1,23 @@
 import { IDataBarBindService } from '@compartilhado/layout/databar/contrato/IDataBarService';
-import { ITurno } from '../model/turno.interface';
 import { FormGroup } from '@angular/forms';
-import { TurnoService } from './turno.service';
+import { EventEmitter } from '@angular/core';
+
 import { Observable } from 'rxjs';
+
+import { TurnoService } from './turno.service';
 import { TurnoPaginado } from '../model/turno.paginacao';
+import { ITurno } from '../model/turno.interface';
 
 export class TurnoDataBarService implements IDataBarBindService<ITurno>{
 
-    onClickEnter: import("@angular/core").EventEmitter<ITurno>;
+    onClickEnter: EventEmitter<ITurno>;
 
     constructor(public formgroup: FormGroup, private _turnoService: TurnoService) {
+        this.onClickEnter = new EventEmitter();
+    }
+
+    enviarFormComEnter(): void {
+        this.onClickEnter.emit(this.getEntidade());
     }
 
     getEntidade(): ITurno {

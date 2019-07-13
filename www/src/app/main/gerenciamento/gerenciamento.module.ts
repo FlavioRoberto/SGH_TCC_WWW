@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
+
 import { FuseSharedModule } from '@fuse/shared.module';
-import { CurriculoModule } from './curriculo/curriculo.module';
+import { CompartilhadoModule } from '@compartilhado/compartilhado.module';
+
 import { CursoModule } from './curso/curso.module';
 import { TurnoModule } from './turno/turno.module';
 import { DisciplinaTipoModule } from './disciplina/tipo/disciplina-tipo.module';
 import { DisciplinaModule } from './disciplina/cadastro/disciplina.module';
-import { CompartilhadoModule } from '@compartilhado/compartilhado.module';
+import { GerenciamentoRoutingModule } from './gerenciamento.routes.module';
 
 @NgModule({
     imports: [
         CompartilhadoModule,
         TranslateModule,
         FuseSharedModule,
-        CurriculoModule,
+        GerenciamentoRoutingModule,
         CursoModule,
         DisciplinaModule,
         DisciplinaTipoModule,

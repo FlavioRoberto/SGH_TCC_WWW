@@ -43,7 +43,7 @@ export class DataBarComponent<T> implements OnInit, OnDestroy {
         private _dialogErro: ErrorDialogService,
         private snackBar: MatSnackBar,
         private _elementRef: ElementRef
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.validarPropertsObrigatorias();
@@ -53,7 +53,8 @@ export class DataBarComponent<T> implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.servicoBind.onClickEnter.unsubscribe();
+        if (this.servicoBind.onClickEnter)
+            this.servicoBind.onClickEnter.unsubscribe
     }
 
     @HostListener('document:click', ['$event'])
@@ -111,6 +112,9 @@ export class DataBarComponent<T> implements OnInit, OnDestroy {
     }
 
     private _submeterFormularioOnEnter(): void {
+        if (!this.servicoBind.onClickEnter)
+            return;
+
         this.servicoBind.onClickEnter.subscribe(() => {
             if (this.status === EStatus.novaPesquisa) {
                 this.pesquisar();

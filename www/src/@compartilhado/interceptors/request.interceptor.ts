@@ -1,35 +1,40 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import {
+    HttpInterceptor,
+    HttpRequest,
+    HttpHandler,
+    HttpSentEvent,
+    HttpHeaderResponse,
+    HttpProgressEvent,
+    HttpResponse,
+    HttpUserEvent
+} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
-import { ErrorDialogService } from '@compartilhado/layout/dialogs/error-dialog/service/error-dialog.service';
+import { TokenStorageService } from '@compartilhado/core/token/token-storage.service';
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
+    constructor(private tokenStorageService: TokenStorageService) { }
 
-
-    constructor(private dialogService: ErrorDialogService) { }
-
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-        request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
-
-        request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
-
-        return next.handle(request)
-            .pipe(
-                map((event: HttpEvent<any>) => {
-                    return event;
-                }),
-                catchError((err: any) => {
-                    if (err instanceof HttpErrorResponse) {
-                        if (err.status >= 400) {
-                            console.log(err);
-                            this.dialogService.openDialog("Atenção", err.error);
-                        }
-                        return Observable.throw(err);
-                    }
-                })
-            );
+    intercept(
+        req: HttpRequest<any>,
+        next: HttpHandler
+    ): Observable<
+        | HttpSentEvent
+        | HttpHeaderResponse
+        | HttpProgressEvent
+        | HttpResponse<any>
+        | HttpUserEvent<any>
+    > {
+        if (this.tokenStorageService.temToken()) {
+            const token = this.tokenStorageService.getToken();
+            req = req.clone({
+                setHeaders: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${JSON.parse(token)}`
+                }
+            });
+        }
+        return next.handle(req);
     }
 }

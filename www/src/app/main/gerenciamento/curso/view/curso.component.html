@@ -8,7 +8,8 @@
 
     <!-- CONTENT -->
     <div class="content p-24">
-        <form [formGroup]="form" fxLayout.xs="column" class="turno-form">
+        <form (Keydown.enter)="servicoDataBarBind.enviarFormComEnter()" [formGroup]="form" fxLayout.xs="column"
+            class="turno-form">
             <!-- CODIGO -->
             <mat-form-field *ngIf="statusNavBar != EStatus.inserindo" appearance="outline" class="pr-sm-8" fxFlex="20">
                 <mat-label>Código</mat-label>

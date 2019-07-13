@@ -1,14 +1,22 @@
 import { FormGroup } from '@angular/forms';
-import { CursoService } from './curso.service';
+import { EventEmitter } from '@angular/core';
+
 import { Observable } from 'rxjs';
-import { ICurso } from '../model/curso.model';
-import { CursoPaginado } from '../model/curso.paginacao';
 import { IDataBarBindService } from '@compartilhado/layout/databar/contrato/IDataBarService';
 
+import { ICurso } from '../model/curso.model';
+import { CursoPaginado } from '../model/curso.paginacao';
+import { CursoService } from './curso.service';
+
 export class CursoDataBarService implements IDataBarBindService<ICurso>{
-    onClickEnter: import("@angular/core").EventEmitter<ICurso>;
+
+    onClickEnter: EventEmitter<ICurso> = new EventEmitter();
 
     constructor(public formgroup: FormGroup, private _servico: CursoService) {
+    }
+
+    enviarFormComEnter() {
+        this.onClickEnter.emit(this.getEntidade());
     }
 
     getEntidade(): ICurso {
