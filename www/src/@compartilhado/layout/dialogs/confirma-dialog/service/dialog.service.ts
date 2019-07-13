@@ -7,15 +7,15 @@ import { ConfirmaDialogComponent } from '../confirma-dialog.component';
 })
 export abstract class DialogService {
 
-    titulo: string;
-    mensagem: string;
     acaoOk: any;
     emProgresso: boolean;
     acaoMensagem: string;
+    dialogRef: any;
+    acaoCancelar: any;
 
     constructor(private dialog: MatDialog) { }
 
-    openDialog() {
+    openDialog(titulo: string, mensagem: string) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
@@ -23,17 +23,18 @@ export abstract class DialogService {
         dialogConfig.maxWidth = '400px';
 
         dialogConfig.data = {
-            titulo: this.titulo,
-            mensagem: this.mensagem,
+            titulo: titulo,
+            mensagem: mensagem,
             acaoOk: this.acaoOk,
             emProgresso: this.emProgresso,
-            acaoMensagem: this.acaoMensagem
+            acaoMensagem: this.acaoMensagem,
+            acaoCancelar: this.acaoCancelar
         };
-        this.dialog.open(ConfirmaDialogComponent, dialogConfig);
+        this.dialogRef = this.dialog.open(ConfirmaDialogComponent, dialogConfig);
 
     }
 
     closeDialog() {
-        this.dialog.closeAll();
+        this.dialogRef.close();
     }
 }

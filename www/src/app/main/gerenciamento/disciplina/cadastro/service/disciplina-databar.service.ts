@@ -7,15 +7,17 @@ import { DisciplinaPaginado } from '../model/disciplina.paginacao';
 
 export class DisciplinaDataBarService implements IDataBarBindService<IDisciplina> {
 
+    onClickEnter: import("@angular/core").EventEmitter<IDisciplina>;
+
     constructor(public formgroup: FormGroup, private _servicoDisciplina: DisciplinaService) { }
 
-    private _getEntidade(): IDisciplina {
+    getEntidade(): IDisciplina {
         return this.formgroup.getRawValue();
     }
 
     criar(): Observable<IDisciplina> {
-        console.log(this._getEntidade());
-        return this._servicoDisciplina.criar(this._getEntidade())
+        console.log(this.getEntidade());
+        return this._servicoDisciplina.criar(this.getEntidade())
     }
 
     listarPaginacao(paginacao: DisciplinaPaginado): Observable<DisciplinaPaginado> {
@@ -23,10 +25,10 @@ export class DisciplinaDataBarService implements IDataBarBindService<IDisciplina
     }
 
     editar(): Observable<IDisciplina> {
-        return this._servicoDisciplina.editar(this._getEntidade());
+        return this._servicoDisciplina.editar(this.getEntidade());
     }
 
     remover(): Observable<any> {
-        return this._servicoDisciplina.remover(this._getEntidade().codigo);
+        return this._servicoDisciplina.remover(this.getEntidade().codigo);
     }
 }

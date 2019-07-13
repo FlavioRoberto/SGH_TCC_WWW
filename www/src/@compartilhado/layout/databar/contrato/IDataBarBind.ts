@@ -1,12 +1,14 @@
 import { OnInit } from '@angular/core';
-import { IDataEntidadePaginada } from './IDataEntidadePaginada';
 import { FormGroup } from '@angular/forms';
+
+import { IDataEntidadePaginada } from './IDataEntidadePaginada';
 import { IDataBarBindService } from './IDataBarService';
 
 export interface IDataBarBindComponent<T> extends OnInit {
-    statusChanged(status: string): void;
     form: FormGroup;
     entidadePaginada: IDataEntidadePaginada<T>;
-    statusNavBar: string,
+    statusNavBar: string;
     servicoDataBarBind: IDataBarBindService<T>;
+
+    statusChanged(status: string): void;
 }

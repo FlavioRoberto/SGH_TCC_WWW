@@ -6,15 +6,16 @@ import { DisciplinaTipoService } from './disciplina.tipo.service';
 import { TipoPaginado } from '../model/tipo.paginacao';
 
 export class DisciplinaTipoDataBarService implements IDataBarBindService<ITipo>{
+    onClickEnter: import("@angular/core").EventEmitter<ITipo>;
 
     constructor(public formgroup: FormGroup, private _servico: DisciplinaTipoService) { }
 
-    private _getDisciplinaTipo(): ITipo {
+    getEntidade(): ITipo {
         return this.formgroup.getRawValue() as ITipo;
     }
 
     criar(): Observable<ITipo> {
-        const disciplinaTipo = this._getDisciplinaTipo();
+        const disciplinaTipo = this.getEntidade();
         return this._servico.criar(disciplinaTipo);
     }
 
@@ -23,11 +24,11 @@ export class DisciplinaTipoDataBarService implements IDataBarBindService<ITipo>{
     }
 
     editar(): Observable<ITipo> {
-        const disciplinaTipo = this._getDisciplinaTipo();
+        const disciplinaTipo = this.getEntidade();
         return this._servico.editar(disciplinaTipo);
     }
     remover(): Observable<any> {
-        const codigo = this._getDisciplinaTipo().codigo;
+        const codigo = this.getEntidade().codigo;
         return this._servico.remover(codigo);
     }
 }

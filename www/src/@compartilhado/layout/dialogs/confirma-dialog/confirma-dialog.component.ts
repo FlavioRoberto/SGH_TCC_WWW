@@ -13,6 +13,7 @@ export class ConfirmaDialogComponent implements OnInit {
     acaoOk: any;
     emProgresso: boolean;
     acaoMensagem: string;
+    acaoCancelar: any;
 
     constructor(
         private dialogRef: MatDialogRef<ConfirmaDialogComponent>,
@@ -23,6 +24,7 @@ export class ConfirmaDialogComponent implements OnInit {
         this.acaoOk = data.acaoOk;
         this.emProgresso = data.emProgresso;
         this.acaoMensagem = data.acaoMensagem;
+        this.acaoCancelar = data.acaoCancelar;
     }
 
     ngOnInit() {
@@ -35,6 +37,7 @@ export class ConfirmaDialogComponent implements OnInit {
     }
 
     close() {
+        this.acaoCancelar();
         this.dialogRef.close();
     }
 }

@@ -1,5 +1,6 @@
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { Injectable } from '@angular/core';
+
 import { ErrorDialogComponent } from '../error-dialog.component';
 
 @Injectable({
@@ -7,28 +8,27 @@ import { ErrorDialogComponent } from '../error-dialog.component';
 })
 export abstract class ErrorDialogService {
 
-    titulo: string;
-    mensagem: string;
+    dialogRef: any;
 
     constructor(private dialog: MatDialog) { }
 
-    openDialog() {
+    openDialog(titulo: string, mensagem: string): void {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
 
         dialogConfig.data = {
-            titulo: this.titulo,
-            mensagem: this.mensagem
+            titulo: titulo,
+            mensagem: mensagem
         };
 
-        dialogConfig.minWidth = "300px";
+        dialogConfig.minWidth = '300px';
 
-        this.dialog.open(ErrorDialogComponent, dialogConfig);
+        this.dialogRef = this.dialog.open(ErrorDialogComponent, dialogConfig);
 
     }
 
-    closeDialog() {
-        this.dialog.closeAll();
+    closeDialog(): void {
+        this.dialogRef.close();
     }
 }

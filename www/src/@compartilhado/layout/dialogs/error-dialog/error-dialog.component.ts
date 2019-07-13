@@ -1,5 +1,5 @@
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
-import { OnInit, Inject, Component } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Inject, Component } from '@angular/core';
 
 @Component({
     selector: 'confirma-dialog',
@@ -18,7 +18,7 @@ export class ErrorDialogComponent {
         this.titulo = data.titulo;
     }
 
-    close() {
+    close(): void {
         this.dialogRef.close();
     }
 }

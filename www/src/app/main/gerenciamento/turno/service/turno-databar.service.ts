@@ -7,15 +7,17 @@ import { TurnoPaginado } from '../model/turno.paginacao';
 
 export class TurnoDataBarService implements IDataBarBindService<ITurno>{
 
+    onClickEnter: import("@angular/core").EventEmitter<ITurno>;
+
     constructor(public formgroup: FormGroup, private _turnoService: TurnoService) {
     }
 
-    private _getTurno(): ITurno {
+    getEntidade(): ITurno {
         return this.formgroup.getRawValue() as ITurno
     }
 
     criar(): Observable<ITurno> {
-        const turno = this._getTurno();
+        const turno = this.getEntidade();
         return this._turnoService.criar(turno);
     }
 
@@ -24,12 +26,12 @@ export class TurnoDataBarService implements IDataBarBindService<ITurno>{
     }
 
     editar(): Observable<ITurno> {
-        return this._turnoService.editar(this._getTurno());
+        return this._turnoService.editar(this.getEntidade());
     }
 
     remover(): Observable<any> {
         return this._turnoService
-            .remover(this._getTurno().codigo);
+            .remover(this.getEntidade().codigo);
     }
 
 }

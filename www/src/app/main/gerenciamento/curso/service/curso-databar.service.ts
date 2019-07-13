@@ -6,16 +6,17 @@ import { CursoPaginado } from '../model/curso.paginacao';
 import { IDataBarBindService } from '@compartilhado/layout/databar/contrato/IDataBarService';
 
 export class CursoDataBarService implements IDataBarBindService<ICurso>{
+    onClickEnter: import("@angular/core").EventEmitter<ICurso>;
 
     constructor(public formgroup: FormGroup, private _servico: CursoService) {
     }
 
-    private _getCurso(): ICurso {
+    getEntidade(): ICurso {
         return this.formgroup.getRawValue() as ICurso;
     }
 
     criar(): Observable<ICurso> {
-        return this._servico.criar(this._getCurso());
+        return this._servico.criar(this.getEntidade());
     }
 
     listarPaginacao(paginacao: CursoPaginado): Observable<CursoPaginado> {
@@ -23,11 +24,11 @@ export class CursoDataBarService implements IDataBarBindService<ICurso>{
     }
 
     editar(): Observable<ICurso> {
-        return this._servico.editar(this._getCurso());
+        return this._servico.editar(this.getEntidade());
     }
 
     remover(): Observable<any> {
-        return this._servico.remover(this._getCurso().codigo);
+        return this._servico.remover(this.getEntidade().codigo);
     }
 
 }
