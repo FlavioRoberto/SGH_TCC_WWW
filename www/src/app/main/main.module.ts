@@ -10,6 +10,7 @@ import { CompartilhadoModule } from '@compartilhado/compartilhado.module';
 import { RequestInterceptor } from '@compartilhado/interceptors/request.interceptor';
 
 import { MainRoutingModule } from './main.routes.module';
+import { RequestErrorInterceptor } from '@compartilhado/layout/interceptors/request.error.interceptor';
 
 
 @NgModule({
@@ -24,6 +25,11 @@ import { MainRoutingModule } from './main.routes.module';
     providers: [{
         provide: HTTP_INTERCEPTORS,
         useClass: RequestInterceptor,
+        multi: true
+    },
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: RequestErrorInterceptor,
         multi: true
     }],
 })

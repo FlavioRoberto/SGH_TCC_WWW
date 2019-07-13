@@ -309,7 +309,6 @@ export class DataBarComponent<T> implements OnInit, OnDestroy {
                 this.form.disable();
             },
             error => {
-                console.log('erro paginação', error);
                 this.setStatus(EStatus.novaPesquisa);
                 this.setProgresso(false);
             }
