@@ -7,6 +7,7 @@ import { MaterialCoreModule } from '@compartilhado/material-core/material-core.m
 
 import { DisciplinaComponent } from './disciplina.component';
 import { DisciplinaRoutingModule } from './disciplina.routes.module';
+import { TipoResolver } from '../../resolvers/tipo.resolver';
 
 
 @NgModule({
@@ -18,6 +19,9 @@ import { DisciplinaRoutingModule } from './disciplina.routes.module';
         MaterialCoreModule,
         CompartilhadoModule
     ],
-    exports: [DisciplinaComponent]
+    exports: [DisciplinaComponent],
+    providers: [
+        TipoResolver
+    ]
 })
 export class DisciplinaModule { }

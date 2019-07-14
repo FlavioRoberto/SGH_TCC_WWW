@@ -10,6 +10,7 @@ import { IDisciplina } from './model/IDisciplina';
 import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/IDataBarBind';
 import { DisciplinaDataBarService } from './service/disciplina-databar.service';
 import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'disciplina',
@@ -28,7 +29,8 @@ export class DisciplinaComponent implements IDataBarBindComponent<IDisciplina> {
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         private _formBuilder: FormBuilder,
         private _servicoTipo: DisciplinaTipoService,
-        private _servicoDisciplina: DisciplinaService
+        private _servicoDisciplina: DisciplinaService,
+        private _route: ActivatedRoute
     ) {
     }
 
@@ -48,10 +50,7 @@ export class DisciplinaComponent implements IDataBarBindComponent<IDisciplina> {
 
         this.entidadePaginada = new DisciplinaPaginado();
 
-        this._servicoTipo.listarTodos().subscribe(result => {
-            console.log(result);
-            this.tipos = result;
-        });
+        this.tipos = this._route.snapshot.data['tipos'];
     }
 
     statusChanged(status: string): void {

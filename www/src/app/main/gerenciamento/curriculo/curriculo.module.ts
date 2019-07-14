@@ -9,6 +9,8 @@ import { MaterialCoreModule } from '@compartilhado/material-core/material-core.m
 
 import { CurriculoComponent } from './curriculo.component';
 import { CurriculoRoutingModule } from './curriculo.routes.module';
+import { TurnoResolver } from '../resolvers/turno.resolver';
+import { CursoResolver } from '../resolvers/curso.resolver';
 
 
 @NgModule({
@@ -21,6 +23,10 @@ import { CurriculoRoutingModule } from './curriculo.routes.module';
         CurriculoRoutingModule,
         CompartilhadoModule
     ],
-    exports: [CurriculoComponent]
+    exports: [CurriculoComponent],
+    providers: [
+        TurnoResolver,
+        CursoResolver
+    ]
 })
 export class CurriculoModule { }

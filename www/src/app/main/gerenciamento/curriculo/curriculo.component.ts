@@ -14,6 +14,7 @@ import { CurriculoModule } from './curriculo.module';
 import { CurriculoDataBarService } from './services/curriculo-databar.service';
 import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/IDataBarBind';
 import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'curriculo',
@@ -37,7 +38,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         private _formBuilder: FormBuilder,
         private _serviceCurso: CursoService,
-        private _serviceTurno: TurnoService
+        private _route: ActivatedRoute
     ) { }
 
     ngOnInit(): void {
@@ -64,13 +65,10 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
 
         this._carregarPeriodos();
 
-        this._serviceCurso.listarTodos().subscribe(success => {
-            this.cursos = success;
-        })
+        this.cursos = this._route.snapshot.data['cursos'];;
 
-        this._serviceTurno.listarTodos().subscribe(success => {
-            this.turnos = success;
-        })
+        this.turnos = this._route.snapshot.data['turnos'];;
+
     }
 
     private _carregarPeriodos() {
