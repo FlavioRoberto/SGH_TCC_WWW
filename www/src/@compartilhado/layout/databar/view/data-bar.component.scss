@@ -1,19 +1,19 @@
 ::ng-deep .sucesso {
-    background: #4caf50 !important;
-    color: white !important;
-    button {
-        color: #1b5e20 !important;
-        font-weight: 800 !important;
-    }
+  background: #4caf50 !important;
+  color: white !important;
+  button {
+    color: #1b5e20 !important;
+    font-weight: 800 !important;
+  }
 }
 
 mat-toolbar {
-    width: 100%;
-    background: #fff !important;
+  width: 100%;
+  background: #fff !important;
 }
 
 mat-drawer-container {
-    background: transparent !important;
+  background: transparent !important;
 }
 
 mat-drawer {
@@ -22,29 +22,30 @@ mat-drawer {
 }
 
 :host {
-    display: flex;
-    flex: 0 0 auto;
-    z-index: 3;
+  display: flex;
+  flex: 0 0 auto;
+  z-index: 3;
 
-    .mat-toolbar {
-        background: inherit;
-        color: inherit;
-        border-bottom: 1px solid #e6e6e6;
-        // box-shadow: 0px -1px 1px -1px rgba(0, 0, 0, 0.2), 0px 0px 1px 0px rgba(0, 0, 0, 0.14),
-        //   0px -1px 3px 0px rgba(58, 52, 52, 0.12);
+  .mat-toolbar {
+    z-index: 1;
+    background: inherit;
+    color: inherit;
+    border-bottom: 1px solid #e6e6e6;
+    // box-shadow: 0px -1px 1px -1px rgba(0, 0, 0, 0.2), 0px 0px 1px 0px rgba(0, 0, 0, 0.14),
+    //   0px -1px 3px 0px rgba(58, 52, 52, 0.12);
 
-        .status {
-            color: #039be5;
-        }
-        .pagina {
-            text-align: center;
-            font-size: 10px;
-            margin: 1vm;
-        }
+    .status {
+      color: #039be5;
     }
-
-    &.above {
-        position: relative;
-        z-index: 99;
+    .pagina {
+      text-align: center;
+      font-size: 10px;
+      margin: 1vm;
     }
+  }
+
+  &.above {
+    position: relative;
+    z-index: 99;
+  }
 }
