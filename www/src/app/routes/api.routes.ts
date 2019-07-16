@@ -25,7 +25,8 @@ export class routesApi {
             disciplina: {
                 tipo: this.construitRotaPadrao('disciplinaTipo'),
                 disciplina: this.construitRotaPadrao('disciplina')
-            }
+            },
+            usuario: this.construitRotaPadrao('usuario')
         };
 
     }

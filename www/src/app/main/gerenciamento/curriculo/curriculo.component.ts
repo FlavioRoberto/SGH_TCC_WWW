@@ -1,13 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { locale as portugues } from './../i18n/pt-br';
-import { ICurriculo } from './model/curriculo.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CurriculoPaginado } from './model/curriculo.paginacao';
 import { ICurso } from '../curso/model/curso.model';
 import { ITurno } from '../turno/model/turno.interface';
 import { CursoService } from '../curso/service/curso.service';
-import { TurnoService } from '../turno/service/turno.service';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { ICurriculoDisciplina } from './model/curriculo-disciplina.model';
 import { CurriculoModule } from './curriculo.module';

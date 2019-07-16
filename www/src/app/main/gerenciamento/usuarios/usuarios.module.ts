@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FuseSharedModule } from '@fuse/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { CompartilhadoModule } from '@compartilhado/compartilhado.module';
 import { MaterialCoreModule } from '@compartilhado/material-core/material-core.module';
@@ -13,6 +14,7 @@ import { DataBarFormModule } from 'app/layout/components/databar-form/databar-fo
     imports: [
         CompartilhadoModule,
         MaterialCoreModule,
+        TranslateModule,
         FuseSharedModule,
         UsuariosRoutingModule,
         DataBarFormModule

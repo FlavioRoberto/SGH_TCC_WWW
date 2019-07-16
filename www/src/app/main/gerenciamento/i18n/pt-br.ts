@@ -19,6 +19,9 @@ export const locale = {
             },
             CURSO: {
                 TITULO: 'Curso'
+            },
+            USUARIO: {
+                PERFIL: 'Perfil'
             }
         }
     }

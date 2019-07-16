@@ -1,13 +1,40 @@
-<form [formGroup]="form" fxLayout.xs="column" class="turno-form">
-
-    <mat-form-field appearance="outline" class="pr-sm-8" fxFlex>
+<form [formGroup]="form" fxLayout="column">
+    <!-- TEXTOS E NÚMEROS -->
+    <mat-form-field *ngIf="tipo != 'password'" appearance="outline" fxFlex="100">
         <mat-label>{{label}}</mat-label>
-        <input matInput #input maxlength="{{maxlength}}" minlength="{{minlength}}"
-            class="primary-color-input border-radius-4" name="{{name}}" formControlName="{{controlName}}" />
-        <mat-hint align="end">{{input.value?.length || 0}}/{{maxlength}}</mat-hint>
+        <input matInput [type]="tipo ? tipo : 'text'" #input [maxlength]="maxlength" [minlength]="minlength"
+            [required]="required" class="primary-color-input border-radius-4" (keydown.space)="aplicarEspacos($event)"
+            [name]="name" [formControlName]="controlName" />
+        <mat-hint align="end" *ngIf="input.value?.length <= maxlength; else erro">
+            {{input.value?.length || 0}}/{{maxlength}}</mat-hint>
+        <mat-hint align="start" *ngIf="textoMatHint">
+            {{ textoMatHint }}
+        </mat-hint>
         <mat-error *ngIf="condicaoErro">
-            {{'NAV.CAMPO_OBRIGATORIO' | translate}}
+            {{ mensagemErro }}
+        </mat-error>
+        <ng-template #erro>
+            <mat-error>
+                Tamanho máximo de {{ maxlength }} caracteres
+            </mat-error>
+        </ng-template>
+    </mat-form-field>
+    <!-- /TEXTOS E NÚMEROS -->
+
+    <!-- SENHAS -->
+    <mat-form-field *ngIf="tipo == 'password'" appearance="outline" fxFlex="100">
+        <mat-label>{{label}}</mat-label>
+        <input matInput [type]="toggle ? 'password' : 'text'" #input [maxlength]="maxlength" [minlength]="minlength"
+            [required]="required" class="primary-color-input border-radius-4" [name]="name"
+            [formControlName]="controlName" />
+        <button *ngIf="toggleSenha" mat-icon-button matSuffix (click)="toggle = !toggle">
+            <mat-icon>{{toggle ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-hint align="end">
+            {{input.value?.length || 0}}/{{maxlength}}</mat-hint>
+        <mat-error *ngIf=" condicaoErro">
+            {{ mensagemErro }}
         </mat-error>
     </mat-form-field>
-
+    <!-- /SENHAS -->
 </form>

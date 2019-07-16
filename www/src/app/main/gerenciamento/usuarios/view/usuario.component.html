@@ -1,5 +1,123 @@
-<databar-form class="inner-scroll" fxLayout="column" fxFlex [servicoBind]="servicoDataBarBind"
-    [entidadePaginada]="entidadePaginada" [form]="form" (statusChanged)="statusChanged($event)"
-    [navegacao]="['Gerenciamento','Usuário']" fxFlex>
+<databar-form
+    class="inner-scroll"
+    fxLayout="column"
+    fxFlex
+    [servicoBind]="servicoDataBarBind"
+    [entidadePaginada]="entidadePaginada"
+    [form]="form"
+    (statusChanged)="statusChanged($event)"
+    [navegacao]="['Gerenciamento', 'Usuários']"
+    fxFlex
+>
+    <!-- FORM -->
+    <form [formGroup]="form" fxLayout="column">
+        <!-- LINHA 1 -->
+        <div fxLayout="column" fxLayout.gt-sm="row">
+            <!-- PERFIL -->
+            <mat-form-field fxFlex appearance="outline" class="pr-sm-8">
+                <mat-select placeholder="Perfil" formControlName="perfil">
+                    <mat-option
+                        *ngFor="let perfil of perfis"
+                        [value]="perfil.codigo"
+                    >
+                        {{ perfil.descricao }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('perfil').errors?.required">
+                    {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
+                </mat-error>
+            </mat-form-field>
+            <!-- PERFIL -->
 
+            <!-- NOME -->
+            <ap-input-max-length
+                fxFlex
+                [maxlength]="45"
+                label="Nome"
+                [minlength]="1"
+                controlName="nome"
+                [form]="form"
+                name="nome"
+                mensagemErro="Campo obrigatório!"
+                [condicaoErro]="form.get('nome').errors?.required"
+            >
+            </ap-input-max-length>
+            <!-- NOME -->
+        </div>
+        <!-- LINHA 1 -->
+
+        <!-- LINHA 2 -->
+        <div fxLayout="column" fxLayout.gt-sm="row">
+            <!-- LOGIN -->
+            <ap-input-max-length
+                class="pr-sm-8"
+                fxFlex
+                [maxlength]="30"
+                label="Login"
+                [minlength]="1"
+                controlName="login"
+                [form]="form"
+                name="login"
+                mensagemErro="Campo obrigatório!"
+                [condicaoErro]="form.get('login').errors?.required"
+            >
+            </ap-input-max-length>
+            <!-- LOGIN -->
+
+            <!-- SENHA -->
+            <ap-input-max-length
+                fxFlex
+                [maxlength]="30"
+                label="Senha"
+                [minlength]="1"
+                controlName="senha"
+                tipo="password"
+                toggleSenha="true"
+                [form]="form"
+                name="senha"
+                mensagemErro="Campo obrigatório!"
+                [condicaoErro]="form.get('senha').errors?.required"
+            >
+            </ap-input-max-length>
+            <!-- SENHA -->
+        </div>
+        <!-- LINHA 2 -->
+
+        <!-- LINHA 3 -->
+        <div fxLayout="column" fxLayout.gt-sm="row">
+            <!-- EMAIL -->
+            <ap-input-max-length
+                class="pr-sm-8"
+                fxFlex
+                [maxlength]="30"
+                label="e-mail"
+                [minlength]="1"
+                controlName="email"
+                [form]="form"
+                name="email"
+                mensagemErro="Campo obrigatório!"
+                [condicaoErro]="form.get('email').errors?.required"
+            >
+            </ap-input-max-length>
+            <!-- EMAIL -->
+
+            <!-- TELEFONE -->
+            <ap-input-max-length
+                fxFlex
+                [maxlength]="30"
+                label="Telefone"
+                [minlength]="1"
+                controlName="telefone"
+                [form]="form"
+                mensagemErro="Campo obrigatório!"
+                name="telefone"
+                [condicaoErro]="form.get('telefone').errors?.required"
+            >
+            </ap-input-max-length>
+            <!-- TELEFONE -->
+        </div>
+        <!-- LINHA 3 -->
+    </form>
+
+    <!-- FORM -->
 </databar-form>
