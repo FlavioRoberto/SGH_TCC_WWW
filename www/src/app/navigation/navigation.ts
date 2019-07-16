@@ -61,6 +61,14 @@ export const navigation: FuseNavigation[] = [
                         type: 'item',
                         icon: 'access_time',
                         url: '/gerenciamento/turno'
+                    },
+                    {
+                        id: 'usuarios',
+                        title: 'Usuarios',
+                        translate: 'NAV.GERENCIAMENTO.USUARIOS',
+                        type: 'item',
+                        icon: 'account_box',
+                        url: '/gerenciamento/usuarios'
                     }
                 ]
             }

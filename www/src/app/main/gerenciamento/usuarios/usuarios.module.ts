@@ -1,26 +1,21 @@
 import { NgModule } from '@angular/core';
-
-import { TranslateModule } from '@ngx-translate/core';
-
 import { FuseSharedModule } from '@fuse/shared.module';
+
 import { CompartilhadoModule } from '@compartilhado/compartilhado.module';
 import { MaterialCoreModule } from '@compartilhado/material-core/material-core.module';
 
-import { CursoComponent } from './curso.component';
-import { CursoRoutingModule } from './curso.routes.module';
+import { UsuariosRoutingModule } from './usuarios.routes.module';
+import { UsuariosComponent } from './usuarios.component';
 import { DataBarFormModule } from 'app/layout/components/databar-form/databar-form.module';
 
-
 @NgModule({
-    declarations: [CursoComponent],
+    declarations: [UsuariosComponent],
     imports: [
-        TranslateModule,
-        FuseSharedModule,
-        MaterialCoreModule,
         CompartilhadoModule,
-        CursoRoutingModule,
+        MaterialCoreModule,
+        FuseSharedModule,
+        UsuariosRoutingModule,
         DataBarFormModule
-    ],
-    exports: [CursoComponent]
+    ]
 })
-export class CursoModule { }
+export class UsuariosModule { }

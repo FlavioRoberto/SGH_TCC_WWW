@@ -1,29 +1,21 @@
-<div class="page-layout simple fullwidth" style="background: white">
-    <!-- HEADER -->
-    <ap-header-descricao [navegacao]="['Gerenciamento']" titulo="{{ 'GERENCIAMENTO.CURSO.TITULO' | translate }}">
-    </ap-header-descricao>
-    <!-- HEADER -->
-    <data-bar [servicoBind]="servicoDataBarBind" [entidadePaginada]="entidadePaginada" [form]="form"
-        (statusChanged)="statusChanged($event)"></data-bar>
+<databar-form class="inner-scroll" fxLayout="column" fxFlex [servicoBind]="servicoDataBarBind"
+    [entidadePaginada]="entidadePaginada" [form]="form" (statusChanged)="statusChanged($event)"
+    [navegacao]="['Gerenciamento','Curso']" fxFlex>
 
-    <!-- CONTENT -->
-    <div class="content p-24">
-        <form (Keydown.enter)="servicoDataBarBind.enviarFormComEnter()" [formGroup]="form" fxLayout.xs="column"
-            class="turno-form">
-            <!-- CODIGO -->
-            <mat-form-field *ngIf="statusNavBar != EStatus.inserindo" appearance="outline" class="pr-sm-8" fxFlex="20">
-                <mat-label>Código</mat-label>
-                <input [attr.disabled]="statusNavBar == EStatus.inserindo || statusNavBar == EStatus.editando" matInput
-                    class="primary-color-input border-radius-4" name="primary color" formControlName="codigo" />
-            </mat-form-field>
-            <!-- CODIGO -->
+    <form (Keydown.enter)="servicoDataBarBind.enviarFormComEnter()" [formGroup]="form" fxLayout.xs="column"
+        class="turno-form">
+        <!-- CODIGO -->
+        <mat-form-field *ngIf="statusNavBar != EStatus.inserindo" appearance="outline" class="pr-sm-8" fxFlex="20">
+            <mat-label>Código</mat-label>
+            <input [attr.disabled]="statusNavBar == EStatus.inserindo || statusNavBar == EStatus.editando" matInput
+                class="primary-color-input border-radius-4" name="primary color" formControlName="codigo" />
+        </mat-form-field>
+        <!-- CODIGO -->
 
-            <!-- DESCRICAO -->
-            <ap-input-max-length fxFlex [maxlength]="50" label="Descrição" [minlength]="1" controlName="descricao"
-                [form]="form" name="descricao" [condicaoErro]="form.get('descricao').errors?.required">
-            </ap-input-max-length>
-            <!-- DESCRICAO -->
-        </form>
-    </div>
-    <!-- / CONTENT -->
-</div>
+        <!-- DESCRICAO -->
+        <ap-input-max-length fxFlex [maxlength]="50" label="Descrição" [minlength]="1" controlName="descricao"
+            [form]="form" name="descricao" [condicaoErro]="form.get('descricao').errors?.required">
+        </ap-input-max-length>
+        <!-- DESCRICAO -->
+    </form>
+</databar-form>

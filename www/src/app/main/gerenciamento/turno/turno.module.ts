@@ -8,6 +8,7 @@ import { MaterialCoreModule } from '@compartilhado/material-core/material-core.m
 
 import { TurnoComponent } from './turno.component';
 import { TurnoRoutingModule } from './turno.routes.module';
+import { DataBarFormModule } from 'app/layout/components/databar-form/databar-form.module';
 
 @NgModule({
     declarations: [TurnoComponent],
@@ -16,7 +17,8 @@ import { TurnoRoutingModule } from './turno.routes.module';
         TranslateModule,
         FuseSharedModule,
         MaterialCoreModule,
-        CompartilhadoModule
+        CompartilhadoModule,
+        DataBarFormModule
     ],
     exports: [TurnoComponent]
 })

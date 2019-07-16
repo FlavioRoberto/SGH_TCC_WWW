@@ -8,6 +8,7 @@ import { MaterialCoreModule } from '@compartilhado/material-core/material-core.m
 import { DisciplinaComponent } from './disciplina.component';
 import { DisciplinaRoutingModule } from './disciplina.routes.module';
 import { TipoResolver } from '../../resolvers/tipo.resolver';
+import { DataBarFormModule } from 'app/layout/components/databar-form/databar-form.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { TipoResolver } from '../../resolvers/tipo.resolver';
         TranslateModule,
         FuseSharedModule,
         MaterialCoreModule,
-        CompartilhadoModule
+        CompartilhadoModule,
+        DataBarFormModule
     ],
     exports: [DisciplinaComponent],
     providers: [

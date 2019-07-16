@@ -17,6 +17,10 @@ const routes: Routes = [
     {
         path: 'turno',
         loadChildren: './turno/turno.module#TurnoModule'
+    },
+    {
+        path: 'usuarios',
+        loadChildren: './usuarios/usuarios.module#UsuariosModule'
     }
 ];
 

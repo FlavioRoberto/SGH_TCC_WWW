@@ -1,49 +1,37 @@
-<div class="page-layout simple fullwidth" style="background: white">
+<databar-form class="inner-scroll" fxLayout="column" fxFlex [servicoBind]="servicoDataBarBind"
+    [entidadePaginada]="entidadePaginada" [form]="form" (statusChanged)="statusChanged($event)"
+    [navegacao]="['Gerenciamento','Disciplina','Cadastro']" fxFlex>
 
-    <!-- HEADER -->
-    <ap-header-descricao [navegacao]="['Gerenciamento','Disciplina']"
-        titulo="{{ 'GERENCIAMENTO.DISCIPLINA.CADASTRO' | translate }}">
-    </ap-header-descricao>
-    <!-- HEADER -->
+    <form [formGroup]="form" fxLayout.xs="column" class="turno-form" fxLayout="column" fxFlex>
 
-    <data-bar [servicoBind]="servicoDataBarBind" [entidadePaginada]="entidadePaginada" [form]="form"
-        (statusChanged)="statusChanged($event)"></data-bar>
-
-    <!-- CONTENT -->
-    <div class="content p-24">
-        <form [formGroup]="form" fxLayout.xs="column" class="turno-form" fxLayout="column" fxFlex>
-
-            <div fxLayout.gt-sm="row">
-                <!-- CODIGO -->
-                <mat-form-field *ngIf="statusNavBar != EStatus.inserindo" appearance="outline" class="pr-sm-8"
-                    fxFlex="20">
-                    <mat-label>Código</mat-label>
-                    <input [attr.disabled]="statusNavBar == EStatus.inserindo || statusNavBar == EStatus.editando"
-                        matInput class="primary-color-input border-radius-4" name="primary color"
-                        formControlName="codigo" />
-                </mat-form-field>
-                <!-- CODIGO -->
-
-                <!-- DESCRICAO -->
-                <ap-input-max-length fxFlex [maxlength]="50" label="Descrição" [minlength]="1" controlName="descricao"
-                    [form]="form" name="descricao" [condicaoErro]="form.get('descricao').errors?.required">
-                </ap-input-max-length>
-                <!-- DESCRICAO -->
-            </div>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Tipo</mat-label>
-                <mat-select placeholder="Tipo" formControlName="codigoTipo">
-                    <mat-option *ngFor="let tipo of tipos" [value]="tipo.codigo">
-                        {{tipo.descricao}}
-                    </mat-option>
-                </mat-select>
-                <mat-error *ngIf="form.get('codigoTipo').errors?.required">
-                    {{'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate}}
-                </mat-error>
+        <div fxLayout.gt-sm="row">
+            <!-- CODIGO -->
+            <mat-form-field *ngIf="statusNavBar != EStatus.inserindo" appearance="outline" class="pr-sm-8" fxFlex="20">
+                <mat-label>Código</mat-label>
+                <input [attr.disabled]="statusNavBar == EStatus.inserindo || statusNavBar == EStatus.editando" matInput
+                    class="primary-color-input border-radius-4" name="primary color" formControlName="codigo" />
             </mat-form-field>
+            <!-- CODIGO -->
 
-        </form>
-    </div>
-    <!-- / CONTENT -->
-</div>
+            <!-- DESCRICAO -->
+            <ap-input-max-length fxFlex [maxlength]="50" label="Descrição" [minlength]="1" controlName="descricao"
+                [form]="form" name="descricao" [condicaoErro]="form.get('descricao').errors?.required">
+            </ap-input-max-length>
+            <!-- DESCRICAO -->
+        </div>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Tipo</mat-label>
+            <mat-select placeholder="Tipo" formControlName="codigoTipo">
+                <mat-option *ngFor="let tipo of tipos" [value]="tipo.codigo">
+                    {{tipo.descricao}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('codigoTipo').errors?.required">
+                {{'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate}}
+            </mat-error>
+        </mat-form-field>
+
+    </form>
+
+</databar-form>

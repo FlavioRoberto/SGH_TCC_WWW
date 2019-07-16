@@ -12,7 +12,8 @@ export const locale = {
                     CADASTRO: 'Cadastro',
                     TIPO: "Tipo"
                 },
-                CURRICULO: 'Currículo'
+                CURRICULO: 'Currículo',
+                USUARIOS: 'Usuários'
             },
             CAMPO_OBRIGATORIO: 'Campo obrigatório'
         }

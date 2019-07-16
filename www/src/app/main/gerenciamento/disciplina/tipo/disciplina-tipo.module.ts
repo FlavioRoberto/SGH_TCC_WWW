@@ -8,6 +8,7 @@ import { MaterialCoreModule } from '@compartilhado/material-core/material-core.m
 
 import { DisciplinaTipoComponent } from './disciplina-tipo.component';
 import { DisciplinaTipoRoutingModule } from './disciplina-tipo.routes.module';
+import { DataBarFormModule } from 'app/layout/components/databar-form/databar-form.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { DisciplinaTipoRoutingModule } from './disciplina-tipo.routes.module';
         FuseSharedModule,
         MaterialCoreModule,
         CompartilhadoModule,
-        DisciplinaTipoRoutingModule
+        DisciplinaTipoRoutingModule,
+        DataBarFormModule
     ],
     exports: [DisciplinaTipoComponent]
 })
