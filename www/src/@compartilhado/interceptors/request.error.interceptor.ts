@@ -32,7 +32,7 @@ export class RequestErrorInterceptor implements HttpInterceptor {
                             console.error(err);
 
                             if (err.error) {
-                                mensagem = err.error.error[0];
+                                mensagem = err.error;
                             }
 
                             if (err.status === 404) {

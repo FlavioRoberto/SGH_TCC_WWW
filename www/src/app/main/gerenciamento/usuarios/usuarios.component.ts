@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
@@ -23,7 +23,7 @@ export class UsuariosComponent implements IDataBarBindComponent<IUsuario> {
     servicoDataBarBind: UsuarioDataBarService;
     status: EStatus;
 
-    constructor(private _formBuilder: FormBuilder, 
+    constructor(private _formBuilder: FormBuilder,
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         private _servicoUsuario: UsuarioService) {
     }
@@ -45,7 +45,7 @@ export class UsuariosComponent implements IDataBarBindComponent<IUsuario> {
             telefone: [null, [Validators.maxLength(12), Validators.required]],
             login: [null, [Validators.maxLength(30), Validators.required]],
             senha: [null, [Validators.maxLength(35), Validators.required]],
-            email: [null, [Validators.maxLength(45), Validators.required]],
+            email: [null, [Validators.maxLength(45), Validators.required, Validators.email]],
             foto: [null, [Validators.maxLength(45), Validators.required]],
             perfil: [null, [Validators.required]]
         });

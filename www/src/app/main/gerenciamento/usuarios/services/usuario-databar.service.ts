@@ -18,19 +18,19 @@ export class UsuarioDataBarService implements IDataBarBindService<IUsuario>{
     }
 
     criar(): Observable<IUsuario> {
-        throw new Error('Method not implemented.');
+        return this._servicoUsuario.criar(this.getEntidade());
     }
 
     editar(): Observable<IUsuario> {
-        throw new Error('Method not implemented.');
+        return this._servicoUsuario.editar(this.getEntidade());
     }
 
     remover(): Observable<IUsuario> {
-        throw new Error('Method not implemented.');
+        return this._servicoUsuario.remover(this.getEntidade().codigo);
     }
 
     listarPaginacao(entidadePaginada: UsuarioPaginado): Observable<UsuarioPaginado> {
-        throw new Error('Method not implemented.');
+        return this._servicoUsuario.listarPaginacao(entidadePaginada);
     }
 
 }
