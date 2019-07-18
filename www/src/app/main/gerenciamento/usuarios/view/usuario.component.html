@@ -15,7 +15,7 @@
         <div fxLayout="column" fxLayout.gt-sm="row">
             <!-- PERFIL -->
             <mat-form-field fxFlex appearance="outline" class="pr-sm-8">
-                <mat-select placeholder="Perfil" formControlName="perfil">
+                <mat-select placeholder="Perfil" formControlName="perfilCodigo">
                     <mat-option
                         *ngFor="let perfil of perfis"
                         [value]="perfil.codigo"
@@ -23,7 +23,7 @@
                         {{ perfil.descricao }}
                     </mat-option>
                 </mat-select>
-                <mat-error *ngIf="form.get('perfil').errors?.required">
+                <mat-error *ngIf="form.get('perfilCodigo').hasError('required')">
                     {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
                 </mat-error>
             </mat-form-field>
@@ -39,7 +39,7 @@
                 [form]="form"
                 name="nome"
                 mensagemErro="Campo obrigatório!"
-                [condicaoErro]="form.get('nome').errors?.required"
+                [condicaoErro]="form.get('nome').hasError('required')"
             >
             </ap-input-max-length>
             <!-- NOME -->
@@ -49,24 +49,31 @@
         <!-- LINHA 2 -->
         <div fxLayout="column" fxLayout.gt-sm="row">
             <!-- LOGIN -->
-            <ap-input-max-length
-                class="pr-sm-8"
-                fxFlex
-                [maxlength]="30"
-                label="Login"
-                [minlength]="1"
-                controlName="login"
-                [form]="form"
-                name="login"
-                mensagemErro="Campo obrigatório!"
-                [condicaoErro]="form.get('login').errors?.required"
-            >
-            </ap-input-max-length>
+            <mat-form-field appearance="outline" fxFlex="100" class="pr-sm-8">
+                <mat-label>Login</mat-label>
+                <input
+                    (keydown.space)="preventEspacos($event)"
+                    matInput
+                    type="text"
+                    #input
+                    maxlength="30"
+                    class="primary-color-input border-radius-4"
+                    name="login"
+                    formControlName="login"
+                />
+
+                <mat-hint align="end">
+                    {{ input.value?.length || 0 }}/30</mat-hint
+                >
+                <mat-error *ngIf="form.get('email').hasError('required')">
+                    {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
+                </mat-error>
+            </mat-form-field>
             <!-- LOGIN -->
 
             <!-- SENHA -->
             <ap-input-max-length
-                fxFlex
+                fxFlex="100"
                 [maxlength]="30"
                 label="Senha"
                 [minlength]="1"
@@ -76,7 +83,7 @@
                 [form]="form"
                 name="senha"
                 mensagemErro="Campo obrigatório!"
-                [condicaoErro]="form.get('senha').errors?.required"
+                [condicaoErro]="form.get('senha').hasError('required')"
             >
             </ap-input-max-length>
             <!-- SENHA -->
@@ -86,7 +93,7 @@
         <!-- LINHA 3 -->
         <div fxLayout="column" fxLayout.gt-sm="row">
             <!-- EMAIL -->
-            <mat-form-field appearance="outline" fxFlex class="pr-sm-8">
+            <mat-form-field appearance="outline" fxFlex="100" class="pr-sm-8">
                 <mat-label>E-mail</mat-label>
                 <input
                     matInput
@@ -94,7 +101,6 @@
                     #input
                     maxlength="30"
                     minlength="1"
-                    required="true"
                     class="primary-color-input border-radius-4"
                     name="email"
                     formControlName="email"
@@ -103,28 +109,33 @@
                 <mat-hint align="end">
                     {{ input.value?.length || 0 }}/30</mat-hint
                 >
-                <mat-error *ngIf="form.get('email').errors?.required">
+                <mat-error *ngIf="form.get('email').hasError('required')">
                     {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
                 </mat-error>
-                 <mat-error *ngIf="form.get('email').errors?.email">
+                <mat-error *ngIf="form.get('email').hasError('email')">
                     E-mail inválido!
                 </mat-error>
             </mat-form-field>
             <!-- EMAIL -->
 
             <!-- TELEFONE -->
-            <ap-input-max-length
-                fxFlex
-                [maxlength]="30"
-                label="Telefone"
-                [minlength]="1"
-                controlName="telefone"
-                [form]="form"
-                mensagemErro="Campo obrigatório!"
-                name="telefone"
-                [condicaoErro]="form.get('telefone').errors?.required"
-            >
-            </ap-input-max-length>
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Celular</mat-label>
+                <input
+                    matInput
+                    mask="(00) 000000000"
+                    type="text"
+                    class="primary-color-input border-radius-4"
+                    name="telefone"
+                    formControlName="telefone"
+                />
+                <mat-error *ngIf="form.get('telefone').hasError('pattern')">
+                    Telefone inválido!
+                </mat-error>
+                <mat-error *ngIf="form.get('telefone').hasError('required')">
+                    {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
+                </mat-error>
+            </mat-form-field>
             <!-- TELEFONE -->
         </div>
         <!-- LINHA 3 -->

@@ -15,9 +15,7 @@ import { fuseConfig } from 'app/fuse-config';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { MainModule } from './main/main.module';
-import { NgxMaskModule, IConfig } from 'ngx-mask';
-
-export let options: Partial<IConfig>;
+import { NgxMaskModule } from 'ngx-mask';
 
 const routes = [
     {
@@ -32,8 +30,8 @@ const routes = [
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(routes),
-        NgxMaskModule.forRoot(options),
         TranslateModule.forRoot(),
+        NgxMaskModule.forRoot(),
         // Fuse modules
         FuseModule.forRoot(fuseConfig),
         FuseProgressBarModule,

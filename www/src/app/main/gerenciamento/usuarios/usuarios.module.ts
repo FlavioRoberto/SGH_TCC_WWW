@@ -8,6 +8,8 @@ import { MaterialCoreModule } from '@compartilhado/material-core/material-core.m
 import { UsuariosRoutingModule } from './usuarios.routes.module';
 import { UsuariosComponent } from './usuarios.component';
 import { DataBarFormModule } from 'app/layout/components/databar-form/databar-form.module';
+import { PerfilResolver } from '../resolvers/perfil.resolver';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
     declarations: [UsuariosComponent],
@@ -17,7 +19,12 @@ import { DataBarFormModule } from 'app/layout/components/databar-form/databar-fo
         TranslateModule,
         FuseSharedModule,
         UsuariosRoutingModule,
-        DataBarFormModule
+        DataBarFormModule,
+        NgxMaskModule.forChild()
+
+    ],
+    providers: [
+        PerfilResolver
     ]
 })
 export class UsuariosModule { }

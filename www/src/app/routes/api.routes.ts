@@ -26,6 +26,7 @@ export class routesApi {
                 tipo: this.construitRotaPadrao('disciplinaTipo'),
                 disciplina: this.construitRotaPadrao('disciplina')
             },
+            perfil: this.construitRotaPadrao('perfil'),
             usuario: this.construitRotaPadrao('usuario')
         };
 
