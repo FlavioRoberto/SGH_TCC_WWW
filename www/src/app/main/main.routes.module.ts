@@ -1,10 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from '@compartilhado/core/auth/auth.guard';
 
 const routes: Routes = [
     { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-    { path: 'inicio', loadChildren: './inicio/inicio.module#InicioModule' },
-    { path: 'gerenciamento', loadChildren: './gerenciamento/gerenciamento.module#GerenciamentoModule' }
+    { path: 'login', loadChildren: './login/login.module#LoginModule' },
+    {
+        path: 'inicio',
+        loadChildren: './inicio/inicio.module#InicioModule',
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'gerenciamento',
+        loadChildren: './gerenciamento/gerenciamento.module#GerenciamentoModule',
+        canActivate: [AuthGuard]
+    }
 ];
 
 

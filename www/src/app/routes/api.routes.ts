@@ -8,7 +8,7 @@ export class routesApi {
         this.API = `${environment.url}api`;
     }
 
-    private construitRotaPadrao(rota: string): any {
+    private construirRotaPadrao(rota: string): any {
         return {
             listarPaginacao: this.API + `/${rota}/listarPaginacao`,
             criar: this.API + `/${rota}/criar`,
@@ -18,16 +18,22 @@ export class routesApi {
         };
     }
 
+    private construirRotaUsuario(rota: string): any {
+        rota = this.construirRotaPadrao(rota);
+        rota['autenticar'] = this.API + `/usuario/autenticar`;
+        return rota;
+    }
+
     getRoutes(): any {
         return {
-            turno: this.construitRotaPadrao('turno'),
-            curso: this.construitRotaPadrao('curso'),
+            turno: this.construirRotaPadrao('turno'),
+            curso: this.construirRotaPadrao('curso'),
             disciplina: {
-                tipo: this.construitRotaPadrao('disciplinaTipo'),
-                disciplina: this.construitRotaPadrao('disciplina')
+                tipo: this.construirRotaPadrao('disciplinaTipo'),
+                disciplina: this.construirRotaPadrao('disciplina')
             },
-            perfil: this.construitRotaPadrao('perfil'),
-            usuario: this.construitRotaPadrao('usuario')
+            perfil: this.construirRotaPadrao('perfil'),
+            usuario: this.construirRotaUsuario('usuario'),
         };
 
     }

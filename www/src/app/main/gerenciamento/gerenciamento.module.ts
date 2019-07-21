@@ -15,11 +15,7 @@ import { GerenciamentoRoutingModule } from './gerenciamento.routes.module';
         CompartilhadoModule,
         TranslateModule,
         FuseSharedModule,
-        GerenciamentoRoutingModule,
-        CursoModule,
-        DisciplinaModule,
-        DisciplinaTipoModule,
-        TurnoModule
+        GerenciamentoRoutingModule
     ]
 })
 export class GerenciamentoModule { }

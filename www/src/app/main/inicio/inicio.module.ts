@@ -3,11 +3,13 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { InicioComponent } from './inicio.component';
+import { AuthGuard } from '@compartilhado/core/auth/auth.guard';
 
 const routes = [
     {
         path: 'inicio',
-        component: InicioComponent
+        component: InicioComponent,
+        canActivate: [AuthGuard]
     }
 ];
 

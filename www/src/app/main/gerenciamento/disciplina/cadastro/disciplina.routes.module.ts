@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DisciplinaComponent } from './disciplina.component';
 import { TipoResolver } from '../../resolvers/tipo.resolver';
+import { AuthGuard } from '@compartilhado/core/auth/auth.guard';
 
 const routes: Routes = [
     {
         path: '',
         component: DisciplinaComponent,
+        canActivate: [AuthGuard],
         resolve: {
             tipos: TipoResolver
         }

@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CursoComponent } from './curso.component';
-import { AuthGuard } from '@compartilhado/core/auth/auth.guard';
+import { LoginComponent } from './login.component';
+import { LoginGuard } from '@compartilhado/core/auth/login.guard';
 
 const routes: Routes = [
     {
         path: '',
-        component: CursoComponent,
-        canActivate: [AuthGuard]
-    }
+        component: LoginComponent,
+        canActivate: [LoginGuard]
+    },
+
 ];
 
 
@@ -16,4 +17,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class CursoRoutingModule { }
+export class LoginRoutingModule { }
