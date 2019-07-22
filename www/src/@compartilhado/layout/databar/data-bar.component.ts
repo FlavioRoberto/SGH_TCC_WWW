@@ -134,26 +134,26 @@ export class DataBarComponent<T> implements OnInit, OnDestroy {
     }
 
     novaPesquisa(): void {
-        this.setStatus(EStatus.novaPesquisa);
         this.form.enable();
         this.form.reset();
         this.entidadePaginada.entidade = this.form.value;
         this.entidadePaginada.posicao = 0;
         this.entidadePaginada.total = 0;
+        this.setStatus(EStatus.novaPesquisa);
     }
 
     pesquisar(): void {
-        this.setStatus(EStatus.pesquisando);
         this.entidadePaginada.entidade = this._getEntidade();
         this._paginar();
         this.drawer.close();
+        this.setStatus(EStatus.pesquisando);
     }
 
     inserir(): void {
-        this.setStatus(EStatus.inserindo);
         this.form.enable();
         this.form.reset();
         this.drawer.close();
+        this.setStatus(EStatus.inserindo);
     }
 
     editar(): void {
@@ -163,9 +163,9 @@ export class DataBarComponent<T> implements OnInit, OnDestroy {
     }
 
     remover(): void {
-        this.setStatus(EStatus.removendo);
         this._exibirDialogConfirmacao();
         this.drawer.close();
+        this.setStatus(EStatus.removendo);
     }
 
     salvar(): void {

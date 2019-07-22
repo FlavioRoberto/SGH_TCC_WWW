@@ -34,9 +34,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         private _fuseConfigService: FuseConfigService,
         private _fuseSidebarService: FuseSidebarService,
         private _translateService: TranslateService,
-        private _authService: AutenticacaoService,
-        private _router: Router
-    ) {
+        private _authService: AutenticacaoService) {
         this.navigation = navigation;
 
         this._unsubscribeAll = new Subject();
@@ -71,7 +69,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     logout(): void {
         this._authService.logout();
-        this._router.navigate(['/login']);
     }
 
 }

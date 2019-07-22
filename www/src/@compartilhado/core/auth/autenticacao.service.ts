@@ -3,6 +3,7 @@ import { JwtHelper } from 'angular2-jwt';
 import { TokenStorageService } from '../token/token-storage.service';
 import { UsuarioStorageService } from '../usuario/usuario-storage.service';
 import { IUsuario } from '../usuario/model/IUsuario.model';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -12,7 +13,8 @@ export class AutenticacaoService {
     jwtHelper: JwtHelper = new JwtHelper();
 
     constructor(private tokenStorageService: TokenStorageService,
-                private usuarioStorage: UsuarioStorageService) { }
+        private usuarioStorage: UsuarioStorageService,
+        private _router: Router) { }
 
     setToken(token: string): void {
         this.tokenStorageService.setToken(token);
@@ -24,7 +26,7 @@ export class AutenticacaoService {
         return this.tokenStorageService.getToken();
     }
 
-    setUsuario(usuario: IUsuario): void{
+    setUsuario(usuario: IUsuario): void {
         this.usuarioStorage.setUsuario(usuario);
     }
 
@@ -35,6 +37,7 @@ export class AutenticacaoService {
     logout(): void {
         this.tokenStorageService.removerToken();
         this.usuarioStorage.removerUsuario();
+        this._router.navigate(['/login']);
     }
 
     estaLogado(): boolean {

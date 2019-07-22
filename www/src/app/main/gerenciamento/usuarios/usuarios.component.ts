@@ -14,6 +14,7 @@ import { UsuarioService } from './services/usuario.service';
 import { IPerfil } from './models/iperfil';
 import { ActivatedRoute } from '@angular/router';
 import { celularRegex } from '@compartilhado/util/input-regex/input-regex';
+import { AutenticacaoService } from '@compartilhado/core/auth/autenticacao.service';
 
 
 @Component({
@@ -30,14 +31,15 @@ export class UsuariosComponent implements IDataBarBindComponent<IUsuario> {
     constructor(private _formBuilder: FormBuilder,
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         private _servicoUsuario: UsuarioService,
-        private _route: ActivatedRoute) {
+        private _route: ActivatedRoute,
+        private _authService: AutenticacaoService) {
     }
 
     ngOnInit(): void {
         this._fuseTranslationLoaderService.loadTranslations(portugues);
         this.form = this._construirFormulario();
         this.entidadePaginada = new UsuarioPaginado();
-        this.servicoDataBarBind = new UsuarioDataBarService(this.form, this._servicoUsuario);
+        this.servicoDataBarBind = new UsuarioDataBarService(this.form, this._servicoUsuario, this._authService);
         this.perfis = this._route.snapshot.data['perfis'];
     }
 
