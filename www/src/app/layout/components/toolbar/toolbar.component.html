@@ -49,7 +49,7 @@
                         src="assets/images/avatars/Velazquez.jpg"
                     />
                     <span class="username mr-12" fxHide fxShow.gt-sm
-                        >Flávio Roberto</span
+                        >{{usuario?.nome}}</span
                     >
                     <mat-icon class="s-16" fxHide.xs
                         >keyboard_arrow_down</mat-icon
@@ -58,19 +58,9 @@
             </button>
 
             <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
-                <button mat-menu-item>
-                    <mat-icon>account_circle</mat-icon>
-                    <span>My Profile</span>
-                </button>
-
-                <button mat-menu-item class="">
-                    <mat-icon>mail</mat-icon>
-                    <span>Inbox</span>
-                </button>
-
-                <button mat-menu-item class="">
+                <button (click)="logout()" mat-menu-item class="">
                     <mat-icon>exit_to_app</mat-icon>
-                    <span>Logout</span>
+                    <span>Sair</span>
                 </button>
             </mat-menu>
         </div>

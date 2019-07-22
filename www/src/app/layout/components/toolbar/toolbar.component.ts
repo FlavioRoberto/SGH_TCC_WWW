@@ -8,6 +8,9 @@ import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
 import { navigation } from 'app/navigation/navigation';
+import { IUsuario } from '@compartilhado/core/usuario/model/IUsuario.model';
+import { AutenticacaoService } from '@compartilhado/core/auth/autenticacao.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'toolbar',
@@ -23,69 +26,26 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     navigation: any;
     selectedLanguage: any;
     userStatusOptions: any[];
+    usuario: IUsuario;
 
-    // Private
     private _unsubscribeAll: Subject<any>;
 
-    /**
-     * Constructor
-     *
-     * @param {FuseConfigService} _fuseConfigService
-     * @param {FuseSidebarService} _fuseSidebarService
-     * @param {TranslateService} _translateService
-     */
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _fuseSidebarService: FuseSidebarService,
-        private _translateService: TranslateService
+        private _translateService: TranslateService,
+        private _authService: AutenticacaoService,
+        private _router: Router
     ) {
-        // Set the defaults
-        this.userStatusOptions = [
-            {
-                title: 'Online',
-                icon: 'icon-checkbox-marked-circle',
-                color: '#4CAF50'
-            },
-            {
-                title: 'Away',
-                icon: 'icon-clock',
-                color: '#FFC107'
-            },
-            {
-                title: 'Do not Disturb',
-                icon: 'icon-minus-circle',
-                color: '#F44336'
-            },
-            {
-                title: 'Invisible',
-                icon: 'icon-checkbox-blank-circle-outline',
-                color: '#BDBDBD'
-            },
-            {
-                title: 'Offline',
-                icon: 'icon-checkbox-blank-circle-outline',
-                color: '#616161'
-            }
-        ];
-
-      
         this.navigation = navigation;
 
-        console.log(navigation);
-
-        // Set the private defaults
         this._unsubscribeAll = new Subject();
+
+        this.usuario = _authService.getUsuario();
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
 
-    /**
-     * On init
-     */
     ngOnInit(): void {
-        // Subscribe to the config changes
         this._fuseConfigService.config
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(settings => {
@@ -95,32 +55,23 @@ export class ToolbarComponent implements OnInit, OnDestroy {
                 this.hiddenNavbar = settings.layout.navbar.hidden === true;
             });
 
-        // Set the selected language from default languages
         this.selectedLanguage = _.find(this.languages, {
             id: this._translateService.currentLang
         });
     }
 
-    /**
-     * On destroy
-     */
     ngOnDestroy(): void {
-        // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * Toggle sidebar open
-     *
-     * @param key
-     */
     toggleSidebarOpen(key): void {
         this._fuseSidebarService.getSidebar(key).toggleOpen();
+    }
+
+    logout(): void {
+        this._authService.logout();
+        this._router.navigate(['/login']);
     }
 
 }
