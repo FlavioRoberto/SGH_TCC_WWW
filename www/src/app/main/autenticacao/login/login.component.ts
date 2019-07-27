@@ -12,8 +12,7 @@ import { Router } from '@angular/router';
     selector: 'login',
     templateUrl: './view/login.component.html',
     styleUrls: ['./view/login.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    animations: fuseAnimations
+    encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;

@@ -6,6 +6,10 @@ const routes: Routes = [
         path: 'login',
         loadChildren: './login/login.module#LoginModule'
     },
+    {
+        path: 'redefinir-senha',
+        loadChildren: './redefinir-senha/redefinir-senha.module#RedefinirSenhaModule'
+    }
 ];
 
 @NgModule({

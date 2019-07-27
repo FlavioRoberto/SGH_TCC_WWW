@@ -20,7 +20,8 @@ export class routesApi {
 
     private construirRotaUsuario(rota: string): any {
         rota = this.construirRotaPadrao(rota);
-        rota['autenticar'] = this.API + `/usuario/autenticar`;
+        rota['autenticar'] = `${this.API}/usuario/autenticar`;
+        rota['redefinirSenha'] = `${this.API}/usuario/redefinirSenha`;
         return rota;
     }
 
