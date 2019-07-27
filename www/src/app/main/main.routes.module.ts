@@ -4,7 +4,7 @@ import { AuthGuard } from '@compartilhado/core/auth/auth.guard';
 
 const routes: Routes = [
     { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-    { path: 'login', loadChildren: './login/login.module#LoginModule' },
+    { path: 'autenticacao', loadChildren: './autenticacao/autenticacao.module#AutenticacaoModule' },
     {
         path: 'inicio',
         loadChildren: './inicio/inicio.module#InicioModule',

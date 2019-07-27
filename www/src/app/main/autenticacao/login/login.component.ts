@@ -20,29 +20,11 @@ export class LoginComponent implements OnInit {
     emProgresso = false;
 
     constructor(
-        private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder,
         private _servico: LoginService,
         private _router: Router,
         private _autenticacaoServico: AutenticacaoService
-    ) {
-        this._fuseConfigService.config = {
-            layout: {
-                navbar: {
-                    hidden: true
-                },
-                toolbar: {
-                    hidden: true
-                },
-                footer: {
-                    hidden: true
-                },
-                sidepanel: {
-                    hidden: true
-                }
-            }
-        };
-    }
+    ) { }
 
     autenticar(): void {
         const dados = this.loginForm.value as ILogin;
@@ -51,7 +33,6 @@ export class LoginComponent implements OnInit {
             this._autenticacaoServico.setToken(success);
             this._router.navigate(['/inicio']);
         }, error => {
-            console.log(error);
             this.emProgresso = false;
         });
     }

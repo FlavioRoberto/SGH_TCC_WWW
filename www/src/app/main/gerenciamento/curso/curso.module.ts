@@ -8,7 +8,7 @@ import { MaterialCoreModule } from '@compartilhado/material-core/material-core.m
 
 import { CursoComponent } from './curso.component';
 import { CursoRoutingModule } from './curso.routes.module';
-import { DataBarFormModule } from 'app/layout/components/databar-form/databar-form.module';
+import { DataBarFormModule } from 'app/shared/layout/components/databar-form/databar-form.module';
 
 
 @NgModule({

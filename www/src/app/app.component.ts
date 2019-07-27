@@ -10,9 +10,10 @@ import { FuseNavigationService } from '@fuse/components/navigation/navigation.se
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
+import { navigation } from './shared/navigation/navigation';
+import { locale as navigationPortugues } from './shared/navigation/i18n/pt-br';
 
-import { navigation } from 'app/navigation/navigation';
-import { locale as navigationPortugues } from 'app/navigation/i18n/pt-br';
+
 
 @Component({
     selector: 'app',

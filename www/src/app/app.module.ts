@@ -11,11 +11,11 @@ import {
     FuseSidebarModule,
     FuseThemeOptionsModule
 } from '@fuse/components';
-import { fuseConfig } from 'app/fuse-config';
 import { AppComponent } from 'app/app.component';
-import { LayoutModule } from 'app/layout/layout.module';
+import { LayoutModule } from 'app/shared/layout/layout.module';
 import { MainModule } from './main/main.module';
 import { NgxMaskModule } from 'ngx-mask';
+import { fuseConfig } from './shared/config/fuse-config';
 
 const routes = [
     {

@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { FuseConfigService } from '@fuse/services/config.service';
-import { navigation } from 'app/navigation/navigation';
+import { navigation } from 'app/shared/navigation/navigation';
 
 @Component({
     selector     : 'vertical-layout-1',
@@ -62,3 +62,4 @@ export class VerticalLayout1Component implements OnInit, OnDestroy
         this._unsubscribeAll.complete();
     }
 }
+

@@ -37,7 +37,7 @@ export class AutenticacaoService {
     logout(): void {
         this.tokenStorageService.removerToken();
         this.usuarioStorage.removerUsuario();
-        this._router.navigate(['/login']);
+        this._router.navigate(['/autenticacao/login']);
     }
 
     estaLogado(): boolean {

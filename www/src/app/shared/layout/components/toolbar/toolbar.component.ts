@@ -7,10 +7,10 @@ import * as _ from 'lodash';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
-import { navigation } from 'app/navigation/navigation';
 import { IUsuario } from '@compartilhado/core/usuario/model/IUsuario.model';
 import { AutenticacaoService } from '@compartilhado/core/auth/autenticacao.service';
 import { Router } from '@angular/router';
+import { navigation } from 'app/shared/navigation/navigation';
 
 @Component({
     selector: 'toolbar',

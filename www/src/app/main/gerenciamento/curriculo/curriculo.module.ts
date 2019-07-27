@@ -11,7 +11,7 @@ import { CurriculoComponent } from './curriculo.component';
 import { CurriculoRoutingModule } from './curriculo.routes.module';
 import { TurnoResolver } from '../resolvers/turno.resolver';
 import { CursoResolver } from '../resolvers/curso.resolver';
-import { DataBarFormModule } from 'app/layout/components/databar-form/databar-form.module';
+import { DataBarFormModule } from 'app/shared/layout/components/databar-form/databar-form.module';
 
 
 @NgModule({
