@@ -29,7 +29,10 @@ export class RedefinirSenhaComponent implements OnInit {
         const email = this.redefinirSenhaForm.get('email').value;
         this._servico.redefinirSenha(email)
             .subscribe(
-                success => this.exibirSnackBar(success),
+                success => {
+                    this.exibirSnackBar(success);
+                    this.emProgresso = false;
+                },
                 error => this.emProgresso = false
             );
     }
