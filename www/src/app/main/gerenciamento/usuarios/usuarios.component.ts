@@ -45,6 +45,9 @@ export class UsuariosComponent implements IDataBarBindComponent<IUsuario> {
 
     statusChanged(status: EStatus): void {
         this.status = status;
+        if (status === EStatus.inserindo) {
+            this.form.get('ativo').setValue(true);
+        }
     }
 
     preventEspacos(event: Event): void {
@@ -60,7 +63,8 @@ export class UsuariosComponent implements IDataBarBindComponent<IUsuario> {
             senha: [null],
             email: [null, [Validators.maxLength(45), Validators.required, Validators.email]],
             foto: [null, []],
-            perfilCodigo: [null, [Validators.required]]
+            perfilCodigo: [null, [Validators.required]],
+            ativo: [false]
         });
     }
 }

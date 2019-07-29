@@ -6,4 +6,5 @@ export interface IUsuario {
     email: string;
     foto: string;
     perfil: number;
+    ativo: boolean;
 }
