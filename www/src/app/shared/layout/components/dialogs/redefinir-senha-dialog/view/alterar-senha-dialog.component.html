@@ -1,0 +1,95 @@
+<div
+    fxLayout="column"
+    fxFlex="1 0 auto"
+    class="dialog-content-wrapper"
+>
+    <mat-toolbar class="mat-accent m-0">
+        <mat-toolbar-row
+            fxFlex
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <span class="title dialog-title">Alterar senha</span>
+            <button
+                mat-icon-button
+                (click)="fecharDialog()"
+                aria-label="Fechar dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div
+        fxFlex="100"
+        class="p-16 pb-0 m-0 noPadding"
+        fusePerfectScrollbar
+    >
+        <!-- FORM -->
+        <form
+            name="alterarSenhaForm"
+            [formGroup]="alterarSenhaForm"
+            fxLayout="column"
+            novalidate
+        >
+            <!-- SENHA -->
+            <mat-form-field appearance="outline">
+                <mat-label>Informe a senha</mat-label>
+                <input matInput type="password" formControlName="senha" />
+                <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
+                <mat-error>
+                    Campo obrigatória!
+                </mat-error>
+            </mat-form-field>
+            <!-- SENHA -->
+
+            <!-- NOVA SENHA -->
+            <mat-form-field appearance="outline">
+                <mat-label>Informe a nova senha</mat-label>
+                <input matInput type="password" formControlName="novaSenha" />
+                <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
+                <mat-error>
+                    Campo obrigatória!
+                </mat-error>
+            </mat-form-field>
+            <!-- NOVA SENHA -->
+
+            <!--CONFIRME NOVA SENHA -->
+            <mat-form-field appearance="outline">
+                <mat-label>Confirme a nova senha</mat-label>
+                <input
+                    matInput
+                    type="password"
+                    formControlName="confirmeNovaSenha"
+                />
+                <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
+                <mat-error>
+                    Campo obrigatória!
+                </mat-error>
+            </mat-form-field>
+            <mat-error class="mt-8" *ngIf="alterarSenhaForm.hasError('senhasDiferentes')">
+                *As senhas não são iguais!
+            </mat-error>
+            <!--CONFIRME NOVA SENHA -->
+        </form>
+        <!-- FORM -->
+    </div>
+
+    <div
+        mat-dialog-actions
+        class="m-0 p-16"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+    >
+        <button
+            fxFlex="100"
+            fxLayout="row"
+            fxLayoutAlign="center center"
+            [disabled]="emProgresso || alterarSenhaForm.invalid"
+            class="mat-raised-button mat-accent"
+            (click)="alterarSenha()"
+        >
+            <span>CONFIRMAR</span>
+        </button>
+    </div>
+</div>

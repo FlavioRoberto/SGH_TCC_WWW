@@ -1,11 +1,1 @@
-::ng-deep .sucesso {
-    @media (min-width: 960px) {
-        max-width: 384px !important;
-    }
-    background: #4caf50 !important;
-    color: white !important;
-    button {
-        color: #1b5e20 !important;
-        font-weight: 800 !important;
-    }
-}
+@import 'src/app/shared/styles/toast'

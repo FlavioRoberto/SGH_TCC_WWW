@@ -22,12 +22,13 @@ export class routesApi {
         rota = this.construirRotaPadrao(rota);
         rota['autenticar'] = `${this.API}/usuario/autenticar`;
         rota['redefinirSenha'] = `${this.API}/usuario/redefinirSenha`;
+        rota['atualizarSenha'] = `${this.API}/usuario/atualizarSenha`;
         return rota;
     }
 
     getRoutes(): any {
         return {
-            turno: this.construirRotaPadrao('turno'),
+            turno: this.construirRotaPadrao('sturno'),
             curso: this.construirRotaPadrao('curso'),
             disciplina: {
                 tipo: this.construirRotaPadrao('disciplinaTipo'),

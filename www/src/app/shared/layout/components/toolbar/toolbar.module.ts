@@ -6,6 +6,7 @@ import { FuseSearchBarModule, FuseShortcutsModule } from '@fuse/components';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import { ToolbarComponent } from 'app/shared/layout/components/toolbar/toolbar.component';
+import { AlterarSenhaDialogModule } from '../dialogs/redefinir-senha-dialog/alterar-senha-dialog.module';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { ToolbarComponent } from 'app/shared/layout/components/toolbar/toolbar.c
 
         FuseSharedModule,
         FuseSearchBarModule,
-        FuseShortcutsModule
+        FuseShortcutsModule,
+        AlterarSenhaDialogModule
     ],
     exports     : [
         ToolbarComponent

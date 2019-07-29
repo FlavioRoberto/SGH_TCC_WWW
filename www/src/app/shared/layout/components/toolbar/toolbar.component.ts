@@ -9,8 +9,8 @@ import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
 import { IUsuario } from '@compartilhado/core/usuario/model/IUsuario.model';
 import { AutenticacaoService } from '@compartilhado/core/auth/autenticacao.service';
-import { Router } from '@angular/router';
 import { navigation } from 'app/shared/navigation/navigation';
+import { AlterarSenhaDialogService } from '../dialogs/redefinir-senha-dialog/service/alterar-senha-dialog.service';
 
 @Component({
     selector: 'toolbar',
@@ -34,7 +34,9 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         private _fuseConfigService: FuseConfigService,
         private _fuseSidebarService: FuseSidebarService,
         private _translateService: TranslateService,
-        private _authService: AutenticacaoService) {
+        private _authService: AutenticacaoService,
+        private _alterarSenhaDialogService: AlterarSenhaDialogService) {
+
         this.navigation = navigation;
 
         this._unsubscribeAll = new Subject();
@@ -69,6 +71,11 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     logout(): void {
         this._authService.logout();
+    }
+
+    alterarSenha(): void {
+        console.log('redefinir senha...');
+        this._alterarSenhaDialogService.openDialog();
     }
 
 }

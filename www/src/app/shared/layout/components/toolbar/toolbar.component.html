@@ -48,9 +48,9 @@
                         class="avatar mr-0 mr-sm-16"
                         src="assets/images/avatars/Velazquez.jpg"
                     />
-                    <span class="username mr-12" fxHide fxShow.gt-sm
-                        >{{usuario?.nome}}</span
-                    >
+                    <span class="username mr-12" fxHide fxShow.gt-sm>{{
+                        usuario?.nome
+                    }}</span>
                     <mat-icon class="s-16" fxHide.xs
                         >keyboard_arrow_down</mat-icon
                     >
@@ -58,6 +58,10 @@
             </button>
 
             <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+                <button (click)="alterarSenha()" mat-menu-item class="">
+                    <mat-icon>security</mat-icon>
+                    <span>Alterar Senha</span>
+                </button>
                 <button (click)="logout()" mat-menu-item class="">
                     <mat-icon>exit_to_app</mat-icon>
                     <span>Sair</span>
