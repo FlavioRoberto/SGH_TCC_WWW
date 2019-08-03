@@ -43,13 +43,15 @@
                 [matMenuTriggerFor]="userMenu"
                 class="user-button"
             >
-                <div fxLayout="row" fxLayoutAlign="center center">
-                    <img
+                <div fxLayout="row" fxLayoutAlign="center center" class="mr-8">
+                    <mat-icon class="mr-4">person_outline</mat-icon>
+
+                    <!-- <img
                         class="avatar mr-0 mr-sm-16"
                         src="assets/images/avatars/Velazquez.jpg"
-                    />
+                    /> -->
                     <span class="username mr-12" fxHide fxShow.gt-sm>{{
-                        usuario?.nome
+                        usuario?.login | uppercase
                     }}</span>
                     <mat-icon class="s-16" fxHide.xs
                         >keyboard_arrow_down</mat-icon

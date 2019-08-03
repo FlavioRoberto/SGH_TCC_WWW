@@ -23,7 +23,6 @@ export class DisciplinaDataBarService implements IDataBarBindService<IDisciplina
     }
 
     criar(): Observable<IDisciplina> {
-        console.log(this.getEntidade());
         return this._servicoDisciplina.criar(this.getEntidade())
     }
 

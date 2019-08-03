@@ -18,7 +18,7 @@ export class UsuarioDataBarService implements IDataBarBindService<IUsuario>{
     }
 
     getEntidade(): IUsuario {
-        return this.formgroup.value as IUsuario;
+        return this.formgroup.getRawValue();
     }
 
     criar(): Observable<IUsuario> {
@@ -32,7 +32,7 @@ export class UsuarioDataBarService implements IDataBarBindService<IUsuario>{
     remover(): Observable<IUsuario> {
         const codigoUsuarioLogado = this._authService.getUsuario().codigo;
         const codigoUsuario = this.getEntidade().codigo;
-        
+
         return this._servicoUsuario.remover(codigoUsuario)
             .pipe(tap(() => {
                 if (codigoUsuario == codigoUsuarioLogado) {

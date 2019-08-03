@@ -45,7 +45,6 @@ export class TurnoComponent implements IDataBarBindComponent<ITurno> {
     }
 
     statusChanged(status: string): void {
-        console.log('status', status)
         this.statusNavBar = status;
     }
 

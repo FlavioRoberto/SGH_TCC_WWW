@@ -48,7 +48,6 @@ export class DisciplinaTipoComponent implements IDataBarBindComponent<ITipo> {
     }
 
     statusChanged(status: string): void {
-        console.log('status', status)
         this.statusNavBar = status;
     }
 

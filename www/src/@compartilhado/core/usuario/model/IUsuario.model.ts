@@ -4,5 +4,6 @@ export class IUsuario {
     login: string;
     foto: string;
     perfilId: number;
+    email: string;
 }
 

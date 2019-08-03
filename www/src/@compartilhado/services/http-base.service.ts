@@ -15,7 +15,6 @@ export abstract class HttpBaseService<T> {
     }
 
     protected getAll(rota: string): Observable<T[]> {
-        console.log('fazendo requisicao...', rota)
         return this.http.get<T[]>(rota);
     }
 

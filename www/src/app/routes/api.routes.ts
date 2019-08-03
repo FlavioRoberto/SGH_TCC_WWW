@@ -28,7 +28,7 @@ export class routesApi {
 
     getRoutes(): any {
         return {
-            turno: this.construirRotaPadrao('sturno'),
+            turno: this.construirRotaPadrao('turno'),
             curso: this.construirRotaPadrao('curso'),
             disciplina: {
                 tipo: this.construirRotaPadrao('disciplinaTipo'),

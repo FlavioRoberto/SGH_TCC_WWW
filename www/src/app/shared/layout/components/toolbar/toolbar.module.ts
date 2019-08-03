@@ -7,27 +7,24 @@ import { FuseSharedModule } from '@fuse/shared.module';
 
 import { ToolbarComponent } from 'app/shared/layout/components/toolbar/toolbar.component';
 import { AlterarSenhaDialogModule } from '../dialogs/redefinir-senha-dialog/alterar-senha-dialog.module';
+import { MaterialCoreModule } from '@compartilhado/material-core/material-core.module';
 
 @NgModule({
     declarations: [
         ToolbarComponent
     ],
-    imports     : [
+    imports: [
         RouterModule,
-        MatButtonModule,
-        MatIconModule,
-        MatMenuModule,
-        MatToolbarModule,
+        MaterialCoreModule,
 
         FuseSharedModule,
         FuseSearchBarModule,
         FuseShortcutsModule,
         AlterarSenhaDialogModule
     ],
-    exports     : [
+    exports: [
         ToolbarComponent
     ]
 })
-export class ToolbarModule
-{
+export class ToolbarModule {
 }

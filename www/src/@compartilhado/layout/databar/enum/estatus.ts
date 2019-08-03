@@ -4,11 +4,12 @@ Injectable({
     providedIn: 'root'
 })
 export enum EStatus {
-    novaPesquisa = 'Nova Pesquisa',
+    novaPesquisa = 'Nova pesquisa',
     inserindo = 'Inserindo',
     editando = 'Editando',
     removendo = 'Removendo',
-    dadosCarregados = 'Dados Carregados',
+    dadosCarregados = 'Dados carregados',
     pesquisando = 'Pesquisando',
-    executarAcao = 'Executar Ação'
+    executarAcao = 'Executar ação'
 }
+

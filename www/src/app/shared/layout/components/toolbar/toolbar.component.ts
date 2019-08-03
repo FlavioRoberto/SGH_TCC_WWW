@@ -74,7 +74,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     }
 
     alterarSenha(): void {
-        console.log('redefinir senha...');
         this._alterarSenhaDialogService.openDialog();
     }
 
