@@ -1,0 +1,52 @@
+<form [formGroup]="form">
+    <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>{{ label }}</mat-label>
+        <button
+            matSuffix
+            mat-icon-button
+            matTooltip="Pesquisar novamente"
+            color="primary"
+            *ngIf="novaPesquisaHabilitada"
+            [disabled]="desabiltarBotaoNovaPesquisa"
+            (click)="emitirNovaPesquisa($event)"
+        >
+            <mat-icon>youtube_searched_for</mat-icon>
+        </button>
+        <input
+            matInput
+            [matAutocomplete]="auto"
+            [required]="required"
+            [formControlName]="controlName"
+            (keyup)="timeoutPesquisa$.next($event.target.value)"
+            (change)="verificaMudancas()"
+            (blur)="onBlurEvent($event)"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngIf="carregandoEntidade">
+                <span fxFlex>{{ mensagemEntidadeCarregando }}</span>
+                <mat-spinner></mat-spinner>
+            </mat-option>
+            <mat-option
+                *ngIf="
+                    (itens$ | async)?.length <= 0 &&
+                    !carregandoEntidade &&
+                    realizouPesquisa
+                "
+                disabled
+            >
+                <span>Nenhum registro encontrado</span>
+            </mat-option>
+            <mat-option *ngIf="!realizouPesquisa" disabled>
+                <span>{{ mensagemDeInformacaoDePesquisa }}</span>
+            </mat-option>
+            <mat-option
+                *ngFor="let item of itens$ | async"
+                [value]="acao.matOptionValueBind(item)"
+                (onSelectionChange)="emitirDadoSelecionado(item)"
+            >
+                {{ acao.matOptionValueBind(item) }}
+            </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="condicaoErro">{{ mensagemErro }}</mat-error>
+    </mat-form-field>
+</form>

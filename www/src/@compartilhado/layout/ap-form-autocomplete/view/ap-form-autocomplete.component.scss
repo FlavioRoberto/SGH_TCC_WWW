@@ -1,0 +1,11 @@
+// mat-spinner
+mat-spinner,
+::ng-deep mat-spinner svg {
+    width: 30px !important;
+    height: 30px !important;
+    margin: auto;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-suffix {
+    top: 0;
+}
