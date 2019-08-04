@@ -7,6 +7,8 @@ import { InputMaxLengthModule } from './ap-input-max-length/input-max-length.mod
 import { ErrorDialogModule } from './dialogs/error-dialog/error-dialog.module';
 import { MatInputModule } from '@angular/material';
 import { ApContainerModule } from './ap-container/ap-container.module';
+import { ApFormAutocompleteModule } from './ap-form-autocomplete/ap-form-autocomplete.module';
+import { ApFieldsetModule } from './ap-fieldset/ap-fieldset.module';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { ApContainerModule } from './ap-container/ap-container.module';
         DataBarModule,
         InputMaxLengthModule,
         ApHeaderDescricaoModule,
-        ApContainerModule
+        ApContainerModule,
+        ApFormAutocompleteModule,
+        ApFieldsetModule
     ],
     exports: [
         FormsModule,
@@ -29,7 +33,10 @@ import { ApContainerModule } from './ap-container/ap-container.module';
         DataBarModule,
         InputMaxLengthModule,
         ApHeaderDescricaoModule,
-        ApContainerModule
+        ApContainerModule,
+        ApContainerModule,
+        ApFormAutocompleteModule,
+        ApFieldsetModule
     ]
 })
 export class AppLayoutModule { }

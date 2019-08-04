@@ -11,7 +11,9 @@ import { CurriculoComponent } from './curriculo.component';
 import { CurriculoRoutingModule } from './curriculo.routes.module';
 import { TurnoResolver } from '../resolvers/turno.resolver';
 import { CursoResolver } from '../resolvers/curso.resolver';
-import { DataBarFormModule } from 'app/layout/components/databar-form/databar-form.module';
+import { DataBarFormModule } from 'app/shared/layout/components/databar-form/databar-form.module';
+import { AdicionarDisciplinaDialogService } from './components/dialogs/adicionar-disciplina/service/adicionar-disciplina-dialog.service';
+import { AdicionarDisciplinaDialogModule } from './components/dialogs/adicionar-disciplina/adicionar-disciplina-dialog.module';
 
 
 @NgModule({
@@ -23,12 +25,14 @@ import { DataBarFormModule } from 'app/layout/components/databar-form/databar-fo
         MaterialCoreModule,
         CurriculoRoutingModule,
         CompartilhadoModule,
-        DataBarFormModule
+        DataBarFormModule,
+        AdicionarDisciplinaDialogModule
     ],
     exports: [CurriculoComponent],
     providers: [
         TurnoResolver,
-        CursoResolver
+        CursoResolver,
+        AdicionarDisciplinaDialogService
     ]
 })
 export class CurriculoModule { }

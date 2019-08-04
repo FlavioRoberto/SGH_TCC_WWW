@@ -18,16 +18,30 @@ export class routesApi {
         };
     }
 
+    private construirRotaUsuario(): any {
+        const rota = this.construirRotaPadrao('usuario');
+        rota['autenticar'] = `${this.API}/usuario/autenticar`;
+        rota['redefinirSenha'] = `${this.API}/usuario/redefinirSenha`;
+        rota['atualizarSenha'] = `${this.API}/usuario/atualizarSenha`;
+        return rota;
+    }
+
+    private construirRotaDisciplina(): any {
+        const rota = this.construirRotaPadrao('disciplina');
+        rota['listarPorDescricao'] = `${this.API}/disciplina/listarPorDescricao`;
+        return rota;
+    }
+
     getRoutes(): any {
         return {
             turno: this.construitRotaPadrao('turno'),
             curso: this.construitRotaPadrao('curso'),
             disciplina: {
-                tipo: this.construitRotaPadrao('disciplinaTipo'),
-                disciplina: this.construitRotaPadrao('disciplina')
+                tipo: this.construirRotaPadrao('disciplinaTipo'),
+                disciplina: this.construirRotaDisciplina()
             },
-            perfil: this.construitRotaPadrao('perfil'),
-            usuario: this.construitRotaPadrao('usuario')
+            perfil: this.construirRotaPadrao('perfil'),
+            usuario: this.construirRotaUsuario(),
         };
 
     }

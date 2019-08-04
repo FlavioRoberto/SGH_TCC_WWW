@@ -5,7 +5,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CurriculoPaginado } from './model/curriculo.paginacao';
 import { ICurso } from '../curso/model/curso.model';
 import { ITurno } from '../turno/model/turno.interface';
-import { CursoService } from '../curso/service/curso.service';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { ICurriculoDisciplina } from './model/curriculo-disciplina.model';
 import { CurriculoModule } from './curriculo.module';
@@ -13,6 +12,7 @@ import { CurriculoDataBarService } from './services/curriculo-databar.service';
 import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/IDataBarBind';
 import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 import { ActivatedRoute } from '@angular/router';
+import { AdicionarDisciplinaDialogService } from './components/dialogs/adicionar-disciplina/service/adicionar-disciplina-dialog.service';
 
 @Component({
     selector: 'curriculo',
@@ -35,8 +35,8 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     constructor(
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         private _formBuilder: FormBuilder,
-        private _serviceCurso: CursoService,
-        private _route: ActivatedRoute
+        private _route: ActivatedRoute,
+        private _dialog: AdicionarDisciplinaDialogService
     ) { }
 
     ngOnInit(): void {
@@ -63,13 +63,18 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
 
         this._carregarPeriodos();
 
-        this.cursos = this._route.snapshot.data['cursos'];;
+        this.cursos = this._route.snapshot.data['cursos'];
 
-        this.turnos = this._route.snapshot.data['turnos'];;
+        this.turnos = this._route.snapshot.data['turnos'];
 
     }
 
-    private _carregarPeriodos() {
+    abrirDialogAdicionarDisciplina(e: Event): void {
+        e.preventDefault();
+        this._dialog.openDialog('Adicionar disciplina');
+    }
+
+    private _carregarPeriodos(): void {
         this.periodos = [
             { codigo: 1, descricao: 'Primeiro' },
             { codigo: 2, descricao: 'Segundo' },

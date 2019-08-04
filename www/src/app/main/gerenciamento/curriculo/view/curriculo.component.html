@@ -1,29 +1,55 @@
-<databar-form class="inner-scroll" fxLayout="column" fxFlex [servicoBind]="servicoDataBarBind"
-    [entidadePaginada]="entidadePaginada" [form]="form" (statusChanged)="statusChanged($event)"
-    [navegacao]="['Gerenciamento','Currículo']" fxFlex>
-
-    <form (Keydown.enter)="servicoDataBarBind.enviarFormComEnter()" [formGroup]="form" fxLayout.xs="column"
-        class="turno-form">
-
+<databar-form
+    class="inner-scroll"
+    fxLayout="column"
+    fxFlex
+    [servicoBind]="servicoDataBarBind"
+    [entidadePaginada]="entidadePaginada"
+    [form]="form"
+    (statusChanged)="statusChanged($event)"
+    [navegacao]="['Gerenciamento', 'Currículo']"
+    fxFlex
+>
+    <form
+        (Keydown.enter)="servicoDataBarBind.enviarFormComEnter()"
+        [formGroup]="form"
+        fxLayout.xs="column"
+        class="turno-form"
+    >
         <!-- ROW 1 -->
         <div fxLayout.gt-sm="row">
             <!-- CODIGO -->
-            <mat-form-field *ngIf="statusNavBar != EStatus.inserindo" appearance="outline" class="pr-sm-8" fxFlex="20">
+            <mat-form-field
+                *ngIf="statusNavBar != EStatus.inserindo"
+                appearance="outline"
+                class="pr-sm-8"
+                fxFlex="20"
+            >
                 <mat-label>Código</mat-label>
-                <input [disabled]="statusNavBar == EStatus.inserindo || statusNavBar == EStatus.editando" matInput
-                    class="primary-color-input border-radius-4" name="primary color" formControlName="codigo" />
+                <input
+                    [disabled]="
+                        statusNavBar == EStatus.inserindo ||
+                        statusNavBar == EStatus.editando
+                    "
+                    matInput
+                    class="primary-color-input border-radius-4"
+                    name="primary color"
+                    formControlName="codigo"
+                />
             </mat-form-field>
             <!-- CODIGO -->
 
             <!-- PERIODO -->
             <mat-form-field fxFlex appearance="outline" class="pr-sm-8">
                 <mat-select placeholder="Período" formControlName="periodo">
-                    <mat-option *ngFor="let periodo of periodos" [value]="periodo.codigo">
-                        {{periodo.descricao}}
+                    <mat-option
+                        *ngFor="let periodo of periodos"
+                        [value]="periodo.codigo"
+                    >
+                        {{ periodo.descricao }}
                     </mat-option>
                 </mat-select>
                 <mat-error *ngIf="form.get('periodo').errors?.required">
-                    {{'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate}}
+                    {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
                 </mat-error>
             </mat-form-field>
             <!-- PERIODO -->
@@ -31,18 +57,21 @@
             <!-- ANO -->
             <mat-form-field appearance="outline" class="pr-sm-8">
                 <mat-label>Ano</mat-label>
-                <input matInput class="primary-color-input border-radius-4" name="primary color" mask="0000"
-                    formControlName="ano" />
+                <input
+                    matInput
+                    class="primary-color-input border-radius-4"
+                    name="primary color"
+                    mask="0000"
+                    formControlName="ano"
+                />
                 <mat-error *ngIf="form.get('ano').errors?.required">
-                    {{'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate}}
+                    {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
                 </mat-error>
                 <mat-error *ngIf="form.get('ano').errors?.pattern">
-                    {{'GERENCIAMENTO.ANO_INVALIDO' | translate}}
+                    {{ 'GERENCIAMENTO.ANO_INVALIDO' | translate }}
                 </mat-error>
             </mat-form-field>
             <!-- ANO -->
-
-
         </div>
         <!-- ROW 1 -->
 
@@ -52,12 +81,15 @@
             <mat-form-field fxFlex appearance="outline" class="pr-sm-8">
                 <mat-label>Curso</mat-label>
                 <mat-select placeholder="Período" formControlName="codigoCurso">
-                    <mat-option *ngFor="let curso of cursos" [value]="curso.codigo">
-                        {{curso.descricao}}
+                    <mat-option
+                        *ngFor="let curso of cursos"
+                        [value]="curso.codigo"
+                    >
+                        {{ curso.descricao }}
                     </mat-option>
                 </mat-select>
                 <mat-error *ngIf="form.get('codigoCurso').errors?.required">
-                    {{'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate}}
+                    {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
                 </mat-error>
             </mat-form-field>
             <!-- CURSO -->
@@ -66,89 +98,160 @@
             <mat-form-field fxFlex appearance="outline" class="pr-sm-8">
                 <mat-label>Turno</mat-label>
                 <mat-select placeholder="Turno" formControlName="codigoTurno">
-                    <mat-option *ngFor="let turno of turnos" [value]="turno.codigo">
-                        {{turno.descricao}}
+                    <mat-option
+                        *ngFor="let turno of turnos"
+                        [value]="turno.codigo"
+                    >
+                        {{ turno.descricao }}
                     </mat-option>
                 </mat-select>
                 <mat-error *ngIf="form.get('codigoTurno').errors?.required">
-                    {{'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate}}
+                    {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
                 </mat-error>
             </mat-form-field>
             <!-- TURNO -->
-
         </div>
         <!-- ROW 2 -->
 
         <!-- TABLE DISCIPLINAS -->
-        <h3>Disciplinas: </h3>
         <div fxLayout.gt-sm="row">
             <div class="mat-elevation-z1" fxFlex>
                 <div fxLayout="column" fxFlex>
-                    <table mat-table [dataSource]="dataSource" matSort>
+                    <div fxLayout="column" fxLayoutAlign="end end">
+                        <button (click)="abrirDialogAdicionarDisciplina($event)" class="m-8" mat-raised-button color="primary">
+                            Adicionar disciplina
+                        </button>
+                    </div>
 
+                    <table mat-table [dataSource]="dataSource" matSort>
                         <!-- ID Column -->
-                        <ng-container matColumnDef="nomeDisciplina" class="text-center">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">
+                        <ng-container
+                            matColumnDef="nomeDisciplina"
+                            class="text-center"
+                        >
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                class="text-center"
+                            >
                                 Disciplina
                             </th>
-                            <td mat-cell *matCellDef="let row" class="text-center">
-                                {{row.nomeDisciplina}}
+                            <td
+                                mat-cell
+                                *matCellDef="let row"
+                                class="text-center"
+                            >
+                                {{ row.nomeDisciplina }}
                             </td>
                         </ng-container>
 
                         <!-- Progress Column -->
                         <ng-container matColumnDef="horaAulaTotal">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">
-                                Hora aula (Total) </th>
-                            <td mat-cell *matCellDef="let row" class="text-center">
-                                {{row.horaAulaTotal}}
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                class="text-center"
+                            >
+                                Hora aula (Total)
+                            </th>
+                            <td
+                                mat-cell
+                                *matCellDef="let row"
+                                class="text-center"
+                            >
+                                {{ row.horaAulaTotal }}
                             </td>
                         </ng-container>
 
                         <!-- Name Column -->
                         <ng-container matColumnDef="credito">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                class="text-center"
+                            >
                                 Créditos
                             </th>
-                            <td mat-cell *matCellDef="let row" class="text-center">
-                                {{row.credito}}
+                            <td
+                                mat-cell
+                                *matCellDef="let row"
+                                class="text-center"
+                            >
+                                {{ row.credito }}
                             </td>
                         </ng-container>
 
                         <ng-container matColumnDef="preRequisito">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                class="text-center"
+                            >
                                 Pré requisito
                             </th>
-                            <td mat-cell *matCellDef="let row" class="text-center">
-                                <mat-checkbox disabled="true" [checked]="row.preRequisito"></mat-checkbox>
+                            <td
+                                mat-cell
+                                *matCellDef="let row"
+                                class="text-center"
+                            >
+                                <mat-checkbox
+                                    disabled="true"
+                                    [checked]="row.preRequisito"
+                                ></mat-checkbox>
                             </td>
                         </ng-container>
 
-
                         <ng-container matColumnDef="acao">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center"> Ação
+                            <th
+                                mat-header-cell
+                                *matHeaderCellDef
+                                mat-sort-header
+                                class="text-center"
+                            >
+                                Ação
                             </th>
-                            <td mat-cell *matCellDef="let row" class="text-center">
-                                <button mat-button color="primary" matTooltip="editar">
+                            <td
+                                mat-cell
+                                *matCellDef="let row"
+                                class="text-center"
+                            >
+                                <button
+                                    mat-button
+                                    color="primary"
+                                    matTooltip="editar"
+                                >
                                     <mat-icon color="accent">edit</mat-icon>
                                 </button>
-                                <button mat-button color="primary" matTooltip="Remover">
+                                <button
+                                    mat-button
+                                    color="primary"
+                                    matTooltip="Remover"
+                                >
                                     <mat-icon color="accent">delete</mat-icon>
                                 </button>
                             </td>
                         </ng-container>
 
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-                        </tr>
+                        <tr
+                            mat-header-row
+                            *matHeaderRowDef="displayedColumns"
+                        ></tr>
+                        <tr
+                            mat-row
+                            *matRowDef="let row; columns: displayedColumns"
+                        ></tr>
                     </table>
 
-                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                    <mat-paginator
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                    ></mat-paginator>
                 </div>
             </div>
         </div>
         <!-- TABLE DISCIPLINAS -->
-
     </form>
-
 </databar-form>
