@@ -14,7 +14,6 @@ export class DisciplinaService extends BaseService<IDisciplina>{
     }
 
      listarPorDescricao(filtro: string): Observable<IDisciplina[]> {
-        console.log(this.getRota());
         const rota = `${this.getRota().listarPorDescricao}?filtro=${filtro}`;
         return this.getAll(rota);
     }

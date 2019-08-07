@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CurriculoPaginado } from './model/curriculo.paginacao';
 import { ICurso } from '../curso/model/curso.model';
 import { ITurno } from '../turno/model/turno.interface';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatPaginator, MatSort, MatSnackBar } from '@angular/material';
 import { ICurriculoDisciplina } from './model/curriculo-disciplina.model';
 import { CurriculoModule } from './curriculo.module';
 import { CurriculoDataBarService } from './services/curriculo-databar.service';
@@ -13,6 +13,9 @@ import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/ID
 import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 import { ActivatedRoute } from '@angular/router';
 import { AdicionarDisciplinaDialogService } from './components/dialogs/adicionar-disciplina/service/adicionar-disciplina-dialog.service';
+import { Platform } from '@angular/cdk/platform';
+import { ApExpansivelTableDataSource, IColumnDef } from '@compartilhado/layout/expansivel-table/expansivel-table.component';
+import { IDisciplinaCurriculo } from './components/dialogs/adicionar-disciplina/models/IDisciplinaCurriculo';
 
 @Component({
     selector: 'curriculo',
@@ -27,17 +30,41 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     periodos: any[];
     cursos: ICurso[] = [];
     turnos: ITurno[] = [];
+    disciplinasVinculadas: ICurriculoDisciplina[] = [];
     EStatus = EStatus;
-    displayedColumns: string[] = ['nomeDisciplina', 'horaAulaTotal', 'credito', 'preRequisito', 'acao'];
-    dataSource: MatTableDataSource<ICurriculoDisciplina>;
+    isMobile = false;
+
+    displayedColumns: IColumnDef[] = [
+        { titulo: 'Disciplina', def: 'nomeDisciplina' },
+        { titulo: 'Hora total (h/a)', def: 'horaAulaTotal' },
+        { titulo: 'Hora total (h)', def: 'horaTotal' },
+        { titulo: 'Crédito', def: 'credito' },
+        { titulo: 'Ação', def: 'acao' }
+    ];
+
+    displayedExpansivelColumns = [
+        { titulo: 'Carga horária semanal teórica', def: 'cargaHorariaSemanalTeorica' },
+        { titulo: 'cargaHorariaSemanalPratica', def: 'cargaHorariaSemanalPratica' },
+    ];
+
+    dataSource: ApExpansivelTableDataSource<ICurriculoDisciplina>;
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
     constructor(
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         private _formBuilder: FormBuilder,
         private _route: ActivatedRoute,
-        private _dialog: AdicionarDisciplinaDialogService
-    ) { }
+        private _dialog: AdicionarDisciplinaDialogService,
+        private _snackBar: MatSnackBar,
+        private _platform: Platform
+    ) {
+        this.disciplinasVinculadas = [];
+        this.dataSource = new ApExpansivelTableDataSource(this.disciplinasVinculadas);
+        this.disciplinasVinculadas.push({
+            nomeDisciplina: 'teste',
+            cargaHorariaSemanalTeorica: 80
+        } as ICurriculoDisciplina);
+    }
 
     ngOnInit(): void {
         this._fuseTranslationLoaderService.loadTranslations(portugues);
@@ -52,26 +79,33 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
 
         this.servicoDataBarBind = new CurriculoDataBarService(this.form);
 
-        this.dataSource = new MatTableDataSource([{
-            nomeDisciplina: 'Interface Homem máquina',
-            horaAulaTotal: 40,
-            credito: 100,
-            preRequisito: true
-        }] as ICurriculoDisciplina[]);
-
-        this.dataSource.paginator = this.paginator;
-
         this._carregarPeriodos();
 
         this.cursos = this._route.snapshot.data['cursos'];
 
         this.turnos = this._route.snapshot.data['turnos'];
 
+        if (this._platform.ANDROID || this._platform.IOS) {
+            this.isMobile = true;
+        }
+
     }
+
 
     abrirDialogAdicionarDisciplina(e: Event): void {
         e.preventDefault();
-        this._dialog.openDialog('Adicionar disciplina');
+        this._dialog.openDialog('Adicionar disciplina', (dados) => {
+            this.disciplinasVinculadas.push(dados);
+            this.exibirSnackBar('Disciplina adicionada.');
+        });
+    }
+
+    private exibirSnackBar(mensagem: string): void {
+        this._snackBar.open(mensagem, 'OK', {
+            panelClass: 'sucesso',
+            duration: 3500,
+            horizontalPosition: 'center'
+        });
     }
 
     private _carregarPeriodos(): void {

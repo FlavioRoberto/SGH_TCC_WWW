@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material';
 import { ApContainerModule } from './ap-container/ap-container.module';
 import { ApFormAutocompleteModule } from './ap-form-autocomplete/ap-form-autocomplete.module';
 import { ApFieldsetModule } from './ap-fieldset/ap-fieldset.module';
+import { ExpansivelTableModule } from './expansivel-table/expansivel-table.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ApFieldsetModule } from './ap-fieldset/ap-fieldset.module';
         ApHeaderDescricaoModule,
         ApContainerModule,
         ApFormAutocompleteModule,
-        ApFieldsetModule
+        ApFieldsetModule,
+        ExpansivelTableModule
     ],
     exports: [
         FormsModule,
@@ -36,7 +38,8 @@ import { ApFieldsetModule } from './ap-fieldset/ap-fieldset.module';
         ApContainerModule,
         ApContainerModule,
         ApFormAutocompleteModule,
-        ApFieldsetModule
+        ApFieldsetModule,
+        ExpansivelTableModule
     ]
 })
 export class AppLayoutModule { }

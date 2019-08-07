@@ -1,6 +1,7 @@
 import { MatDialogConfig, MatDialog } from '@angular/material';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { AdicionarDisciplinaDialogComponent } from '../adicionar-disciplina-dialog.component';
+import { ICurriculoDisciplina } from 'app/main/gerenciamento/curriculo/model/curriculo-disciplina.model';
 
 @Injectable()
 export class AdicionarDisciplinaDialogService {
@@ -9,13 +10,17 @@ export class AdicionarDisciplinaDialogService {
 
     constructor(private dialog: MatDialog) { }
 
-    openDialog(titulo: string): void {
+    openDialog(titulo: string, onClickSalvar: (dados: ICurriculoDisciplina) => void): void {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.panelClass = 'adicionar-disciplina-dialog';
         dialogConfig.data = {
-            titulo
+            titulo,
+            onClickSalvar: onClickSalvar
         };
         this.dialogRef = this.dialog.open(AdicionarDisciplinaDialogComponent, dialogConfig);
+
+        // return this.dialogRef.afterClosed();
+
     }
 
     closeDialog(): void {

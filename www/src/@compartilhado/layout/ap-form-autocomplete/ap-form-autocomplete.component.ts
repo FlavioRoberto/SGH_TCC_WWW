@@ -79,7 +79,6 @@ export class ApFormAutocompleteComponent implements OnInit, OnDestroy {
         this.carregandoEntidade = true;
         this.itens$ = this.acao.pesquisar(filtro)
             .pipe(map((res: any) => {
-                console.log(res);
                 return res;
             }
             ), finalize(() => this.carregandoEntidade = false));

@@ -1,5 +1,7 @@
+import { IDisciplina } from 'app/main/gerenciamento/disciplina/cadastro/model/IDisciplina';
+
 export interface IDisciplinaCurriculo {
-    codigoDisciplina: number;
+    disciplina: IDisciplina;
     codigoCurriculo: number;
     cargaHorariaSemanalTeorica: number;
     cargaHorariaSemanalPratica: number;

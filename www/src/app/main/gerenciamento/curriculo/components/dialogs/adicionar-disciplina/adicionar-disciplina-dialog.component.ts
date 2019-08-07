@@ -6,6 +6,7 @@ import { IDisciplina } from 'app/main/gerenciamento/disciplina/cadastro/model/ID
 import { locale as portugues } from './../../../../i18n/pt-br';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { DisciplinaService } from 'app/main/gerenciamento/disciplina/cadastro/service/disciplina.service';
+import { IDisciplinaCurriculo } from './models/IDisciplinaCurriculo';
 
 @Component({
     selector: 'adicionar-disciplina-dialog',
@@ -22,6 +23,8 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
     acaoAutoCompleteDisciplina: IFormAutocompleteAcao;
     pesquisandoDisciplina: boolean;
     disciplinaSelecionada: IDisciplina = null;
+    private eventClickSalvar;
+    private limparFormulario;
 
     constructor(
         private dialogRef: MatDialogRef<AdicionarDisciplinaDialogComponent>,
@@ -33,17 +36,18 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
 
         this.titulo = data.titulo;
         this._fuseTranslationLoaderService.loadTranslations(portugues);
+        this.eventClickSalvar = data.onClickSalvar;
 
     }
 
     ngOnInit(): void {
         this.adicionarDisciplinaForm = this._formBuilder.group({
             disciplina: [null, [Validators.required]],
-            cargaHorariaSemanalTeorica: [null],
-            cargaHorariaSemanalPratica: [null],
-            horaTotal: [null],
-            horaAulaTotal: [null],
-            credito: [null]
+            cargaHorariaSemanalTeorica: [null, [Validators.required]],
+            cargaHorariaSemanalPratica: [null, [Validators.required]],
+            horaTotal: [null, [Validators.required]],
+            horaAulaTotal: [null, [Validators.required]],
+            credito: [null, [Validators.required]]
         });
 
         this.acaoAutoCompleteDisciplina = {
@@ -61,7 +65,10 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
     }
 
     salvar(): void {
-
+        const dados = this.adicionarDisciplinaForm.getRawValue() as IDisciplinaCurriculo;
+        dados.disciplina = this.disciplinaSelecionada;
+        this.eventClickSalvar(dados);
+        this.adicionarDisciplinaForm.reset();
     }
 
     onItemDisciplinaSelected(disciplina: IDisciplina): void {
@@ -79,13 +86,6 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
         this.disciplinaSelecionada = null;
     }
 
-    private exibirSnackBar(mensagem: string): void {
-        this._snackBar.open(mensagem, 'OK', {
-            panelClass: 'sucesso',
-            duration: 3500,
-            horizontalPosition: 'center'
-        });
-    }
 }
 
 

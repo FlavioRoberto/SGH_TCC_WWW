@@ -1,0 +1,72 @@
+<div class="mat-container">
+    <mat-table #table [dataSource]="dataSource">
+        <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+
+        <div *ngFor="let col of displayedColumns">
+            <ng-container matColumnDef="{{ col.def }}">
+                <mat-header-cell *matHeaderCellDef>
+                    {{ col.titulo }}
+                </mat-header-cell>ss
+                <mat-cell *matCellDef="let element">
+                    {{ element[col.def] }}
+                </mat-cell>
+            </ng-container>
+        </div>
+
+        <!-- Expanded Content Column - The detail row is made up of this one column -->
+        <ng-container matColumnDef="expandedDetail">
+            <mat-cell *matCellDef="let detail">
+                <mat-list fxFlex="1 0 auto">
+                    <div
+                        *ngFor="
+                            let item of columnDefExpansivel;
+                            let lastItem = last
+                        "
+                    >
+                        <mat-list-item>
+                            <mat-divider *ngIf="!lastItem"></mat-divider>
+                            <div
+                                fxLayout="column"
+                                style="color: #ACACAC"
+                                class="mr-12"
+                            >
+                                {{ item.titulo }}:
+                            </div>
+                            <div fxLayout="column">
+                                {{ detail.element[item.def] }}
+                            </div>
+                        </mat-list-item>
+                    </div>
+                </mat-list>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="defColumns"></mat-header-row>
+        <mat-row
+            *matRowDef="let row; columns: defColumns"
+            matRipple
+            class="element-row"
+            [class.expanded]="expandedElement == row"
+            (click)="expandedElement = row"
+        ></mat-row>
+        <mat-row
+            *matRowDef="
+                let row;
+                columns: ['expandedDetail'];
+                when: isExpansionDetailRow
+            "
+            [@detailExpand]="
+                row.element == expandedElement ? 'expanded' : 'collapsed'
+            "
+            style="overflow: hidden"
+        >
+        </mat-row>
+    </mat-table>
+</div>
+
+<!-- Copyright 2017 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
