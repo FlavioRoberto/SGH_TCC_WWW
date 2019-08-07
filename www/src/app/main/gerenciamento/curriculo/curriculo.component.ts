@@ -44,7 +44,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
 
     displayedExpansivelColumns = [
         { titulo: 'Carga horária semanal teórica', def: 'cargaHorariaSemanalTeorica' },
-        { titulo: 'cargaHorariaSemanalPratica', def: 'cargaHorariaSemanalPratica' },
+        { titulo: 'Carga horária semanal prática', def: 'cargaHorariaSemanalPratica' },
     ];
 
     dataSource: ApExpansivelTableDataSource<ICurriculoDisciplina>;
@@ -62,8 +62,20 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         this.dataSource = new ApExpansivelTableDataSource(this.disciplinasVinculadas);
         this.disciplinasVinculadas.push({
             nomeDisciplina: 'teste',
-            cargaHorariaSemanalTeorica: 80
-        } as ICurriculoDisciplina);
+            cargaHorariaSemanalTeorica: 70,
+            horaAulaTotal: 42,
+            horaTotal: 40,
+            credito: 100,
+            cargaHorariaSemanalPratica: 74
+        } as ICurriculoDisciplina,
+            {
+                nomeDisciplina: 'teste 2',
+                cargaHorariaSemanalTeorica: 74,
+                horaAulaTotal: 38,
+                horaTotal: 44,
+                credito: 100,
+                cargaHorariaSemanalPratica: 80
+            } as ICurriculoDisciplina);
     }
 
     ngOnInit(): void {
