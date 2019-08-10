@@ -3,11 +3,13 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, Htt
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { ErrorDialogService } from '@compartilhado/layout/dialogs/error-dialog/service/error-dialog.service';
+import { Router } from '@angular/router';
+import { AutenticacaoService } from '@compartilhado/core/auth/autenticacao.service';
 
 @Injectable()
 export class RequestErrorInterceptor implements HttpInterceptor {
 
-    constructor(private dialogService: ErrorDialogService) { }
+    constructor(private dialogService: ErrorDialogService, private _authService: AutenticacaoService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -25,7 +27,7 @@ export class RequestErrorInterceptor implements HttpInterceptor {
                         let mensagem = '';
 
                         if (err.status === 0) {
-                            mensagem = "Não foi possível conectar ao servidor! Verifique o proxy e sua conexão com a internet.";
+                            mensagem = 'Não foi possível conectar ao servidor! Verifique o proxy e sua conexão com a internet.';
                         }
 
                         if (err.status >= 400) {
@@ -36,15 +38,20 @@ export class RequestErrorInterceptor implements HttpInterceptor {
                             }
 
                             if (err.status === 404) {
-                                mensagem = "O recurso acessado não está disponível, verifique se existe a rota especificada!";
+                                mensagem = 'O recurso acessado não está disponível, verifique se existe a rota especificada!';
                             }
 
-                            if (err.status === 401 || err.status === 403) {
-                                mensagem = "Você não tem permissão para executar esta ação!";
+                            if (err.status === 403) {
+                                mensagem = 'Você não tem permissão para executar esta ação!';
+                            }
+
+                            if (err.status === 401){
+                                this._authService.logout();
+                                mensagem = 'O prazo da autenticação expirou, realize o login novamente!';
                             }
                         }
 
-                        this.dialogService.openDialog("Atenção", mensagem);
+                        this.dialogService.openDialog('Atenção', mensagem);
 
                         return Observable.throw(err);
                     }
