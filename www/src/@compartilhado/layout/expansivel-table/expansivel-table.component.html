@@ -7,14 +7,40 @@
 
         <div *ngFor="let col of displayedColumns">
             <ng-container matColumnDef="{{ col.def }}">
-                <mat-header-cell *matHeaderCellDef>
+                <mat-header-cell
+                    *matHeaderCellDef
+                    fxLayoutAlign="center center"
+                >
                     {{ col.titulo }}
-                </mat-header-cell>ss
-                <mat-cell *matCellDef="let element">
+                </mat-header-cell>
+                <mat-cell
+                    *matCellDef="let element"
+                    fxLayoutAlign="center center"
+                >
                     {{ element[col.def] }}
                 </mat-cell>
             </ng-container>
         </div>
+
+        <ng-container matColumnDef="acao" *ngIf="acoesTabela">
+            <mat-header-cell *matHeaderCellDef fxLayoutAlign="center center">
+                Ações
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element" fxLayoutAlign="center center">
+                <div *ngFor="let acao of acoesTabela">
+                    <button
+                        [disabled]="desabilitarBotoes"
+                        type="button"
+                        mat-button
+                        [matTooltip]="acao.descricao"
+                        (click)="onClick($event, element, acao)"
+                        color="primary"
+                    >
+                        <mat-icon>{{ acao.icone }}</mat-icon>
+                    </button>
+                </div>
+            </mat-cell>
+        </ng-container>
 
         <!-- Expanded Content Column - The detail row is made up of this one column -->
         <ng-container matColumnDef="expandedDetail">

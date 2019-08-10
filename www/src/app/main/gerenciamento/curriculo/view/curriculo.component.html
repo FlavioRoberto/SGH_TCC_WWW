@@ -16,7 +16,7 @@
         class="turno-form"
     >
         <!-- ROW 1 -->
-        <div fxLayout.gt-sm="row">
+        <div fxLayout.gt-sm="row" fxLayout="column">
             <!-- CODIGO -->
             <mat-form-field
                 *ngIf="statusNavBar != EStatus.inserindo"
@@ -76,7 +76,7 @@
         <!-- ROW 1 -->
 
         <!-- ROW 2 -->
-        <div fxLayout.gt-sm="row">
+        <div fxLayout.gt-sm="row" fxLayout="column">
             <!-- CURSO -->
             <mat-form-field fxFlex appearance="outline" class="pr-sm-8">
                 <mat-label>Curso</mat-label>
@@ -114,11 +114,33 @@
         <!-- ROW 2 -->
 
         <!-- TABLE DISCIPLINAS -->
-        <div class="mat-elevation-z1">
+        <div class="mat-elevation-z1" fxLayout="column">
+            <div fxLayoutAlign="end center">
+                <button
+                    class="m-4"
+                    type="button"
+                    mat-button
+                    matTooltip="Adicionar disciplina"
+                    (click)="abrirDialogAdicionarDisciplina($event)"
+                    color="primary"
+                >
+                    <span>
+                        Adicionar disciplina
+                    </span>
+                    <mat-icon>add_circle</mat-icon>
+                </button>
+            </div>
+
             <ap-expansivel-table
+                fxFlex
                 [displayedColumns]="displayedColumns"
                 [columnDefExpansivel]="displayedExpansivelColumns"
                 [dataSource]="dataSource"
+                [acoesTabela]="acoesTabela"
+                [desabilitarBotoes]="
+                    statusNavBar != EStatus.editando &&
+                    statusNavBar != EStatus.inserindo
+                "
             >
             </ap-expansivel-table>
         </div>

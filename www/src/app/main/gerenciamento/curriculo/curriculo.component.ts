@@ -14,8 +14,8 @@ import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 import { ActivatedRoute } from '@angular/router';
 import { AdicionarDisciplinaDialogService } from './components/dialogs/adicionar-disciplina/service/adicionar-disciplina-dialog.service';
 import { Platform } from '@angular/cdk/platform';
-import { ApExpansivelTableDataSource, IColumnDef } from '@compartilhado/layout/expansivel-table/expansivel-table.component';
-import { IDisciplinaCurriculo } from './components/dialogs/adicionar-disciplina/models/IDisciplinaCurriculo';
+import { IColumnDef } from '@compartilhado/layout/expansivel-table/expansivel-table.component';
+import { ApExpansivelTableDataSource } from '@compartilhado/layout/expansivel-table/ApExpansivelTableDataSource';
 
 @Component({
     selector: 'curriculo',
@@ -30,7 +30,6 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     periodos: any[];
     cursos: ICurso[] = [];
     turnos: ITurno[] = [];
-    disciplinasVinculadas: ICurriculoDisciplina[] = [];
     EStatus = EStatus;
     isMobile = false;
 
@@ -38,14 +37,27 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         { titulo: 'Disciplina', def: 'nomeDisciplina' },
         { titulo: 'Hora total (h/a)', def: 'horaAulaTotal' },
         { titulo: 'Hora total (h)', def: 'horaTotal' },
-        { titulo: 'Crédito', def: 'credito' },
-        { titulo: 'Ação', def: 'acao' }
+        { titulo: 'Crédito', def: 'credito' }
     ];
 
     displayedExpansivelColumns = [
         { titulo: 'Carga horária semanal teórica', def: 'cargaHorariaSemanalTeorica' },
         { titulo: 'Carga horária semanal prática', def: 'cargaHorariaSemanalPratica' },
     ];
+
+    acoesTabela = [{
+        descricao: 'Editar',
+        icone: 'edit',
+        executar: (item: any): void => {
+            alert('Inserindo: ' + JSON.stringify(item));
+        }
+    }, {
+        descricao: 'Remover',
+        icone: 'delete',
+        executar: (item: any): void => {
+            this._removerDisicplina(item);
+        }
+    }];
 
     dataSource: ApExpansivelTableDataSource<ICurriculoDisciplina>;
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -58,24 +70,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         private _snackBar: MatSnackBar,
         private _platform: Platform
     ) {
-        this.disciplinasVinculadas = [];
-        this.dataSource = new ApExpansivelTableDataSource(this.disciplinasVinculadas);
-        this.disciplinasVinculadas.push({
-            nomeDisciplina: 'teste',
-            cargaHorariaSemanalTeorica: 70,
-            horaAulaTotal: 42,
-            horaTotal: 40,
-            credito: 100,
-            cargaHorariaSemanalPratica: 74
-        } as ICurriculoDisciplina,
-            {
-                nomeDisciplina: 'teste 2',
-                cargaHorariaSemanalTeorica: 74,
-                horaAulaTotal: 38,
-                horaTotal: 44,
-                credito: 100,
-                cargaHorariaSemanalPratica: 80
-            } as ICurriculoDisciplina);
+        this.dataSource = new ApExpansivelTableDataSource();
     }
 
     ngOnInit(): void {
@@ -101,13 +96,23 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
             this.isMobile = true;
         }
 
+        this.dataSource.data.push(
+            {
+                nomeDisciplina: 'teste 2',
+                cargaHorariaSemanalTeorica: 74,
+                horaAulaTotal: 38,
+                horaTotal: 44,
+                credito: 100,
+                cargaHorariaSemanalPratica: 80
+            } as ICurriculoDisciplina);
+
     }
 
 
     abrirDialogAdicionarDisciplina(e: Event): void {
         e.preventDefault();
         this._dialog.openDialog('Adicionar disciplina', (dados) => {
-            this.disciplinasVinculadas.push(dados);
+            this.dataSource.data.push(dados);
             this.exibirSnackBar('Disciplina adicionada.');
         });
     }
@@ -133,6 +138,10 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
             { codigo: 9, descricao: 'Nono' },
             { codigo: 10, descricao: 'Décimo' }
         ]
+    }
+
+    private _removerDisicplina(itemRemover): void {
+        this.dataSource.data = [];
     }
 
     statusChanged(status: string): void {

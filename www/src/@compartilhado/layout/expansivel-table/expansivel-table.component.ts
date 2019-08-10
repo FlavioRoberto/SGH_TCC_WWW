@@ -3,6 +3,8 @@ import { DataSource } from '@angular/cdk/collections';
 import { Observable, of } from 'rxjs';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ICurriculoDisciplina } from 'app/main/gerenciamento/curriculo/model/curriculo-disciplina.model';
+import { MatTableDataSource } from '@angular/material';
+import { ApExpansivelTableDataSource } from './ApExpansivelTableDataSource';
 
 @Component({
     selector: 'ap-expansivel-table',
@@ -21,31 +23,25 @@ export class ExpansivelTableComponent implements OnInit {
     @Input() displayedColumns: IColumnDef[];
     @Input() columnDefExpansivel: IColumnDef[];
     expandedElement: any;
-    @Input() dataSource: ApExpansivelTableDataSource<ICurriculoDisciplina>;
+    @Input() acoesTabela: any[];
+    @Input() dataSource: ApExpansivelTableDataSource<any>;
+    @Input() desabilitarBotoes: boolean;
 
     isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
     defColumns: string[];
 
     ngOnInit(): void {
         this.defColumns = this.displayedColumns.map(i => i.def);
-    }
-}
-
-
-export class ApExpansivelTableDataSource<T> extends DataSource<T> {
-
-    constructor(private data) {
-        super();
+        if (this.acoesTabela.length > 0) {
+            this.defColumns.push('acao');
+        }
     }
 
-    connect(): Observable<T[]> {
-        const rows = [];
-        this.data.forEach(element => rows.push(element, { detailRow: true, element }));
-        console.log(rows);
-        return of(rows);
+    onClick(event, element, acao): void {
+        event.stopPropagation();
+        event.preventDefault();
+        acao.executar(element);
     }
-
-    disconnect() { }
 }
 
 export interface IColumnDef {
