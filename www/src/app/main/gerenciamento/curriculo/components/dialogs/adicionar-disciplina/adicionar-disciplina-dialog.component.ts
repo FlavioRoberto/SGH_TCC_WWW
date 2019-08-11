@@ -22,7 +22,9 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
     adicionarDisciplinaForm: FormGroup;
     acaoAutoCompleteDisciplina: IFormAutocompleteAcao;
     pesquisandoDisciplina: boolean;
+    disciplinas: IDisciplina[];
     disciplinaSelecionada: IDisciplina = null;
+    filtroDisciplinaPreRequisito = '';
     private eventClickSalvar;
     private limparFormulario;
 
@@ -47,8 +49,12 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
             cargaHorariaSemanalPratica: [null, [Validators.required]],
             horaTotal: [null, [Validators.required]],
             horaAulaTotal: [null, [Validators.required]],
-            credito: [null, [Validators.required]]
+            credito: [null, [Validators.required]],
+            disciplinasPreRequisito: [null]
         });
+
+        this._servicoDisciplina.listarTodos()
+            .subscribe(data => this.disciplinas = data);
 
         this.acaoAutoCompleteDisciplina = {
             pesquisar: (filter: string) => {
@@ -84,6 +90,10 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
         this.adicionarDisciplinaForm.get('disciplina').reset();
         this.adicionarDisciplinaForm.get('disciplina').enable();
         this.disciplinaSelecionada = null;
+    }
+
+    filtrarDisciplinasPreRequisito(filtro: string): void{
+        this.filtroDisciplinaPreRequisito = filtro;
     }
 
 }

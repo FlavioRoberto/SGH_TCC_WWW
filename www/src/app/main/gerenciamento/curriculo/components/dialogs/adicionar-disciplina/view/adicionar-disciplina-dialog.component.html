@@ -242,6 +242,42 @@
                 </ap-fieldset>
                 <!-- CARGA_HORARIA TOTAL -->
             </div>
+
+            <!-- DISCIPLINA_PREREQUISITO -->
+
+            <div fxLayout="column">
+                <mat-form-field appearance="outline">
+                    <mat-label>Pré-requisito</mat-label>
+                    <mat-select
+                        fxLayout="column"
+                        formControlName="disciplinasPreRequisito"
+                        multiple
+                    >
+                        <input
+                            class="px-8 my-8"
+                            placeholder="Pesquisar..."
+                            matInput
+                            name="filtro"
+                            (keyup)="
+                                filtrarDisciplinasPreRequisito(
+                                    $event.target.value
+                                )
+                            "
+                        />
+                        <mat-divider></mat-divider>
+                        <mat-option
+                            *ngFor="
+                                let disciplinaPreRequisito of disciplinas
+                                    | filter: filtroDisciplinaPreRequisito
+                            "
+                            [value]="disciplinaPreRequisito"
+                            >{{ disciplinaPreRequisito.descricao }}</mat-option
+                        >
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <!-- DISCIPLINA_PREREQUISITO -->
         </form>
         <!-- FORM -->
     </div>
@@ -259,7 +295,6 @@
             [disabled]="emProgresso || adicionarDisciplinaForm.invalid"
             class="mat-raised-button mat-accent"
             (click)="salvar()"
-            
         >
             <span>SALVAR</span>
         </button>

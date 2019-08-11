@@ -16,6 +16,7 @@ import { AdicionarDisciplinaDialogService } from './components/dialogs/adicionar
 import { Platform } from '@angular/cdk/platform';
 import { ColumnDef } from '@compartilhado/layout/expansivel-table/expansivel-table.component';
 import { ApExpansivelTableDataSource } from '@compartilhado/layout/expansivel-table/ApExpansivelTableDataSource';
+import { IDisciplina } from '../disciplina/cadastro/model/IDisciplina';
 
 @Component({
     selector: 'curriculo',
@@ -43,6 +44,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     displayedExpansivelColumns = [
         { titulo: 'Carga horária semanal teórica', def: 'cargaHorariaSemanalTeorica' },
         { titulo: 'Carga horária semanal prática', def: 'cargaHorariaSemanalPratica' },
+        { titulo: 'Pré-requisito', def: 'preRequisito' },
     ];
 
     acoesTabela = [{
@@ -117,8 +119,21 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     abrirDialogAdicionarDisciplina(e: Event): void {
         e.preventDefault();
         this._dialog.openDialog('Adicionar disciplina', (dados) => {
+            this.constroiPreRequisitos(dados);
             this.dataSource.add(dados);
+            console.log(dados);
             this.exibirSnackBar('Disciplina adicionada.');
+        });
+    }
+
+    private constroiPreRequisitos(dados: ICurriculoDisciplina): void {
+        dados.preRequisito = '';
+        dados.disciplinasPreRequisito.forEach((disciplina, i) => {
+            let separador = '-';
+            if (i == 0) {
+                separador = '';
+            }
+            dados.preRequisito += separador + disciplina.descricao;
         });
     }
 

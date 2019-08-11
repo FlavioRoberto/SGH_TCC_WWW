@@ -11,7 +11,8 @@ export class ICurriculoDisciplina {
     horaAulaTotal: number;
     horaTotal: number;
     credito: number;
-    preRequisito: boolean;
+    disciplinasPreRequisito: IDisciplina[];
+    preRequisito: string;
 
     constructor() {
         this.codigo = 0;
@@ -24,6 +25,8 @@ export class ICurriculoDisciplina {
         this.horaAulaTotal = 0;
         this.horaTotal = 0;
         this.credito = 0;
-        this.preRequisito = false;
+        this.disciplinasPreRequisito = [];
+        this.preRequisito = '';
     }
+
 }
