@@ -10,6 +10,7 @@ export enum EStatus {
     removendo = 'Removendo',
     dadosCarregados = 'Dados carregados',
     pesquisando = 'Pesquisando',
-    executarAcao = 'Executar ação'
+    executarAcao = 'Executar ação',
+    aguardando = 'Aguardando ação'
 }
 

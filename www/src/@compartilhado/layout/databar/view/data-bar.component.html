@@ -20,7 +20,7 @@
 
                 <!-- BTN_PESQUISAR -->
                 <button
-                    [disabled]="(status == EStatus.inserindo || status == EStatus.editando || status == EStatus.dadosCarregados) || emProgresso"
+                    [disabled]="status == EStatus.aguardando || (status == EStatus.inserindo || status == EStatus.editando || status == EStatus.dadosCarregados) || emProgresso"
                     mat-button color="primary" (click)="pesquisar()" matTooltip="Pesquisar">
                     <mat-icon>search</mat-icon>
                 </button>
@@ -36,7 +36,7 @@
 
                 <!-- BTN_EDITAR -->
                 <button mat-button
-                    [disabled]="status == 'Inserindo' || status == EStatus.novaPesquisa || status == EStatus.executarAcao || status == EStatus.pesquisando || emProgresso || disabled"
+                    [disabled]="status == EStatus.aguardando || status == 'Inserindo' || status == EStatus.novaPesquisa || status == EStatus.executarAcao || status == EStatus.pesquisando || emProgresso || disabled"
                     color="primary" matTooltip="Editar" (click)="editar()">
                     <mat-icon>edit</mat-icon>
                 </button>
