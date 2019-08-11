@@ -1,9 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { DataSource } from '@angular/cdk/collections';
-import { Observable, of } from 'rxjs';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ICurriculoDisciplina } from 'app/main/gerenciamento/curriculo/model/curriculo-disciplina.model';
-import { MatTableDataSource } from '@angular/material';
 import { ApExpansivelTableDataSource } from './ApExpansivelTableDataSource';
 
 @Component({
@@ -20,8 +16,8 @@ import { ApExpansivelTableDataSource } from './ApExpansivelTableDataSource';
 })
 export class ExpansivelTableComponent implements OnInit {
 
-    @Input() displayedColumns: IColumnDef[];
-    @Input() columnDefExpansivel: IColumnDef[];
+    @Input() displayedColumns: ColumnDef[];
+    @Input() columnDefExpansivel: ColumnDef[];
     expandedElement: any;
     @Input() acoesTabela: any[];
     @Input() dataSource: ApExpansivelTableDataSource<any>;
@@ -44,7 +40,11 @@ export class ExpansivelTableComponent implements OnInit {
     }
 }
 
-export interface IColumnDef {
-    titulo: string;
-    def: string
+export class ColumnDef {
+
+    constructor(
+        public titulo: string,
+        public def: string,
+        public value: string = '') {
+    }
 }

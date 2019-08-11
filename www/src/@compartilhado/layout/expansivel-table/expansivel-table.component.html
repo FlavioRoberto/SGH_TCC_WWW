@@ -17,7 +17,12 @@
                     *matCellDef="let element"
                     fxLayoutAlign="center center"
                 >
-                    {{ element[col.def] }}
+                    <div *ngIf="col.value">
+                        {{ element[col.def][col.value] }}
+                    </div>
+                    <div *ngIf="!col.value">
+                        {{ element[col.def] }}
+                    </div>
                 </mat-cell>
             </ng-container>
         </div>

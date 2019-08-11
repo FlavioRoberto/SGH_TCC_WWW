@@ -1,7 +1,9 @@
+import { DisciplinaModule } from '../../disciplina/cadastro/disciplina.module';
+import { IDisciplina } from '../../disciplina/cadastro/model/IDisciplina';
+
 export class ICurriculoDisciplina {
     codigo: number;
-    codigoDisciplina: number;
-    nomeDisciplina: string;
+    disciplina: IDisciplina;
     codigoCurriculo: number;
     cargaHorariaSemanalTeorica: number;
     cargaHorariaSemanalPratica: number;
@@ -13,8 +15,8 @@ export class ICurriculoDisciplina {
 
     constructor() {
         this.codigo = 0;
-        this.codigoDisciplina = 0;
-        this.nomeDisciplina = '';
+        this.disciplina = {
+        } as IDisciplina;
         this.codigoCurriculo = 0;
         this.cargaHorariaSemanalTeorica = 0;
         this.cargaHorariaSemanalPratica = 0;

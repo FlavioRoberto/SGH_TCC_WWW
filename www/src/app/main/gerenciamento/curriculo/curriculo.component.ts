@@ -14,7 +14,7 @@ import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 import { ActivatedRoute } from '@angular/router';
 import { AdicionarDisciplinaDialogService } from './components/dialogs/adicionar-disciplina/service/adicionar-disciplina-dialog.service';
 import { Platform } from '@angular/cdk/platform';
-import { IColumnDef } from '@compartilhado/layout/expansivel-table/expansivel-table.component';
+import { ColumnDef } from '@compartilhado/layout/expansivel-table/expansivel-table.component';
 import { ApExpansivelTableDataSource } from '@compartilhado/layout/expansivel-table/ApExpansivelTableDataSource';
 
 @Component({
@@ -33,11 +33,11 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     EStatus = EStatus;
     isMobile = false;
 
-    displayedColumns: IColumnDef[] = [
-        { titulo: 'Disciplina', def: 'nomeDisciplina' },
-        { titulo: 'Hora total (h/a)', def: 'horaAulaTotal' },
-        { titulo: 'Hora total (h)', def: 'horaTotal' },
-        { titulo: 'Crédito', def: 'credito' }
+    displayedColumns: ColumnDef[] = [
+        new ColumnDef('Disciplina', 'disciplina', 'descricao'),
+        new ColumnDef('Hora total (h/a)', 'horaAulaTotal'),
+        new ColumnDef('Hora total (h)', 'horaTotal'),
+        new ColumnDef('Crédito', 'credito')
     ];
 
     displayedExpansivelColumns = [
@@ -98,7 +98,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
 
         this.dataSource.data.push(
             {
-                nomeDisciplina: 'teste 2',
+                disciplina: { descricao: 'teste' },
                 cargaHorariaSemanalTeorica: 74,
                 horaAulaTotal: 38,
                 horaTotal: 44,
@@ -108,11 +108,16 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
 
     }
 
+    private _removerDisicplina(itemRemover): void {
+        this.dataSource.data = this.dataSource
+            .data
+            .filter(item => item.disciplina.descricao != itemRemover.disciplina.descricao);
+    }
 
     abrirDialogAdicionarDisciplina(e: Event): void {
         e.preventDefault();
         this._dialog.openDialog('Adicionar disciplina', (dados) => {
-            this.dataSource.data.push(dados);
+            this.dataSource.add(dados);
             this.exibirSnackBar('Disciplina adicionada.');
         });
     }
@@ -138,10 +143,6 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
             { codigo: 9, descricao: 'Nono' },
             { codigo: 10, descricao: 'Décimo' }
         ]
-    }
-
-    private _removerDisicplina(itemRemover): void {
-        this.dataSource.data = [];
     }
 
     statusChanged(status: string): void {
