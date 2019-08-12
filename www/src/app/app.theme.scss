@@ -23,9 +23,9 @@ $fuse-navy: (
   400: #5c616f,
   500: #039be5,
   600: #353a48,
-  700: #2d323e,
+  700: #f8f8f8, //nav bar body
   800: #262933,
-  900: #1e2129,
+  900: #44697E, //nav bar head
   A100: #c5c6cb,
   A200: #9ea1a9,
   A400: #5c616f,
@@ -38,7 +38,7 @@ $fuse-navy: (
     400: $light-primary-text,
     500: $light-primary-text,
     600: $light-primary-text,
-    700: $light-primary-text,
+    700: $dark-primary-text,
     800: $light-primary-text,
     900: $light-primary-text,
     A100: $dark-primary-text,
@@ -96,7 +96,7 @@ $typography: mat-typography-config(
 
 // Define the primary, accent and warn palettes
 $default-primary-palette: mat-palette($fuse-navy);
-$default-accent-palette: mat-palette($mat-light-blue, 600, 400, 700);
+$default-accent-palette: mat-palette($fuse-navy, 900, 900, 900);
 $default-warn-palette: mat-palette($mat-red);
 
 // Create the Material theme object

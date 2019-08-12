@@ -1,17 +1,17 @@
 <!-- HEADER -->
-<div class="header accent p-24 h-80" fxLayout="row" fxLayoutAlign="start center" style="width: 100%">
+<div class="header fundo p-24 h-80" fxLayout="row" fxLayoutAlign="start center" style="width: 100%">
     <div fxLayout="column" fxLayoutAlign="center start">
         <div fxLayout="row" fxLayoutAlign="center center">
             <div fxLayout="row" fxLayoutAlign="center center">
-                <mat-icon class="secondary-text s-18">home</mat-icon>
-                <mat-icon class="secondary-text s-16">chevron_right</mat-icon>
+                <mat-icon class="fuse-white-500-fg secondary-text s-18">home</mat-icon>
+                <mat-icon class="fuse-white-500-fg secondary-text s-16">chevron_right</mat-icon>
             </div>
             <div fxLayout="row" *ngFor="let nav of navegacao; index as i" fxLayoutAlign="center center">
-                <span class="secondary-text">{{ nav }}</span>
-                <mat-icon class="secondary-text s-16" *ngIf="navegacao.length - 1 > i">chevron_right</mat-icon>
+                <span class="secondary-text fuse-white-500-fg">{{ nav }}</span>
+                <mat-icon class="secondary-text fuse-white-500-fg s-16" *ngIf="navegacao.length - 1 > i">chevron_right</mat-icon>
             </div>
         </div>
-        <div *ngIf="titulo" class="h2 mt-16">{{ titulo }}</div>
+        <div *ngIf="titulo" class="h2 mt-16 fuse-white-500-fg">{{ titulo }}</div>
     </div>
 </div>
 <!-- / HEADER -->

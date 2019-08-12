@@ -6,7 +6,6 @@ import { IDisciplina } from 'app/main/gerenciamento/disciplina/cadastro/model/ID
 import { locale as portugues } from './../../../../i18n/pt-br';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { DisciplinaService } from 'app/main/gerenciamento/disciplina/cadastro/service/disciplina.service';
-import { IDisciplinaCurriculo } from './models/IDisciplinaCurriculo';
 
 @Component({
     selector: 'adicionar-disciplina-dialog',
