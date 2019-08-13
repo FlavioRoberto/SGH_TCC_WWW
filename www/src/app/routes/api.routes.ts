@@ -42,6 +42,7 @@ export class routesApi {
             },
             perfil: this.construirRotaPadrao('perfil'),
             usuario: this.construirRotaUsuario(),
+            curriculo: this.construirRotaPadrao('curriculo')
         };
 
     }

@@ -6,6 +6,7 @@ import { IDisciplina } from 'app/main/gerenciamento/disciplina/cadastro/model/ID
 import { locale as portugues } from './../../../../i18n/pt-br';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { DisciplinaService } from 'app/main/gerenciamento/disciplina/cadastro/service/disciplina.service';
+import { ICurriculoDisciplina } from '../../../model/curriculo-disciplina.model';
 
 @Component({
     selector: 'adicionar-disciplina-dialog',
@@ -70,7 +71,7 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
     }
 
     salvar(): void {
-        const dados = this.adicionarDisciplinaForm.getRawValue() as IDisciplinaCurriculo;
+        const dados = this.adicionarDisciplinaForm.getRawValue() as ICurriculoDisciplina;
         dados.disciplina = this.disciplinaSelecionada;
         this.eventClickSalvar(dados);
         this.adicionarDisciplinaForm.reset();

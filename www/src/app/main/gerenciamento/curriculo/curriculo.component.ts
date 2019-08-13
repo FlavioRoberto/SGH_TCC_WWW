@@ -17,6 +17,8 @@ import { Platform } from '@angular/cdk/platform';
 import { ColumnDef } from '@compartilhado/layout/expansivel-table/expansivel-table.component';
 import { ApExpansivelTableDataSource } from '@compartilhado/layout/expansivel-table/ApExpansivelTableDataSource';
 import { IDisciplina } from '../disciplina/cadastro/model/IDisciplina';
+import { CurriculoService } from './services/curriculo.service';
+import { ICurriculo } from './model/curriculo.model';
 
 @Component({
     selector: 'curriculo',
@@ -70,23 +72,27 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         private _route: ActivatedRoute,
         private _dialog: AdicionarDisciplinaDialogService,
         private _snackBar: MatSnackBar,
-        private _platform: Platform
+        private _platform: Platform,
+        private _servico: CurriculoService
     ) {
-        this.dataSource = new ApExpansivelTableDataSource();
+        this.dataSource = new ApExpansivelTableDataSource<ICurriculoDisciplina>();
     }
 
     ngOnInit(): void {
         this._fuseTranslationLoaderService.loadTranslations(portugues);
         this.entidadePaginada = new CurriculoPaginado();
-        this.form = this._formBuilder.group({
-            codigo: [null],
-            periodo: [null, [Validators.required]],
-            ano: [null, [Validators.required, Validators.pattern(/^\d{4}$/)]],
-            codigoCurso: [null, [Validators.required]],
-            codigoTurno: [null, [Validators.required]]
-        });
+        this._construirForm();
+        this.dataSource.data.push(
+            {
+                disciplina: { descricao: 'teste' },
+                cargaHorariaSemanalTeorica: 74,
+                horaAulaTotal: 38,
+                horaTotal: 44,
+                credito: 100,
+                cargaHorariaSemanalPratica: 80
+            } as ICurriculoDisciplina);
 
-        this.servicoDataBarBind = new CurriculoDataBarService(this.form);
+        this.servicoDataBarBind = new CurriculoDataBarService(this.form, this._servico, this.dataSource);
 
         this._carregarPeriodos();
 
@@ -97,16 +103,6 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         if (this._platform.ANDROID || this._platform.IOS) {
             this.isMobile = true;
         }
-
-        this.dataSource.data.push(
-            {
-                disciplina: { descricao: 'teste' },
-                cargaHorariaSemanalTeorica: 74,
-                horaAulaTotal: 38,
-                horaTotal: 44,
-                credito: 100,
-                cargaHorariaSemanalPratica: 80
-            } as ICurriculoDisciplina);
 
     }
 
@@ -126,6 +122,10 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         });
     }
 
+    statusChanged(status: string): void {
+        this.statusNavBar = status
+    }
+
     private constroiPreRequisitos(dados: ICurriculoDisciplina): void {
         dados.preRequisito = '';
         dados.disciplinasPreRequisito.forEach((disciplina, i) => {
@@ -133,7 +133,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
             if (i == 0) {
                 separador = '';
             }
-            dados.preRequisito += separador + disciplina.descricao;
+            dados.preRequisito += separador + disciplina.disciplina.descricao;
         });
     }
 
@@ -160,8 +160,31 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         ]
     }
 
-    statusChanged(status: string): void {
-        this.statusNavBar = status
+    private _construirForm(): void {
+        this.form = this._formBuilder.group({
+            codigo: [null],
+            periodo: [null, [Validators.required]],
+            ano: [null, [Validators.required, Validators.pattern(/^\d{4}$/)]],
+            codigoCurso: [null, [Validators.required]],
+            codigoTurno: [null, [Validators.required]],
+            disciplinas: [null]
+        });
     }
+
+    // private _construirFormGroupDisciplinas(): FormGroup {
+    //     return this._formBuilder.group({
+    //         codigo: [null],
+    //         disciplina: [null],
+    //         codigoCurriculo: [null],
+    //         cargaHorariaSemanalTeorica: [null],
+    //         cargaHorariaSemanalPratica: [null],
+    //         cargaHorariaSemanalTotal: [null],
+    //         horaAulaTotal: [null],
+    //         horaTotal: [null],
+    //         credito: [null],
+    //         disciplinasPreRequisito: [null]
+    //     });
+
+    // }
 
 }
