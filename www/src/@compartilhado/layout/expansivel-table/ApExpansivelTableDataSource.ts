@@ -8,6 +8,10 @@ export class ApExpansivelTableDataSource<T> extends MatTableDataSource<T>{
         this.connect();
     }
 
+    clear(): void{
+        this.data = [];
+        this.connect();
+    }
 
     connect(): BehaviorSubject<T[]> {
         const rows = [];

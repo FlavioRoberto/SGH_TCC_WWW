@@ -18,6 +18,7 @@ import { DialogService } from '../dialogs/confirma-dialog/service/dialog.service
 import { IDataBarBindService } from './contrato/IDataBarService';
 import { EStatus } from './enum/estatus';
 import { ErrorDialogService } from '../dialogs/error-dialog/service/error-dialog.service';
+import { IDataBarLifeCycle } from './contrato/IDataBarLifeCycle';
 
 @Component({
     selector: 'data-bar',
@@ -25,7 +26,7 @@ import { ErrorDialogService } from '../dialogs/error-dialog/service/error-dialog
     styleUrls: ['./view/data-bar.component.scss']
 })
 export class DataBarComponent<T> implements OnInit, OnDestroy {
-    @Input() servicoBind: IDataBarBindService<T>;
+    @Input() servicoBind: IDataBarBindService<T> | IDataBarLifeCycle<T>;
     @Input() form: FormGroup;
     @Input() entidadePaginada: IDataEntidadePaginada<any>;
     @Input() disabled = false;
@@ -136,6 +137,10 @@ export class DataBarComponent<T> implements OnInit, OnDestroy {
     }
 
     novaPesquisa(): void {
+
+        if ((this.servicoBind as IDataBarLifeCycle<T>).onClickNovaPesquisa){
+            (this.servicoBind as IDataBarLifeCycle<T>).onClickNovaPesquisa();
+        }
         this.form.enable();
         this.form.reset();
         this.entidadePaginada.entidade = this.form.value;
