@@ -50,7 +50,7 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
             horaTotal: [null, [Validators.required]],
             horaAulaTotal: [null, [Validators.required]],
             credito: [null, [Validators.required]],
-            disciplinasPreRequisito: [null]
+            preRequisitos: [null]
         });
 
         this._servicoDisciplina.listarTodos()
@@ -73,6 +73,7 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
     salvar(): void {
         const dados = this.adicionarDisciplinaForm.getRawValue() as ICurriculoDisciplina;
         dados.disciplina = this.disciplinaSelecionada;
+        dados.codigoDisciplina = this.disciplinaSelecionada.codigo;
         this.eventClickSalvar(dados);
         this.adicionarDisciplinaForm.reset();
     }
@@ -92,7 +93,7 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
         this.disciplinaSelecionada = null;
     }
 
-    filtrarDisciplinasPreRequisito(filtro: string): void{
+    filtrarDisciplinasPreRequisito(filtro: string): void {
         this.filtroDisciplinaPreRequisito = filtro;
     }
 

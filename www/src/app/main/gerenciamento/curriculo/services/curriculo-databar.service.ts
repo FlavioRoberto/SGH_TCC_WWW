@@ -30,9 +30,11 @@ export class CurriculoDataBarService implements IDataBarBindService<ICurriculo>{
     }
 
     criar(): Observable<ICurriculo> {
+        console.log('dados disciplina', this._dataSource.data)
         const disciplinas = this._dataSource.data;
         const entidadeEnvio = this.getEntidade();
         entidadeEnvio.disciplinas = disciplinas;
+
         return this._servico.criar(entidadeEnvio);
     }
 

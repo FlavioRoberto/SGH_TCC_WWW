@@ -46,7 +46,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     displayedExpansivelColumns = [
         { titulo: 'Carga horária semanal teórica', def: 'cargaHorariaSemanalTeorica' },
         { titulo: 'Carga horária semanal prática', def: 'cargaHorariaSemanalPratica' },
-        { titulo: 'Pré-requisito', def: 'preRequisito' },
+        { titulo: 'Pré-requisito', def: 'preRequisitoDescricao' },
     ];
 
     acoesTabela = [{
@@ -127,13 +127,13 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     }
 
     private constroiPreRequisitos(dados: ICurriculoDisciplina): void {
-        dados.preRequisito = '';
-        dados.disciplinasPreRequisito.forEach((disciplina, i) => {
+        dados.preRequisitoDescricao = '';
+        dados.preRequisitos.forEach((disciplinaPreRequsito, i) => {
             let separador = '-';
             if (i == 0) {
                 separador = '';
             }
-            dados.preRequisito += separador + disciplina.disciplina.descricao;
+            dados.preRequisitoDescricao += separador + disciplinaPreRequsito.descricao;
         });
     }
 
