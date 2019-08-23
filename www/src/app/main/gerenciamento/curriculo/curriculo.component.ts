@@ -82,16 +82,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         this._fuseTranslationLoaderService.loadTranslations(portugues);
         this.entidadePaginada = new CurriculoPaginado();
         this._construirForm();
-        this.dataSource.data.push(
-            {
-                disciplina: { descricao: 'teste' },
-                cargaHorariaSemanalTeorica: 74,
-                horaAulaTotal: 38,
-                horaTotal: 44,
-                credito: 100,
-                cargaHorariaSemanalPratica: 80
-            } as ICurriculoDisciplina);
-
+    
         this.servicoDataBarBind = new CurriculoDataBarService(this.form, this._servico, this.dataSource);
 
         this._carregarPeriodos();
@@ -123,18 +114,20 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     }
 
     statusChanged(status: string): void {
-        this.statusNavBar = status
+        this.statusNavBar = status;
     }
 
     private constroiPreRequisitos(dados: ICurriculoDisciplina): void {
         dados.preRequisitoDescricao = '';
-        dados.preRequisitos.forEach((disciplinaPreRequsito, i) => {
-            let separador = '-';
-            if (i == 0) {
-                separador = '';
-            }
-            dados.preRequisitoDescricao += separador + disciplinaPreRequsito.descricao;
-        });
+        if (dados.preRequisitos && dados.preRequisitos.length > 0) {
+            dados.preRequisitos.forEach((disciplinaPreRequsito, i) => {
+                let separador = '-';
+                if (i == 0) {
+                    separador = '';
+                }
+                dados.preRequisitoDescricao += separador + disciplinaPreRequsito.descricao;
+            });
+        }
     }
 
     private exibirSnackBar(mensagem: string): void {

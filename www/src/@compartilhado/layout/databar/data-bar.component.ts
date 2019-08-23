@@ -138,8 +138,8 @@ export class DataBarComponent<T> implements OnInit, OnDestroy {
 
     novaPesquisa(): void {
 
-        if ((this.servicoBind as IDataBarLifeCycle<T>).onClickNovaPesquisa){
-            (this.servicoBind as IDataBarLifeCycle<T>).onClickNovaPesquisa();
+        if ((this.servicoBind as IDataBarLifeCycle<T>).onClickAcaoDatabar) {
+            (this.servicoBind as IDataBarLifeCycle<T>).onClickAcaoDatabar(EStatus.novaPesquisa);
         }
         this.form.enable();
         this.form.reset();
@@ -150,6 +150,10 @@ export class DataBarComponent<T> implements OnInit, OnDestroy {
     }
 
     pesquisar(): void {
+        if ((this.servicoBind as IDataBarLifeCycle<T>).onClickAcaoDatabar) {
+            (this.servicoBind as IDataBarLifeCycle<T>).onClickAcaoDatabar(EStatus.pesquisando);
+        }
+
         this.entidadePaginada.entidade = this._getEntidade();
         this._paginar();
         this.drawer.close();
@@ -157,6 +161,10 @@ export class DataBarComponent<T> implements OnInit, OnDestroy {
     }
 
     inserir(): void {
+        if ((this.servicoBind as IDataBarLifeCycle<T>).onClickAcaoDatabar) {
+            (this.servicoBind as IDataBarLifeCycle<T>).onClickAcaoDatabar(EStatus.inserindo);
+        }
+
         this.form.enable();
         this.form.reset();
         this.drawer.close();
@@ -164,12 +172,20 @@ export class DataBarComponent<T> implements OnInit, OnDestroy {
     }
 
     editar(): void {
+        if ((this.servicoBind as IDataBarLifeCycle<T>).onClickAcaoDatabar) {
+            (this.servicoBind as IDataBarLifeCycle<T>).onClickAcaoDatabar(EStatus.editando);
+        }
+
         this.setStatus(EStatus.editando);
         this.form.enable();
         this.drawer.close();
     }
 
     remover(): void {
+        if ((this.servicoBind as IDataBarLifeCycle<T>).onClickAcaoDatabar) {
+            (this.servicoBind as IDataBarLifeCycle<T>).onClickAcaoDatabar(EStatus.removendo);
+        }
+
         this._exibirDialogConfirmacao();
         this.drawer.close();
         this.setStatus(EStatus.removendo);

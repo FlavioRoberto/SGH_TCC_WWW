@@ -8,6 +8,11 @@ export class ApExpansivelTableDataSource<T> extends MatTableDataSource<T>{
         this.connect();
     }
 
+    addRange(itens: T[]): void{
+        this.data = [].concat(itens);
+        this.connect();
+    }
+
     clear(): void{
         this.data = [];
         this.connect();

@@ -1,5 +1,5 @@
-import { IDataBarBindService } from './IDataBarService';
+import { EStatus } from '../enum/estatus';
 
-export interface IDataBarLifeCycle<T> extends IDataBarBindService<T> {
-    onClickNovaPesquisa: () => void;
+export abstract class IDataBarLifeCycle<T> {
+    onClickAcaoDatabar: (status: EStatus) => void;
 }
