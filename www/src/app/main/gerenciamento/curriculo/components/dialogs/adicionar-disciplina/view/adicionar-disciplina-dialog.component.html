@@ -265,14 +265,23 @@
                             "
                         />
                         <mat-divider></mat-divider>
-                        <mat-option
+                        <div
                             *ngFor="
                                 let disciplinaPreRequisito of disciplinas
                                     | filter: filtroDisciplinaPreRequisito
                             "
-                            [value]="disciplinaPreRequisito"
-                            >{{ disciplinaPreRequisito.descricao }}</mat-option
                         >
+                            <mat-option
+                                *ngIf="
+                                    disciplinaSelecionada?.codigo !=
+                                    disciplinaPreRequisito.codigo
+                                "
+                                [value]="disciplinaPreRequisito"
+                                >{{
+                                    disciplinaPreRequisito.descricao
+                                }}</mat-option
+                            >
+                        </div>
                     </mat-select>
                 </mat-form-field>
             </div>

@@ -52,12 +52,12 @@ export class DataBarComponent<T> implements OnInit, OnDestroy {
         this.setProgresso(false);
         this._submeterFormularioOnEnter();
         this.form.disable();
-
     }
 
     ngOnDestroy(): void {
-        if (this.servicoBind.onClickEnter)
-            this.servicoBind.onClickEnter.unsubscribe
+        if (this.servicoBind.onClickEnter) {
+            this.servicoBind.onClickEnter.unsubscribe;
+        }
     }
 
     @HostListener('document:click', ['$event'])

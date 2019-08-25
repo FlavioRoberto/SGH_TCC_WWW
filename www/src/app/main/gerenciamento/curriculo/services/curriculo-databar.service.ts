@@ -40,17 +40,15 @@ export class CurriculoDataBarService extends IDataBarLifeCycle<ICurriculo> imple
     }
 
     criar(): Observable<ICurriculo> {
-        console.log('dados disciplina', this._dataSource.data)
-        const disciplinas = this._dataSource.data;
-        const entidadeEnvio = this.getEntidade();
-        entidadeEnvio.disciplinas = disciplinas;
-
+        const entidadeEnvio = this._prepararEntidadeParaEnvio();
         return this._servico.criar(entidadeEnvio)
             .pipe(tap(dados => this._constroiPreRequisitoDescricao(dados.disciplinas)));
     }
 
     editar(): Observable<ICurriculo> {
-        throw new Error('Method not implemented.');
+        const entidadeEnvio = this._prepararEntidadeParaEnvio();
+        console.log(entidadeEnvio);
+        return this._servico.editar(entidadeEnvio);
     }
 
     remover(): Observable<ICurriculo> {
@@ -61,16 +59,30 @@ export class CurriculoDataBarService extends IDataBarLifeCycle<ICurriculo> imple
     listarPaginacao(entidadePaginada: CurriculoPaginado): Observable<CurriculoPaginado> {
         return this._servico.listarPaginacao(entidadePaginada)
             .pipe(tap(dados => {
+                console.log(dados);
                 this._constroiPreRequisitoDescricao(dados.entidade.disciplinas);
                 this._dataSource.addRange(dados.entidade.disciplinas);
             }));
     }
 
-
     private _constroiPreRequisitoDescricao(dados: ICurriculoDisciplina[]): void {
         dados.forEach(dis => {
-            dis.preRequisitoDescricao = dis.disciplina.descricao;
+            dis.preRequisitoDescricao = '';
+            dis.preRequisitos.forEach((pr, i) => {
+                if (i == 0 || i >= dis.preRequisitos.length) {
+                    dis.preRequisitoDescricao += pr.descricao;
+                } else {
+                    dis.preRequisitoDescricao += ' - ' + pr.descricao;
+                }
+            });
         });
+    }
+
+    private _prepararEntidadeParaEnvio(): ICurriculo {
+        const disciplinas = this._dataSource.data;
+        const entidadeEnvio = this.getEntidade();
+        entidadeEnvio.disciplinas = disciplinas;
+        return entidadeEnvio;
     }
 
 }
