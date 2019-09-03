@@ -9,3 +9,16 @@
         font-weight: 800 !important;
     }
 }
+
+
+::ng-deep .erro {
+    @media (min-width: 960px) {
+        max-width: 384px !important;
+    }
+    background: #af4c4c !important;
+    color: white !important;
+    button {
+        color: #5e231b !important;
+        font-weight: 800 !important;
+    }
+}

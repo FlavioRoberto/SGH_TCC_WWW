@@ -16,9 +16,7 @@ import { AdicionarDisciplinaDialogService } from './components/dialogs/adicionar
 import { Platform } from '@angular/cdk/platform';
 import { ColumnDef } from '@compartilhado/layout/expansivel-table/expansivel-table.component';
 import { ApExpansivelTableDataSource } from '@compartilhado/layout/expansivel-table/ApExpansivelTableDataSource';
-import { IDisciplina } from '../disciplina/cadastro/model/IDisciplina';
 import { CurriculoService } from './services/curriculo.service';
-import { ICurriculo } from './model/curriculo.model';
 
 @Component({
     selector: 'curriculo',
@@ -52,14 +50,14 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     acoesTabela = [{
         descricao: 'Editar',
         icone: 'edit',
-        executar: (item: any): void => {
-            alert('Inserindo: ' + JSON.stringify(item));
+        executar: (item: any, index): void => {
+            this._editarDisciplina(item, index);
         }
     }, {
         descricao: 'Remover',
         icone: 'delete',
-        executar: (item: any): void => {
-            this._removerDisicplina(item);
+        executar: (item: any, index): void => {
+            this._removerDisicplina(item, index);
         }
     }];
 
@@ -82,7 +80,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         this._fuseTranslationLoaderService.loadTranslations(portugues);
         this.entidadePaginada = new CurriculoPaginado();
         this._construirForm();
-    
+
         this.servicoDataBarBind = new CurriculoDataBarService(this.form, this._servico, this.dataSource);
 
         this._carregarPeriodos();
@@ -97,20 +95,48 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
 
     }
 
-    private _removerDisicplina(itemRemover): void {
-        this.dataSource.data = this.dataSource
-            .data
-            .filter(item => item.disciplina.descricao != itemRemover.disciplina.descricao);
+    private _removerDisicplina(itemRemover, index): void {
+        this.dataSource.removeByIndex(index);
     }
 
-    abrirDialogAdicionarDisciplina(e: Event): void {
-        e.preventDefault();
+    private _editarDisciplina(itemEditar: ICurriculoDisciplina, index): void {
+        const disciplina = {
+            disciplina: itemEditar.disciplina.codigo,
+            cargaHorariaSemanalTeorica: itemEditar.cargaHorariaSemanalTeorica,
+            cargaHorariaSemanalPratica: itemEditar.cargaHorariaSemanalPratica,
+            horaTotal: itemEditar.horaTotal,
+            horaAulaTotal: itemEditar.horaAulaTotal,
+            credito: itemEditar.credito,
+            preRequisitos: itemEditar.preRequisitos.map(i => i.codigo)
+        };
+
+        this.abrirDialogAdicionarDisciplina(disciplina, index);
+    }
+
+    abrirDialogAdicionarDisciplina(disciplina = null, index = null): void {
         this._dialog.openDialog('Adicionar disciplina', (dados) => {
-            this.constroiPreRequisitos(dados);
-            this.dataSource.add(dados);
-            console.log(dados);
-            this.exibirSnackBar('Disciplina adicionada.');
-        });
+
+            console.log(disciplina, index);
+
+            const disciplinaAdicionada = this.dataSource.data.filter(item => {
+                return item.codigoDisciplina == dados.codigoDisciplina;
+            });
+
+            if (disciplinaAdicionada.length > 0) {
+                this.exibirSnackBar('Disciplina já adicionada.', true);
+            } else {
+                if (disciplina && index >= 0) {
+                    this._removerDisicplina(dados, index);
+                    this.constroiPreRequisitos(dados);
+                    this.dataSource.add(dados);
+                    this.exibirSnackBar('Disciplina atualizada.', false, true);
+                } else {
+                    this.constroiPreRequisitos(dados);
+                    this.dataSource.add(dados);
+                    this.exibirSnackBar('Disciplina adicionada.', false, true);
+                }
+            }
+        }, disciplina);
     }
 
     statusChanged(status: string): void {
@@ -121,7 +147,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         dados.preRequisitoDescricao = '';
         if (dados.preRequisitos && dados.preRequisitos.length > 0) {
             dados.preRequisitos.forEach((disciplinaPreRequsito, i) => {
-                let separador = '-';
+                let separador = ' - ';
                 if (i == 0) {
                     separador = '';
                 }
@@ -130,9 +156,18 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         }
     }
 
-    private exibirSnackBar(mensagem: string): void {
+    private exibirSnackBar(mensagem: string, erro: boolean = false, info: boolean = false): void {
+        let classe = 'sucesso';
+        if (erro) {
+            classe = 'erro';
+        }
+
+        if (info) {
+            classe = 'info';
+        }
+
         this._snackBar.open(mensagem, 'OK', {
-            panelClass: 'sucesso',
+            panelClass: classe,
             duration: 3500,
             horizontalPosition: 'center'
         });
@@ -150,7 +185,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
             { codigo: 8, descricao: 'Oitavo' },
             { codigo: 9, descricao: 'Nono' },
             { codigo: 10, descricao: 'Décimo' }
-        ]
+        ];
     }
 
     private _construirForm(): void {
@@ -163,21 +198,5 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
             disciplinas: [null]
         });
     }
-
-    // private _construirFormGroupDisciplinas(): FormGroup {
-    //     return this._formBuilder.group({
-    //         codigo: [null],
-    //         disciplina: [null],
-    //         codigoCurriculo: [null],
-    //         cargaHorariaSemanalTeorica: [null],
-    //         cargaHorariaSemanalPratica: [null],
-    //         cargaHorariaSemanalTotal: [null],
-    //         horaAulaTotal: [null],
-    //         horaTotal: [null],
-    //         credito: [null],
-    //         disciplinasPreRequisito: [null]
-    //     });
-
-    // }
 
 }

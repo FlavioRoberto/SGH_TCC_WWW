@@ -8,8 +8,13 @@ export class ApExpansivelTableDataSource<T> extends MatTableDataSource<T>{
         this.connect();
     }
 
-    addRange(itens: T[]): void{
+    addRange(itens: T[]): void {
         this.data = this.data.concat(itens);
+        this.connect();
+    }
+
+    removeByIndex(index: number): void {
+        this.data.splice(index, 1);
         this.connect();
     }
 
@@ -18,7 +23,7 @@ export class ApExpansivelTableDataSource<T> extends MatTableDataSource<T>{
         this.connect();
     }
 
-    clear(): void{
+    clear(): void {
         this.data = [];
         this.connect();
     }

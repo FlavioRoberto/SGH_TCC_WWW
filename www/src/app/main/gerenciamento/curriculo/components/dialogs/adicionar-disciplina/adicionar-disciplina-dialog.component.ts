@@ -23,10 +23,10 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
     acaoAutoCompleteDisciplina: IFormAutocompleteAcao;
     pesquisandoDisciplina: boolean;
     disciplinas: IDisciplina[];
-    disciplinaSelecionada: IDisciplina = null;
     filtroDisciplinaPreRequisito = '';
     private eventClickSalvar;
     private limparFormulario;
+    private disciplinaEditar;
 
     constructor(
         private dialogRef: MatDialogRef<AdicionarDisciplinaDialogComponent>,
@@ -39,7 +39,7 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
         this.titulo = data.titulo;
         this._fuseTranslationLoaderService.loadTranslations(portugues);
         this.eventClickSalvar = data.onClickSalvar;
-
+        this.disciplinaEditar = data.disciplina;
     }
 
     ngOnInit(): void {
@@ -54,16 +54,13 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
         });
 
         this._servicoDisciplina.listarTodos()
-            .subscribe(data => this.disciplinas = data);
-
-        this.acaoAutoCompleteDisciplina = {
-            pesquisar: (filter: string) => {
-                return this._servicoDisciplina.listarPorDescricao(filter);
-            },
-            matOptionValueBind: (item: IDisciplina) => {
-                return item.descricao;
-            }
-        } as IFormAutocompleteAcao;
+            .subscribe(data => {
+                this.disciplinas = data;
+                console.log(this.disciplinaEditar);
+                if (this.disciplinaEditar) {
+                    this.adicionarDisciplinaForm.setValue(this.disciplinaEditar);
+                }
+            });
     }
 
     fecharDialog(): void {
@@ -72,25 +69,16 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
 
     salvar(): void {
         const dados = this.adicionarDisciplinaForm.getRawValue() as ICurriculoDisciplina;
-        dados.disciplina = this.disciplinaSelecionada;
-        dados.codigoDisciplina = this.disciplinaSelecionada.codigo;
+        dados.disciplina = this.disciplinas.filter(i => i.codigo == this.adicionarDisciplinaForm.get('disciplina').value)[0];
+        dados.preRequisitos = this.disciplinas.filter(dis => {
+            const preRequisitos = this.adicionarDisciplinaForm.get('preRequisitos').value;
+            if (preRequisitos) {
+                return preRequisitos.filter(pre => pre == dis.codigo)[0];
+            }
+        });
+        dados.codigoDisciplina = dados.disciplina.codigo;
         this.eventClickSalvar(dados);
         this.adicionarDisciplinaForm.reset();
-    }
-
-    onItemDisciplinaSelected(disciplina: IDisciplina): void {
-        this.disciplinaSelecionada = disciplina;
-        this.adicionarDisciplinaForm.get('disciplina').disable();
-    }
-
-    onBlurDisciplina(event): void {
-        this.adicionarDisciplinaForm.get('disciplina').reset();
-    }
-
-    onClickNovaPesquisaDisciplina(): void {
-        this.adicionarDisciplinaForm.get('disciplina').reset();
-        this.adicionarDisciplinaForm.get('disciplina').enable();
-        this.disciplinaSelecionada = null;
     }
 
     filtrarDisciplinasPreRequisito(filtro: string): void {

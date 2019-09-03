@@ -26,31 +26,36 @@
         >
             <div fxLayout="row">
                 <!-- DISCIPLINA -->
-                <ap-form-autocomplete
-                    fxFlex
-                    class="mr-4"
-                    [controlName]="'disciplina'"
-                    [required]="true"
-                    [condicaoErro]="
-                        adicionarDisciplinaForm
-                            .get('disciplina')
-                            .hasError('required')
-                    "
-                    [mensagemErro]="'Campo obrigatório'"
-                    [form]="adicionarDisciplinaForm"
-                    [acao]="acaoAutoCompleteDisciplina"
-                    mensagemDeInformacaoDePesquisa="Pesquise por uma disciplina"
-                    mensagemMatHint="Digite pelo menos 3 caracteres"
-                    mensagemEntidadeCarregando="Pesquisando a disciplina..."
-                    label="Disciplina"
-                    [novaPesquisaHabilitada]="disciplinaSelecionada"
-                    (novaPesquisa)="onClickNovaPesquisaDisciplina($event)"
-                    (itemSelecionado)="onItemDisciplinaSelected($event)"
-                    (onBlur)="onBlurDisciplina($event)"
-                >
-                </ap-form-autocomplete>
-                <!-- DISCIPLINA -->
 
+                <mat-form-field appearance="outline" fxFlex class="mr-4">
+                    <mat-label>Disciplina</mat-label>
+                    <mat-select fxLayout="column" formControlName="disciplina">
+                        <input
+                            class="px-8 my-8"
+                            placeholder="Pesquisar..."
+                            matInput
+                            name="filtro"
+                            (keyup)="
+                                filtrarDisciplinasPreRequisito(
+                                    $event.target.value
+                                )
+                            "
+                        />
+                        <mat-divider></mat-divider>
+                        <div
+                            *ngFor="
+                                let itemDisciplina of disciplinas
+                                    | filter: filtroDisciplinaPreRequisito
+                            "
+                        >
+                            <mat-option [value]="itemDisciplina.codigo">{{
+                                itemDisciplina.descricao
+                            }}</mat-option>
+                        </div>
+                    </mat-select>
+                </mat-form-field>
+
+        
                 <!-- CREDITO -->
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Créditos</mat-label>
@@ -273,10 +278,10 @@
                         >
                             <mat-option
                                 *ngIf="
-                                    disciplinaSelecionada?.codigo !=
+                                    adicionarDisciplinaForm.get('disciplina').value !=
                                     disciplinaPreRequisito.codigo
                                 "
-                                [value]="disciplinaPreRequisito"
+                                [value]="disciplinaPreRequisito.codigo"
                                 >{{
                                     disciplinaPreRequisito.descricao
                                 }}</mat-option

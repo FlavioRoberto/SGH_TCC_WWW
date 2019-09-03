@@ -8,11 +8,9 @@ import { ApExpansivelTableDataSource } from '@compartilhado/layout/expansivel-ta
 import { ICurriculoDisciplina } from '../model/curriculo-disciplina.model';
 import { IDataBarLifeCycle } from '@compartilhado/layout/databar/contrato/IDataBarLifeCycle';
 import { retry, tap } from 'rxjs/operators';
-import { IDisciplina } from '../../disciplina/cadastro/model/IDisciplina';
-import { IDataBarBindService } from '@compartilhado/layout/databar/contrato/IDataBarService';
 import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 
-export class CurriculoDataBarService extends IDataBarLifeCycle<ICurriculo> implements IDataBarBindService<ICurriculo> {
+export class CurriculoDataBarService implements IDataBarLifeCycle<ICurriculo> {
 
     onClickEnter: EventEmitter<ICurriculo>;
 
@@ -21,14 +19,13 @@ export class CurriculoDataBarService extends IDataBarLifeCycle<ICurriculo> imple
         private _servico: CurriculoService,
         private _dataSource: ApExpansivelTableDataSource<ICurriculoDisciplina>) {
 
-        super();
         this.onClickEnter = new EventEmitter();
-        this.onClickAcaoDatabar = (status: EStatus) => {
-            if (EStatus.editando !== status) {
-                this._dataSource.clear();
-            }
-        };
+    }
 
+    onClickAcaoDatabar(status: EStatus): void {
+        if (EStatus.editando !== status) {
+            this._dataSource.clear();
+        }
     }
 
     enviarFormComEnter(): void {
@@ -47,7 +44,6 @@ export class CurriculoDataBarService extends IDataBarLifeCycle<ICurriculo> imple
 
     editar(): Observable<ICurriculo> {
         const entidadeEnvio = this._prepararEntidadeParaEnvio();
-        console.log(entidadeEnvio);
         return this._servico.editar(entidadeEnvio);
     }
 

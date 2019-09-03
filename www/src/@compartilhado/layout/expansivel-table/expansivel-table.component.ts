@@ -33,10 +33,11 @@ export class ExpansivelTableComponent implements OnInit {
         }
     }
 
-    onClick(event, element, acao): void {
+    onClick(event, element, acao, index): void {
         event.stopPropagation();
         event.preventDefault();
-        acao.executar(element);
+        const i = index / 2;
+        acao.executar(element, i);
     }
 }
 

@@ -31,14 +31,17 @@
             <mat-header-cell *matHeaderCellDef fxLayoutAlign="center center">
                 Ações
             </mat-header-cell>
-            <mat-cell *matCellDef="let element" fxLayoutAlign="center center">
+            <mat-cell
+                *matCellDef="let element; let i = index"
+                fxLayoutAlign="center center"
+            >
                 <div *ngFor="let acao of acoesTabela">
                     <button
                         [disabled]="desabilitarBotoes"
                         type="button"
                         mat-button
                         [matTooltip]="acao.descricao"
-                        (click)="onClick($event, element, acao)"
+                        (click)="onClick($event, element, acao, i)"
                         color="primary"
                     >
                         <mat-icon>{{ acao.icone }}</mat-icon>
