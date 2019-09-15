@@ -17,6 +17,7 @@ import { Platform } from '@angular/cdk/platform';
 import { ColumnDef } from '@compartilhado/layout/expansivel-table/expansivel-table.component';
 import { ApExpansivelTableDataSource } from '@compartilhado/layout/expansivel-table/ApExpansivelTableDataSource';
 import { CurriculoService } from './services/curriculo.service';
+import { EPeriodos } from 'app/shared/enums/eperiodos.enum';
 
 @Component({
     selector: 'curriculo',
@@ -83,7 +84,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
 
         this.servicoDataBarBind = new CurriculoDataBarService(this.form, this._servico, this.dataSource);
 
-        this._carregarPeriodos();
+        this.periodos = EPeriodos;
 
         this.cursos = this._route.snapshot.data['cursos'];
 
@@ -122,19 +123,21 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
                 return item.codigoDisciplina == dados.codigoDisciplina;
             });
 
-            if (disciplinaAdicionada.length > 0) {
+            if (disciplinaAdicionada.length > 0 && !index) {
                 this.exibirSnackBar('Disciplina já adicionada.', true);
-            } else {
-                if (disciplina && index >= 0) {
-                    this._removerDisicplina(dados, index);
-                    this.constroiPreRequisitos(dados);
-                    this.dataSource.add(dados);
-                    this.exibirSnackBar('Disciplina atualizada.', false, true);
-                } else {
-                    this.constroiPreRequisitos(dados);
-                    this.dataSource.add(dados);
-                    this.exibirSnackBar('Disciplina adicionada.', false, true);
-                }
+                return;
+            }
+            
+            if (disciplina && index >= 0) {
+                this._removerDisicplina(dados, index);
+                this.constroiPreRequisitos(dados);
+                this.dataSource.add(dados);
+                this.exibirSnackBar('Disciplina atualizada.', false, true);
+            }
+            else {
+                this.constroiPreRequisitos(dados);
+                this.dataSource.add(dados);
+                this.exibirSnackBar('Disciplina adicionada.', false, true);
             }
         }, disciplina);
     }
@@ -171,21 +174,6 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
             duration: 3500,
             horizontalPosition: 'center'
         });
-    }
-
-    private _carregarPeriodos(): void {
-        this.periodos = [
-            { codigo: 1, descricao: 'Primeiro' },
-            { codigo: 2, descricao: 'Segundo' },
-            { codigo: 3, descricao: 'Terceiro' },
-            { codigo: 4, descricao: 'Quarto' },
-            { codigo: 5, descricao: 'Quinto' },
-            { codigo: 6, descricao: 'Sexto' },
-            { codigo: 7, descricao: 'Sétimo' },
-            { codigo: 8, descricao: 'Oitavo' },
-            { codigo: 9, descricao: 'Nono' },
-            { codigo: 10, descricao: 'Décimo' }
-        ];
     }
 
     private _construirForm(): void {
