@@ -4,68 +4,66 @@ export const navigation: FuseNavigation[] = [
     {
         id: 'applications',
         title: 'Aplicação',
-        translate: 'NAV.APPLICATIONS',
         type: 'group',
         icon: 'apps',
         children: [
             {
                 id: 'gerenciamento',
                 title: 'Gerenciamento',
-                translate: 'NAV.GERENCIAMENTO.TITULO',
                 type: 'collapsable',
                 icon: 'library_add',
                 children: [
                     {
                         id: 'curso',
-                        title: 'Curso',
-                        translate: 'NAV.GERENCIAMENTO.CURSO',
+                        title: 'Cursos',
                         type: 'item',
                         icon: 'school',
                         url: '/gerenciamento/curso'
                     },
                     {
-                        id: 'curriculo',
-                        title: 'Currículo',
-                        translate: 'NAV.GERENCIAMENTO.CURRICULO',
+                        id: 'turno',
+                        title: 'Turnos',
                         type: 'item',
-                        icon: 'list_alt',
-                        url: '/gerenciamento/curriculo'
+                        icon: 'access_time',
+                        url: '/gerenciamento/turno'
                     },
                     {
                         id: 'disciplina',
-                        title: 'Disciplina',
-                        translate: 'NAV.GERENCIAMENTO.DISCIPLINA.TITULO',
+                        title: 'Disciplinas',
                         icon: 'collections_bookmark',
                         type: 'collapsable',
                         children: [
                             {
                                 id: 'disciplina.cadastrar',
                                 title: 'Cadastro',
-                                translate: 'NAV.GERENCIAMENTO.DISCIPLINA.CADASTRO',
                                 type: 'item',
                                 url: '/gerenciamento/disciplina/cadastro',
                             },
                             {
                                 id: 'disciplina.tipo',
                                 title: 'Tipo',
-                                translate: 'NAV.GERENCIAMENTO.DISCIPLINA.TIPO',
                                 type: 'item',
                                 url: '/gerenciamento/disciplina/tipo',
                             }
                         ]
                     },
                     {
-                        id: 'turno',
-                        title: 'Turno',
-                        translate: 'NAV.GERENCIAMENTO.TURNO',
+                        id: 'curriculo',
+                        title: 'Currículos',
                         type: 'item',
-                        icon: 'access_time',
-                        url: '/gerenciamento/turno'
+                        icon: 'list_alt',
+                        url: '/gerenciamento/curriculo'
+                    },
+                    {
+                        id: 'professor',
+                        title: 'Professores',
+                        type: 'item',
+                        icon: 'person',
+                        url: '/gerenciamento/professores'
                     },
                     {
                         id: 'usuarios',
                         title: 'Usuarios',
-                        translate: 'NAV.GERENCIAMENTO.USUARIOS',
                         type: 'item',
                         icon: 'account_box',
                         url: '/gerenciamento/usuarios'

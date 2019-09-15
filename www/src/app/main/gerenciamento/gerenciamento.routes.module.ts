@@ -27,7 +27,12 @@ const routes: Routes = [
         path: 'usuarios',
         loadChildren: './usuarios/usuarios.module#UsuariosModule',
         canActivate: [AuthGuard]
-    }
+    },
+    {
+        path: 'professores',
+        loadChildren: './professores/professores.module#ProfessoresModule',
+        canActivate: [AuthGuard]
+    },
 ];
 
 

@@ -11,7 +11,6 @@ import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { navigation } from './shared/navigation/navigation';
-import { locale as navigationPortugues } from './shared/navigation/i18n/pt-br';
 
 
 
@@ -65,9 +64,9 @@ export class AppComponent implements OnInit, OnDestroy {
         this._translateService.setDefaultLang('pt-br');
 
         // Set the navigation translations
-        this._fuseTranslationLoaderService.loadTranslations(
-            navigationPortugues
-        );
+        // this._fuseTranslationLoaderService.loadTranslations(
+        //     navigationPortugues
+        // );
 
         // Use a language
         this._translateService.use('en');
