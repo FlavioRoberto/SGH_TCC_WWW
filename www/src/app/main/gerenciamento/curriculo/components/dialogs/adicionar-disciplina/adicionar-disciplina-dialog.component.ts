@@ -85,6 +85,10 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
         this.filtroDisciplinaPreRequisito = filtro;
     }
 
+    onChangeDisciplina(disciplina): void {
+        this.adicionarDisciplinaForm.get('preRequisitos').setValue(null);
+    }
+
 }
 
 

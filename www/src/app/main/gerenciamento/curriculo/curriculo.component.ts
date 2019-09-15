@@ -116,9 +116,6 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
 
     abrirDialogAdicionarDisciplina(disciplina = null, index = null): void {
         this._dialog.openDialog('Adicionar disciplina', (dados) => {
-
-            console.log(disciplina, index);
-
             const disciplinaAdicionada = this.dataSource.data.filter(item => {
                 return item.codigoDisciplina == dados.codigoDisciplina;
             });
@@ -127,7 +124,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
                 this.exibirSnackBar('Disciplina já adicionada.', true);
                 return;
             }
-            
+
             if (disciplina && index >= 0) {
                 this._removerDisicplina(dados, index);
                 this.constroiPreRequisitos(dados);

@@ -29,7 +29,11 @@
 
                 <mat-form-field appearance="outline" fxFlex class="mr-4">
                     <mat-label>Disciplina</mat-label>
-                    <mat-select fxLayout="column" formControlName="disciplina">
+                    <mat-select
+                        fxLayout="column"
+                        (selectionChange)="onChangeDisciplina($event.value)"
+                        formControlName="disciplina"
+                    >
                         <input
                             class="px-8 my-8"
                             placeholder="Pesquisar..."
@@ -55,7 +59,6 @@
                     </mat-select>
                 </mat-form-field>
 
-        
                 <!-- CREDITO -->
                 <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Créditos</mat-label>
@@ -278,8 +281,8 @@
                         >
                             <mat-option
                                 *ngIf="
-                                    adicionarDisciplinaForm.get('disciplina').value !=
-                                    disciplinaPreRequisito.codigo
+                                    adicionarDisciplinaForm.get('disciplina')
+                                        .value != disciplinaPreRequisito.codigo
                                 "
                                 [value]="disciplinaPreRequisito.codigo"
                                 >{{

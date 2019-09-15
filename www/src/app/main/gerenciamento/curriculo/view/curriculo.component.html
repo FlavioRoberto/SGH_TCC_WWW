@@ -135,7 +135,9 @@
                 </button>
             </div>
 
+            <!-- TABELA -->
             <ap-expansivel-table
+                *ngIf="dataSource.data.length > 0"
                 fxFlex
                 [displayedColumns]="displayedColumns"
                 [columnDefExpansivel]="displayedExpansivelColumns"
@@ -147,6 +149,11 @@
                 "
             >
             </ap-expansivel-table>
+
+            <span class="texto-informativo" *ngIf="dataSource.data.length <= 0">
+                <p>Clique no + para vincular uma disciplina ao currículo.</p>
+            </span>
+            <!-- TABELA -->
         </div>
         <!-- TABLE DISCIPLINAS -->
     </form>
