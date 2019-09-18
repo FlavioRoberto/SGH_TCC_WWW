@@ -42,7 +42,8 @@ export class routesApi {
             },
             perfil: this.construirRotaPadrao('perfil'),
             usuario: this.construirRotaUsuario(),
-            curriculo: this.construirRotaPadrao('curriculo')
+            curriculo: this.construirRotaPadrao('curriculo'),
+            professor: this.construirRotaPadrao('professor')
         };
 
     }

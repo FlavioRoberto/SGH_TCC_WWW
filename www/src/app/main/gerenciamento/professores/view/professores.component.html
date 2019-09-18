@@ -1,1 +1,98 @@
-hello professores
+<databar-form
+    class="inner-scroll"
+    fxLayout="column"
+    fxFlex
+    [servicoBind]="servicoDataBarBind"
+    [entidadePaginada]="entidadePaginada"
+    [form]="form"
+    (statusChanged)="statusChanged($event)"
+    [navegacao]="['Gerenciamento', 'Professores']"
+    fxFlex
+>
+    <!-- FORM -->
+    <form [formGroup]="form" fxLayout="column">
+        <!-- LINHA 1 -->
+        <div fxLayout="column" fxLayout.gt-sm="row">
+            <!-- NOME -->
+            <mat-form-field appearance="outline" fxFlex="100" class="pr-sm-8">
+                <mat-label>Nome</mat-label>
+                <input
+                    matInput
+                    type="text"
+                    #input
+                    maxlength="45"
+                    minlength="1"
+                    class="primary-color-input border-radius-4"
+                    name="nome"
+                    formControlName="nome"
+                />
+
+                <mat-hint align="end">
+                    {{ input.value?.length || 0 }}/45</mat-hint
+                >
+                <mat-error *ngIf="form.get('nome').hasError('required')">
+                    Campo obrigatório!
+                </mat-error>
+            </mat-form-field>
+            <!-- NOME -->
+        </div>
+        <!-- LINHA 1 -->
+
+        <!-- LINHA 2 -->
+        <div fxLayout="column" fxLayout.gt-sm="row">
+            <!-- EMAIL -->
+            <mat-form-field appearance="outline" fxFlex="100" class="pr-sm-8">
+                <mat-label>E-mail</mat-label>
+                <input
+                    matInput
+                    [required]="status != EStatus.novaPesquisa"
+                    type="email"
+                    #input
+                    maxlength="30"
+                    minlength="1"
+                    class="primary-color-input border-radius-4"
+                    name="email"
+                    formControlName="email"
+                />
+
+                <mat-hint align="end">
+                    {{ input.value?.length || 0 }}/30</mat-hint
+                >
+                <mat-error *ngIf="form.get('email').hasError('required')">
+                    Campo obrigatório!
+                </mat-error>
+                <mat-error *ngIf="form.get('email').hasError('email')">
+                    E-mail inválido!
+                </mat-error>
+            </mat-form-field>
+            <!-- EMAIL -->
+
+            <!-- TELEFONE -->
+            <mat-form-field appearance="outline" fxFlex.gt-sm="18" fxFlex="100">
+                <mat-label>Celular</mat-label>
+                <input
+                    matInput
+                    mask="(00) 000000000"
+                    type="text"
+                    class="primary-color-input border-radius-4"
+                    name="telefone"
+                    formControlName="telefone"
+                />
+                <mat-error *ngIf="form.get('telefone').hasError('pattern')">
+                    Telefone inválido!
+                </mat-error>
+                <mat-error *ngIf="form.get('telefone').hasError('required')">
+                    Campo obrigatório!
+                </mat-error>
+            </mat-form-field>
+            <!-- TELEFONE -->
+        </div>
+        <!-- LINHA 2 -->
+
+        <!-- LINHA 3 -->
+        <div fxLayout="column" fxLayout.gt-sm="row"></div>
+        <!-- LINHA 3 -->
+    </form>
+
+    <!-- FORM -->
+</databar-form>
