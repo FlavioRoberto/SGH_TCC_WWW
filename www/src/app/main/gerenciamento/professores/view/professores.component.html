@@ -13,13 +13,38 @@
     <form [formGroup]="form" fxLayout="column">
         <!-- LINHA 1 -->
         <div fxLayout="column" fxLayout.gt-sm="row">
+            <!-- MATRICULA -->
+            <mat-form-field
+                appearance="outline"
+                fxFlex.gt-sm="18"
+                fxFlex="100"
+                class="pr-sm-8"
+            >
+                <mat-label>Matrícula</mat-label>
+                <input
+                    matInput
+                    mask="00-00000"
+                    type="text"
+                    class="primary-color-input border-radius-4"
+                    name="matricula"
+                    formControlName="matricula"
+                />
+                <mat-error *ngIf="form.get('matricula').hasError('pattern')">
+                    Matrícula inválida!
+                </mat-error>
+                <mat-error *ngIf="form.get('matricula').hasError('required')">
+                    Campo obrigatório!
+                </mat-error>
+            </mat-form-field>
+            <!-- MATRICULA -->
+
             <!-- NOME -->
-            <mat-form-field appearance="outline" fxFlex="100" class="pr-sm-8">
+            <mat-form-field appearance="outline" fxFlex="100">
                 <mat-label>Nome</mat-label>
                 <input
                     matInput
                     type="text"
-                    #input
+                    #input_nome
                     maxlength="45"
                     minlength="1"
                     class="primary-color-input border-radius-4"
@@ -28,7 +53,7 @@
                 />
 
                 <mat-hint align="end">
-                    {{ input.value?.length || 0 }}/45</mat-hint
+                    {{ input_nome.value?.length || 0 }}/45</mat-hint
                 >
                 <mat-error *ngIf="form.get('nome').hasError('required')">
                     Campo obrigatório!

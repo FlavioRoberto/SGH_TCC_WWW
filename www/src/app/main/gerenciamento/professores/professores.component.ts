@@ -6,7 +6,7 @@ import { ProfessorPaginado } from './models/professor-paginado.model';
 import { ProfessorDataBarService } from './services/professor.databar.service';
 import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 import { ProfessorService } from './services/professor.service';
-import { celularRegex } from '@compartilhado/util/input-regex/input-regex';
+import { celularRegex, matriculaRegex } from '@compartilhado/util/input-regex/input-regex';
 
 @Component({
     templateUrl: './view/professores.component.html',
@@ -40,7 +40,7 @@ export class ProfessoresComponent implements IDataBarBindComponent<Professor> {
             nome: [null, [Validators.required, Validators.maxLength(45)]],
             telefone: [null, [Validators.maxLength(20), Validators.required, Validators.pattern(celularRegex)]],
             email: [null, [Validators.maxLength(45), Validators.required, Validators.email]],
-            matricula: [null, [Validators.maxLength(10)]]
+            matricula: [null, [Validators.required, Validators.maxLength(10), Validators.pattern(matriculaRegex)]]
         });
     }
 }
