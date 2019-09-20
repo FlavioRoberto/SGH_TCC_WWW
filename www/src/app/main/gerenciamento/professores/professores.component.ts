@@ -7,6 +7,8 @@ import { ProfessorDataBarService } from './services/professor.databar.service';
 import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 import { ProfessorService } from './services/professor.service';
 import { celularRegex, matriculaRegex } from '@compartilhado/util/input-regex/input-regex';
+import { ActivatedRoute } from '@angular/router';
+import { ICurso } from '../curso/model/curso.model';
 
 @Component({
     templateUrl: './view/professores.component.html',
@@ -19,15 +21,19 @@ export class ProfessoresComponent implements IDataBarBindComponent<Professor> {
     servicoDataBarBind: ProfessorDataBarService;
     status: EStatus;
     EStatus = EStatus;
+    cursos: ICurso[];
 
     constructor(private _formBuilder: FormBuilder,
-        private _servico: ProfessorService) {
+        private _servico: ProfessorService,
+        private _route: ActivatedRoute) {
         this._construirFormulario();
     }
 
     ngOnInit(): void {
         this.entidadePaginada = new ProfessorPaginado();
         this.servicoDataBarBind = new ProfessorDataBarService(this.form, this._servico);
+        this.cursos = this._route.snapshot.data['cursos'];
+
     }
 
     statusChanged(status: EStatus): void {
@@ -37,6 +43,7 @@ export class ProfessoresComponent implements IDataBarBindComponent<Professor> {
     private _construirFormulario(): void {
         this.form = this._formBuilder.group({
             codigo: [null],
+            cursos: [null],
             nome: [null, [Validators.required, Validators.maxLength(45)]],
             telefone: [null, [Validators.maxLength(20), Validators.required, Validators.pattern(celularRegex)]],
             email: [null, [Validators.maxLength(45), Validators.required, Validators.email]],

@@ -9,6 +9,7 @@ import { MaterialCoreModule } from '@compartilhado/material-core/material-core.m
 import { FuseSharedModule } from '@fuse/shared.module';
 import { DataBarFormModule } from 'app/shared/layout/components/databar-form/databar-form.module';
 import { NgxMaskModule } from 'ngx-mask';
+import { CursoResolver } from '../resolvers/curso.resolver';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { NgxMaskModule } from 'ngx-mask';
         NgxMaskModule.forChild()
     ],
     providers: [
-        ProfessorService, ProfessorDataBarService
+        ProfessorService, ProfessorDataBarService,
+        CursoResolver,
     ]
 })
 export class ProfessoresModule { }

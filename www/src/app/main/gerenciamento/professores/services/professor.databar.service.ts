@@ -5,6 +5,8 @@ import { FormGroup } from '@angular/forms';
 import { ProfessorService } from './professor.service';
 import { Observable } from 'rxjs';
 import { ProfessorPaginado } from '../models/professor-paginado.model';
+import { ProfessorCurso } from '../models/professor-curso.model';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class ProfessorDataBarService implements IDataBarBindService<Professor>{
@@ -13,11 +15,11 @@ export class ProfessorDataBarService implements IDataBarBindService<Professor>{
 
     constructor(public formgroup: FormGroup,
         private _servicoUsuario: ProfessorService
-        ) {
+    ) {
     }
 
     getEntidade(): Professor {
-        return this.formgroup.getRawValue();
+       return this.formgroup.getRawValue() as Professor;
     }
 
     criar(): Observable<Professor> {
@@ -30,7 +32,7 @@ export class ProfessorDataBarService implements IDataBarBindService<Professor>{
 
     remover(): Observable<Professor> {
         const codigoProfessor = this.getEntidade().codigo;
-        return this._servicoUsuario.remover(codigoProfessor);         
+        return this._servicoUsuario.remover(codigoProfessor);
     }
 
     listarPaginacao(entidadePaginada: ProfessorPaginado): Observable<ProfessorPaginado> {
