@@ -16,11 +16,11 @@ import { CursoResolver } from '../resolvers/curso.resolver';
     declarations: [ProfessoresComponent],
     imports: [
         CompartilhadoModule,
-        ProfessoresRoutingModule,
         MaterialCoreModule,
         FuseSharedModule,
         DataBarFormModule,
-        NgxMaskModule.forChild()
+        NgxMaskModule.forChild(),
+        ProfessoresRoutingModule
     ],
     providers: [
         ProfessorService, ProfessorDataBarService,

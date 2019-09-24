@@ -19,7 +19,7 @@ export class ProfessorDataBarService implements IDataBarBindService<Professor>{
     }
 
     getEntidade(): Professor {
-       return this.formgroup.getRawValue() as Professor;
+       return this.formgroup.value as Professor;
     }
 
     criar(): Observable<Professor> {

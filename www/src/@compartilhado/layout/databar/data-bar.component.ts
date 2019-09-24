@@ -7,7 +7,10 @@ import {
     HostListener,
     ElementRef,
     ViewChild,
-    OnDestroy
+    OnDestroy,
+    AfterViewInit,
+    AfterContentChecked,
+    AfterViewChecked
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
@@ -26,6 +29,8 @@ import { IDataBarLifeCycle } from './contrato/IDataBarLifeCycle';
     styleUrls: ['./view/data-bar.component.scss']
 })
 export class DataBarComponent<T> implements OnInit, OnDestroy {
+
+
     @Input() servicoBind: IDataBarBindService<T> | IDataBarLifeCycle<T>;
     @Input() form: FormGroup;
     @Input() entidadePaginada: IDataEntidadePaginada<any>;
@@ -44,15 +49,17 @@ export class DataBarComponent<T> implements OnInit, OnDestroy {
         private _dialogErro: ErrorDialogService,
         private snackBar: MatSnackBar,
         private _elementRef: ElementRef
-    ) { }
+    ) {
+    }
 
     ngOnInit(): void {
         this.validarPropertsObrigatorias();
         this.setStatus(EStatus.aguardando);
         this.setProgresso(false);
         this._submeterFormularioOnEnter();
-        this.form.disable();
+        setTimeout(() => this.form.disable(), 500);
     }
+
 
     ngOnDestroy(): void {
         if (this.servicoBind.onClickEnter) {

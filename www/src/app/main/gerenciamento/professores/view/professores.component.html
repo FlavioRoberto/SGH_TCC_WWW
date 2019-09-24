@@ -22,11 +22,11 @@
             >
                 <mat-label>Matrícula</mat-label>
                 <input
+                    [required]="condicaoDataBar"
                     matInput
                     mask="00-00000"
                     type="text"
                     class="primary-color-input border-radius-4"
-                    name="matricula"
                     formControlName="matricula"
                 />
                 <mat-error *ngIf="form.get('matricula').hasError('pattern')">
@@ -42,6 +42,7 @@
             <mat-form-field appearance="outline" fxFlex="100">
                 <mat-label>Nome</mat-label>
                 <input
+                    [required]="condicaoDataBar"
                     matInput
                     type="text"
                     #input_nome
@@ -60,6 +61,20 @@
                 </mat-error>
             </mat-form-field>
             <!-- NOME -->
+
+            <!-- ATIVO -->
+            <div
+                fxFlex.gt-sm="20"
+                fxFlex
+                fxLayoutAlign.gt-sm="center center"
+                class="pb-8"
+                fxLayoutAlign=" center start"
+            >
+                <mat-slide-toggle formControlName="ativo"
+                    >Ativo</mat-slide-toggle
+                >
+            </div>
+            <!-- ATIVO -->
         </div>
         <!-- LINHA 1 -->
 
@@ -69,8 +84,8 @@
             <mat-form-field appearance="outline" fxFlex="100" class="pr-sm-8">
                 <mat-label>E-mail</mat-label>
                 <input
+                    [required]="condicaoDataBar"
                     matInput
-                    [required]="status != EStatus.novaPesquisa"
                     type="email"
                     #input
                     maxlength="30"
@@ -96,6 +111,7 @@
             <mat-form-field fxFlex="100" appearance="outline" class="pr-sm-8">
                 <mat-label>Curso</mat-label>
                 <mat-select
+                    [required]="condicaoDataBar"
                     placeholder="Cursos"
                     multiple
                     formControlName="cursos"
@@ -107,9 +123,7 @@
                         {{ curso.descricao }}
                     </mat-option>
                 </mat-select>
-                <mat-error
-                    *ngIf="form.get('cursos').hasError('required')"
-                >
+                <mat-error *ngIf="form.get('cursos').hasError('required')">
                     Campo Obrigatório
                 </mat-error>
             </mat-form-field>
@@ -119,6 +133,7 @@
             <mat-form-field appearance="outline" fxFlex.gt-sm="18" fxFlex="100">
                 <mat-label>Celular</mat-label>
                 <input
+                    [required]="condicaoDataBar"
                     matInput
                     mask="(00) 000000000"
                     type="text"
@@ -136,10 +151,6 @@
             <!-- TELEFONE -->
         </div>
         <!-- LINHA 2 -->
-
-        <!-- LINHA 3 -->
-        <div fxLayout="column" fxLayout.gt-sm="row"></div>
-        <!-- LINHA 3 -->
     </form>
 
     <!-- FORM -->
