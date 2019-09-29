@@ -24,10 +24,10 @@
             fxLayout="column"
             novalidate
         >
-            <div fxLayout="row">
+            <div fxLayout="row" fxLayoutGap="4px">
                 <!-- DISCIPLINA -->
 
-                <mat-form-field appearance="outline" fxFlex class="mr-4">
+                <mat-form-field appearance="outline" fxFlex>
                     <mat-label>Disciplina</mat-label>
                     <mat-select
                         fxLayout="column"
@@ -35,7 +35,7 @@
                         formControlName="disciplina"
                     >
                         <input
-                            class="px-8 my-8"
+                            class="p-12"
                             placeholder="Pesquisar..."
                             matInput
                             name="filtro"
@@ -58,6 +58,29 @@
                         </div>
                     </mat-select>
                 </mat-form-field>
+                <!-- DISCIPLINA -->
+
+                <!-- PERIODO -->
+                <mat-form-field fxFlex appearance="outline">
+                    <mat-select placeholder="Período" formControlName="periodo">
+                        <mat-option
+                            *ngFor="let periodo of periodos"
+                            [value]="periodo.codigo"
+                        >
+                            {{ periodo.descricao }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error
+                        *ngIf="
+                            adicionarDisciplinaForm
+                                .get('periodo')
+                                .hasError('required')
+                        "
+                    >
+                        {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
+                    </mat-error>
+                </mat-form-field>
+                <!-- PERIODO -->
 
                 <!-- CREDITO -->
                 <mat-form-field appearance="outline" fxFlex>
@@ -93,16 +116,12 @@
                 <!-- CREDITO -->
             </div>
 
-            <div fxLayout="row">
+            <div fxLayout="row" fxLayoutGap="4px">
                 <!-- CARGA_HORARIA SEMANAL -->
                 <ap-fieldset label="Quantidade de aulas semanal" fxFlex>
-                    <div fxLayout="row wrap">
+                    <div fxLayout="row wrap" fxLayoutGap="4px">
                         <!-- TEORICA -->
-                        <mat-form-field
-                            appearance="outline"
-                            fxFlex
-                            class="mr-12"
-                        >
+                        <mat-form-field appearance="outline" fxFlex>
                             <mat-label>Teórica</mat-label>
                             <input
                                 required="true"
@@ -181,7 +200,7 @@
                         multiple
                     >
                         <input
-                            class="px-8 my-8"
+                            class="p-12"
                             placeholder="Pesquisar..."
                             matInput
                             name="filtro"

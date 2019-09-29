@@ -1,13 +1,11 @@
 <div class="mat-container">
-    <mat-table #table [dataSource]="dataSource">
-        <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
+    <mat-table #table [dataSource]="dataSource" matSort>
         <!-- Position Column -->
 
         <div *ngFor="let col of displayedColumns">
             <ng-container matColumnDef="{{ col.def }}">
                 <mat-header-cell
+                    mat-sort-header
                     *matHeaderCellDef
                     fxLayoutAlign="center center"
                 >
@@ -50,7 +48,6 @@
             </mat-cell>
         </ng-container>
 
-        <!-- Expanded Content Column - The detail row is made up of this one column -->
         <ng-container matColumnDef="expandedDetail">
             <mat-cell *matCellDef="let detail">
                 <mat-list fxFlex="1 0 auto">
@@ -84,7 +81,11 @@
             matRipple
             class="element-row"
             [class.expanded]="expandedElement == row"
-            (click)="expandedElement == row ? expandedElement = '' : expandedElement = row"
+            (click)="
+                expandedElement == row
+                    ? (expandedElement = '')
+                    : (expandedElement = row)
+            "
         ></mat-row>
         <mat-row
             *matRowDef="
@@ -100,7 +101,3 @@
         </mat-row>
     </mat-table>
 </div>
-
-<!-- Copyright 2017 Google Inc. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license -->

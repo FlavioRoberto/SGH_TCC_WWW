@@ -2,6 +2,7 @@ import { IDisciplina } from '../../disciplina/cadastro/model/IDisciplina';
 
 export class ICurriculoDisciplina {
     codigo: number;
+    periodo: number;
     disciplina: IDisciplina;
     codigoDisciplina: number;
     codigoCurriculo: number;
@@ -13,6 +14,7 @@ export class ICurriculoDisciplina {
 
     constructor() {
         this.codigo = 0;
+        this.periodo = 0;
         this.disciplina = {
         } as IDisciplina;
         this.aulasSemanaisTeorica = 0;

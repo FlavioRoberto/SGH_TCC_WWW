@@ -1,6 +1,7 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ApExpansivelTableDataSource } from './ApExpansivelTableDataSource';
+import { MatSort } from '@angular/material';
 
 @Component({
     selector: 'ap-expansivel-table',
@@ -22,7 +23,8 @@ export class ExpansivelTableComponent implements OnInit {
     @Input() acoesTabela: any[];
     @Input() dataSource: ApExpansivelTableDataSource<any>;
     @Input() desabilitarBotoes: boolean;
-
+    @ViewChild(MatSort) sort: MatSort;
+    
     isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
     defColumns: string[];
 
@@ -31,6 +33,7 @@ export class ExpansivelTableComponent implements OnInit {
         if (this.acoesTabela.length > 0) {
             this.defColumns.push('acao');
         }
+        this.dataSource.sort = this.sort;
     }
 
     onClick(event, element, acao, index): void {

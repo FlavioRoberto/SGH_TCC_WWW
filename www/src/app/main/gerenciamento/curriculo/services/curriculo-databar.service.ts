@@ -76,6 +76,7 @@ export class CurriculoDataBarService implements IDataBarLifeCycle<ICurriculo> {
 
     private _prepararEntidadeParaEnvio(): ICurriculo {
         const disciplinas = this._dataSource.data;
+        console.log(disciplinas);
         const entidadeEnvio = this.getEntidade();
         entidadeEnvio.disciplinas = disciplinas;
         return entidadeEnvio;

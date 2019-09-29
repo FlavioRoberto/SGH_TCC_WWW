@@ -7,6 +7,7 @@ import { locale as portugues } from './../../../../i18n/pt-br';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { DisciplinaService } from 'app/main/gerenciamento/disciplina/cadastro/service/disciplina.service';
 import { ICurriculoDisciplina } from '../../../model/curriculo-disciplina.model';
+import { EPeriodos } from 'app/shared/enums/eperiodos.enum';
 
 @Component({
     selector: 'adicionar-disciplina-dialog',
@@ -23,6 +24,7 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
     acaoAutoCompleteDisciplina: IFormAutocompleteAcao;
     pesquisandoDisciplina: boolean;
     disciplinas: IDisciplina[];
+    periodos: any;
     filtroDisciplinaPreRequisito = '';
     private eventClickSalvar;
     private limparFormulario;
@@ -43,12 +45,16 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
     }
 
     ngOnInit(): void {
+
+        this.periodos = EPeriodos;
+
         this.adicionarDisciplinaForm = this._formBuilder.group({
             disciplina: [null, [Validators.required]],
             aulasSemanaisTeorica: [null, [Validators.required]],
             aulasSemanaisPratica: [null, [Validators.required]],
             credito: [null, [Validators.required]],
-            preRequisitos: [null]
+            preRequisitos: [null],
+            periodo: [null, [Validators.required]]
         });
 
         this._servicoDisciplina.listarTodos()
@@ -75,8 +81,7 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
             }
         });
         dados.codigoDisciplina = dados.disciplina.codigo;
-        this.eventClickSalvar(dados);
-        this.adicionarDisciplinaForm.reset();
+        this.eventClickSalvar(dados, this.adicionarDisciplinaForm);
     }
 
     filtrarDisciplinasPreRequisito(filtro: string): void {

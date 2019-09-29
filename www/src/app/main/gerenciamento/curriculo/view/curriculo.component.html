@@ -15,13 +15,11 @@
         fxLayout.xs="column"
         class="turno-form"
     >
-        <!-- ROW 1 -->
-        <div fxLayout.gt-sm="row" fxLayout="column">
+        <div fxLayout="column" fxLayout.gt-sm="row wrap" fxLayoutGap="8px">
             <!-- CODIGO -->
             <mat-form-field
                 *ngIf="statusNavBar != EStatus.inserindo"
                 appearance="outline"
-                class="pr-sm-8"
                 fxFlex="20"
             >
                 <mat-label>Código</mat-label>
@@ -38,24 +36,8 @@
             </mat-form-field>
             <!-- CODIGO -->
 
-            <!-- PERIODO -->
-            <mat-form-field fxFlex appearance="outline" class="pr-sm-8">
-                <mat-select placeholder="Período" formControlName="periodo">
-                    <mat-option
-                        *ngFor="let periodo of periodos"
-                        [value]="periodo.codigo"
-                    >
-                        {{ periodo.descricao }}
-                    </mat-option>
-                </mat-select>
-                <mat-error *ngIf="form.get('periodo').hasError('required')">
-                    {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
-                </mat-error>
-            </mat-form-field>
-            <!-- PERIODO -->
-
             <!-- ANO -->
-            <mat-form-field appearance="outline" class="pr-sm-8">
+            <mat-form-field appearance="outline">
                 <mat-label>Ano</mat-label>
                 <input
                     matInput
@@ -72,13 +54,9 @@
                 </mat-error>
             </mat-form-field>
             <!-- ANO -->
-        </div>
-        <!-- ROW 1 -->
 
-        <!-- ROW 2 -->
-        <div fxLayout.gt-sm="row" fxLayout="column">
             <!-- CURSO -->
-            <mat-form-field fxFlex appearance="outline" class="pr-sm-8">
+            <mat-form-field fxFlex appearance="outline">
                 <mat-label>Curso</mat-label>
                 <mat-select placeholder="Período" formControlName="codigoCurso">
                     <mat-option
@@ -95,7 +73,7 @@
             <!-- CURSO -->
 
             <!-- TURNO -->
-            <mat-form-field fxFlex appearance="outline" class="pr-sm-8">
+            <mat-form-field fxFlex appearance="outline">
                 <mat-label>Turno</mat-label>
                 <mat-select placeholder="Turno" formControlName="codigoTurno">
                     <mat-option
@@ -111,8 +89,6 @@
             </mat-form-field>
             <!-- TURNO -->
         </div>
-        <!-- ROW 2 -->
-
         <!-- TABLE DISCIPLINAS -->
         <div class="mat-elevation-z1" fxLayout="column">
             <div fxLayoutAlign="end center">
