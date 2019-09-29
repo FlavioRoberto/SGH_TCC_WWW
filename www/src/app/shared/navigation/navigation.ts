@@ -34,16 +34,16 @@ export const navigation: FuseNavigation[] = [
                         type: 'collapsable',
                         children: [
                             {
-                                id: 'disciplina.cadastrar',
-                                title: 'Cadastro',
-                                type: 'item',
-                                url: '/gerenciamento/disciplina/cadastro',
-                            },
-                            {
                                 id: 'disciplina.tipo',
                                 title: 'Tipo',
                                 type: 'item',
                                 url: '/gerenciamento/disciplina/tipo',
+                            },
+                            {
+                                id: 'disciplina.cadastrar',
+                                title: 'Cadastro',
+                                type: 'item',
+                                url: '/gerenciamento/disciplina/cadastro',
                             }
                         ]
                     },

@@ -1,4 +1,3 @@
-import { DisciplinaModule } from '../../disciplina/cadastro/disciplina.module';
 import { IDisciplina } from '../../disciplina/cadastro/model/IDisciplina';
 
 export class ICurriculoDisciplina {
@@ -6,11 +5,8 @@ export class ICurriculoDisciplina {
     disciplina: IDisciplina;
     codigoDisciplina: number;
     codigoCurriculo: number;
-    cargaHorariaSemanalTeorica: number;
-    cargaHorariaSemanalPratica: number;
-    cargaHorariaSemanalTotal: number;
-    horaAulaTotal: number;
-    horaTotal: number;
+    aulasSemanaisTeorica: number;
+    aulasSemanaisPratica: number;
     credito: number;
     preRequisitos: IDisciplina[];
     preRequisitoDescricao: string;
@@ -19,12 +15,9 @@ export class ICurriculoDisciplina {
         this.codigo = 0;
         this.disciplina = {
         } as IDisciplina;
+        this.aulasSemanaisTeorica = 0;
+        this.aulasSemanaisPratica = 0;
         this.codigoCurriculo = 0;
-        this.cargaHorariaSemanalTeorica = 0;
-        this.cargaHorariaSemanalPratica = 0;
-        this.cargaHorariaSemanalTotal = 0;
-        this.horaAulaTotal = 0;
-        this.horaTotal = 0;
         this.credito = 0;
         this.preRequisitos = new Array<IDisciplina>();
         this.preRequisitoDescricao = '';

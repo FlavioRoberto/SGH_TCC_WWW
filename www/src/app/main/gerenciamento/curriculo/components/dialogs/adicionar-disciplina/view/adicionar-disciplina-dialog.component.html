@@ -95,7 +95,7 @@
 
             <div fxLayout="row">
                 <!-- CARGA_HORARIA SEMANAL -->
-                <ap-fieldset label="Carga horária semanal (h/a)" fxFlex>
+                <ap-fieldset label="Quantidade de aulas semanal" fxFlex>
                     <div fxLayout="row wrap">
                         <!-- TEORICA -->
                         <mat-form-field
@@ -107,14 +107,13 @@
                             <input
                                 required="true"
                                 matInput
-                                name="cargaHorariaSemanalTeorica"
                                 mask="000"
-                                formControlName="cargaHorariaSemanalTeorica"
+                                formControlName="aulasSemanaisTeorica"
                             />
                             <mat-error
                                 *ngIf="
                                     adicionarDisciplinaForm
-                                        .get('cargaHorariaSemanalTeorica')
+                                        .get('aulasSemanaisTeorica')
                                         .hasError('required')
                                 "
                             >
@@ -126,7 +125,7 @@
                             <mat-error
                                 *ngIf="
                                     adicionarDisciplinaForm
-                                        .get('cargaHorariaSemanalTeorica')
+                                        .get('aulasSemanaisTeorica')
                                         .hasError('pattern')
                                 "
                             >
@@ -141,14 +140,13 @@
                             <input
                                 required="true"
                                 matInput
-                                name="cargaHorariaSemanalPratica"
                                 mask="000"
-                                formControlName="cargaHorariaSemanalPratica"
+                                formControlName="aulasSemanaisPratica"
                             />
                             <mat-error
                                 *ngIf="
                                     adicionarDisciplinaForm
-                                        .get('cargaHorariaSemanalPratica')
+                                        .get('aulasSemanaisPratica')
                                         .hasError('required')
                                 "
                             >
@@ -160,7 +158,7 @@
                             <mat-error
                                 *ngIf="
                                     adicionarDisciplinaForm
-                                        .get('cargaHorariaSemanalPratica')
+                                        .get('aulasSemanaisPratica')
                                         .hasError('pattern')
                                 "
                             >
@@ -170,85 +168,6 @@
                         <!-- PRATICA -->
                     </div>
                 </ap-fieldset>
-                <!-- CARGA_HORARIA SEMANAL -->
-
-                <!-- CARGA_HORARIA TOTAL -->
-                <ap-fieldset label="Carga horária total" fxFlex>
-                    <div fxLayout="row wrap">
-                        <!-- HORA_AULA -->
-                        <mat-form-field
-                            appearance="outline"
-                            fxFlex
-                            class="mr-12"
-                        >
-                            <mat-label>Hora aula</mat-label>
-                            <input
-                                required="true"
-                                matInput
-                                name="horaAulaTotal"
-                                mask="000"
-                                formControlName="horaAulaTotal"
-                            />
-                            <mat-error
-                                *ngIf="
-                                    adicionarDisciplinaForm
-                                        .get('horaAulaTotal')
-                                        .hasError('required')
-                                "
-                            >
-                                {{
-                                    'GERENCIAMENTO.CAMPO_OBRIGATORIO'
-                                        | translate
-                                }}
-                            </mat-error>
-                            <mat-error
-                                *ngIf="
-                                    adicionarDisciplinaForm
-                                        .get('cargaHorariaSemanalTeorica')
-                                        .hasError('pattern')
-                                "
-                            >
-                                {{ 'GERENCIAMENTO.ANO_INVALIDO' | translate }}
-                            </mat-error>
-                        </mat-form-field>
-                        <!-- HORA_AULA -->
-
-                        <!-- HORA -->
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Horas</mat-label>
-                            <input
-                                required="true"
-                                matInput
-                                name="horaTotal"
-                                mask="000"
-                                formControlName="horaTotal"
-                            />
-                            <mat-error
-                                *ngIf="
-                                    adicionarDisciplinaForm
-                                        .get('horaTotal')
-                                        .hasError('required')
-                                "
-                            >
-                                {{
-                                    'GERENCIAMENTO.CAMPO_OBRIGATORIO'
-                                        | translate
-                                }}
-                            </mat-error>
-                            <mat-error
-                                *ngIf="
-                                    adicionarDisciplinaForm
-                                        .get('horaTotal')
-                                        .hasError('pattern')
-                                "
-                            >
-                                {{ 'GERENCIAMENTO.ANO_INVALIDO' | translate }}
-                            </mat-error>
-                        </mat-form-field>
-                        <!-- HORA -->
-                    </div>
-                </ap-fieldset>
-                <!-- CARGA_HORARIA TOTAL -->
             </div>
 
             <!-- DISCIPLINA_PREREQUISITO -->

@@ -37,14 +37,12 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
 
     displayedColumns: ColumnDef[] = [
         new ColumnDef('Disciplina', 'disciplina', 'descricao'),
-        new ColumnDef('Hora total (h/a)', 'horaAulaTotal'),
-        new ColumnDef('Hora total (h)', 'horaTotal'),
         new ColumnDef('Crédito', 'credito')
     ];
 
     displayedExpansivelColumns = [
-        { titulo: 'Carga horária semanal teórica', def: 'cargaHorariaSemanalTeorica' },
-        { titulo: 'Carga horária semanal prática', def: 'cargaHorariaSemanalPratica' },
+        { titulo: 'Aulas semanais teóricas', def: 'aulasSemanaisTeorica' },
+        { titulo: 'Aulas semanais práticas', def: 'aulasSemanaisPratica' },
         { titulo: 'Pré-requisito', def: 'preRequisitoDescricao' },
     ];
 
@@ -103,14 +101,13 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     private _editarDisciplina(itemEditar: ICurriculoDisciplina, index): void {
         const disciplina = {
             disciplina: itemEditar.disciplina.codigo,
-            cargaHorariaSemanalTeorica: itemEditar.cargaHorariaSemanalTeorica,
-            cargaHorariaSemanalPratica: itemEditar.cargaHorariaSemanalPratica,
-            horaTotal: itemEditar.horaTotal,
-            horaAulaTotal: itemEditar.horaAulaTotal,
+            aulasSemanaisPratica: itemEditar.aulasSemanaisPratica,
+            aulasSemanaisTeorica: itemEditar.aulasSemanaisTeorica,
             credito: itemEditar.credito,
             preRequisitos: itemEditar.preRequisitos.map(i => i.codigo)
         };
 
+        console.log(index);
         this.abrirDialogAdicionarDisciplina(disciplina, index);
     }
 
@@ -120,7 +117,9 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
                 return item.codigoDisciplina == dados.codigoDisciplina;
             });
 
-            if (disciplinaAdicionada.length > 0 && !index) {
+            console.log(index);
+
+            if (disciplinaAdicionada.length > 0 && index == null) {
                 this.exibirSnackBar('Disciplina já adicionada.', true);
                 return;
             }

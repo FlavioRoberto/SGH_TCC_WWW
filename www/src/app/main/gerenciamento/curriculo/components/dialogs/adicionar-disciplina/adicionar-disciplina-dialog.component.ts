@@ -45,10 +45,8 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
     ngOnInit(): void {
         this.adicionarDisciplinaForm = this._formBuilder.group({
             disciplina: [null, [Validators.required]],
-            cargaHorariaSemanalTeorica: [null, [Validators.required]],
-            cargaHorariaSemanalPratica: [null, [Validators.required]],
-            horaTotal: [null, [Validators.required]],
-            horaAulaTotal: [null, [Validators.required]],
+            aulasSemanaisTeorica: [null, [Validators.required]],
+            aulasSemanaisPratica: [null, [Validators.required]],
             credito: [null, [Validators.required]],
             preRequisitos: [null]
         });
