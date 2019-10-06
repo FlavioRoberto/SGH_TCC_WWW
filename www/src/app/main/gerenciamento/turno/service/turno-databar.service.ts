@@ -1,4 +1,4 @@
-import { IDataBarBindService } from '@compartilhado/layout/databar/contrato/IDataBarService';
+import { IDataBarBindService } from '@compartilhado/layout/databar/contrato/idata-bar-service';
 import { FormGroup } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 

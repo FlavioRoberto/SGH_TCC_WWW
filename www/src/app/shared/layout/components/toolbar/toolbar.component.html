@@ -1,4 +1,4 @@
-<mat-toolbar class="p-0 mat-elevation-z1">
+<mat-toolbar class="p-0 mat-elevation-z3">
     <div fxFlex fxFill fxLayout="row" fxLayoutAlign="start center">
         <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
             <button
@@ -8,7 +8,7 @@
                 (click)="toggleSidebarOpen('navbar')"
                 fxHide.gt-md
             >
-                <mat-icon class="secondary-text">menu</mat-icon>
+                <mat-icon class="fuse-navy-50-fg">menu</mat-icon>
             </button>
 
             <div
@@ -32,18 +32,17 @@
             </div>
         </div>
 
-        <div
-            class=""
-            fxFlex="0 1 auto"
-            fxLayout="row"
-            fxLayoutAlign="start center"
-        >
+        <div fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
             <button
                 mat-button
                 [matMenuTriggerFor]="userMenu"
                 class="user-button"
             >
-                <div fxLayout="row" fxLayoutAlign="center center" class="mr-8">
+                <div
+                    fxLayout="row"
+                    fxLayoutAlign="center center"
+                    class="mr-8 fuse-navy-50-fg"
+                >
                     <mat-icon class="mr-4">person_outline</mat-icon>
 
                     <!-- <img

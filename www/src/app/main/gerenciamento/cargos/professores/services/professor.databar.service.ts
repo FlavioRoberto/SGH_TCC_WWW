@@ -1,12 +1,10 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { IDataBarBindService } from '@compartilhado/layout/databar/contrato/IDataBarService';
+import { IDataBarBindService } from '@compartilhado/layout/databar/contrato/idata-bar-service';
 import { Professor } from '../models/professor.model';
 import { FormGroup } from '@angular/forms';
 import { ProfessorService } from './professor.service';
 import { Observable } from 'rxjs';
 import { ProfessorPaginado } from '../models/professor-paginado.model';
-import { ProfessorCurso } from '../models/professor-curso.model';
-import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class ProfessorDataBarService implements IDataBarBindService<Professor>{

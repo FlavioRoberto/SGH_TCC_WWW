@@ -14,8 +14,6 @@ import { NgxMaskModule } from 'ngx-mask';
 @NgModule({
     declarations: [UsuariosComponent],
     imports: [
-        CompartilhadoModule,
-        MaterialCoreModule,
         TranslateModule,
         FuseSharedModule,
         UsuariosRoutingModule,

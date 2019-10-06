@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { locale as portugues } from './../i18n/pt-br';
 
-import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/IDataBarBind';
+import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/idatabar-bind';
 import { IUsuario } from '@compartilhado/core/usuario/model/IUsuario.model';
 import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 
@@ -20,7 +20,7 @@ import { AutenticacaoService } from '@compartilhado/core/auth/autenticacao.servi
 @Component({
     templateUrl: './view/usuario.component.html'
 })
-export class UsuariosComponent implements IDataBarBindComponent<IUsuario> {
+export class UsuariosComponent implements IDataBarBindComponent<IUsuario>, OnInit {
     form: FormGroup;
     entidadePaginada: UsuarioPaginado;
     statusNavBar: string;

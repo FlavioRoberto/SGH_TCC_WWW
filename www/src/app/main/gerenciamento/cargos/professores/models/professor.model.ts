@@ -1,4 +1,3 @@
-import { ProfessorCurso } from './professor-curso.model';
 
 export class Professor {
     codigo: number;
@@ -7,5 +6,4 @@ export class Professor {
     nome: string;
     telefone: string;
     email: string;
-    cursos: ProfessorCurso[] | number[];
 }

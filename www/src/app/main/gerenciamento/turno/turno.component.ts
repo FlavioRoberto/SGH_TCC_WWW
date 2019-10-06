@@ -5,7 +5,7 @@ import { ITurno } from './model/turno.interface';
 import { TurnoService } from './service/turno.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TurnoPaginado } from './model/turno.paginacao';
-import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/IDataBarBind';
+import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/idatabar-bind';
 import { TurnoDataBarService } from './service/turno-databar.service';
 import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 

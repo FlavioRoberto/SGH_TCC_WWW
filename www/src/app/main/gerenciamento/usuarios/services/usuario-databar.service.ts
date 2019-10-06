@@ -1,4 +1,4 @@
-import { IDataBarBindService } from '@compartilhado/layout/databar/contrato/IDataBarService';
+import { IDataBarBindService } from '@compartilhado/layout/databar/contrato/idata-bar-service';
 import { IUsuario } from '@compartilhado/core/usuario/model/IUsuario.model';
 import { UsuarioPaginado } from '../models/usuario-paginado';
 import { Observable } from 'rxjs';

@@ -6,7 +6,7 @@ import { MaterialCoreModule } from '@compartilhado/material-core/material-core.m
 @NgModule({
     declarations: [DataBarFormComponent],
     imports: [CompartilhadoModule, MaterialCoreModule],
-    exports: [DataBarFormComponent]
+    exports: [DataBarFormComponent, CompartilhadoModule, MaterialCoreModule]
 })
 export class DataBarFormModule {
 }

@@ -7,7 +7,7 @@ import { ITipo } from '../tipo/model/ITipo';
 import { DisciplinaTipoService } from '../tipo/service/disciplina.tipo.service';
 import { DisciplinaService } from './service/disciplina.service';
 import { IDisciplina } from './model/IDisciplina';
-import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/IDataBarBind';
+import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/idatabar-bind';
 import { DisciplinaDataBarService } from './service/disciplina-databar.service';
 import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 import { ActivatedRoute } from '@angular/router';

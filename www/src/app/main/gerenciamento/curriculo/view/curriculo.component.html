@@ -71,23 +71,6 @@
                 </mat-error>
             </mat-form-field>
             <!-- CURSO -->
-
-            <!-- TURNO -->
-            <mat-form-field fxFlex appearance="outline">
-                <mat-label>Turno</mat-label>
-                <mat-select placeholder="Turno" formControlName="codigoTurno">
-                    <mat-option
-                        *ngFor="let turno of turnos"
-                        [value]="turno.codigo"
-                    >
-                        {{ turno.descricao }}
-                    </mat-option>
-                </mat-select>
-                <mat-error *ngIf="form.get('codigoTurno').hasError('required')">
-                    {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
-                </mat-error>
-            </mat-form-field>
-            <!-- TURNO -->
         </div>
         <!-- TABLE DISCIPLINAS -->
         <div class="mat-elevation-z1" fxLayout="column">

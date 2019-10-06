@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 
 import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
-import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/IDataBarBind';
+import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/idatabar-bind';
 
 import { locale as portugues } from '../../i18n/pt-br';
 import { ITipo } from './model/ITipo';

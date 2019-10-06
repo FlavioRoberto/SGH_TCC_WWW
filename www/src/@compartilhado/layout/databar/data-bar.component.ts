@@ -16,12 +16,12 @@ import { FormGroup } from '@angular/forms';
 
 import { MatSnackBar, MatDrawer } from '@angular/material';
 
-import { IDataEntidadePaginada } from './contrato/IDataEntidadePaginada';
+import { IDataEntidadePaginada } from './contrato/idatabar-entidade-paginada';
 import { DialogService } from '../dialogs/confirma-dialog/service/dialog.service';
-import { IDataBarBindService } from './contrato/IDataBarService';
+import { IDataBarBindService } from './contrato/idata-bar-service';
 import { EStatus } from './enum/estatus';
 import { ErrorDialogService } from '../dialogs/error-dialog/service/error-dialog.service';
-import { IDataBarLifeCycle } from './contrato/IDataBarLifeCycle';
+import { IDataBarLifeCycle } from './contrato/idatabar-life-cycle';
 
 @Component({
     selector: 'data-bar',

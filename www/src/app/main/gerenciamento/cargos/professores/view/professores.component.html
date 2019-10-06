@@ -107,28 +107,6 @@
             </mat-form-field>
             <!-- EMAIL -->
 
-            <!-- CURSO -->
-            <mat-form-field fxFlex="100" appearance="outline" class="pr-sm-8">
-                <mat-label>Curso</mat-label>
-                <mat-select
-                    [required]="condicaoDataBar"
-                    placeholder="Cursos"
-                    multiple
-                    formControlName="cursos"
-                >
-                    <mat-option
-                        *ngFor="let curso of cursos"
-                        [value]="curso.codigo"
-                    >
-                        {{ curso.descricao }}
-                    </mat-option>
-                </mat-select>
-                <mat-error *ngIf="form.get('cursos').hasError('required')">
-                    Campo Obrigatório
-                </mat-error>
-            </mat-form-field>
-            <!-- CURSO -->
-
             <!-- TELEFONE -->
             <mat-form-field appearance="outline" fxFlex.gt-sm="18" fxFlex="100">
                 <mat-label>Celular</mat-label>

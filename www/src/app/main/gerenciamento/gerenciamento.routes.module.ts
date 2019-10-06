@@ -29,8 +29,8 @@ const routes: Routes = [
         canActivate: [AuthGuard]
     },
     {
-        path: 'professores',
-        loadChildren: './professores/professores.module#ProfessoresModule',
+        path: 'cargos',
+        loadChildren: './cargos/cargos.module#CargoModule',
         canActivate: [AuthGuard]
     },
 ];

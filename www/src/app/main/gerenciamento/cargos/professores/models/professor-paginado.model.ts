@@ -1,4 +1,4 @@
-import { IDataEntidadePaginada } from '@compartilhado/layout/databar/contrato/IDataEntidadePaginada';
+import { IDataEntidadePaginada } from '@compartilhado/layout/databar/contrato/idatabar-entidade-paginada';
 import { Professor as Professor } from './professor.model';
 
 export class ProfessorPaginado implements IDataEntidadePaginada<Professor>{

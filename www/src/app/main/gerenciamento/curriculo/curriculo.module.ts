@@ -22,9 +22,7 @@ import { AdicionarDisciplinaDialogModule } from './components/dialogs/adicionar-
         NgxMaskModule.forRoot(),
         TranslateModule,
         FuseSharedModule,
-        MaterialCoreModule,
         CurriculoRoutingModule,
-        CompartilhadoModule,
         DataBarFormModule,
         AdicionarDisciplinaDialogModule
     ],

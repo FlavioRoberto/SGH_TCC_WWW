@@ -6,7 +6,7 @@ import { CurriculoService } from './curriculo.service';
 import { ICurriculo } from '../model/curriculo.model';
 import { ApExpansivelTableDataSource } from '@compartilhado/layout/expansivel-table/ApExpansivelTableDataSource';
 import { ICurriculoDisciplina } from '../model/curriculo-disciplina.model';
-import { IDataBarLifeCycle } from '@compartilhado/layout/databar/contrato/IDataBarLifeCycle';
+import { IDataBarLifeCycle } from '@compartilhado/layout/databar/contrato/idatabar-life-cycle';
 import { retry, tap } from 'rxjs/operators';
 import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 

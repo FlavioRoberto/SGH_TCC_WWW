@@ -1,5 +1,5 @@
 import { IDisciplina } from './IDisciplina';
-import { IDataEntidadePaginada } from '@compartilhado/layout/databar/contrato/IDataEntidadePaginada';
+import { IDataEntidadePaginada } from '@compartilhado/layout/databar/contrato/idatabar-entidade-paginada';
 
 export class DisciplinaPaginado implements IDataEntidadePaginada<IDisciplina>{
     total: number; posicao: number;

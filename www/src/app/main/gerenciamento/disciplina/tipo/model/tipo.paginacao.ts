@@ -1,5 +1,5 @@
 import { ITipo } from './ITipo';
-import { IDataEntidadePaginada } from '@compartilhado/layout/databar/contrato/IDataEntidadePaginada';
+import { IDataEntidadePaginada } from '@compartilhado/layout/databar/contrato/idatabar-entidade-paginada';
 
 export class TipoPaginado implements IDataEntidadePaginada<ITipo>{
     total: number; posicao: number;

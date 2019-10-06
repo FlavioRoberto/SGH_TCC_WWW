@@ -17,8 +17,6 @@ import { DataBarFormModule } from 'app/shared/layout/components/databar-form/dat
         DisciplinaRoutingModule,
         TranslateModule,
         FuseSharedModule,
-        MaterialCoreModule,
-        CompartilhadoModule,
         DataBarFormModule
     ],
     exports: [DisciplinaComponent],

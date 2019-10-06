@@ -2,7 +2,7 @@ import { FormGroup } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { IDataBarBindService } from '@compartilhado/layout/databar/contrato/IDataBarService';
+import { IDataBarBindService } from '@compartilhado/layout/databar/contrato/idata-bar-service';
 
 import { ICurso } from '../model/curso.model';
 import { CursoPaginado } from '../model/curso.paginacao';

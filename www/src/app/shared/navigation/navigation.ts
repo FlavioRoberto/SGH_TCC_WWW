@@ -55,11 +55,24 @@ export const navigation: FuseNavigation[] = [
                         url: '/gerenciamento/curriculo'
                     },
                     {
-                        id: 'professor',
-                        title: 'Professores',
-                        type: 'item',
-                        icon: 'person',
-                        url: '/gerenciamento/professores'
+                        id: 'cargos',
+                        title: 'Cargos',
+                        icon: 'school',
+                        type: 'collapsable',
+                        children: [
+                            {
+                                id: 'professor',
+                                title: 'Professores',
+                                type: 'item',
+                                url: '/gerenciamento/cargos/professores'
+                            },
+                            {
+                                id: 'cargo',
+                                title: 'Cargo',
+                                type: 'item',
+                                url: '/gerenciamento/cargos/cargo'
+                            },
+                        ]
                     },
                     {
                         id: 'usuarios',

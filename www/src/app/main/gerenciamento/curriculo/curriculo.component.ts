@@ -9,7 +9,7 @@ import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.
 import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 import { ColumnDef } from '@compartilhado/layout/expansivel-table/expansivel-table.component';
 import { ApExpansivelTableDataSource } from '@compartilhado/layout/expansivel-table/ApExpansivelTableDataSource';
-import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/IDataBarBind';
+import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/idatabar-bind';
 
 import { locale as portugues } from './../i18n/pt-br';
 
@@ -180,7 +180,6 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
             codigo: [null],
             ano: [null, [Validators.required, Validators.pattern(/^\d{4}$/)]],
             codigoCurso: [null, [Validators.required]],
-            codigoTurno: [null, [Validators.required]],
             disciplinas: [null]
         });
     }

@@ -1,23 +1,19 @@
 import { NgModule } from '@angular/core';
-
-import { TranslateModule } from '@ngx-translate/core';
 import { FuseSharedModule } from '@fuse/shared.module';
-
 import { CompartilhadoModule } from '@compartilhado/compartilhado.module';
 import { MaterialCoreModule } from '@compartilhado/material-core/material-core.module';
-
-import { TurnoComponent } from './turno.component';
-import { TurnoRoutingModule } from './turno.routes.module';
+import { CargoRoutingModule } from './cargo.routes.module';
+import { CargoComponent } from './cargo.component';
 import { DataBarFormModule } from 'app/shared/layout/components/databar-form/databar-form.module';
+import { CargoDataBarBindService } from './services/cargo.databar.service';
 
 @NgModule({
-    declarations: [TurnoComponent],
     imports: [
-        TurnoRoutingModule,
-        TranslateModule,
+        DataBarFormModule,
         FuseSharedModule,
-        DataBarFormModule
+        CargoRoutingModule
     ],
-    exports: [TurnoComponent]
+    declarations: [CargoComponent],
+    providers: [CargoDataBarBindService]
 })
-export class TurnoModule { }
+export class CargoModule { }

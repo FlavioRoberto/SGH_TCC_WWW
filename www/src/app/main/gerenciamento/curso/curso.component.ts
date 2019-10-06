@@ -6,7 +6,7 @@ import { CursoPaginado } from './model/curso.paginacao';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CursoService } from './service/curso.service';
 import { CursoDataBarService } from './service/curso-databar.service';
-import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/IDataBarBind';
+import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/idatabar-bind';
 import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 
 @Component({
