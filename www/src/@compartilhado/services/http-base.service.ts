@@ -14,7 +14,7 @@ export abstract class HttpBaseService<T> {
         this.http = http;
     }
 
-    protected getAll(rota: string): Observable<T[]> {
+    protected getAll<T>(rota: string): Observable<T[]> {
         return this.http.get<T[]>(rota);
     }
 

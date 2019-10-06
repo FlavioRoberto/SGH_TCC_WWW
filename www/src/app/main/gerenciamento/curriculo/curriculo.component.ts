@@ -22,6 +22,7 @@ import { CurriculoDataBarService } from './services/curriculo-databar.service';
 import { AdicionarDisciplinaDialogService } from './components/dialogs/adicionar-disciplina/service/adicionar-disciplina-dialog.service';
 
 import { CurriculoService } from './services/curriculo.service';
+import { anoRegex } from '@compartilhado/util/input-regex/input-regex';
 
 @Component({
     selector: 'curriculo',
@@ -178,7 +179,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     private _construirForm(): void {
         this.form = this._formBuilder.group({
             codigo: [null],
-            ano: [null, [Validators.required, Validators.pattern(/^\d{4}$/)]],
+            ano: [null, [Validators.required, Validators.pattern(anoRegex)]],
             codigoCurso: [null, [Validators.required]],
             disciplinas: [null]
         });

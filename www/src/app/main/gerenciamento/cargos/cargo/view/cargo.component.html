@@ -6,12 +6,226 @@
     [entidadePaginada]="entidadePaginada"
     [form]="form"
     (statusChanged)="statusChanged($event)"
-    [navegacao]="['Gerenciamento', 'Professores']"
+    [navegacao]="['Gerenciamento', 'Cargos', 'Cargo']"
     fxFlex
 >
     <!-- FORM -->
-    <form [formGroup]="form" fxLayout="column">
-       
+    <form [formGroup]="form" fxLayout="column" fxLayoutGap="4px">
+        <div fxLayout.gt-sm="row wrap" fxLayout="column" fxLayoutGap="4px">
+            <!-- NUMERO -->
+            <mat-form-field appearance="outline" fxFlex.gt-sm="12" fxFlex="100">
+                <mat-label>Número</mat-label>
+                <input
+                    #input_numero
+                    [required]="condicaoDataBar"
+                    matInput
+                    mask="9*"
+                    maxlength="6"
+                    type="text"
+                    class="primary-color-input border-radius-4"
+                    formControlName="numero"
+                />
+                <mat-hint align="end">
+                    {{ input_numero.value?.length || 0 }}/6</mat-hint
+                >
+                <mat-error *ngIf="form.get('numero').hasError('required')">
+                    Campo obrigatório!
+                </mat-error>
+            </mat-form-field>
+            <!-- NUMERO -->
+
+            <!-- EDITAL -->
+            <mat-form-field appearance="outline" fxFlex.gt-sm="12" fxFlex="100">
+                <mat-label>Edital</mat-label>
+                <input
+                    #input_edital
+                    [required]="condicaoDataBar"
+                    matInput
+                    mask="9*"
+                    maxlength="6"
+                    type="text"
+                    class="primary-color-input border-radius-4"
+                    formControlName="edital"
+                />
+                <mat-hint align="end">
+                    {{ input_edital.value?.length || 0 }}/6</mat-hint
+                >
+                <mat-error *ngIf="form.get('edital').hasError('required')">
+                    Campo obrigatório!
+                </mat-error>
+            </mat-form-field>
+            <!-- EDITAL -->
+
+            <!-- ANO -->
+            <mat-form-field appearance="outline" fxFlex.gt-sm="12" fxFlex="100">
+                <mat-label>Ano</mat-label>
+                <input
+                    #input_ano
+                    [required]="condicaoDataBar"
+                    matInput
+                    mask="9{4}"
+                    maxlength="4"
+                    type="text"
+                    class="primary-color-input border-radius-4"
+                    formControlName="ano"
+                />
+                <mat-hint align="end">
+                    {{ input_ano.value?.length || 0 }}/4</mat-hint
+                >
+                <mat-error *ngIf="form.get('ano').hasError('pattern')">
+                    Ano inválido
+                </mat-error>
+                <mat-error *ngIf="form.get('ano').hasError('required')">
+                    Campo obrigatório!
+                </mat-error>
+            </mat-form-field>
+            <!-- ANO -->
+
+            <!-- SEMESTRE -->
+            <mat-form-field
+                appearance="outline"
+                fxFlex.gt-sm="20"
+                fxFlex="1 0 auto"
+            >
+                <mat-label>Semestre</mat-label>
+                <mat-select
+                    fxLayout="column"
+                    formControlName="semestre"
+                    [required]="condicaoDataBar"
+                >
+                    <div *ngFor="let semestre of semestres">
+                        <mat-option [value]="semestre.codigo">{{
+                            semestre.descricao
+                        }}</mat-option>
+                    </div>
+                </mat-select>
+            </mat-form-field>
+            <!-- SEMESTRE -->
+
+            <!-- PROFESSOR -->
+            <mat-form-field appearance="outline" fxFlex="1 0 auto">
+                <mat-label>Professor</mat-label>
+                <mat-select fxLayout="column" formControlName="professor">
+                    <input
+                        *ngIf="professores.length > 0"
+                        class="p-12"
+                        placeholder="Pesquisar..."
+                        matInput
+                        name="filtro"
+                        (keyup)="filtrarProfessores($event.target.value)"
+                    />
+                    <mat-divider></mat-divider>
+                    <mat-option *ngIf="carregandoProfessores"
+                        >Carregando professores...</mat-option
+                    >
+                    <mat-option
+                        *ngIf="
+                            professores.length <= 0 && !carregandoProfessoreso
+                        "
+                        >Nenhum professor encontrado</mat-option
+                    >
+                    <div
+                        *ngFor="
+                            let professor of professores
+                                | filter: professorFiltro
+                        "
+                    >
+                        <mat-option [value]="professor.codigo">{{
+                            professor.nome
+                        }}</mat-option>
+                    </div>
+                </mat-select>
+            </mat-form-field>
+            <!-- PROFESSOR -->
+        </div>
+
+        <div fxLayout="column">
+            <!-- TABLE DISCIPLINAS -->
+            <div class="mat-elevation-z1" fxLayout="column">
+                <div
+                    *ngIf="condicaoDataBar"
+                    fxLayout="row"
+                    fxLayoutGap="16px"
+                    class="p-16"
+                    fxLayoutAlign="center center"
+                >
+                    <!-- CURRICULO -->
+                    <mat-form-field fxFlex="1 0 auto">
+                        <mat-label>Curso</mat-label>
+                        <mat-select
+                            fxLayout="column"
+                            [required]="condicaoDataBar"
+                        >
+                            <div *ngFor="let curriculo of curriculos">
+                                <mat-option
+                                    [value]="curriculo.codigo"
+                                    (onSelectionChange)="
+                                        onSelectCurriculo(curriculo)
+                                    "
+                                >
+                                    {{ curriculo.descricaoCurso }} -
+                                    {{ curriculo.ano }}
+                                </mat-option>
+                            </div>
+                        </mat-select>
+                    </mat-form-field>
+                    <!-- CURRICULO -->
+
+                    <!-- DISCIPLINAS -->
+                    <mat-form-field fxFlex="1 0 auto">
+                        <mat-label>Disciplinas</mat-label>
+                        <mat-select
+                            fxLayout="column"
+                            [required]="condicaoDataBar"
+                        >
+                            <div *ngFor="let disciplina of disciplinas">
+                                <mat-option [value]="disciplina.codigo">{{
+                                    disciplina.disciplina.descricao
+                                }}</mat-option>
+                            </div>
+                        </mat-select>
+                    </mat-form-field>
+                    <!-- DISCIPLINAS -->
+
+                    <button
+                        [disabled]="!condicaoDataBar"
+                        type="button"
+                        mat-button
+                        matTooltip="Vincular disciplina"
+                        (click)="abrirDialogAdicionarDisciplina()"
+                        color="primary"
+                    >
+                        <!-- <span>
+                        Vincular disciplina
+                    </span> -->
+                        <mat-icon>add_circle</mat-icon>
+                    </button>
+                </div>
+
+                <!-- TABELA -->
+                <ap-expansivel-table
+                    *ngIf="dataSource.data.length > 0"
+                    fxFlex
+                    [displayedColumns]="displayedColumns"
+                    [columnDefExpansivel]="displayedExpansivelColumns"
+                    [dataSource]="dataSource"
+                    [acoesTabela]="acoesTabela"
+                    [desabilitarBotoes]="condicaoDataBar"
+                >
+                </ap-expansivel-table>
+
+                <span
+                    class="texto-informativo"
+                    *ngIf="dataSource.data.length <= 0"
+                >
+                    <p>
+                        Clique no + para vincular uma disciplina ao currículo.
+                    </p>
+                </span>
+                <!-- TABELA -->
+            </div>
+            <!-- TABLE DISCIPLINAS -->
+        </div>
     </form>
 
     <!-- FORM -->

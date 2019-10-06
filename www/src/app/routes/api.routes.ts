@@ -10,6 +10,7 @@ export class routesApi {
 
     private construirRotaPadrao(rota: string): any {
         return {
+            base: this.API + `/${rota}`,
             listarPaginacao: this.API + `/${rota}/listarPaginacao`,
             criar: this.API + `/${rota}/criar`,
             editar: this.API + `/${rota}/editar`,
@@ -32,6 +33,12 @@ export class routesApi {
         return rota;
     }
 
+    private construirRotaProfessor(): any {
+        const rota = this.construirRotaPadrao('professor');
+        rota['listarAtivos'] = `${this.API}/professor/listarAtivos`;
+        return rota;
+    }
+    s
     getRoutes(): any {
         return {
             turno: this.construirRotaPadrao('turno'),
@@ -43,7 +50,7 @@ export class routesApi {
             perfil: this.construirRotaPadrao('perfil'),
             usuario: this.construirRotaUsuario(),
             curriculo: this.construirRotaPadrao('curriculo'),
-            professor: this.construirRotaPadrao('professor')
+            professor: this.construirRotaProfessor()
         };
 
     }
