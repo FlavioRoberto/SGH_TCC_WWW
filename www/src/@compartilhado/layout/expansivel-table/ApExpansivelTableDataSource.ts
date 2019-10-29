@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 
 export class ApExpansivelTableDataSource<T> extends MatTableDataSource<T>{
 

@@ -2,7 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Platform } from '@angular/cdk/platform';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatPaginator, MatSnackBar } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/idatabar-bind';
 import { Professor } from './models/professor.model';
 import { ProfessorPaginado } from './models/professor-paginado.model';
@@ -46,12 +46,12 @@ export class ProfessoresComponent implements IDataBarBindComponent<Professor> {
 
     private _construirFormulario(): void {
         this.form = this._formBuilder.group({
-            codigo: [null],
-            nome: [null, [Validators.required, Validators.maxLength(45)]],
-            telefone: [null, [Validators.maxLength(20), Validators.required, Validators.pattern(celularRegex)]],
-            email: [null, [Validators.maxLength(45), Validators.required, Validators.email]],
-            matricula: [null, [Validators.required, Validators.maxLength(10), Validators.pattern(matriculaRegex)]],
-            ativo: [null]
+            codigo: new FormControl(null),
+            nome: new FormControl(null, [Validators.required, Validators.maxLength(45)]),
+            telefone: new FormControl(null, [Validators.maxLength(20), Validators.required, Validators.pattern(celularRegex)]),
+            email: new FormControl(null, [Validators.maxLength(45), Validators.required, Validators.email]),
+            matricula: new FormControl(null, [Validators.required, Validators.maxLength(10), Validators.pattern(matriculaRegex)]),
+            ativo: new FormControl(null)
         });
     }
 }

@@ -14,7 +14,8 @@ import {
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { MatSnackBar, MatDrawer } from '@angular/material';
+import { MatDrawer } from '@angular/material/sidenav';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { IDataEntidadePaginada } from './contrato/idatabar-entidade-paginada';
 import { DialogService } from '../dialogs/confirma-dialog/service/dialog.service';

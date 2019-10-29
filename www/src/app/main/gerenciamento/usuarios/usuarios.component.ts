@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { locale as portugues } from './../i18n/pt-br';
@@ -56,15 +56,15 @@ export class UsuariosComponent implements IDataBarBindComponent<IUsuario>, OnIni
 
     private _construirFormulario(): FormGroup {
         return this._formBuilder.group({
-            codigo: [null],
-            nome: [null, [Validators.required, Validators.maxLength(45)]],
-            telefone: [null, [Validators.maxLength(20), Validators.required, Validators.pattern(celularRegex)]],
-            login: [null, [Validators.maxLength(30), Validators.required]],
-            senha: [null],
-            email: [null, [Validators.maxLength(45), Validators.required, Validators.email]],
-            foto: [null, []],
-            perfilCodigo: [null, [Validators.required]],
-            ativo: [false]
+            codigo: new FormControl(null),
+            nome: new FormControl(null, [Validators.required, Validators.maxLength(45)]),
+            telefone: new FormControl(null, [Validators.maxLength(20), Validators.required, Validators.pattern(celularRegex)]),
+            login: new FormControl(null, [Validators.maxLength(30), Validators.required]),
+            senha: new FormControl(null),
+            email: new FormControl(null, [Validators.maxLength(45), Validators.required, Validators.email]),
+            foto: new FormControl(null),
+            perfilCodigo: new FormControl(null, [Validators.required]),
+            ativo: new FormControl(false)
         });
     }
 }

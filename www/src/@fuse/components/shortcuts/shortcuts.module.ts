@@ -10,7 +10,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CookieService } from 'ngx-cookie-service';
 
 import { FuseShortcutsComponent } from './shortcuts.component';
 
@@ -18,7 +17,7 @@ import { FuseShortcutsComponent } from './shortcuts.component';
     declarations: [
         FuseShortcutsComponent
     ],
-    imports     : [
+    imports: [
         CommonModule,
         RouterModule,
 
@@ -33,13 +32,9 @@ import { FuseShortcutsComponent } from './shortcuts.component';
         MatListModule,
         MatTooltipModule
     ],
-    exports     : [
+    exports: [
         FuseShortcutsComponent
-    ],
-    providers   : [
-     //   CookieService
     ]
 })
-export class FuseShortcutsModule
-{
+export class FuseShortcutsModule {
 }

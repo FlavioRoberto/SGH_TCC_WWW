@@ -1,4 +1,4 @@
-import { MatDialogConfig, MatDialog } from '@angular/material';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { Injectable, EventEmitter } from '@angular/core';
 import { AdicionarDisciplinaDialogComponent } from '../adicionar-disciplina-dialog.component';
 import { ICurriculoDisciplina } from 'app/main/gerenciamento/curriculo/model/curriculo-disciplina.model';

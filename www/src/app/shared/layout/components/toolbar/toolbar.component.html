@@ -1,5 +1,11 @@
 <mat-toolbar class="p-0 mat-elevation-z3">
-    <div fxFlex fxFill fxLayout="row" fxLayoutAlign="start center">
+    <div
+        fxFlex
+        fxFill
+        fxLayoutGap="4px"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+    >
         <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
             <button
                 mat-icon-button
@@ -32,7 +38,12 @@
             </div>
         </div>
 
-        <div fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
+        <div
+            class="mr-12"
+            fxFlex="0 1 auto"
+            fxLayout="row"
+            fxLayoutAlign="start center"
+        >
             <button
                 mat-button
                 [matMenuTriggerFor]="userMenu"
@@ -49,7 +60,7 @@
                         class="avatar mr-0 mr-sm-16"
                         src="assets/images/avatars/Velazquez.jpg"
                     /> -->
-                    <span class="username mr-12" fxHide fxShow.gt-sm>{{
+                    <span class="username mr-4" fxHide fxShow.gt-sm>{{
                         usuario?.login | uppercase
                     }}</span>
                     <mat-icon class="s-16" fxHide.xs
@@ -58,7 +69,7 @@
                 </div>
             </button>
 
-            <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+            <mat-menu #userMenu="matMenu" >
                 <button (click)="alterarSenha()" mat-menu-item class="">
                     <mat-icon>security</mat-icon>
                     <span>Alterar Senha</span>
