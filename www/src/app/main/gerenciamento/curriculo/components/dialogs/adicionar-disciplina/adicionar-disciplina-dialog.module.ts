@@ -7,6 +7,7 @@ import { CompartilhadoModule } from '@compartilhado/compartilhado.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { DisciplinaService } from 'app/main/gerenciamento/disciplina/cadastro/service/disciplina.service';
 import { NgxMaskModule } from 'ngx-mask';
+import {IcFieldsetModule} from '@breaking_dev/ic-fieldset';
 
 @NgModule({
     declarations: [AdicionarDisciplinaDialogComponent],
@@ -15,7 +16,8 @@ import { NgxMaskModule } from 'ngx-mask';
         MaterialCoreModule,
         CompartilhadoModule,
         TranslateModule,
-        NgxMaskModule.forChild()
+        NgxMaskModule.forChild(),
+        IcFieldsetModule
     ],
     exports: [AdicionarDisciplinaDialogComponent],
     entryComponents: [AdicionarDisciplinaDialogComponent],

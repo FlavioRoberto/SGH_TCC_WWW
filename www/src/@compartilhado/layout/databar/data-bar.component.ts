@@ -38,7 +38,7 @@ export class DataBarComponent<T> implements OnInit, OnDestroy {
     @Input() desabilitarBotaoRemover: boolean;
     @Output() statusChanged = new EventEmitter<EStatus>();
 
-    @ViewChild('drawer', null) drawer: MatDrawer;
+    @ViewChild('drawer', /* TODO: add static flag */ null) drawer: MatDrawer;
 
     status: EStatus;
     EStatus = EStatus;

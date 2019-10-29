@@ -23,7 +23,7 @@ export class ExpansivelTableComponent implements OnInit {
     @Input() acoesTabela: any[];
     @Input() dataSource: ApExpansivelTableDataSource<any>;
     @Input() desabilitarBotoes: boolean;
-    @ViewChild(MatSort) sort: MatSort;
+    @ViewChild(MatSort, { static: true }) sort: MatSort;
     
     isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
     defColumns: string[];

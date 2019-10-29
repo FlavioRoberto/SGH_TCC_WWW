@@ -5,12 +5,12 @@ import { AuthGuard } from '@compartilhado/core/auth/auth.guard';
 const routes: Routes = [
     {
         path: 'cadastro',
-        loadChildren: './cadastro/disciplina.module#DisciplinaModule',
+        loadChildren: () => import('./cadastro/disciplina.module').then(m => m.DisciplinaModule),
         canActivate: [AuthGuard]
     },
     {
         path: 'tipo',
-        loadChildren: './tipo/disciplina-tipo.module#DisciplinaTipoModule',
+        loadChildren: () => import('./tipo/disciplina-tipo.module').then(m => m.DisciplinaTipoModule),
         canActivate: [AuthGuard]
     }
 ];

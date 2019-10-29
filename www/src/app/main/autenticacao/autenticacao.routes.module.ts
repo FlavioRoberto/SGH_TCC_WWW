@@ -4,11 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
     {
         path: 'login',
-        loadChildren: './login/login.module#LoginModule'
+        loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
     },
     {
         path: 'redefinir-senha',
-        loadChildren: './redefinir-senha/redefinir-senha.module#RedefinirSenhaModule'
+        loadChildren: () => import('./redefinir-senha/redefinir-senha.module').then(m => m.RedefinirSenhaModule)
     }
 ];
 

@@ -5,32 +5,32 @@ import { AuthGuard } from '@compartilhado/core/auth/auth.guard';
 const routes: Routes = [
     {
         path: 'curriculo',
-        loadChildren: './curriculo/curriculo.module#CurriculoModule',
+        loadChildren: () => import('./curriculo/curriculo.module').then(m => m.CurriculoModule),
         canActivate: [AuthGuard]
     },
     {
         path: 'curso',
-        loadChildren: './curso/curso.module#CursoModule',
+        loadChildren: () => import('./curso/curso.module').then(m => m.CursoModule),
         canActivate: [AuthGuard]
     },
     {
         path: 'disciplina',
-        loadChildren: './disciplina/disciplinas.module#DisciplinasModule',
+        loadChildren: () => import('./disciplina/disciplinas.module').then(m => m.DisciplinasModule),
         canActivate: [AuthGuard]
     },
     {
         path: 'turno',
-        loadChildren: './turno/turno.module#TurnoModule',
+        loadChildren: () => import('./turno/turno.module').then(m => m.TurnoModule),
         canActivate: [AuthGuard]
     },
     {
         path: 'usuarios',
-        loadChildren: './usuarios/usuarios.module#UsuariosModule',
+        loadChildren: () => import('./usuarios/usuarios.module').then(m => m.UsuariosModule),
         canActivate: [AuthGuard]
     },
     {
         path: 'cargos',
-        loadChildren: './cargos/cargos.module#CargoModule',
+        loadChildren: () => import('./cargos/cargos.module').then(m => m.CargoModule),
         canActivate: [AuthGuard]
     },
 ];

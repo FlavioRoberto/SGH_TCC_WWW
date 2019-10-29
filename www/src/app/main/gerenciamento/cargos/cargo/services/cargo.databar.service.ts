@@ -6,29 +6,34 @@ import { IDataBarBindService } from '@compartilhado/layout/databar/contrato/idat
 import { IDataEntidadePaginada } from '@compartilhado/layout/databar/contrato/idatabar-entidade-paginada';
 
 import { Cargo } from '../models/cargo.model';
+import { CargoService } from './cargo.service';
+import { CargoPaginado } from '../models/cargo-paginado';
 
 @Injectable()
 export class CargoDataBarBindService implements IDataBarBindService<Cargo>{
 
-    formgroup: FormGroup;
     onClickEnter: EventEmitter<Cargo>;
 
+    constructor(private _servico: CargoService, public formgroup: FormGroup) { }
+
     getEntidade(): Cargo {
-        throw new Error("Method not implemented.");
+        return this.formgroup.getRawValue() as Cargo;
     }
 
     criar(): Observable<Cargo> {
-        throw new Error("Method not implemented.");
-    }
-    editar(): Observable<Cargo> {
-        throw new Error("Method not implemented.");
-    }
-    remover(): Observable<Cargo> {
-        throw new Error("Method not implemented.");
+        return this._servico.criar(this.getEntidade());
     }
 
-    listarPaginacao(entidadePaginada: IDataEntidadePaginada<Cargo>): Observable<IDataEntidadePaginada<Cargo>> {
-        throw new Error("Method not implemented.");
+    editar(): Observable<Cargo> {
+        return this._servico.editar(this.getEntidade());
+    }
+
+    remover(): Observable<Cargo> {
+        return this._servico.remover(this.getEntidade().codigo);
+    }
+
+    listarPaginacao(entidadePaginada: CargoPaginado): Observable<CargoPaginado> {
+        return this.listarPaginacao(entidadePaginada);
     }
 
 }

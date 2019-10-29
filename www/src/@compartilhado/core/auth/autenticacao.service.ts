@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
-import { JwtHelper } from 'angular2-jwt';
+import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 import { TokenStorageService } from '../token/token-storage.service';
 import { UsuarioStorageService } from '../usuario/usuario-storage.service';
 import { IUsuario } from '../usuario/model/IUsuario.model';
-import { Router } from '@angular/router';
+
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class AutenticacaoService {
-    jwtHelper: JwtHelper = new JwtHelper();
+    jwtHelper = new JwtHelperService();
 
     constructor(private tokenStorageService: TokenStorageService,
         private usuarioStorage: UsuarioStorageService,

@@ -1,20 +1,23 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/idatabar-bind';
-import { CargoPaginado } from './models/cargo-paginado';
-import { Cargo } from './models/cargo.model';
-import { CargoDataBarBindService } from './services/cargo.databar.service';
 import { Component, OnInit } from '@angular/core';
+
+import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/idatabar-bind';
 import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 import { anoRegex } from '@compartilhado/util/input-regex/input-regex';
+import { ColumnDef } from '@compartilhado/layout/expansivel-table/expansivel-table.component';
+import { ApExpansivelTableDataSource } from '@compartilhado/layout/expansivel-table/ApExpansivelTableDataSource';
+
 import { ESemestre } from 'app/shared/enums/esemestre.enum';
 import { ProfessorService } from '../professores/services/professor.service';
 import { Professor } from '../professores/models/professor.model';
 import { CargoDisciplina } from './models/cargo-disciplina';
-import { ApExpansivelTableDataSource } from '@compartilhado/layout/expansivel-table/ApExpansivelTableDataSource';
-import { ColumnDef } from '@compartilhado/layout/expansivel-table/expansivel-table.component';
 import { CurriculoService } from '../../curriculo/services/curriculo.service';
 import { ICurriculo } from '../../curriculo/model/curriculo.model';
 import { ICurriculoDisciplina } from '../../curriculo/model/curriculo-disciplina.model';
+import { CargoService } from './services/cargo.service';
+import { CargoPaginado } from './models/cargo-paginado';
+import { Cargo } from './models/cargo.model';
+import { CargoDataBarBindService } from './services/cargo.databar.service';
 
 @Component({
     templateUrl: './view/cargo.component.html',
@@ -64,12 +67,13 @@ export class CargoComponent implements IDataBarBindComponent<Cargo>, OnInit {
 
     constructor(private _formBuilder: FormBuilder,
         private _servicoProfessor: ProfessorService,
-        private _servicoCurriculo: CurriculoService) { }
+        private _servicoCurriculo: CurriculoService,
+        private _servico: CargoService) { }
 
     ngOnInit(): void {
         this.construirFormulario();
         this.entidadePaginada = new CargoPaginado();
-        this.servicoDataBarBind = new CargoDataBarBindService();
+        this.servicoDataBarBind = new CargoDataBarBindService(this._servico, this.form);
         this.dataSource = new ApExpansivelTableDataSource<CargoDisciplina>();
         this._carregarProfessoresAtivos();
         this._carregarCurriculos();

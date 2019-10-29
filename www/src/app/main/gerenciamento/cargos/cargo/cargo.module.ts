@@ -6,6 +6,7 @@ import { DataBarFormModule } from 'app/shared/layout/components/databar-form/dat
 import { CargoDataBarBindService } from './services/cargo.databar.service';
 import { ProfessorService } from '../professores/services/professor.service';
 import { CurriculoService } from '../../curriculo/services/curriculo.service';
+import { CargoService } from './services/cargo.service';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import { CurriculoService } from '../../curriculo/services/curriculo.service';
     providers: [
         CargoDataBarBindService,
         ProfessorService,
-        CurriculoService
+        CurriculoService,
+        CargoService
     ]
 })
 export class CargoModule { }

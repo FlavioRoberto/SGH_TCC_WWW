@@ -8,7 +8,6 @@ import { ErrorDialogModule } from './dialogs/error-dialog/error-dialog.module';
 import { MatInputModule } from '@angular/material';
 import { ApContainerModule } from './ap-container/ap-container.module';
 import { ApFormAutocompleteModule } from './ap-form-autocomplete/ap-form-autocomplete.module';
-import { ApFieldsetModule } from './ap-fieldset/ap-fieldset.module';
 import { ExpansivelTableModule } from './expansivel-table/expansivel-table.module';
 
 
@@ -24,7 +23,6 @@ import { ExpansivelTableModule } from './expansivel-table/expansivel-table.modul
         ApHeaderDescricaoModule,
         ApContainerModule,
         ApFormAutocompleteModule,
-        ApFieldsetModule,
         ExpansivelTableModule
     ],
     exports: [
@@ -38,7 +36,6 @@ import { ExpansivelTableModule } from './expansivel-table/expansivel-table.modul
         ApContainerModule,
         ApContainerModule,
         ApFormAutocompleteModule,
-        ApFieldsetModule,
         ExpansivelTableModule
     ]
 })

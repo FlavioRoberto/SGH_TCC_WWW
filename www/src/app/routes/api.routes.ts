@@ -38,7 +38,7 @@ export class routesApi {
         rota['listarAtivos'] = `${this.API}/professor/listarAtivos`;
         return rota;
     }
-    s
+
     getRoutes(): any {
         return {
             turno: this.construirRotaPadrao('turno'),
@@ -50,7 +50,8 @@ export class routesApi {
             perfil: this.construirRotaPadrao('perfil'),
             usuario: this.construirRotaUsuario(),
             curriculo: this.construirRotaPadrao('curriculo'),
-            professor: this.construirRotaProfessor()
+            professor: this.construirRotaProfessor(),
+            cargo: this.construirRotaPadrao('cargo')
         };
 
     }

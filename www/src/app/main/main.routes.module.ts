@@ -4,15 +4,15 @@ import { AuthGuard } from '@compartilhado/core/auth/auth.guard';
 
 const routes: Routes = [
     { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-    { path: 'autenticacao', loadChildren: './autenticacao/autenticacao.module#AutenticacaoModule' },
+    { path: 'autenticacao', loadChildren: () => import('./autenticacao/autenticacao.module').then(m => m.AutenticacaoModule) },
     {
         path: 'inicio',
-        loadChildren: './inicio/inicio.module#InicioModule',
+        loadChildren: () => import('./inicio/inicio.module').then(m => m.InicioModule),
         canActivate: [AuthGuard]
     },
     {
         path: 'gerenciamento',
-        loadChildren: './gerenciamento/gerenciamento.module#GerenciamentoModule',
+        loadChildren: () => import('./gerenciamento/gerenciamento.module').then(m => m.GerenciamentoModule),
         canActivate: [AuthGuard]
     }
 ];
