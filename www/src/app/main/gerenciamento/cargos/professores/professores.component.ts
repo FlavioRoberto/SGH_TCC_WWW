@@ -1,23 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/idatabar-bind';
 import { Professor } from './models/professor.model';
 import { ProfessorPaginado } from './models/professor-paginado.model';
 import { ProfessorDataBarService } from './services/professor.databar.service';
-import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 import { ProfessorService } from './services/professor.service';
 import { celularRegex, matriculaRegex } from '@compartilhado/util/input-regex/input-regex';
 import { ActivatedRoute } from '@angular/router';
 import { ICurso } from '../../curso/model/curso.model';
+import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
 
 @Component({
     templateUrl: './view/professores.component.html',
     styleUrls: ['./view/professores.component.scss']
 })
 export class ProfessoresComponent implements IDataBarBindComponent<Professor> {
+    statusDataBar: EStatus;
     form: FormGroup;
     entidadePaginada: ProfessorPaginado;
-    statusNavBar: string;
     servicoDataBarBind: ProfessorDataBarService;
     status: EStatus;
     EStatus = EStatus;

@@ -1,4 +1,3 @@
-import { IDataBarBindService } from '@compartilhado/layout/databar/contrato/idata-bar-service';
 import { FormGroup } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 
@@ -7,8 +6,10 @@ import { Observable } from 'rxjs';
 import { TurnoService } from './turno.service';
 import { TurnoPaginado } from '../model/turno.paginacao';
 import { ITurno } from '../model/turno.interface';
+import { IDataBarBindService, EStatus } from '@breaking_dev/ic-databar-lib';
 
 export class TurnoDataBarService implements IDataBarBindService<ITurno>{
+    status: EStatus;
 
     onClickEnter: EventEmitter<ITurno>;
 

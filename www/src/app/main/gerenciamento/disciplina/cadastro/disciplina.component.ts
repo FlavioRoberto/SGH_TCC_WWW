@@ -7,10 +7,9 @@ import { ITipo } from '../tipo/model/ITipo';
 import { DisciplinaTipoService } from '../tipo/service/disciplina.tipo.service';
 import { DisciplinaService } from './service/disciplina.service';
 import { IDisciplina } from './model/IDisciplina';
-import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/idatabar-bind';
 import { DisciplinaDataBarService } from './service/disciplina-databar.service';
-import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 import { ActivatedRoute } from '@angular/router';
+import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
 
 @Component({
     selector: 'disciplina',
@@ -18,10 +17,10 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['./view/disciplina.component.scss']
 })
 export class DisciplinaComponent implements IDataBarBindComponent<IDisciplina> {
+    statusDataBar: EStatus;
     servicoDataBarBind: DisciplinaDataBarService;
     form: FormGroup;
     entidadePaginada: DisciplinaPaginado;
-    statusNavBar: string;
     EStatus = EStatus;
     tipos: ITipo[];
 
@@ -53,8 +52,8 @@ export class DisciplinaComponent implements IDataBarBindComponent<IDisciplina> {
         this.tipos = this._route.snapshot.data['tipos'];
     }
 
-    statusChanged(status: string): void {
-        this.statusNavBar = status;
+    statusChanged(status: EStatus): void {
+        this.statusDataBar = status;
     }
 
 }

@@ -7,32 +7,23 @@ import { ICurriculo } from '../model/curriculo.model';
 import { ApExpansivelTableDataSource } from '@compartilhado/layout/expansivel-table/ApExpansivelTableDataSource';
 import { ICurriculoDisciplina } from '../model/curriculo-disciplina.model';
 import { tap } from 'rxjs/operators';
-import { IDatabarBindOnClickService, EStatus, DatabarEventClickService, EEventoClick } from '@breaking_dev/ic-databar-lib';
+import { IDatabarBindOnClickService, EStatus, DatabarEventClickService, IDataBarBindService } from '@breaking_dev/ic-databar-lib';
 
-export class CurriculoDataBarService implements IDatabarBindOnClickService<ICurriculo> {
 
-    eventDatabar: DatabarEventClickService;
+export class CurriculoDataBarService implements IDataBarBindService<ICurriculo> {
+      
     status: EStatus;
+    
     onClickEnter: EventEmitter<ICurriculo>;
-
-    constructor(
-        public formgroup: FormGroup,
-        private _servico: CurriculoService,
-        private _dataSource: ApExpansivelTableDataSource<ICurriculoDisciplina>) {
-
+  
+    constructor(public formgroup: FormGroup, private _servico: CurriculoService, private _dataSource: ApExpansivelTableDataSource<ICurriculoDisciplina>) {
         this.onClickEnter = new EventEmitter();
-        this.eventDatabar = new DatabarEventClickService((event: EEventoClick) => {
-            switch (event) {
-                case EEventoClick.onClickEditar: break;
-                default: this._dataSource.clear();
-            }
-        });
     }
-
+   
     enviarFormComEnter(): void {
         this.onClickEnter.emit(this.getEntidade());
     }
-
+   
     getEntidade(): ICurriculo {
         return this.formgroup.getRawValue() as ICurriculo;
     }
@@ -42,17 +33,15 @@ export class CurriculoDataBarService implements IDatabarBindOnClickService<ICurr
         return this._servico.criar(entidadeEnvio)
             .pipe(tap(dados => this._constroiPreRequisitoDescricao(dados.disciplinas)));
     }
-
+    
     editar(): Observable<ICurriculo> {
         const entidadeEnvio = this._prepararEntidadeParaEnvio();
         return this._servico.editar(entidadeEnvio);
     }
-
     remover(): Observable<ICurriculo> {
         return this._servico.remover(this.getEntidade().codigo)
-            .pipe(tap(() => this._dataSource.clear()));
+            .pipe(tap(i => this._dataSource.clear()));
     }
-
     listarPaginacao(entidadePaginada: CurriculoPaginado): Observable<CurriculoPaginado> {
         return this._servico.listarPaginacao(entidadePaginada)
             .pipe(tap(dados => {
@@ -61,20 +50,19 @@ export class CurriculoDataBarService implements IDatabarBindOnClickService<ICurr
                 this._dataSource.addRange(dados.entidade[0].disciplinas);
             }));
     }
-
     private _constroiPreRequisitoDescricao(dados: ICurriculoDisciplina[]): void {
         dados.forEach(dis => {
             dis.preRequisitoDescricao = '';
             dis.preRequisitos.forEach((pr, i) => {
-                if (i === 0 || i >= dis.preRequisitos.length) {
+                if (i == 0 || i >= dis.preRequisitos.length) {
                     dis.preRequisitoDescricao += pr.descricao;
-                } else {
+                }
+                else {
                     dis.preRequisitoDescricao += ' - ' + pr.descricao;
                 }
             });
         });
     }
-
     private _prepararEntidadeParaEnvio(): ICurriculo {
         const disciplinas = this._dataSource.data;
         console.log(disciplinas);
@@ -82,5 +70,4 @@ export class CurriculoDataBarService implements IDatabarBindOnClickService<ICurr
         entidadeEnvio.disciplinas = disciplinas;
         return entidadeEnvio;
     }
-
 }

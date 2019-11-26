@@ -1,31 +1,27 @@
 <div class="page-layout carded simple fullwidth inner-scroll" id="databar-form">
     <!-- CENTER -->
     <div class="center">
-
         <div fxLayout="column">
             <!-- HEADER -->
-            <ap-header-descricao [navegacao]="navegacao">
-            </ap-header-descricao>
+            <ap-header-descricao [navegacao]="navegacao"> </ap-header-descricao>
             <!-- HEADER -->
-            <data-bar [servicoBind]="servicoBind" [entidadePaginada]="entidadePaginada" [form]="form"
-                (statusChanged)="statusAlterado($event)"></data-bar>
+            <ic-data-bar
+                [servicoBind]="servicoBind"
+                [entidadePaginada]="entidadePaginada"
+                [form]="form"
+                (statusChanged)="statusAlterado($event)"
+            ></ic-data-bar>
         </div>
 
         <!-- CONTENT CARD -->
         <div class="content-card">
-
             <!-- CONTENT -->
             <div class="content p-24" fusePerfectScrollbar>
-
                 <ng-content></ng-content>
-
             </div>
             <!-- / CONTENT -->
-
         </div>
         <!-- / CONTENT CARD -->
-
     </div>
     <!-- / CENTER -->
-
 </div>

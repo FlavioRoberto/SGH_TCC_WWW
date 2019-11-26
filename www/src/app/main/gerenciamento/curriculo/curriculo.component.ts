@@ -7,10 +7,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 
-import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 import { ColumnDef } from '@compartilhado/layout/expansivel-table/expansivel-table.component';
 import { ApExpansivelTableDataSource } from '@compartilhado/layout/expansivel-table/ApExpansivelTableDataSource';
-import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/idatabar-bind';
 
 import { locale as portugues } from './../i18n/pt-br';
 
@@ -19,11 +17,12 @@ import { ICurso } from '../curso/model/curso.model';
 import { ITurno } from '../turno/model/turno.interface';
 import { ICurriculoDisciplina } from './model/curriculo-disciplina.model';
 import { CurriculoModule } from './curriculo.module';
-import { CurriculoDataBarService } from './services/curriculo-databar.service';
+import { CurriculoDataBarService } from "./services/CurriculoDataBarService";
 import { AdicionarDisciplinaDialogService } from './components/dialogs/adicionar-disciplina/service/adicionar-disciplina-dialog.service';
 
 import { CurriculoService } from './services/curriculo.service';
 import { anoRegex } from '@compartilhado/util/input-regex/input-regex';
+import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
 
 @Component({
     selector: 'curriculo',
@@ -31,10 +30,10 @@ import { anoRegex } from '@compartilhado/util/input-regex/input-regex';
     styleUrls: ['./view/curriculo.component.scss']
 })
 export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule> {
+    statusDataBar: EStatus;
     servicoDataBarBind: CurriculoDataBarService;
     form: FormGroup;
     entidadePaginada: CurriculoPaginado;
-    statusNavBar: string;
     cursos: ICurso[] = [];
     turnos: ITurno[] = [];
     EStatus = EStatus;
@@ -143,8 +142,8 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         }, disciplina);
     }
 
-    statusChanged(status: string): void {
-        this.statusNavBar = status;
+    statusChanged(status: EStatus): void {
+        this.statusDataBar = status;
     }
 
     private constroiPreRequisitos(dados: ICurriculoDisciplina): void {

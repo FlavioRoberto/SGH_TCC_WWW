@@ -5,9 +5,8 @@ import { ITurno } from './model/turno.interface';
 import { TurnoService } from './service/turno.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TurnoPaginado } from './model/turno.paginacao';
-import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/idatabar-bind';
 import { TurnoDataBarService } from './service/turno-databar.service';
-import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
+import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
 
 @Component({
     selector: 'turno',
@@ -15,10 +14,10 @@ import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
     styleUrls: ['./view/turno.component.scss']
 })
 export class TurnoComponent implements IDataBarBindComponent<ITurno> {
+    statusDataBar: EStatus;
     servicoDataBarBind: TurnoDataBarService;
     form: FormGroup;
     entidadePaginada: TurnoPaginado;
-    statusNavBar: string;
     public EStatus = EStatus;
 
     constructor(
@@ -44,8 +43,8 @@ export class TurnoComponent implements IDataBarBindComponent<ITurno> {
 
     }
 
-    statusChanged(status: string): void {
-        this.statusNavBar = status;
+    statusChanged(status: EStatus): void {
+        this.statusDataBar = status;
     }
 
 

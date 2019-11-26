@@ -1,8 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { IDataBarBindService } from '@compartilhado/layout/databar/contrato/idata-bar-service';
-import { IDataEntidadePaginada } from '@compartilhado/layout/databar/contrato/idatabar-entidade-paginada';
+import { IDataEntidadePaginada, EStatus, IDataBarBindService } from '@breaking_dev/ic-databar-lib';
 import { FormGroup } from '@angular/forms';
-import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
 
 @Component({
     selector: 'databar-form',

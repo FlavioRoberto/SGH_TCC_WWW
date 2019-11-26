@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { DataBarModule } from './databar/data-bar.module';
 import { ApHeaderDescricaoModule } from './ap-header-descricao/ap-header-descricao.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -18,7 +17,6 @@ import { ExpansivelTableModule } from './expansivel-table/expansivel-table.modul
         ReactiveFormsModule,
         MatInputModule,
         ErrorDialogModule,
-        DataBarModule,
         InputMaxLengthModule,
         ApHeaderDescricaoModule,
         ApContainerModule,
@@ -30,7 +28,6 @@ import { ExpansivelTableModule } from './expansivel-table/expansivel-table.modul
         ReactiveFormsModule,
         ErrorDialogModule,
         MatInputModule,
-        DataBarModule,
         InputMaxLengthModule,
         ApHeaderDescricaoModule,
         ApContainerModule,

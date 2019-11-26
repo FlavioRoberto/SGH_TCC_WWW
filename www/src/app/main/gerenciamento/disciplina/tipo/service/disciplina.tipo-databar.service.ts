@@ -1,12 +1,13 @@
-import { IDataBarBindService } from '@compartilhado/layout/databar/contrato/idata-bar-service';
 import { FormGroup } from '@angular/forms';
 import { ITipo } from '../model/ITipo';
 import { Observable } from 'rxjs';
 import { DisciplinaTipoService } from './disciplina.tipo.service';
 import { TipoPaginado } from '../model/tipo.paginacao';
 import { EventEmitter } from '@angular/core';
+import { IDataBarBindService, EStatus } from '@breaking_dev/ic-databar-lib';
 
 export class DisciplinaTipoDataBarService implements IDataBarBindService<ITipo>{
+    status: EStatus;
     onClickEnter: EventEmitter<ITipo>;
 
     constructor(public formgroup: FormGroup, private _servico: DisciplinaTipoService) {

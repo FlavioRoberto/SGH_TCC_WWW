@@ -18,15 +18,15 @@
         <div fxLayout="column" fxLayout.gt-sm="row wrap" fxLayoutGap="8px">
             <!-- CODIGO -->
             <mat-form-field
-                *ngIf="statusNavBar != EStatus.inserindo"
+                *ngIf="statusDataBar != EStatus.inserindo"
                 appearance="outline"
                 fxFlex="20"
             >
                 <mat-label>Código</mat-label>
                 <input
                     [disabled]="
-                        statusNavBar == EStatus.inserindo ||
-                        statusNavBar == EStatus.editando
+                        statusDataBar == EStatus.inserindo ||
+                        statusDataBar == EStatus.editando
                     "
                     matInput
                     class="primary-color-input border-radius-4"
@@ -77,8 +77,8 @@
             <div fxLayoutAlign="end center">
                 <button
                     [disabled]="
-                        statusNavBar != EStatus.editando &&
-                        statusNavBar != EStatus.inserindo
+                        statusDataBar != EStatus.editando &&
+                        statusDataBar != EStatus.inserindo
                     "
                     class="m-4"
                     type="button"
@@ -103,8 +103,8 @@
                 [dataSource]="dataSource"
                 [acoesTabela]="acoesTabela"
                 [desabilitarBotoes]="
-                    statusNavBar != EStatus.editando &&
-                    statusNavBar != EStatus.inserindo
+                    statusDataBar != EStatus.editando &&
+                    statusDataBar != EStatus.inserindo
                 "
             >
             </ap-expansivel-table>

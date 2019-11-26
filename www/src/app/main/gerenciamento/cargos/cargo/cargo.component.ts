@@ -1,8 +1,7 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
 
-import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/idatabar-bind';
-import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
+import { EStatus, OnInitDataBar } from '@breaking_dev/ic-databar-lib';
 import { anoRegex } from '@compartilhado/util/input-regex/input-regex';
 import { ColumnDef } from '@compartilhado/layout/expansivel-table/expansivel-table.component';
 import { ApExpansivelTableDataSource } from '@compartilhado/layout/expansivel-table/ApExpansivelTableDataSource';
@@ -23,12 +22,9 @@ import { CargoDataBarBindService } from './services/cargo.databar.service';
     templateUrl: './view/cargo.component.html',
     styleUrls: ['./view/cargo.component.scss']
 })
-export class CargoComponent implements IDataBarBindComponent<Cargo>, OnInit {
+export class CargoComponent extends OnInitDataBar<Cargo> {
 
-    form: FormGroup;
-    entidadePaginada: CargoPaginado;
-    statusNavBar: string;
-    servicoDataBarBind: CargoDataBarBindService;
+
     semestres = ESemestre;
     professores: Professor[] = [];
     professorFiltro = '';
@@ -38,6 +34,7 @@ export class CargoComponent implements IDataBarBindComponent<Cargo>, OnInit {
 
     //#region datatable
     dataSource: ApExpansivelTableDataSource<CargoDisciplina>;
+
     displayedColumns: ColumnDef[] = [
         new ColumnDef('Disciplina', 'disciplina', 'descricao'),
         new ColumnDef('Período', 'periodo'),
@@ -53,24 +50,31 @@ export class CargoComponent implements IDataBarBindComponent<Cargo>, OnInit {
     acoesTabela = [{
         descricao: 'Editar',
         icone: 'edit',
-        executar: (item: any, index): void => {
+        executar: (): void => {
             //this._editarDisciplina(item, index);
         }
     }, {
         descricao: 'Remover',
         icone: 'delete',
-        executar: (item: any, index): void => {
+        executar: (): void => {
             //this._removerDisicplina(item, index);
         }
     }];
     //#endregion datatable
 
-    constructor(private _formBuilder: FormBuilder,
+    constructor(
+        private _formBuilder: FormBuilder,
         private _servicoProfessor: ProfessorService,
         private _servicoCurriculo: CurriculoService,
-        private _servico: CargoService) { }
+        private _servico: CargoService) {
+        super();
+    }
 
-    ngOnInit(): void {
+    onStatusChanged(status: EStatus): void {
+        this.statusDataBar = status;
+    }
+
+    onInit(): void {
         this.construirFormulario();
         this.entidadePaginada = new CargoPaginado();
         this.servicoDataBarBind = new CargoDataBarBindService(this._servico, this.form);
@@ -80,11 +84,7 @@ export class CargoComponent implements IDataBarBindComponent<Cargo>, OnInit {
     }
 
     get condicaoDataBar(): boolean {
-        return this.statusNavBar === EStatus.inserindo || this.statusNavBar === EStatus.editando;
-    }
-
-    statusChanged(status: string): void {
-        this.statusNavBar = status;
+        return this.statusDataBar === EStatus.inserindo || this.statusDataBar === EStatus.editando;
     }
 
     construirFormulario(): void {
@@ -116,11 +116,10 @@ export class CargoComponent implements IDataBarBindComponent<Cargo>, OnInit {
             this.professores = dados;
             this.carregandoProfessores = false;
         },
-            erro => this.carregandoProfessores = false);
+            () => this.carregandoProfessores = false);
     }
 
     onSelectCurriculo(curriculo: ICurriculo): void {
-        console.log('entrou', curriculo);
         this._servicoCurriculo.listarDisciplinas(curriculo.codigo).subscribe(dados => this.disciplinas = dados);
     }
 

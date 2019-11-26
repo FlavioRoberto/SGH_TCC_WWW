@@ -6,8 +6,7 @@ import { CursoPaginado } from './model/curso.paginacao';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CursoService } from './service/curso.service';
 import { CursoDataBarService } from './service/curso-databar.service';
-import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/idatabar-bind';
-import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
+import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
 
 @Component({
     selector: 'curso',
@@ -15,6 +14,7 @@ import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
     styleUrls: ['./view/curso.component.scss']
 })
 export class CursoComponent implements IDataBarBindComponent<ICurso>{
+    statusDataBar: EStatus;
     servicoDataBarBind: CursoDataBarService;
     statusNavBar: string;
     entidadePaginada: CursoPaginado;

@@ -1,11 +1,14 @@
 import { ITipo } from './ITipo';
-import { IDataEntidadePaginada } from '@compartilhado/layout/databar/contrato/idatabar-entidade-paginada';
+import { IDataEntidadePaginada } from '@breaking_dev/ic-databar-lib';
 
 export class TipoPaginado implements IDataEntidadePaginada<ITipo>{
-    total: number; posicao: number;
-    entidade: ITipo;
+    quantidade: number;
+    total: number; 
+    posicao: number;
+    entidade: ITipo[];
 
     constructor() {
+        this.quantidade = 1;
         this.total = 0;
         this.posicao = 0;
     }

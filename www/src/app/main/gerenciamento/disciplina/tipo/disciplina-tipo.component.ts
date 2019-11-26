@@ -3,14 +3,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 
-import { EStatus } from '@compartilhado/layout/databar/enum/estatus';
-import { IDataBarBindComponent } from '@compartilhado/layout/databar/contrato/idatabar-bind';
-
 import { locale as portugues } from '../../i18n/pt-br';
 import { ITipo } from './model/ITipo';
 import { TipoPaginado } from './model/tipo.paginacao';
 import { DisciplinaTipoService } from './service/disciplina.tipo.service';
 import { DisciplinaTipoDataBarService } from './service/disciplina.tipo-databar.service';
+import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
 
 
 @Component({
@@ -19,10 +17,10 @@ import { DisciplinaTipoDataBarService } from './service/disciplina.tipo-databar.
     styleUrls: ['./view/disciplina-tipo.scss']
 })
 export class DisciplinaTipoComponent implements IDataBarBindComponent<ITipo> {
+    statusDataBar: EStatus;
     servicoDataBarBind: DisciplinaTipoDataBarService;
     form: FormGroup;
     entidadePaginada: TipoPaginado;
-    statusNavBar: string;
     EStatus = EStatus;
 
     constructor(
@@ -47,8 +45,8 @@ export class DisciplinaTipoComponent implements IDataBarBindComponent<ITipo> {
 
     }
 
-    statusChanged(status: string): void {
-        this.statusNavBar = status;
+    statusChanged(status: EStatus): void {
+        this.statusDataBar = status;
     }
 
 }

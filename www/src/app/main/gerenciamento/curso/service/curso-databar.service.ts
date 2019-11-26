@@ -2,20 +2,22 @@ import { FormGroup } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { IDataBarBindService } from '@compartilhado/layout/databar/contrato/idata-bar-service';
 
 import { ICurso } from '../model/curso.model';
 import { CursoPaginado } from '../model/curso.paginacao';
 import { CursoService } from './curso.service';
+import { IDataBarBindService, EStatus } from '@breaking_dev/ic-databar-lib';
 
 export class CursoDataBarService implements IDataBarBindService<ICurso>{
+    status: EStatus;
 
     onClickEnter: EventEmitter<ICurso> = new EventEmitter();
 
     constructor(public formgroup: FormGroup, private _servico: CursoService) {
+        this.onClickEnter = new EventEmitter();
     }
 
-    enviarFormComEnter() {
+    enviarFormComEnter(): void {
         this.onClickEnter.emit(this.getEntidade());
     }
 
