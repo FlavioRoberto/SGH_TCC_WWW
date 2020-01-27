@@ -56,7 +56,6 @@ export class CurriculoDataBarService implements IDatabarBindOnClickService<ICurr
     listarPaginacao(entidadePaginada: CurriculoPaginado): Observable<CurriculoPaginado> {
         return this._servico.listarPaginacao(entidadePaginada)
             .pipe(tap(dados => {
-                console.log(dados);
                 this._constroiPreRequisitoDescricao(dados.entidade[0].disciplinas);
                 this._dataSource.addRange(dados.entidade[0].disciplinas);
             }));
@@ -64,14 +63,16 @@ export class CurriculoDataBarService implements IDatabarBindOnClickService<ICurr
 
     private _constroiPreRequisitoDescricao(dados: ICurriculoDisciplina[]): void {
         dados.forEach(dis => {
-            dis.preRequisitoDescricao = '';
-            dis.preRequisitos.forEach((pr, i) => {
-                if (i === 0 || i >= dis.preRequisitos.length) {
-                    dis.preRequisitoDescricao += pr.descricao;
-                } else {
-                    dis.preRequisitoDescricao += ' - ' + pr.descricao;
-                }
-            });
+            if (dis.preRequisitos) {
+                dis.preRequisitoDescricao = '';
+                dis.preRequisitos.forEach((pr, i) => {
+                    if (i === 0 || i >= dis.preRequisitos.length) {
+                        dis.preRequisitoDescricao += pr.descricao;
+                    } else {
+                        dis.preRequisitoDescricao += ' - ' + pr.descricao;
+                    }
+                });
+            }
         });
     }
 

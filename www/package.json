@@ -67,7 +67,7 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "0.803.21",
+    "@angular-devkit/build-angular": "0.803.23",
     "@angular/cli": "8.3.21",
     "@angular/compiler-cli": "8.2.14",
     "@angular/language-service": "8.2.14",
@@ -76,7 +76,7 @@
     "@types/jasminewd2": "2.0.6",
     "@types/lodash": "4.14.119",
     "@types/node": "8.9.5",
-    "codelyzer": "^5.0.1",
+    "codelyzer": "5.2.1",
     "jasmine-core": "2.99.1",
     "jasmine-spec-reporter": "4.2.1",
     "karma": "4.4.1",

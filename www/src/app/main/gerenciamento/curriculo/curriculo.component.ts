@@ -17,7 +17,7 @@ import { ICurso } from '../curso/model/curso.model';
 import { ITurno } from '../turno/model/turno.interface';
 import { ICurriculoDisciplina } from './model/curriculo-disciplina.model';
 import { CurriculoModule } from './curriculo.module';
-import { CurriculoDataBarService } from "./services/CurriculoDataBarService";
+import { CurriculoDataBarService } from './services/curriculo-databar.service';
 import { AdicionarDisciplinaDialogService } from './components/dialogs/adicionar-disciplina/service/adicionar-disciplina-dialog.service';
 
 import { CurriculoService } from './services/curriculo.service';

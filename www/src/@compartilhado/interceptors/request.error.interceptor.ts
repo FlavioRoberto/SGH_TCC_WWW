@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { ErrorDialogService } from '@compartilhado/layout/dialogs/error-dialog/service/error-dialog.service';
 import { Router } from '@angular/router';
@@ -53,7 +53,7 @@ export class RequestErrorInterceptor implements HttpInterceptor {
 
                         this.dialogService.openDialog('Atenção', mensagem);
 
-                        return Observable.throw(err);
+                        return throwError(err);
                     }
                 })
             );
