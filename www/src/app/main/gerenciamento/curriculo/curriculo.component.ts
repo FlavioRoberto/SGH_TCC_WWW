@@ -66,7 +66,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     }];
 
     dataSource: ApExpansivelTableDataSource<ICurriculoDisciplina>;
-    @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
 
     constructor(
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
