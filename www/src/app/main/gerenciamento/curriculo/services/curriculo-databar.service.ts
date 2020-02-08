@@ -22,10 +22,10 @@ export class CurriculoDataBarService implements IDatabarBindOnClickService<ICurr
 
         this.onClickEnter = new EventEmitter();
         this.eventDatabar = new DatabarEventClickService((event: EEventoClick) => {
-            switch (event) {
-                case EEventoClick.onClickEditar: break;
-                default: this._dataSource.clear();
-            }
+            // switch (event) {
+            //     // case EEventoClick.onClickEditar: break;
+            //     // default: this._dataSource.clear();
+            // }
         });
     }
 
