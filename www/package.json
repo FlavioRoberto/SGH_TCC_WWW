@@ -33,7 +33,7 @@
     "@angular/router": "9.0.0",
     "@auth0/angular-jwt": "3.0.0",
     "@breaking_dev/ic-databar-lib": "0.0.12",
-    "@breaking_dev/ic-expansivel-table": "0.0.3",
+    "@breaking_dev/ic-expansivel-table": "0.0.4",
     "@breaking_dev/ic-fieldset": "0.0.1",
     "@ngrx/effects": "8.6.0",
     "@ngrx/store": "8.6.0",

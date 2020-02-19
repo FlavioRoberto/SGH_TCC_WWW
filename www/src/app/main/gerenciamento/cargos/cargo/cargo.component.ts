@@ -36,7 +36,7 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
         private _formBuilder: FormBuilder,
         private _servicoProfessor: ProfessorService,
         private _servico: CargoService,
-        public expansivelTableServico: CargoExpansivelTableService) {
+        public servicoExpansivelTable: CargoExpansivelTableService) {
         super();
     }
 
@@ -49,26 +49,20 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
         this.entidadePaginada = new CargoPaginado();
         this.servicoDataBarBind = new CargoDataBarBindService(this._servico, this.form);
         this._carregarProfessoresAtivos();
-
-        this.colunasExpansivelTable = [
-            { def: 'cursoDescricao', titulo: 'Curso', value: null },
-            { def: 'disciplinaDescricao', titulo: 'Disciplina', value: null }
-        ];
-
-        this.acoesExpansivelTable = [
-            {
-                descricao: 'Remover',
-                cor: 'primary',
-                executaMetodo: () => { alert('teste'); },
-                icone: 'delete',
-                toolTip: 'Remover disciplina',
-                expandir: false
-            }
-        ];
+        this.colunasExpansivelTable = this.servicoExpansivelTable.colunas;
+        this.acoesExpansivelTable = this.servicoExpansivelTable.acoes;
     }
 
-    get condicaoDataBar(): boolean {
+    get inserindoOuEditando(): boolean {
         return this.statusDataBar === EStatus.inserindo || this.statusDataBar === EStatus.editando;
+    }
+
+    get exibirTextoVincularDisciplina(): boolean {
+        if (this.servicoExpansivelTable == null) {
+            return true;
+        }
+
+        return this.servicoExpansivelTable.dataSource.data.length <= 0;
     }
 
     construirFormulario(): void {

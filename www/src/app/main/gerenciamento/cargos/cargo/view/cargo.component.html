@@ -17,7 +17,7 @@
                 <mat-label>Número</mat-label>
                 <input
                     #input_numero
-                    [required]="condicaoDataBar"
+                    [required]="inserindoOuEditando"
                     matInput
                     mask="9*"
                     maxlength="6"
@@ -39,7 +39,7 @@
                 <mat-label>Edital</mat-label>
                 <input
                     #input_edital
-                    [required]="condicaoDataBar"
+                    [required]="inserindoOuEditando"
                     matInput
                     mask="9*"
                     maxlength="6"
@@ -61,7 +61,7 @@
                 <mat-label>Ano</mat-label>
                 <input
                     #input_ano
-                    [required]="condicaoDataBar"
+                    [required]="inserindoOuEditando"
                     matInput
                     mask="9{4}"
                     maxlength="4"
@@ -91,7 +91,7 @@
                 <mat-select
                     fxLayout="column"
                     formControlName="semestre"
-                    [required]="condicaoDataBar"
+                    [required]="inserindoOuEditando"
                 >
                     <div *ngFor="let semestre of semestres">
                         <mat-option [value]="semestre.codigo">{{
@@ -143,7 +143,7 @@
             <!--  DISCIPLINAS -->
             <div class="mat-elevation-z1" fxLayout="column">
                 <!-- BTN_ADICIONAR_DISCIPINA -->
-                <div fxLayoutAlign="end center">
+                <div fxLayoutAlign="end center" class="mt-8">
                     <button
                         [disabled]="
                             statusDataBar != EStatus.editando &&
@@ -151,7 +151,7 @@
                         "
                         class="m-4"
                         type="button"
-                        mat-button
+                        mat-raised-button
                         matTooltip="Vincular disciplina"
                         (click)="abrirDialogAdicionarDisciplina()"
                         color="primary"
@@ -159,23 +159,20 @@
                         <!-- <span>
                         Vincular disciplina
                     </span> -->
-                        <mat-icon>add_circle</mat-icon>
+                        Adicionar disciplina
                     </button>
                 </div>
                 <!-- BTN_ADICIONAR_DISCIPINA -->
 
-                <span class="texto-informativo">
-                    <p>
-                        Clique no + para vincular uma disciplina ao currículo.
-                    </p>
-                </span>
-
                 <!-- TABELA -->
-                <ic-expansivel-table
-                    [displayedColumns]="colunasExpansivelTable"
-                    [servico]="expansivelTableServico"
-                    [acoesTabela]="acoesExpansivelTable"
-                ></ic-expansivel-table>
+                <div class="p-8">
+                    <ic-expansivel-table
+                        [desabilitarBotoes]="!inserindoOuEditando"
+                        [displayedColumns]="colunasExpansivelTable"
+                        [servico]="servicoExpansivelTable"
+                        [acoesTabela]="acoesExpansivelTable"
+                    ></ic-expansivel-table>
+                </div>
                 <!-- TABELA -->
             </div>
             <!--  DISCIPLINAS -->
