@@ -4,10 +4,10 @@ import { CurriculoPaginado } from '../model/curriculo.paginacao';
 import { EventEmitter } from '@angular/core';
 import { CurriculoService } from './curriculo.service';
 import { ICurriculo } from '../model/curriculo.model';
-import { ApExpansivelTableDataSource } from '@compartilhado/layout/expansivel-table/ApExpansivelTableDataSource';
 import { ICurriculoDisciplina } from '../model/curriculo-disciplina.model';
 import { tap } from 'rxjs/operators';
 import { IDatabarBindOnClickService, EStatus, DatabarEventClickService, EEventoClick } from '@breaking_dev/ic-databar-lib';
+import { ApExpansivelTableDataSource } from '@compartilhado/layout/expansivel-table/ApExpansivelTableDataSource';
 
 export class CurriculoDataBarService implements IDatabarBindOnClickService<ICurriculo> {
 

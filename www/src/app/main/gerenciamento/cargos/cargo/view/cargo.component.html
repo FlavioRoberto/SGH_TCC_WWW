@@ -107,7 +107,7 @@
                 <mat-label>Professor</mat-label>
                 <mat-select fxLayout="column" formControlName="professor">
                     <input
-                        *ngIf="professores.length > 0"
+                        *ngIf="professores?.length > 0"
                         class="p-12"
                         placeholder="Pesquisar..."
                         matInput
@@ -120,7 +120,7 @@
                     >
                     <mat-option
                         *ngIf="
-                            professores.length <= 0 && !carregandoProfessores
+                            professores?.length <= 0 && !carregandoProfessores
                         "
                         >Nenhum professor encontrado</mat-option
                     >
@@ -140,55 +140,16 @@
         </div>
 
         <div fxLayout="column">
-            <!-- TABLE DISCIPLINAS -->
+            <!--  DISCIPLINAS -->
             <div class="mat-elevation-z1" fxLayout="column">
-                <div
-                    *ngIf="condicaoDataBar"
-                    fxLayout="row"
-                    fxLayoutGap="16px"
-                    class="p-16"
-                    fxLayoutAlign="center center"
-                >
-                    <!-- CURRICULO -->
-                    <mat-form-field fxFlex="1 0 auto">
-                        <mat-label>Curso</mat-label>
-                        <mat-select
-                            fxLayout="column"
-                            [required]="condicaoDataBar"
-                        >
-                            <div *ngFor="let curriculo of curriculos">
-                                <mat-option
-                                    [value]="curriculo.codigo"
-                                    (onSelectionChange)="
-                                        onSelectCurriculo(curriculo)
-                                    "
-                                >
-                                    {{ curriculo.descricaoCurso }} -
-                                    {{ curriculo.ano }}
-                                </mat-option>
-                            </div>
-                        </mat-select>
-                    </mat-form-field>
-                    <!-- CURRICULO -->
-
-                    <!-- DISCIPLINAS -->
-                    <mat-form-field fxFlex="1 0 auto">
-                        <mat-label>Disciplinas</mat-label>
-                        <mat-select
-                            fxLayout="column"
-                            [required]="condicaoDataBar"
-                        >
-                            <div *ngFor="let disciplina of disciplinas">
-                                <mat-option [value]="disciplina.codigo">{{
-                                    disciplina.disciplina.descricao
-                                }}</mat-option>
-                            </div>
-                        </mat-select>
-                    </mat-form-field>
-                    <!-- DISCIPLINAS -->
-
+                <!-- BTN_ADICIONAR_DISCIPINA -->
+                <div fxLayoutAlign="end center">
                     <button
-                        [disabled]="!condicaoDataBar"
+                        [disabled]="
+                            statusDataBar != EStatus.editando &&
+                            statusDataBar != EStatus.inserindo
+                        "
+                        class="m-4"
                         type="button"
                         mat-button
                         matTooltip="Vincular disciplina"
@@ -201,30 +162,23 @@
                         <mat-icon>add_circle</mat-icon>
                     </button>
                 </div>
+                <!-- BTN_ADICIONAR_DISCIPINA -->
 
-                <!-- TABELA -->
-                <ap-expansivel-table
-                    *ngIf="dataSource.data.length > 0"
-                    fxFlex
-                    [displayedColumns]="displayedColumns"
-                    [columnDefExpansivel]="displayedExpansivelColumns"
-                    [dataSource]="dataSource"
-                    [acoesTabela]="acoesTabela"
-                    [desabilitarBotoes]="condicaoDataBar"
-                >
-                </ap-expansivel-table>
-
-                <span
-                    class="texto-informativo"
-                    *ngIf="dataSource.data.length <= 0"
-                >
+                <span class="texto-informativo">
                     <p>
                         Clique no + para vincular uma disciplina ao currículo.
                     </p>
                 </span>
+
+                <!-- TABELA -->
+                <ic-expansivel-table
+                    [displayedColumns]="colunasExpansivelTable"
+                    [servico]="expansivelTableServico"
+                    [acoesTabela]="acoesExpansivelTable"
+                ></ic-expansivel-table>
                 <!-- TABELA -->
             </div>
-            <!-- TABLE DISCIPLINAS -->
+            <!--  DISCIPLINAS -->
         </div>
     </form>
 
