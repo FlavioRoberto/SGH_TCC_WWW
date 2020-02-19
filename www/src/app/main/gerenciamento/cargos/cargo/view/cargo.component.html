@@ -94,9 +94,9 @@
                     [required]="inserindoOuEditando"
                 >
                     <div *ngFor="let semestre of semestres">
-                        <mat-option [value]="semestre.codigo">{{
-                            semestre.descricao
-                        }}</mat-option>
+                        <mat-option [value]="semestre">
+                            {{ retornarDescricaoSemestre(semestre) }}
+                        </mat-option>
                     </div>
                 </mat-select>
             </mat-form-field>

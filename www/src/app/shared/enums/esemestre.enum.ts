@@ -3,3 +3,7 @@ export enum ESemestre {
     Segundo = 2
 }
 
+export const ESemestreLabel = new Map<number, string>([
+    [ESemestre.Primeiro, 'Primeiro'],
+    [ESemestre.Segundo, 'Segundo']
+]);

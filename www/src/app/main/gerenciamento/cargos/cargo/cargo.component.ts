@@ -2,11 +2,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 
 import { EStatus, OnInitDataBar } from '@breaking_dev/ic-databar-lib';
-import { ColumnDef, IExpansivelTableServico, AcoesExpansivelTable } from '@breaking_dev/ic-expansivel-table';
+import { ColumnDef, AcoesExpansivelTable } from '@breaking_dev/ic-expansivel-table';
 
 import { anoRegex } from '@compartilhado/util/input-regex/input-regex';
 
-import { ESemestre } from 'app/shared/enums/esemestre.enum';
+import { ESemestre, ESemestreLabel } from 'app/shared/enums/esemestre.enum';
 import { ProfessorService } from '../professores/services/professor.service';
 import { Professor } from '../professores/models/professor.model';
 import { ICurriculo } from '../../curriculo/model/curriculo.model';
@@ -23,7 +23,7 @@ import { CargoExpansivelTableService } from './services/cargo.table.service';
 })
 export class CargoComponent extends OnInitDataBar<Cargo> {
 
-    semestres = ESemestre;
+    semestres: ESemestre[];
     professores: Professor[] = [];
     professorFiltro = '';
     carregandoProfessores = false;
@@ -51,6 +51,7 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
         this._carregarProfessoresAtivos();
         this.colunasExpansivelTable = this.servicoExpansivelTable.colunas;
         this.acoesExpansivelTable = this.servicoExpansivelTable.acoes;
+        this.semestres = this._servico.listarSemestres();
     }
 
     get inserindoOuEditando(): boolean {
@@ -63,6 +64,10 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
         }
 
         return this.servicoExpansivelTable.dataSource.data.length <= 0;
+    }
+
+    retornarDescricaoSemestre(semestre: ESemestre): string {
+        return ESemestreLabel.get(semestre);
     }
 
     construirFormulario(): void {
