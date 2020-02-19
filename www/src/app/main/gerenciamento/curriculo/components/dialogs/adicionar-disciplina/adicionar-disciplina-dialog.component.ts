@@ -3,12 +3,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { OnInit, Inject, Component, ViewEncapsulation, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IFormAutocompleteAcao } from '@compartilhado/layout/ap-form-autocomplete/contrato/IFormAutocompleteAcao';
-import { IDisciplina } from 'app/main/gerenciamento/disciplina/cadastro/model/IDisciplina';
 import { locale as portugues } from './../../../../i18n/pt-br';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { DisciplinaService } from 'app/main/gerenciamento/disciplina/cadastro/service/disciplina.service';
 import { ICurriculoDisciplina } from '../../../model/curriculo-disciplina.model';
 import { EPeriodos } from 'app/shared/enums/eperiodos.enum';
+import { Disciplina } from 'app/main/gerenciamento/disciplina/cadastro/model/disciplina';
 
 @Component({
     selector: 'adicionar-disciplina-dialog',
@@ -24,7 +24,7 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
     adicionarDisciplinaForm: FormGroup;
     acaoAutoCompleteDisciplina: IFormAutocompleteAcao;
     pesquisandoDisciplina: boolean;
-    disciplinas: IDisciplina[];
+    disciplinas: Disciplina[];
     periodos: any;
     filtroDisciplinaPreRequisito = '';
     private eventClickSalvar;

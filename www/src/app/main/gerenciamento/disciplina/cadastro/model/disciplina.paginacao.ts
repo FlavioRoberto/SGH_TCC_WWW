@@ -1,11 +1,11 @@
-import { IDisciplina } from './IDisciplina';
 import { IDataEntidadePaginada } from '@breaking_dev/ic-databar-lib';
+import { Disciplina } from './disciplina';
 
-export class DisciplinaPaginado implements IDataEntidadePaginada<IDisciplina>{
+export class DisciplinaPaginado implements IDataEntidadePaginada<Disciplina>{
     quantidade: number;
     total: number; 
     posicao: number;
-    entidade: IDisciplina[];
+    entidade: Disciplina[];
 
     constructor() {
         this.quantidade = 1;

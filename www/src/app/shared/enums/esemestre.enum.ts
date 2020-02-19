@@ -1,4 +1,5 @@
-export const ESemestre = [
-    { codigo: 1, descricao: 'Primeiro' },
-    { codigo: 2, descricao: 'Segundo' }
-];
+export enum ESemestre {
+    Primeiro = 1,
+    Segundo = 2
+}
+

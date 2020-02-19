@@ -1,11 +1,12 @@
 import { CargoDisciplina } from './cargo-disciplina';
+import { ESemestre } from 'app/shared/enums/esemestre.enum';
 
 export class Cargo {
     codigo: number;
     numero: number;
     edital: number;
     ano: number;
-    semestre: number;
+    semestre: ESemestre;
     codigoProfessor: number;
     cargoDisciplinas: CargoDisciplina[];
 }

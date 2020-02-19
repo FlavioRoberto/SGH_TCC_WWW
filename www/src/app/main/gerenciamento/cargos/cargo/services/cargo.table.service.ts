@@ -16,9 +16,8 @@ export class CargoExpansivelTableService implements IExpansivelTableServico<Carg
         this.dataSource = new IcExpansivelTableDataSource([{
             codigoCargo: 1,
             codigoCurriculoDisciplina: 1,
-            cursoDescricao: 'Engenharia da computação',
-            disciplinaDescricao: 'Inteligência Artifical',
-            turno: '1'
+            curso: 'Engenharia da computação',
+            disciplina: { descricao: 'Engenharia de software', codigo: 1 }
         }] as CargoDisciplina[]);
 
         this.paginacaoExpansivelTable = new PaginacaoExpansivelTable();
@@ -40,13 +39,13 @@ export class CargoExpansivelTableService implements IExpansivelTableServico<Carg
 
     private _inicializarColunas(): ColumnDef[] {
         return [
-            { def: 'cursoDescricao', titulo: 'Curso', value: null },
-            { def: 'disciplinaDescricao', titulo: 'Disciplina', value: null }
+            { def: 'curso', titulo: 'Curso', value: null },
+            { def: 'disciplina', titulo: 'Disciplina', value: 'descricao' }
         ];
     }
 
     private _pesquisar(filtro: PaginacaoExpansivelTable<any>, acaoFinalizar: () => void): void {
-
+        
     }
 
     private _removerDisciplina(posicao: number): void {

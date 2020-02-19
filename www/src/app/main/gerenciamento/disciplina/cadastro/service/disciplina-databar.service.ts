@@ -1,15 +1,15 @@
 import { FormGroup } from '@angular/forms';
 import { DisciplinaService } from './disciplina.service';
-import { IDisciplina } from '../model/IDisciplina';
 import { Observable } from 'rxjs';
 import { DisciplinaPaginado } from '../model/disciplina.paginacao';
 import { EventEmitter } from '@angular/core';
 import { IDataBarBindService, EStatus } from '@breaking_dev/ic-databar-lib';
+import { Disciplina } from '../model/disciplina';
 
-export class DisciplinaDataBarService implements IDataBarBindService<IDisciplina> {
+export class DisciplinaDataBarService implements IDataBarBindService<Disciplina> {
     status: EStatus;
 
-    onClickEnter: EventEmitter<IDisciplina>;
+    onClickEnter: EventEmitter<Disciplina>;
 
     constructor(public formgroup: FormGroup, private _servicoDisciplina: DisciplinaService) {
         this.onClickEnter = new EventEmitter();
@@ -19,11 +19,11 @@ export class DisciplinaDataBarService implements IDataBarBindService<IDisciplina
         this.onClickEnter.emit(this.getEntidade());
     }
 
-    getEntidade(): IDisciplina {
+    getEntidade(): Disciplina {
         return this.formgroup.getRawValue();
     }
 
-    criar(): Observable<IDisciplina> {
+    criar(): Observable<Disciplina> {
         return this._servicoDisciplina.criar(this.getEntidade())
     }
 
@@ -31,7 +31,7 @@ export class DisciplinaDataBarService implements IDataBarBindService<IDisciplina
         return this._servicoDisciplina.listarPaginacao(paginacao);
     }
 
-    editar(): Observable<IDisciplina> {
+    editar(): Observable<Disciplina> {
         return this._servicoDisciplina.editar(this.getEntidade());
     }
 

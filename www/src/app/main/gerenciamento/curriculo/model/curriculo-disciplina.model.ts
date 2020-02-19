@@ -1,27 +1,27 @@
-import { IDisciplina } from '../../disciplina/cadastro/model/IDisciplina';
+import { Disciplina } from '../../disciplina/cadastro/model/disciplina';
 
 export class ICurriculoDisciplina {
     codigo: number;
     periodo: number;
-    disciplina: IDisciplina;
+    disciplina: Disciplina;
     codigoDisciplina: number;
     codigoCurriculo: number;
     aulasSemanaisTeorica: number;
     aulasSemanaisPratica: number;
     credito: number;
-    preRequisitos: IDisciplina[];
+    preRequisitos: Disciplina[];
     preRequisitoDescricao: string;
 
     constructor() {
         this.codigo = 0;
         this.periodo = 0;
         this.disciplina = {
-        } as IDisciplina;
+        } as Disciplina;
         this.aulasSemanaisTeorica = 0;
         this.aulasSemanaisPratica = 0;
         this.codigoCurriculo = 0;
         this.credito = 0;
-        this.preRequisitos = new Array<IDisciplina>();
+        this.preRequisitos = new Array<Disciplina>();
         this.preRequisitoDescricao = '';
     }
 

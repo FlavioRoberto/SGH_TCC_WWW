@@ -6,17 +6,17 @@ import { DisciplinaPaginado } from './model/disciplina.paginacao';
 import { ITipo } from '../tipo/model/ITipo';
 import { DisciplinaTipoService } from '../tipo/service/disciplina.tipo.service';
 import { DisciplinaService } from './service/disciplina.service';
-import { IDisciplina } from './model/IDisciplina';
 import { DisciplinaDataBarService } from './service/disciplina-databar.service';
 import { ActivatedRoute } from '@angular/router';
 import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
+import { Disciplina } from './model/disciplina';
 
 @Component({
     selector: 'disciplina',
     templateUrl: './view/disciplina.component.html',
     styleUrls: ['./view/disciplina.component.scss']
 })
-export class DisciplinaComponent implements IDataBarBindComponent<IDisciplina> {
+export class DisciplinaComponent implements IDataBarBindComponent<Disciplina> {
     statusDataBar: EStatus;
     servicoDataBarBind: DisciplinaDataBarService;
     form: FormGroup;

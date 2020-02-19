@@ -141,9 +141,13 @@
 
         <div fxLayout="column">
             <!--  DISCIPLINAS -->
-            <div class="mat-elevation-z1" fxLayout="column">
+            <div
+                class="mat-elevation-z1 p-8"
+                fxLayout="column"
+                fxLayoutGap="8px"
+            >
                 <!-- BTN_ADICIONAR_DISCIPINA -->
-                <div fxLayoutAlign="end center" class="mt-8">
+                <div fxLayoutAlign="end center">
                     <button
                         [disabled]="
                             statusDataBar != EStatus.editando &&
@@ -165,8 +169,11 @@
                 <!-- BTN_ADICIONAR_DISCIPINA -->
 
                 <!-- TABELA -->
-                <div class="p-8">
+                <div>
+                    <mat-divider></mat-divider>
                     <ic-expansivel-table
+                        [habilitarPaginacao]="false"
+                        [habilitarPesquisa]="false"
                         [desabilitarBotoes]="!inserindoOuEditando"
                         [displayedColumns]="colunasExpansivelTable"
                         [servico]="servicoExpansivelTable"
