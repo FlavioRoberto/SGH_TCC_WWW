@@ -3,6 +3,6 @@ import { Disciplina } from 'app/main/gerenciamento/disciplina/cadastro/model/dis
 export class CargoDisciplina {
     codigoCargo: number;
     codigoCurriculoDisciplina: number;
-    disciplina: Disciplina;
-    curso: string;
+    disciplinaDescricao: string;
+    cursoDescricao: string;
 }

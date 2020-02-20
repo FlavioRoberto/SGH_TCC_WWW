@@ -3,17 +3,17 @@ import { Observable } from 'rxjs';
 import { CurriculoPaginado } from '../model/curriculo.paginacao';
 import { EventEmitter } from '@angular/core';
 import { CurriculoService } from './curriculo.service';
-import { ICurriculo } from '../model/curriculo.model';
+import { Curriculo } from '../model/curriculo.model';
 import { ICurriculoDisciplina } from '../model/curriculo-disciplina.model';
 import { tap } from 'rxjs/operators';
 import { IDatabarBindOnClickService, EStatus, DatabarEventClickService, EEventoClick } from '@breaking_dev/ic-databar-lib';
 import { ApExpansivelTableDataSource } from '@compartilhado/layout/expansivel-table/ApExpansivelTableDataSource';
 
-export class CurriculoDataBarService implements IDatabarBindOnClickService<ICurriculo> {
+export class CurriculoDataBarService implements IDatabarBindOnClickService<Curriculo> {
 
     eventDatabar: DatabarEventClickService;
     status: EStatus;
-    onClickEnter: EventEmitter<ICurriculo>;
+    onClickEnter: EventEmitter<Curriculo>;
 
     constructor(
         public formgroup: FormGroup,
@@ -33,22 +33,22 @@ export class CurriculoDataBarService implements IDatabarBindOnClickService<ICurr
         this.onClickEnter.emit(this.getEntidade());
     }
 
-    getEntidade(): ICurriculo {
-        return this.formgroup.getRawValue() as ICurriculo;
+    getEntidade(): Curriculo {
+        return this.formgroup.getRawValue() as Curriculo;
     }
 
-    criar(): Observable<ICurriculo> {
+    criar(): Observable<Curriculo> {
         const entidadeEnvio = this._prepararEntidadeParaEnvio();
         return this._servico.criar(entidadeEnvio)
             .pipe(tap(dados => this._constroiPreRequisitoDescricao(dados.disciplinas)));
     }
 
-    editar(): Observable<ICurriculo> {
+    editar(): Observable<Curriculo> {
         const entidadeEnvio = this._prepararEntidadeParaEnvio();
         return this._servico.editar(entidadeEnvio);
     }
 
-    remover(): Observable<ICurriculo> {
+    remover(): Observable<Curriculo> {
         return this._servico.remover(this.getEntidade().codigo)
             .pipe(tap(() => this._dataSource.clear()));
     }
@@ -76,7 +76,7 @@ export class CurriculoDataBarService implements IDatabarBindOnClickService<ICurr
         });
     }
 
-    private _prepararEntidadeParaEnvio(): ICurriculo {
+    private _prepararEntidadeParaEnvio(): Curriculo {
         const disciplinas = this._dataSource.data;
         console.log(disciplinas);
         const entidadeEnvio = this.getEntidade();

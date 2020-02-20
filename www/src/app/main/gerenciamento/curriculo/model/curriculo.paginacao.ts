@@ -1,13 +1,13 @@
-import { ICurriculo } from './curriculo.model';
+import { Curriculo } from './curriculo.model';
 import { IDataEntidadePaginada } from '@breaking_dev/ic-databar-lib';
 
 
-export class CurriculoPaginado implements IDataEntidadePaginada<ICurriculo>
+export class CurriculoPaginado implements IDataEntidadePaginada<Curriculo>
 {
     quantidade: number;
     total: number;
     posicao: number;
-    entidade: ICurriculo[];
+    entidade: Curriculo[];
 
     constructor() {
         this.quantidade = 1;

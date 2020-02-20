@@ -11,7 +11,7 @@ export class AdicionarDisciplinaDialogService {
 
     constructor(private dialog: MatDialog) { }
 
-    openDialog(titulo: string, onClickSalvar: (dados: ICurriculoDisciplina, form: FormGroup) => void, disciplina): void {
+    abrirDialog(titulo: string, onClickSalvar: (dados: ICurriculoDisciplina, form: FormGroup) => void, disciplina): void {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.panelClass = 'adicionar-disciplina-dialog';
         dialogConfig.data = {
@@ -25,7 +25,7 @@ export class AdicionarDisciplinaDialogService {
 
     }
 
-    closeDialog(): void {
+    fecharDialog(): void {
         this.dialogRef.close();
     }
 }

@@ -18,7 +18,7 @@ export abstract class HttpBaseService<T> {
         return this.http.get<T[]>(rota);
     }
 
-    protected post(entidade: T, rota: string): Observable<T> {
+    protected post<T>(entidade: T, rota: string): Observable<T> {
         return this.http.post<T>(
             rota,
             JSON.stringify(entidade)

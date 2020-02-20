@@ -47,10 +47,10 @@
                     formControlName="ano"
                 />
                 <mat-error *ngIf="form.get('ano').hasError('required')">
-                    {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
+                    {{ "GERENCIAMENTO.CAMPO_OBRIGATORIO" | translate }}
                 </mat-error>
                 <mat-error *ngIf="form.get('ano').hasError('pattern')">
-                    {{ 'GERENCIAMENTO.ANO_INVALIDO' | translate }}
+                    {{ "GERENCIAMENTO.ANO_INVALIDO" | translate }}
                 </mat-error>
             </mat-form-field>
             <!-- ANO -->
@@ -67,13 +67,13 @@
                     </mat-option>
                 </mat-select>
                 <mat-error *ngIf="form.get('codigoCurso').hasError('required')">
-                    {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
+                    {{ "GERENCIAMENTO.CAMPO_OBRIGATORIO" | translate }}
                 </mat-error>
             </mat-form-field>
             <!-- CURSO -->
         </div>
         <!-- TABLE DISCIPLINAS -->
-        <div class="mat-elevation-z1" fxLayout="column">
+        <div class="mat-elevation-z1 p-8" fxLayout="column">
             <div fxLayoutAlign="end center">
                 <button
                     [disabled]="
@@ -82,15 +82,11 @@
                     "
                     class="m-4"
                     type="button"
-                    mat-button
-                    matTooltip="Vincular disciplina"
+                    mat-raised-button
                     (click)="abrirDialogAdicionarDisciplina()"
                     color="primary"
                 >
-                    <!-- <span>
-                        Vincular disciplina
-                    </span> -->
-                    <mat-icon>add_circle</mat-icon>
+                    Vincular disciplina
                 </button>
             </div>
 
@@ -110,7 +106,10 @@
             </ap-expansivel-table>
 
             <span class="texto-informativo" *ngIf="dataSource.data.length <= 0">
-                <p>Clique no + para vincular uma disciplina ao currículo.</p>
+                <p>
+                    Clique em vincular disciplina para adicionar uma disciplina
+                    ao currículo.
+                </p>
             </span>
             <!-- TABELA -->
         </div>

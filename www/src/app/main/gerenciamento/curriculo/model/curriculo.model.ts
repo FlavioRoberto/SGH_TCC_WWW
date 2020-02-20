@@ -1,6 +1,6 @@
 import { ICurriculoDisciplina } from './curriculo-disciplina.model';
 
-export interface ICurriculo {
+export interface Curriculo {
     codigo: number;
     codigoCurso: number;
     descricaoCurso: string;

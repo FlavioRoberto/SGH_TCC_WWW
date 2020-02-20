@@ -63,7 +63,7 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
                 this.disciplinas = data;
                 console.log(this.disciplinaEditar);
                 if (this.disciplinaEditar) {
-                    this.adicionarDisciplinaForm.setValue(this.disciplinaEditar);
+                    this.adicionarDisciplinaForm.patchValue(this.disciplinaEditar);
                 }
             });
     }
@@ -90,7 +90,7 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
     }
 
     onChangeDisciplina(disciplina): void {
-        this.adicionarDisciplinaForm.get('preRequisitos').setValue(null);
+        this.adicionarDisciplinaForm.get('preRequisitos').patchValue(null);
     }
 
 }

@@ -11,7 +11,7 @@ export class LoginService extends HttpBaseService<any> {
     rota = new routesApi().getRoutes().usuario;
 
     autenticar(dados: ILogin): Observable<string> {
-        return this.post(dados, this.rota.autenticar);
+        return this.post<any>(dados, this.rota.autenticar);
     }
 
 }

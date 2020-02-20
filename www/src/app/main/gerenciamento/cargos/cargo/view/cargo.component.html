@@ -149,10 +149,7 @@
                 <!-- BTN_ADICIONAR_DISCIPINA -->
                 <div fxLayoutAlign="end center">
                     <button
-                        [disabled]="
-                            statusDataBar != EStatus.editando &&
-                            statusDataBar != EStatus.inserindo
-                        "
+                        [disabled]="desabilitarBotaoAdicionarDisciplina"
                         class="m-4"
                         type="button"
                         mat-raised-button

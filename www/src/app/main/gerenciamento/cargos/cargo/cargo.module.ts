@@ -9,13 +9,16 @@ import { CurriculoService } from '../../curriculo/services/curriculo.service';
 import { CargoService } from './services/cargo.service';
 import { CargoComponent } from './cargo.component';
 import { CargoExpansivelTableService } from './services/cargo.table.service';
+import { DisciplinaCargoDialogModule } from './components/disciplina-cargo-dialog/disciplina-cargo-dialog.module';
+import { CurriculoResolver } from '../../resolvers/curriculo.resolver';
 
 @NgModule({
     imports: [
         DataBarFormModule,
         FuseSharedModule,
         CargoRoutingModule,
-        IcExpansivelTableModule
+        IcExpansivelTableModule,
+        DisciplinaCargoDialogModule
     ],
     declarations: [CargoComponent],
     providers: [
@@ -23,7 +26,8 @@ import { CargoExpansivelTableService } from './services/cargo.table.service';
         ProfessorService,
         CurriculoService,
         CargoService,
-        CargoExpansivelTableService
+        CargoExpansivelTableService,
+        CurriculoResolver
     ]
 })
 export class CargoModule { }

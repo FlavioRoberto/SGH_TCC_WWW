@@ -10,7 +10,7 @@ export class AlterarSenhaService extends HttpBaseService<any>{
     rota = new routesApi().getRoutes().usuario;
 
     atualizarSenha(dados: IAtualizarSenha): Observable<string> {
-        return this.post(dados, this.rota.atualizarSenha);
+        return this.post<any>(dados, this.rota.atualizarSenha);
     }
 
 }

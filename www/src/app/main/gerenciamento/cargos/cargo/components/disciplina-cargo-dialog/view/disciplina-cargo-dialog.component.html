@@ -1,0 +1,93 @@
+<div fxLayout="column" fxFlex="1 0 auto" class="dialog-content-wrapper">
+    <mat-toolbar class="mat-accent m-0">
+        <mat-toolbar-row
+            fxFlex
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <span class="title dialog-title">Adicionar disciplinas</span>
+            <button
+                mat-icon-button
+                (click)="fecharDialog()"
+                aria-label="Fechar dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div fxFlex="100" class="p-16 pb-0 m-0 noPadding" fusePerfectScrollbar>
+        <!-- FORM -->
+        <form [formGroup]="form" fxLayout="column">
+            <!-- CURRICULO -->
+            <mat-form-field appearance="outline" fxFlex="1 0 auto">
+                <mat-label>Currículo</mat-label>
+                <mat-select fxLayout="column" formControlName="curriculo">
+                    <div *ngFor="let curriculo of curriculos">
+                        <mat-option *ngIf="curriculos.length <= 0" disabled>
+                            <span>Nenhum registro encontrado</span>
+                        </mat-option>
+                        <mat-option
+                            [value]="curriculo"
+                            (onSelectionChange)="
+                                aoSelecionarCurriculo(curriculo)
+                            "
+                        >
+                            {{ curriculo.descricaoCurso }} - {{ curriculo.ano }}
+                        </mat-option>
+                    </div>
+                </mat-select>
+            </mat-form-field>
+            <!-- CURRICULO -->
+
+            <!-- DISCIPLINAS_CURRICULO -->
+            <mat-form-field appearance="outline" fxFlex="1 0 auto">
+                <mat-label>{{ descricaoLabelDisciplinasCurriculo }} </mat-label>
+                <mat-select
+                    fxLayout="column"
+                    [disabled]="!form.get('curriculo').value"
+                    formControlName="disciplinasCurriculo"
+                >
+                    <input
+                        class="p-12"
+                        placeholder="Pesquisar..."
+                        matInput
+                        name="filtro"
+                        (keyup)="
+                            filtrarDisciplinasCurriculo($event.target.value)
+                        "
+                    />
+                    <mat-divider></mat-divider>
+                    <div
+                        *ngFor="
+                            let disciplinaCurriculo of disciplinasCurriculo
+                                | filter: filtroDisciplinaCurriculo
+                        "
+                    >
+                        <mat-option [value]="disciplinaCurriculo">{{
+                            disciplinaCurriculo.disciplina.descricao
+                        }}</mat-option>
+                    </div>
+                </mat-select>
+            </mat-form-field>
+            <!-- DISCIPLINAS_CURRICULO -->
+
+            <!-- FORM -->
+        </form>
+    </div>
+
+    <div
+        mat-dialog-actions
+        class="m-0 p-16"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+    >
+        <button
+            class="mat-raised-button mat-accent"
+            (click)="salvar()"
+            [disabled]="this.form.hasError() || this.form.invalid"
+        >
+            <span>SALVAR</span>
+        </button>
+    </div>
+</div>

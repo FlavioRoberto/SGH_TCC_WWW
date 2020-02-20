@@ -4,6 +4,7 @@ import { OnInit, Inject, Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlterarSenhaService } from './service/alterar-senha.service';
 import { IAtualizarSenha } from './models/IAtualizarSenha';
+import { SnackBarService } from 'app/shared/services/snack-bar.service';
 
 @Component({
     selector: 'alterar-senha-dialog',
@@ -20,7 +21,7 @@ export class AlterarSenhaDialogComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private dialogRef: MatDialogRef<AlterarSenhaDialogComponent>,
         private _service: AlterarSenhaService,
-        private _snackBar: MatSnackBar,
+        private _snackBar: SnackBarService,
         @Inject(MAT_DIALOG_DATA) data) {
 
     }
@@ -63,11 +64,7 @@ export class AlterarSenhaDialogComponent implements OnInit {
     }
 
     private exibirSnackBar(mensagem: string): void {
-        this._snackBar.open(mensagem, 'OK', {
-            panelClass: 'sucesso',
-            duration: 3500,
-            horizontalPosition: 'center'
-        });
+        this._snackBar.exibirSnackBarSucesso(mensagem);
     }
 
 }

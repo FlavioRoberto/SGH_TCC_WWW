@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControlName, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RedefinirSenhaService } from './services/redefinir-senha.service';
+import { SnackBarService } from 'app/shared/services/snack-bar.service';
 
 @Component({
     templateUrl: './view/redefinir-senha.component.html',
@@ -14,7 +15,7 @@ export class RedefinirSenhaComponent implements OnInit {
 
     constructor(
         private _formBuilder: FormBuilder,
-        private _snackBar: MatSnackBar,
+        private _snackBar: SnackBarService,
         private _servico: RedefinirSenhaService) {
     }
 
@@ -38,11 +39,7 @@ export class RedefinirSenhaComponent implements OnInit {
     }
 
     private exibirSnackBar(mensagem: string): void {
-        //   'Senha redefinida com sucesso! Foi enviado um e-mail com seus dados de acesso.'
-        this._snackBar.open(mensagem, 'OK', {
-            panelClass: 'sucesso',
-            horizontalPosition: 'center'
-        });
+        this._snackBar.exibirSnackBarSucesso(mensagem);
     }
 
 }

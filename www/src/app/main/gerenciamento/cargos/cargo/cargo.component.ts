@@ -9,13 +9,16 @@ import { anoRegex } from '@compartilhado/util/input-regex/input-regex';
 import { ESemestre, ESemestreLabel } from 'app/shared/enums/esemestre.enum';
 import { ProfessorService } from '../professores/services/professor.service';
 import { Professor } from '../professores/models/professor.model';
-import { ICurriculo } from '../../curriculo/model/curriculo.model';
+import { Curriculo } from '../../curriculo/model/curriculo.model';
 import { ICurriculoDisciplina } from '../../curriculo/model/curriculo-disciplina.model';
 import { CargoService } from './services/cargo.service';
 import { CargoPaginado } from './models/cargo-paginado';
 import { Cargo } from './models/cargo.model';
 import { CargoDataBarBindService } from './services/cargo.databar.service';
 import { CargoExpansivelTableService } from './services/cargo.table.service';
+import { DisciplinaCargoDialogService } from './components/disciplina-cargo-dialog/services/disciplina-cargo-dialog.service';
+import { ActivatedRoute } from '@angular/router';
+import { SnackBarService } from 'app/shared/services/snack-bar.service';
 
 @Component({
     templateUrl: './view/cargo.component.html',
@@ -27,7 +30,7 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
     professores: Professor[] = [];
     professorFiltro = '';
     carregandoProfessores = false;
-    curriculos: ICurriculo[];
+    curriculos: Curriculo[];
     disciplinas: ICurriculoDisciplina[];
     colunasExpansivelTable: ColumnDef[];
     acoesExpansivelTable: AcoesExpansivelTable[];
@@ -36,7 +39,9 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
         private _formBuilder: FormBuilder,
         private _servicoProfessor: ProfessorService,
         private _servico: CargoService,
-        public servicoExpansivelTable: CargoExpansivelTableService) {
+        private _disciplinaCargoDialogService: DisciplinaCargoDialogService,
+        public servicoExpansivelTable: CargoExpansivelTableService,
+        private _route: ActivatedRoute) {
         super();
     }
 
@@ -47,11 +52,12 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
     onInit(): void {
         this.construirFormulario();
         this.entidadePaginada = new CargoPaginado();
-        this.servicoDataBarBind = new CargoDataBarBindService(this._servico, this.form);
+        this.servicoDataBarBind = new CargoDataBarBindService(this._servico, this.servicoExpansivelTable, this.form);
         this._carregarProfessoresAtivos();
         this.colunasExpansivelTable = this.servicoExpansivelTable.colunas;
         this.acoesExpansivelTable = this.servicoExpansivelTable.acoes;
         this.semestres = this._servico.listarSemestres();
+        this.curriculos = this._route.snapshot.data['curriculos'];
     }
 
     get inserindoOuEditando(): boolean {
@@ -66,12 +72,18 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
         return this.servicoExpansivelTable.dataSource.data.length <= 0;
     }
 
+    get desabilitarBotaoAdicionarDisciplina(): boolean {
+        return (this.statusDataBar !== EStatus.editando && this.statusDataBar !== EStatus.inserindo)
+            || !this.form.get('codigo').value;
+    }
+
     retornarDescricaoSemestre(semestre: ESemestre): string {
         return ESemestreLabel.get(semestre);
     }
 
     construirFormulario(): void {
         this.form = this._formBuilder.group({
+            codigo: [null],
             numero: [null, [Validators.required]],
             edital: [null, [Validators.required]],
             ano: [null, [Validators.required, Validators.pattern(anoRegex)]],
@@ -85,7 +97,11 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
     }
 
     abrirDialogAdicionarDisciplina(): void {
-
+        this._disciplinaCargoDialogService.abrirDialog(
+            this.form.get('codigo').value,
+            this.curriculos, disciplinaAdicionada => {
+                this.servicoExpansivelTable.dataSource.add(disciplinaAdicionada);
+            });
     }
 
     private _carregarProfessoresAtivos(): void {

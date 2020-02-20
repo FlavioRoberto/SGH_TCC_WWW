@@ -23,6 +23,7 @@ import { AdicionarDisciplinaDialogService } from './components/dialogs/adicionar
 import { CurriculoService } from './services/curriculo.service';
 import { anoRegex } from '@compartilhado/util/input-regex/input-regex';
 import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
+import { SnackBarService } from 'app/shared/services/snack-bar.service';
 
 @Component({
     selector: 'curriculo',
@@ -73,7 +74,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         private _formBuilder: FormBuilder,
         private _route: ActivatedRoute,
         private _dialog: AdicionarDisciplinaDialogService,
-        private _snackBar: MatSnackBar,
+        private _snackBar: SnackBarService,
         private _platform: Platform,
         private _servico: CurriculoService
     ) {
@@ -108,14 +109,14 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
             aulasSemanaisTeorica: itemEditar.aulasSemanaisTeorica,
             credito: itemEditar.credito,
             periodo: itemEditar.periodo,
-            preRequisitos: itemEditar.preRequisitos.map(i => i.codigo)
+            preRequisitos: itemEditar.preRequisitos?.map(i => i.codigo)
         };
 
         this.abrirDialogAdicionarDisciplina(disciplina, index);
     }
 
     abrirDialogAdicionarDisciplina(disciplina = null, index = null): void {
-        this._dialog.openDialog('Adicionar disciplina', (dados, form: FormGroup) => {
+        this._dialog.abrirDialog('Adicionar disciplina', (dados, form: FormGroup) => {
             const disciplinaAdicionada = this.dataSource.data.filter(item => {
                 return item.codigoDisciplina == dados.codigoDisciplina;
             });
@@ -144,6 +145,9 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
 
     statusChanged(status: EStatus): void {
         this.statusDataBar = status;
+        if (this.statusDataBar === EStatus.novaPesquisa || this.statusDataBar === EStatus.inserindo) {
+            this.dataSource.clear();
+        }
     }
 
     private constroiPreRequisitos(dados: ICurriculoDisciplina): void {
@@ -160,20 +164,17 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     }
 
     private exibirSnackBar(mensagem: string, erro: boolean = false, info: boolean = false): void {
-        let classe = 'sucesso';
         if (erro) {
-            classe = 'erro';
+            this._snackBar.exibirSnackBarErro(mensagem);
+            return;
         }
 
         if (info) {
-            classe = 'info';
+            this._snackBar.exibirSnackBarInformativo(mensagem);
+            return;
         }
-
-        this._snackBar.open(mensagem, 'OK', {
-            panelClass: classe,
-            duration: 3500,
-            horizontalPosition: 'center'
-        });
+        
+        this._snackBar.exibirSnackBarSucesso(mensagem);
     }
 
     private _construirForm(): void {
