@@ -19,12 +19,13 @@ import { CargoService } from '../../services/cargo.service';
 export class DisciplinaCargoDialogComponent implements OnInit {
 
     private _data: IDisciplinaCargoDialogData;
-    public form: FormGroup;
-    public curriculos: Curriculo[];
-    public filtroDisciplinaCurriculo = '';
-    public disciplinasCurriculo: ICurriculoDisciplina[] = [];
-    public carregandoDisciplinasCurriculo = false;
-
+    form: FormGroup;
+    curriculos: Curriculo[];
+    filtroDisciplinaCurriculo = '';
+    disciplinasCurriculo: ICurriculoDisciplina[] = [];
+    carregandoDisciplinasCurriculo = false;
+    salvandoDisciplina = false;
+    
     constructor(
         @Inject(MAT_DIALOG_DATA) data: IDisciplinaCargoDialogData,
         private _formBuilder: FormBuilder,
@@ -70,12 +71,16 @@ export class DisciplinaCargoDialogComponent implements OnInit {
             cursoDescricao: curriculoSelecionado.descricaoCurso
         } as CargoDisciplina;
 
-        this._cargoService.adicionarDisciplina(disciplinaCargo).subscribe(
-            () => {
-                this._data.onClickSalvar(disciplinaCargo);
-                this._snackBarService.exibirSnackBarSucesso('Disciplina adicionada com sucesso');
-            }
-        );
+        this.salvandoDisciplina = true;
+
+        this._cargoService.adicionarDisciplina(disciplinaCargo)
+            .pipe(finalize(() => this.salvandoDisciplina = false))
+            .subscribe(
+                () => {
+                    this._data.onClickSalvar(disciplinaCargo);
+                    this._snackBarService.exibirSnackBarSucesso('Disciplina adicionada com sucesso');
+                }
+            );
     }
 
     fecharDialog(): void {

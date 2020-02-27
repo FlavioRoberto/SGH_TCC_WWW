@@ -85,9 +85,23 @@
         <button
             class="mat-raised-button mat-accent"
             (click)="salvar()"
-            [disabled]="this.form.hasError() || this.form.invalid"
+            [disabled]="
+                this.form.hasError() ||
+                this.form.invalid ||
+                this.salvandoDisciplina
+            "
         >
-            <span>SALVAR</span>
+            <div
+                *ngIf="salvandoDisciplina"
+                fxLayout="row"
+                fxFlex="1 0 auto"
+                fxLayoutAlign="center center"
+                fxLayoutGap="8px"
+            >
+                <span>SALVANDO</span>
+                <mat-spinner diameter="20"></mat-spinner>
+            </div>
+            <span *ngIf="!salvandoDisciplina">SALVAR</span>
         </button>
     </div>
 </div>
