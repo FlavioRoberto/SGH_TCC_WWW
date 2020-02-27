@@ -2,6 +2,8 @@ import { IExpansivelTableServico, PaginacaoExpansivelTable, IcExpansivelTableDat
 import { Injectable } from '@angular/core';
 import { CargoDisciplina } from '../models/cargo-disciplina';
 import { ColumnDef } from '@compartilhado/layout/expansivel-table/expansivel-table.component';
+import { CargoService } from './cargo.service';
+import { finalize } from 'rxjs/operators';
 
 @Injectable()
 export class CargoExpansivelTableService implements IExpansivelTableServico<CargoDisciplina>{
@@ -11,19 +13,24 @@ export class CargoExpansivelTableService implements IExpansivelTableServico<Carg
     dataSource: IcExpansivelTableDataSource<any>;
     acoes: AcoesExpansivelTable[];
     colunas: ColumnDef[];
+    private _removendoDisciplina = false;
 
-    constructor() {
+    constructor(private _servicoCargo: CargoService) {
         this.dataSource = new IcExpansivelTableDataSource();
         this.paginacaoExpansivelTable = new PaginacaoExpansivelTable();
         this.acoes = this._inicializarAcoes();
         this.colunas = this._inicializarColunas();
     }
 
+    get removendoDisciplina(): boolean {
+        return this._removendoDisciplina;
+    }
+
     private _inicializarAcoes(): AcoesExpansivelTable[] {
         return [
             {
                 descricao: 'Remover',
-                executaMetodo: (data?: any, posicao?: number) => this._removerDisciplina(posicao),
+                executaMetodo: (data?: any, posicao?: number) => this._removerDisciplina(data, posicao),
                 icone: 'delete',
                 toolTip: 'Remover disciplina',
                 expandir: false
@@ -42,7 +49,10 @@ export class CargoExpansivelTableService implements IExpansivelTableServico<Carg
 
     }
 
-    private _removerDisciplina(posicao: number): void {
-        this.dataSource.removeByIndex(posicao);
+    private _removerDisciplina(disciplina: CargoDisciplina, posicao: number): void {
+        this._removendoDisciplina = true;
+        this._servicoCargo.removerDisciplina(disciplina.codigo)
+            .pipe(finalize(() => this._removendoDisciplina = false))
+            .subscribe(() => this.dataSource.removeByIndex(posicao));
     }
 }

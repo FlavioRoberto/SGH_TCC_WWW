@@ -1,12 +1,12 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, concat, forkJoin } from 'rxjs';
 
 import { Cargo } from '../models/cargo.model';
 import { CargoService } from './cargo.service';
 import { CargoPaginado } from '../models/cargo-paginado';
 import { IDataBarBindService, EStatus } from '@breaking_dev/ic-databar-lib';
-import { tap } from 'rxjs/operators';
+import { tap, finalize, flatMap } from 'rxjs/operators';
 import { CargoExpansivelTableService } from './cargo.table.service';
 
 @Injectable()
@@ -39,16 +39,24 @@ export class CargoDataBarBindService implements IDataBarBindService<Cargo>{
     }
 
     listarPaginacao(entidadePaginada: CargoPaginado): Observable<CargoPaginado> {
-        return this._servico.listarPaginacao(entidadePaginada).pipe(
-            tap(dados => this._adicionarDisciplinasNaTabela(dados.entidade[0]))
-        );
-    }
-
-    private _adicionarDisciplinasNaTabela(cargo: Cargo): void {
-        this._servico.listarDisciplinas(cargo.codigo).subscribe(disciplinas => {
-            console.log(disciplinas);
-            this._servicoExpansivelTable.dataSource.addRange(disciplinas);
+        return new Observable(observer => {
+            this._servico.listarPaginacao(entidadePaginada)
+                .subscribe(dados => this._adicionarDisciplinasNaTabela(dados.entidade[0],
+                    () => observer.next(dados),
+                    erro => observer.error(erro),
+                    observer.complete
+                ), error => {
+                    observer.error(error);
+                    observer.complete();
+                });
         });
     }
 
+    private _adicionarDisciplinasNaTabela(cargo: Cargo, acaoSucesso: () => void, acaoErro: (erro: string) => void, acaoComplete: () => void): void {
+        this._servico.listarDisciplinas(cargo.codigo)
+            .subscribe(disciplinas => {
+                this._servicoExpansivelTable.dataSource.addRange(disciplinas);
+                acaoSucesso();
+            }, erro => acaoErro(erro), acaoComplete);
+    }
 }

@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class CargoService extends BaseService<Cargo>{
 
+    private _rotaDisciplina = `${this.getRota().base}/disciplinas`;
+
     getRota(): any {
         return new routesApi().getRoutes().cargo;
     }
@@ -18,10 +20,14 @@ export class CargoService extends BaseService<Cargo>{
     }
 
     adicionarDisciplina(disciplina: CargoDisciplina): Observable<CargoDisciplina> {
-        return this.post<CargoDisciplina>(disciplina, `${this.getRota().base}/disciplinas`);
+        return this.post<CargoDisciplina>(disciplina, `${this._rotaDisciplina}`);
     }
 
-    listarDisciplinas(codigoCargo: number):Observable<CargoDisciplina[]>{
+    removerDisciplina(disciplinaId: number): Observable<boolean> {
+        return this.delete(`${this._rotaDisciplina}/${disciplinaId}`);
+    }
+
+    listarDisciplinas(codigoCargo: number): Observable<CargoDisciplina[]> {
         return this.getAll(`${this.getRota().base}/disciplinas/${codigoCargo}`);
     }
 }

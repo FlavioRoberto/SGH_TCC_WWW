@@ -18,7 +18,6 @@ import { CargoDataBarBindService } from './services/cargo.databar.service';
 import { CargoExpansivelTableService } from './services/cargo.table.service';
 import { DisciplinaCargoDialogService } from './components/disciplina-cargo-dialog/services/disciplina-cargo-dialog.service';
 import { ActivatedRoute } from '@angular/router';
-import { SnackBarService } from 'app/shared/services/snack-bar.service';
 
 @Component({
     templateUrl: './view/cargo.component.html',
@@ -47,6 +46,7 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
 
     onStatusChanged(status: EStatus): void {
         this.statusDataBar = status;
+        this._limparDadosDatatable();
     }
 
     onInit(): void {
@@ -64,17 +64,17 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
         return this.statusDataBar === EStatus.inserindo || this.statusDataBar === EStatus.editando;
     }
 
+    get desabilitarBotaoAcaoDatatable(): boolean {
+        return !(this.statusDataBar === EStatus.editando || this.statusDataBar === EStatus.dadosCarregados) ||
+            !this.form.get('codigo').value;
+    }
+
     get exibirTextoVincularDisciplina(): boolean {
         if (this.servicoExpansivelTable == null) {
             return true;
         }
 
         return this.servicoExpansivelTable.dataSource.data.length <= 0;
-    }
-
-    get desabilitarBotaoAdicionarDisciplina(): boolean {
-        return (this.statusDataBar !== EStatus.editando && this.statusDataBar !== EStatus.inserindo)
-            || !this.form.get('codigo').value;
     }
 
     retornarDescricaoSemestre(semestre: ESemestre): string {
@@ -111,6 +111,12 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
             this.carregandoProfessores = false;
         },
             () => this.carregandoProfessores = false);
+    }
+
+    private _limparDadosDatatable(): void {
+        if (this.statusDataBar !== EStatus.dadosCarregados && this.statusDataBar !== EStatus.editando) {
+            this.servicoExpansivelTable.dataSource.clear();
+        }
     }
 }
 

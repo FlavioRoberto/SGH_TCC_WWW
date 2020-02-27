@@ -149,7 +149,7 @@
                 <!-- BTN_ADICIONAR_DISCIPINA -->
                 <div fxLayoutAlign="end center">
                     <button
-                        [disabled]="desabilitarBotaoAdicionarDisciplina"
+                        [disabled]="desabilitarBotaoAcaoDatatable"
                         class="m-4"
                         type="button"
                         mat-raised-button
@@ -169,9 +169,10 @@
                 <div>
                     <mat-divider></mat-divider>
                     <ic-expansivel-table
+                        [habilitarProgressBar]="this.servicoExpansivelTable.removendoDisciplina"
                         [habilitarPaginacao]="false"
                         [habilitarPesquisa]="false"
-                        [desabilitarBotoes]="!inserindoOuEditando"
+                        [desabilitarBotoes]="desabilitarBotaoAcaoDatatable"
                         [displayedColumns]="colunasExpansivelTable"
                         [servico]="servicoExpansivelTable"
                         [acoesTabela]="acoesExpansivelTable"
