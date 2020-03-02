@@ -19,8 +19,7 @@ import { SharedModule } from 'app/shared/shared.module';
         FuseSharedModule,
         CargoRoutingModule,
         IcExpansivelTableModule,
-        DisciplinaCargoDialogModule,
-        SharedModule
+        DisciplinaCargoDialogModule
     ],
     declarations: [CargoComponent],
     providers: [

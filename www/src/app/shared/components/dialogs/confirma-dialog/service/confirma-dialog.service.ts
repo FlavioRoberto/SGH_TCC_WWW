@@ -16,7 +16,7 @@ export class ConfirmaDialogService {
 
     constructor(private dialog: MatDialog) { }
 
-    openDialog(titulo: string, mensagem: string): void {
+    abrirDialog(titulo: string, mensagem: string): void {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
@@ -35,7 +35,7 @@ export class ConfirmaDialogService {
         this.dialogRef = this.dialog.open(ConfirmaDialogComponent, dialogConfig);
     }
 
-    closeDialog(): void {
+    fecharDialog(): void {
         this.dialogRef.close();
     }
 }

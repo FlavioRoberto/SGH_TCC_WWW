@@ -56,7 +56,10 @@ export class CargoExpansivelTableService implements IExpansivelTableServico<Carg
         this._confirmaDialogService.acaoOk = () => {
             this._confirmaDialogService.emProgresso = true;
             this._servicoCargo.removerDisciplina(disciplina.codigo)
-                .pipe(finalize(() => this._confirmaDialogService.emProgresso = false))
+                .pipe(finalize(() => {
+                    this._confirmaDialogService.emProgresso = false;
+                    this._confirmaDialogService.fecharDialog();
+                }))
                 .subscribe(() => this.dataSource.removeByIndex(posicao));
         };
 
@@ -64,6 +67,6 @@ export class CargoExpansivelTableService implements IExpansivelTableServico<Carg
 
         this._confirmaDialogService.mensagemCarregando = `Removendo disciplina ${disciplina.cursoDescricao} do cargo...`;
 
-        this._confirmaDialogService.openDialog('Atenção', `Deseja remover a disciplina ${disciplina.disciplinaDescricao} do cargo?`);
+        this._confirmaDialogService.abrirDialog('Atenção', `Deseja remover a disciplina ${disciplina.disciplinaDescricao} do cargo?`);
     }
 }
