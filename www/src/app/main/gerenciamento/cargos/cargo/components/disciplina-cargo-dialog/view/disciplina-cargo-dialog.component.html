@@ -77,7 +77,7 @@
                 <mat-label>Turnos </mat-label>
                 <mat-select fxLayout="column" formControlName="turno">
                     <div *ngFor="let turno of turnos">
-                        <mat-option [value]="turno.codigo">{{
+                        <mat-option [value]="turno">{{
                             turno.descricao
                         }}</mat-option>
                     </div>

@@ -66,14 +66,14 @@ export class DisciplinaCargoDialogComponent implements OnInit {
     salvar(): void {
         const disciplinaSelecionada = this.form.get('disciplinasCurriculo').value as ICurriculoDisciplina;
         const curriculoSelecionado = this.form.get('curriculo').value as Curriculo;
-        const codigoTurno = this.form.get('turno').value;
+        const turno = this.form.get('turno').value as ITurno;
 
         const disciplinaCargo = {
             codigoCargo: this._data.codigoCargo,
             codigoCurriculoDisciplina: disciplinaSelecionada.codigo,
             disciplinaDescricao: disciplinaSelecionada.disciplina.descricao,
             cursoDescricao: curriculoSelecionado.descricaoCurso,
-            codigoTurno: codigoTurno
+            codigoTurno: turno.codigo
         } as CargoDisciplina;
 
         this.salvandoDisciplina = true;
@@ -82,6 +82,8 @@ export class DisciplinaCargoDialogComponent implements OnInit {
             .pipe(finalize(() => this.salvandoDisciplina = false))
             .subscribe(
                 () => {
+                    disciplinaCargo.cursoDescricao = `${disciplinaCargo.cursoDescricao} - ${curriculoSelecionado.ano}`;
+                    disciplinaCargo.turnoDescricao = turno.descricao;
                     this._data.onClickSalvar(disciplinaCargo);
                     this._snackBarService.exibirSnackBarSucesso('Disciplina adicionada com sucesso');
                     this.form.get('disciplinasCurriculo').reset();
