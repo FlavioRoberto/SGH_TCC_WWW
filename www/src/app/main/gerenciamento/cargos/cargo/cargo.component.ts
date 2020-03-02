@@ -1,5 +1,5 @@
 import { FormBuilder, Validators } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, Injectable, Injector } from '@angular/core';
 
 import { EStatus, OnInitDataBar } from '@breaking_dev/ic-databar-lib';
 import { ColumnDef, AcoesExpansivelTable } from '@breaking_dev/ic-expansivel-table';
@@ -40,6 +40,7 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
         private _servico: CargoService,
         private _disciplinaCargoDialogService: DisciplinaCargoDialogService,
         public servicoExpansivelTable: CargoExpansivelTableService,
+        private _injector: Injector,
         private _route: ActivatedRoute) {
         super();
     }
@@ -52,7 +53,7 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
     onInit(): void {
         this.construirFormulario();
         this.entidadePaginada = new CargoPaginado();
-        this.servicoDataBarBind = new CargoDataBarBindService(this._servico, this.servicoExpansivelTable, this.form);
+        this.servicoDataBarBind = new CargoDataBarBindService(this._injector, this.form);
         this._carregarProfessoresAtivos();
         this.colunasExpansivelTable = this.servicoExpansivelTable.colunas;
         this.acoesExpansivelTable = this.servicoExpansivelTable.acoes;
