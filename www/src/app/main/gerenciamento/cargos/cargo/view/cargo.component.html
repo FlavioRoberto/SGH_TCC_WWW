@@ -166,10 +166,23 @@
                 <!-- BTN_ADICIONAR_DISCIPINA -->
 
                 <!-- TABELA -->
-                <div>
+
+                <span
+                    class="texto-informativo"
+                    *ngIf="!existeDisciplinaCargoSelecionado"
+                >
+                    <p>
+                        Clique em vincular disciplina para adicionar uma
+                        disciplina ao cargo.
+                    </p>
+                </span>
+
+                <div *ngIf="existeDisciplinaCargoSelecionado">
                     <mat-divider></mat-divider>
                     <ic-expansivel-table
-                        [habilitarProgressBar]="this.servicoExpansivelTable.removendoDisciplina"
+                        [habilitarProgressBar]="
+                            this.servicoExpansivelTable.removendoDisciplina
+                        "
                         [habilitarPaginacao]="false"
                         [habilitarPesquisa]="false"
                         [desabilitarBotoes]="desabilitarBotaoAcaoDatatable"

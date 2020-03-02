@@ -79,6 +79,7 @@ export class DisciplinaCargoDialogComponent implements OnInit {
                 () => {
                     this._data.onClickSalvar(disciplinaCargo);
                     this._snackBarService.exibirSnackBarSucesso('Disciplina adicionada com sucesso');
+                    this.form.get('disciplinasCurriculo').reset();
                 }
             );
     }

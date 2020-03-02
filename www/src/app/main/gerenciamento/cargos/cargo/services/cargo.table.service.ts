@@ -47,7 +47,6 @@ export class CargoExpansivelTableService implements IExpansivelTableServico<Carg
     }
 
     private _pesquisar(filtro: PaginacaoExpansivelTable<any>, acaoFinalizar: () => void): void {
-
     }
 
     private _removerDisciplina(disciplina: CargoDisciplina, posicao: number): void {

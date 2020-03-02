@@ -69,13 +69,14 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
             !this.form.get('codigo').value;
     }
 
-    get exibirTextoVincularDisciplina(): boolean {
+    get existeDisciplinaCargoSelecionado(): boolean {
         if (this.servicoExpansivelTable == null) {
-            return true;
+            return false;
         }
 
-        return this.servicoExpansivelTable.dataSource.data.length <= 0;
+        return this.servicoExpansivelTable.dataSource.data.length > 0;
     }
+    
 
     retornarDescricaoSemestre(semestre: ESemestre): string {
         return ESemestreLabel.get(semestre);
