@@ -11,6 +11,7 @@ import { RequestInterceptor } from '@compartilhado/interceptors/request.intercep
 
 import { MainRoutingModule } from './main.routes.module';
 import { RequestErrorInterceptor } from '@compartilhado/interceptors/request.error.interceptor';
+import { SharedModule } from 'app/shared/shared.module';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { RequestErrorInterceptor } from '@compartilhado/interceptors/request.err
         HttpClientModule,
         FuseSharedModule,
         MainRoutingModule,
-        CompartilhadoModule
+        CompartilhadoModule,
+        SharedModule
     ],
     providers: [{
         provide: HTTP_INTERCEPTORS,

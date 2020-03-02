@@ -4,6 +4,7 @@ import { CargoDisciplina } from '../models/cargo-disciplina';
 import { ColumnDef } from '@compartilhado/layout/expansivel-table/expansivel-table.component';
 import { CargoService } from './cargo.service';
 import { finalize } from 'rxjs/operators';
+import { ConfirmaDialogService } from 'app/shared/components/dialogs/confirma-dialog/service/confirma-dialog.service';
 
 @Injectable()
 export class CargoExpansivelTableService implements IExpansivelTableServico<CargoDisciplina>{
@@ -15,7 +16,7 @@ export class CargoExpansivelTableService implements IExpansivelTableServico<Carg
     colunas: ColumnDef[];
     private _removendoDisciplina = false;
 
-    constructor(private _servicoCargo: CargoService) {
+    constructor(private _servicoCargo: CargoService, private _confirmaDialogService: ConfirmaDialogService) {
         this.dataSource = new IcExpansivelTableDataSource();
         this.paginacaoExpansivelTable = new PaginacaoExpansivelTable();
         this.acoes = this._inicializarAcoes();
@@ -50,9 +51,19 @@ export class CargoExpansivelTableService implements IExpansivelTableServico<Carg
     }
 
     private _removerDisciplina(disciplina: CargoDisciplina, posicao: number): void {
-        this._removendoDisciplina = true;
-        this._servicoCargo.removerDisciplina(disciplina.codigo)
-            .pipe(finalize(() => this._removendoDisciplina = false))
-            .subscribe(() => this.dataSource.removeByIndex(posicao));
+        this._confirmaDialogService.emProgresso = false;
+
+        this._confirmaDialogService.acaoOk = () => {
+            this._confirmaDialogService.emProgresso = true;
+            this._servicoCargo.removerDisciplina(disciplina.codigo)
+                .pipe(finalize(() => this._confirmaDialogService.emProgresso = false))
+                .subscribe(() => this.dataSource.removeByIndex(posicao));
+        };
+
+        this._confirmaDialogService.dialogRef = 'Dialog remover disciplina.';
+
+        this._confirmaDialogService.mensagemCarregando = `Removendo disciplina ${disciplina.cursoDescricao} do cargo...`;
+
+        this._confirmaDialogService.openDialog('Atenção', `Deseja remover a disciplina ${disciplina.disciplinaDescricao} do cargo?`);
     }
 }

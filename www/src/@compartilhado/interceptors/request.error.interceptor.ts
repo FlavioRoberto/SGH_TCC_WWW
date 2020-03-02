@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { ErrorDialogService } from '@compartilhado/layout/dialogs/error-dialog/service/error-dialog.service';
-import { Router } from '@angular/router';
 import { AutenticacaoService } from '@compartilhado/core/auth/autenticacao.service';
+import { ErrorDialogService } from 'app/shared/components/dialogs/error-dialog/service/error-dialog.service';
 
 @Injectable()
 export class RequestErrorInterceptor implements HttpInterceptor {

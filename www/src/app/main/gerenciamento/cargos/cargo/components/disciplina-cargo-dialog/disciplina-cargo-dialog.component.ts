@@ -25,7 +25,7 @@ export class DisciplinaCargoDialogComponent implements OnInit {
     disciplinasCurriculo: ICurriculoDisciplina[] = [];
     carregandoDisciplinasCurriculo = false;
     salvandoDisciplina = false;
-    
+
     constructor(
         @Inject(MAT_DIALOG_DATA) data: IDisciplinaCargoDialogData,
         private _formBuilder: FormBuilder,
@@ -97,6 +97,4 @@ export class DisciplinaCargoDialogComponent implements OnInit {
             disciplinasCurriculo: [null, Validators.required]
         });
     }
-
-
 }

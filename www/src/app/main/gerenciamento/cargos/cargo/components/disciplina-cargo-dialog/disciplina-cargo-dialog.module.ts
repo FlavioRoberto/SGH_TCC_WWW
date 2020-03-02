@@ -4,6 +4,7 @@ import { DisciplinaCargoDialogComponent } from './disciplina-cargo-dialog.compon
 import { DisciplinaCargoDialogService } from './services/disciplina-cargo-dialog.service';
 import { CompartilhadoModule } from '@compartilhado/compartilhado.module';
 import { FuseSharedModule } from '@fuse/shared.module';
+import { SharedModule } from 'app/shared/shared.module';
 
 @NgModule({
     declarations: [DisciplinaCargoDialogComponent],
@@ -11,6 +12,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
         FuseSharedModule,
         MaterialCoreModule,
         CompartilhadoModule,
+        SharedModule
     ],
     entryComponents: [DisciplinaCargoDialogComponent],
     providers: [
