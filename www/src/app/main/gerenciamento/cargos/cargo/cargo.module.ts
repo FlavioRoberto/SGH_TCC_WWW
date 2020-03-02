@@ -10,8 +10,6 @@ import { CargoService } from './services/cargo.service';
 import { CargoComponent } from './cargo.component';
 import { CargoExpansivelTableService } from './services/cargo.table.service';
 import { DisciplinaCargoDialogModule } from './components/disciplina-cargo-dialog/disciplina-cargo-dialog.module';
-import { CurriculoResolver } from '../../resolvers/curriculo.resolver';
-import { SharedModule } from 'app/shared/shared.module';
 
 @NgModule({
     imports: [
@@ -27,8 +25,6 @@ import { SharedModule } from 'app/shared/shared.module';
         ProfessorService,
         CurriculoService,
         CargoService,
-        CargoExpansivelTableService,
-        CurriculoResolver
-    ]
+        CargoExpansivelTableService]
 })
 export class CargoModule { }

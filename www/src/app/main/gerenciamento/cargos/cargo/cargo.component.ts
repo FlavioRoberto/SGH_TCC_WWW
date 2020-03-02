@@ -29,7 +29,6 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
     professores: Professor[] = [];
     professorFiltro = '';
     carregandoProfessores = false;
-    curriculos: Curriculo[];
     disciplinas: ICurriculoDisciplina[];
     colunasExpansivelTable: ColumnDef[];
     acoesExpansivelTable: AcoesExpansivelTable[];
@@ -40,8 +39,7 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
         private _servico: CargoService,
         private _disciplinaCargoDialogService: DisciplinaCargoDialogService,
         public servicoExpansivelTable: CargoExpansivelTableService,
-        private _injector: Injector,
-        private _route: ActivatedRoute) {
+        private _injector: Injector) {
         super();
     }
 
@@ -58,7 +56,6 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
         this.colunasExpansivelTable = this.servicoExpansivelTable.colunas;
         this.acoesExpansivelTable = this.servicoExpansivelTable.acoes;
         this.semestres = this._servico.listarSemestres();
-        this.curriculos = this._route.snapshot.data['curriculos'];
     }
 
     get inserindoOuEditando(): boolean {
@@ -77,7 +74,7 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
 
         return this.servicoExpansivelTable.dataSource.data.length > 0;
     }
-    
+
 
     retornarDescricaoSemestre(semestre: ESemestre): string {
         return ESemestreLabel.get(semestre);
@@ -101,7 +98,7 @@ export class CargoComponent extends OnInitDataBar<Cargo> {
     abrirDialogAdicionarDisciplina(): void {
         this._disciplinaCargoDialogService.abrirDialog(
             this.form.get('codigo').value,
-            this.curriculos, disciplinaAdicionada => {
+            disciplinaAdicionada => {
                 this.servicoExpansivelTable.dataSource.add(disciplinaAdicionada);
             });
     }

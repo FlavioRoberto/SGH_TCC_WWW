@@ -72,6 +72,19 @@
             </mat-form-field>
             <!-- DISCIPLINAS_CURRICULO -->
 
+            <!-- TURNOS -->
+            <mat-form-field appearance="outline" fxFlex="1 0 auto">
+                <mat-label>Turnos </mat-label>
+                <mat-select fxLayout="column" formControlName="turno">
+                    <div *ngFor="let turno of turnos">
+                        <mat-option [value]="turno.codigo">{{
+                            turno.descricao
+                        }}</mat-option>
+                    </div>
+                </mat-select>
+            </mat-form-field>
+            <!-- TURNOS -->
+
             <!-- FORM -->
         </form>
     </div>

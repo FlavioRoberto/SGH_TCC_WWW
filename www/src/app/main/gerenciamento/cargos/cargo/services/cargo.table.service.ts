@@ -42,7 +42,8 @@ export class CargoExpansivelTableService implements IExpansivelTableServico<Carg
     private _inicializarColunas(): ColumnDef[] {
         return [
             { def: 'cursoDescricao', titulo: 'Curso', value: null },
-            { def: 'disciplinaDescricao', titulo: 'Disciplina', value: null }
+            { def: 'disciplinaDescricao', titulo: 'Disciplina', value: null },
+            { def: 'turnoDescricao', titulo: 'Turno', value: null }
         ];
     }
 

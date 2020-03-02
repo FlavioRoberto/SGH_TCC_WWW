@@ -9,6 +9,7 @@ import { ICurriculoDisciplina } from 'app/main/gerenciamento/curriculo/model/cur
 import { finalize } from 'rxjs/operators';
 import { SnackBarService } from 'app/shared/services/snack-bar.service';
 import { CargoService } from '../../services/cargo.service';
+import { ITurno } from 'app/main/gerenciamento/turno/model/turno.interface';
 
 @Component({
     selector: 'app-disciplina-cargo-dialog',
@@ -21,6 +22,7 @@ export class DisciplinaCargoDialogComponent implements OnInit {
     private _data: IDisciplinaCargoDialogData;
     form: FormGroup;
     curriculos: Curriculo[];
+    turnos: ITurno[];
     filtroDisciplinaCurriculo = '';
     disciplinasCurriculo: ICurriculoDisciplina[] = [];
     carregandoDisciplinasCurriculo = false;
@@ -39,6 +41,7 @@ export class DisciplinaCargoDialogComponent implements OnInit {
     ngOnInit(): void {
         this._construirFormulario();
         this.curriculos = this._data.curriculos;
+        this.turnos = this._data.turnos;
     }
 
     get descricaoLabelDisciplinasCurriculo(): string {
@@ -63,12 +66,14 @@ export class DisciplinaCargoDialogComponent implements OnInit {
     salvar(): void {
         const disciplinaSelecionada = this.form.get('disciplinasCurriculo').value as ICurriculoDisciplina;
         const curriculoSelecionado = this.form.get('curriculo').value as Curriculo;
+        const codigoTurno = this.form.get('turno').value;
 
         const disciplinaCargo = {
             codigoCargo: this._data.codigoCargo,
             codigoCurriculoDisciplina: disciplinaSelecionada.codigo,
             disciplinaDescricao: disciplinaSelecionada.disciplina.descricao,
-            cursoDescricao: curriculoSelecionado.descricaoCurso
+            cursoDescricao: curriculoSelecionado.descricaoCurso,
+            codigoTurno: codigoTurno
         } as CargoDisciplina;
 
         this.salvandoDisciplina = true;
@@ -80,6 +85,7 @@ export class DisciplinaCargoDialogComponent implements OnInit {
                     this._data.onClickSalvar(disciplinaCargo);
                     this._snackBarService.exibirSnackBarSucesso('Disciplina adicionada com sucesso');
                     this.form.get('disciplinasCurriculo').reset();
+                    this.form.get('turno').reset();
                 }
             );
     }
@@ -95,7 +101,8 @@ export class DisciplinaCargoDialogComponent implements OnInit {
     private _construirFormulario(): void {
         this.form = this._formBuilder.group({
             curriculo: [null, Validators.required],
-            disciplinasCurriculo: [null, Validators.required]
+            disciplinasCurriculo: [null, Validators.required],
+            turno: [null, Validators.required]
         });
     }
 }
