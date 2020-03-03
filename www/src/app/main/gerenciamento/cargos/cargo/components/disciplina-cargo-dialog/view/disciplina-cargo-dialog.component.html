@@ -72,6 +72,26 @@
             </mat-form-field>
             <!-- DISCIPLINAS_CURRICULO -->
 
+            <!-- DESCRICAO -->
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Descrição da disciplina</mat-label>
+                <input
+                    matTooltip="Deve ser preenchido somente se o nome da disciplina precisar ser alterado."
+                    matInput
+                    type="text"
+                    #input_descricao
+                    maxlength="30"
+                    formControlName="descricao"
+                />
+                <mat-hint align="end">
+                    {{ input_descricao.value?.length || 0 }}/{{ 30 }}</mat-hint
+                >
+                <mat-error *ngIf="form.get('descricao').hasError('maxlength')">
+                    O campo pode ter no máximo 30 caracteres
+                </mat-error>
+            </mat-form-field>
+            <!-- DESCRICAO -->
+
             <!-- TURNOS -->
             <mat-form-field appearance="outline" fxFlex="1 0 auto">
                 <mat-label>Turnos </mat-label>

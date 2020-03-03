@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Inject, OnChanges } from '@angular/core';
 import { IDisciplinaCargoDialogData } from './contratos/disciplina-cargo-dialog-data';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CargoDisciplina } from '../../models/cargo-disciplina';
@@ -42,6 +42,7 @@ export class DisciplinaCargoDialogComponent implements OnInit {
         this._construirFormulario();
         this.curriculos = this._data.curriculos;
         this.turnos = this._data.turnos;
+        this.form.valueChanges.subscribe(dados => this._desabilitarInputDescricao());
     }
 
     get descricaoLabelDisciplinasCurriculo(): string {
@@ -67,13 +68,14 @@ export class DisciplinaCargoDialogComponent implements OnInit {
         const disciplinaSelecionada = this.form.get('disciplinasCurriculo').value as ICurriculoDisciplina;
         const curriculoSelecionado = this.form.get('curriculo').value as Curriculo;
         const turno = this.form.get('turno').value as ITurno;
+        const descricao = this.form.get('descricao').value;
 
         const disciplinaCargo = {
             codigoCargo: this._data.codigoCargo,
             codigoCurriculoDisciplina: disciplinaSelecionada.codigo,
-            disciplinaDescricao: disciplinaSelecionada.disciplina.descricao,
+            descricao: descricao ?? disciplinaSelecionada.disciplina.descricao,
             cursoDescricao: curriculoSelecionado.descricaoCurso,
-            codigoTurno: turno.codigo
+            codigoTurno: turno.codigo,
         } as CargoDisciplina;
 
         this.salvandoDisciplina = true;
@@ -88,6 +90,7 @@ export class DisciplinaCargoDialogComponent implements OnInit {
                     this._snackBarService.exibirSnackBarSucesso('Disciplina adicionada com sucesso');
                     this.form.get('disciplinasCurriculo').reset();
                     this.form.get('turno').reset();
+                    this.form.get('descrição').reset();
                 }
             );
     }
@@ -104,7 +107,18 @@ export class DisciplinaCargoDialogComponent implements OnInit {
         this.form = this._formBuilder.group({
             curriculo: [null, Validators.required],
             disciplinasCurriculo: [null, Validators.required],
-            turno: [null, Validators.required]
+            turno: [null, Validators.required],
+            descricao: [{ value: null, disabled: true }, [Validators.maxLength(30)]]
         });
+    }
+
+    private _desabilitarInputDescricao(): void {
+        const formDescricao = this.form.get('descricao');
+        const disciplinaSelecionada = this.form.get('disciplinasCurriculo').value;
+
+        if (disciplinaSelecionada)
+            formDescricao.enable({ emitEvent: false });
+        else
+            formDescricao.disable({ emitEvent: false });
     }
 }

@@ -5,7 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "preLaunchTask": "npm: start",
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",

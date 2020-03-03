@@ -42,7 +42,7 @@ export class CargoExpansivelTableService implements IExpansivelTableServico<Carg
     private _inicializarColunas(): ColumnDef[] {
         return [
             { def: 'cursoDescricao', titulo: 'Curso', value: null },
-            { def: 'disciplinaDescricao', titulo: 'Disciplina', value: null },
+            { def: 'descricao', titulo: 'Disciplina', value: null },
             { def: 'turnoDescricao', titulo: 'Turno', value: null }
         ];
     }
@@ -67,6 +67,6 @@ export class CargoExpansivelTableService implements IExpansivelTableServico<Carg
 
         this._confirmaDialogService.mensagemCarregando = `Removendo disciplina ${disciplina.cursoDescricao} do cargo...`;
 
-        this._confirmaDialogService.abrirDialog('Atenção', `Deseja remover a disciplina ${disciplina.disciplinaDescricao} do cargo?`);
+        this._confirmaDialogService.abrirDialog('Atenção', `Deseja remover a disciplina ${disciplina.descricao} do cargo?`);
     }
 }

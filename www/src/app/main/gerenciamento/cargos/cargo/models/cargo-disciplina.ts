@@ -3,7 +3,7 @@ export class CargoDisciplina {
     codigoCargo: number;
     codigoTurno: number;
     codigoCurriculoDisciplina: number;
-    disciplinaDescricao: string;
+    descricao: string;
     turnoDescricao: string;
     cursoDescricao: string;
 }
