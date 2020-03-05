@@ -119,7 +119,7 @@
             class="mat-raised-button mat-accent"
             (click)="salvar()"
             [disabled]="
-                this.form.hasError() ||
+                this.form?.errors?.length > 0 ||
                 this.form.invalid ||
                 this.salvandoDisciplina
             "

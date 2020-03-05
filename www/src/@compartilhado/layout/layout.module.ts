@@ -7,7 +7,6 @@ import { MatInputModule } from '@angular/material/input';
 import { ApContainerModule } from './ap-container/ap-container.module';
 import { ApFormAutocompleteModule } from './ap-form-autocomplete/ap-form-autocomplete.module';
 import { ExpansivelTableModule } from './expansivel-table/expansivel-table.module';
-import { ErrorDialogModule } from '@breaking_dev/ic-databar-lib/lib/components/dialogs/error-dialog/error-dialog.module';
 
 
 @NgModule({
