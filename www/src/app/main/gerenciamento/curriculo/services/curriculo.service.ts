@@ -10,12 +10,22 @@ import { ICurriculoDisciplina } from '../model/curriculo-disciplina.model';
 })
 export class CurriculoService extends BaseService<Curriculo>{
 
+    private _rotaDisciplina = `${this.getRota().base}/disciplinas`;
+
     public getRota(): any {
         return new routesApi().getRoutes().curriculo;
     }
 
-    listarDisciplinas(codigoCurriculo: number): Observable<ICurriculoDisciplina[]>{
-        return this.getAll(`${this.getRota().base}/${codigoCurriculo}/disciplinas`);
+    listarDisciplinas(codigoCurriculo: number): Observable<ICurriculoDisciplina[]> {
+        return this.getAll(`${this._rotaDisciplina}/${codigoCurriculo}`);
+    }
+
+    adicionarDisciplina(disciplina: ICurriculoDisciplina): Observable<ICurriculoDisciplina> {
+        return this.post<ICurriculoDisciplina>(disciplina, `${this._rotaDisciplina}`);
+    }
+
+    removerDisciplina(disciplinaId: number): Observable<boolean> {
+        return this.delete(`${this._rotaDisciplina}/${disciplinaId}`);
     }
 
 }

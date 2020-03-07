@@ -77,8 +77,8 @@
             <div fxLayoutAlign="end center">
                 <button
                     [disabled]="
-                        statusDataBar != EStatus.editando &&
-                        statusDataBar != EStatus.inserindo
+                        !this.form.get('codigo').value ||
+                        this.statusDataBar === EStatus.pesquisando
                     "
                     class="m-4"
                     type="button"
@@ -99,8 +99,7 @@
                 [dataSource]="dataSource"
                 [acoesTabela]="acoesTabela"
                 [desabilitarBotoes]="
-                    statusDataBar != EStatus.editando &&
-                    statusDataBar != EStatus.inserindo
+                    !this.form.get('codigo').value || this.removendoDisciplina
                 "
             >
             </ap-expansivel-table>

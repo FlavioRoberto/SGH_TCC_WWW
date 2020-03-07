@@ -24,6 +24,8 @@ import { CurriculoService } from './services/curriculo.service';
 import { anoRegex } from '@compartilhado/util/input-regex/input-regex';
 import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
 import { SnackBarService } from 'app/shared/services/snack-bar.service';
+import { finalize } from 'rxjs/operators';
+import { ConfirmaDialogService } from 'app/shared/components/dialogs/confirma-dialog/service/confirma-dialog.service';
 
 @Component({
     selector: 'curriculo',
@@ -39,6 +41,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     turnos: ITurno[] = [];
     EStatus = EStatus;
     isMobile = false;
+    removendoDisciplina = false;
 
     displayedColumns: ColumnDef[] = [
         new ColumnDef('Disciplina', 'disciplina', 'descricao'),
@@ -75,6 +78,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         private _route: ActivatedRoute,
         private _dialog: AdicionarDisciplinaDialogService,
         private _snackBar: SnackBarService,
+        private _servicoConfirmaDialog: ConfirmaDialogService,
         private _platform: Platform,
         private _servico: CurriculoService
     ) {
@@ -98,8 +102,27 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
 
     }
 
-    private _removerDisicplina(itemRemover, index): void {
-        this.dataSource.removeByIndex(index);
+    private _removerDisicplina(itemRemover: ICurriculoDisciplina, index): void {
+        this._servicoConfirmaDialog.emProgresso = false;
+        this._servicoConfirmaDialog.mensagemCarregando = 'Removendo disciplina...';
+        this._servicoConfirmaDialog.acaoCancelar = () => this._servicoConfirmaDialog.fecharDialog();
+        this._servicoConfirmaDialog.acaoOk = () => {
+            this._servicoConfirmaDialog.emProgresso = true;
+            this.removendoDisciplina = true;
+            this._servico.removerDisciplina(itemRemover.codigo)
+                .pipe(finalize(() => {
+                    this._servicoConfirmaDialog.fecharDialog();
+                    this.removendoDisciplina = false;
+                }))
+                .subscribe(() => {
+                    this.dataSource.removeByIndex(index);
+                    this._snackBar.exibirSnackBarSucesso('Disciplina removida com sucesso.');
+                });
+        };
+
+        this._servicoConfirmaDialog
+            .abrirDialog('Atencão', `Deseja remover a disciplina ${itemRemover.disciplina.descricao}`);
+
     }
 
     private _editarDisciplina(itemEditar: ICurriculoDisciplina, index): void {
@@ -116,36 +139,40 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     }
 
     abrirDialogAdicionarDisciplina(disciplina = null, index = null): void {
-        this._dialog.abrirDialog('Adicionar disciplina', (dados, form: FormGroup) => {
-            const disciplinaAdicionada = this.dataSource.data.filter(item => {
-                return item.codigoDisciplina == dados.codigoDisciplina;
-            });
+        this._dialog.abrirDialog(
+            this.form.get('codigo').value,
+            'Adicionar disciplina', (dados, form: FormGroup) => {
+                const disciplinaAdicionada = this.dataSource.data.filter(item => {
+                    return item.codigoDisciplina === dados.codigoDisciplina;
+                });
 
-            if (disciplinaAdicionada.length > 0 && index == null) {
-                this.exibirSnackBar('Disciplina já adicionada.', true);
-                return;
-            }
+                if (disciplinaAdicionada.length > 0 && index == null) {
+                    this._snackBar.exibirSnackBarErro('Disciplina já adicionada.');
+                    return;
+                }
 
-            if (disciplina && index >= 0) {
-                this._removerDisicplina(dados, index);
-                this.constroiPreRequisitos(dados);
-                this.dataSource.add(dados);
-                this.exibirSnackBar('Disciplina atualizada.', false, true);
-            }
-            else {
-                this.constroiPreRequisitos(dados);
-                this.dataSource.add(dados);
-                this.exibirSnackBar('Disciplina adicionada.', false, true);
-                form.reset();
-            }
-            console.log(dados);
+                if (disciplina && index >= 0) {
+                    this._removerDisicplina(dados, index);
+                    this.constroiPreRequisitos(dados);
+                    this.dataSource.add(dados);
+                    this._snackBar.exibirSnackBarSucesso('Disciplina atualizada.');
+                }
+                else {
+                    this.constroiPreRequisitos(dados);
+                    this.dataSource.add(dados);
+                    this._snackBar.exibirSnackBarSucesso('Disciplina adicionada.');
+                    form.reset();
+                }
+                console.log(dados);
 
-        }, disciplina);
+            }, disciplina);
     }
 
     statusChanged(status: EStatus): void {
         this.statusDataBar = status;
-        if (this.statusDataBar === EStatus.novaPesquisa || this.statusDataBar === EStatus.inserindo) {
+        if (this.statusDataBar === EStatus.novaPesquisa ||
+            this.statusDataBar === EStatus.inserindo ||
+            this.statusDataBar === EStatus.pesquisando) {
             this.dataSource.clear();
         }
     }
@@ -155,26 +182,12 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         if (dados.preRequisitos && dados.preRequisitos.length > 0) {
             dados.preRequisitos.forEach((disciplinaPreRequsito, i) => {
                 let separador = ' - ';
-                if (i == 0) {
+                if (i === 0) {
                     separador = '';
                 }
                 dados.preRequisitoDescricao += separador + disciplinaPreRequsito.descricao;
             });
         }
-    }
-
-    private exibirSnackBar(mensagem: string, erro: boolean = false, info: boolean = false): void {
-        if (erro) {
-            this._snackBar.exibirSnackBarErro(mensagem);
-            return;
-        }
-
-        if (info) {
-            this._snackBar.exibirSnackBarInformativo(mensagem);
-            return;
-        }
-        
-        this._snackBar.exibirSnackBarSucesso(mensagem);
     }
 
     private _construirForm(): void {

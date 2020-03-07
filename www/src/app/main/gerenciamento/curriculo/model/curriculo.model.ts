@@ -5,5 +5,4 @@ export interface Curriculo {
     codigoCurso: number;
     descricaoCurso: string;
     ano: number;
-    disciplinas: ICurriculoDisciplina[]
 }

@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
     hmr       : false,
-    url: 'http://localhost:5000/'
+    url: 'http://3.21.83.83:8042/'
 };

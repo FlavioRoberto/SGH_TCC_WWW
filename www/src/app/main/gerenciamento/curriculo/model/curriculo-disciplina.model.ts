@@ -20,7 +20,6 @@ export class ICurriculoDisciplina {
         this.aulasSemanaisTeorica = 0;
         this.aulasSemanaisPratica = 0;
         this.codigoCurriculo = 0;
-        this.credito = 0;
         this.preRequisitos = new Array<Disciplina>();
         this.preRequisitoDescricao = '';
     }

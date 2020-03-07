@@ -1,5 +1,4 @@
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { OnInit, Inject, Component, ViewEncapsulation, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IFormAutocompleteAcao } from '@compartilhado/layout/ap-form-autocomplete/contrato/IFormAutocompleteAcao';
@@ -9,6 +8,10 @@ import { DisciplinaService } from 'app/main/gerenciamento/disciplina/cadastro/se
 import { ICurriculoDisciplina } from '../../../model/curriculo-disciplina.model';
 import { EPeriodos } from 'app/shared/enums/eperiodos.enum';
 import { Disciplina } from 'app/main/gerenciamento/disciplina/cadastro/model/disciplina';
+import { CurriculoService } from '../../../services/curriculo.service';
+import { SnackBarService } from 'app/shared/services/snack-bar.service';
+import { DisciplinaCurriculoDialoData } from '../../model/disciplina-curriculo-dialog-data';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     selector: 'adicionar-disciplina-dialog',
@@ -27,22 +30,23 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
     disciplinas: Disciplina[];
     periodos: any;
     filtroDisciplinaPreRequisito = '';
+    private codigoCurriculo: number;
     private eventClickSalvar;
-    private limparFormulario;
     private disciplinaEditar;
 
     constructor(
         private dialogRef: MatDialogRef<AdicionarDisciplinaDialogComponent>,
-        private _snackBar: MatSnackBar,
+        private _curriculoService: CurriculoService,
         private _formBuilder: FormBuilder,
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         private _servicoDisciplina: DisciplinaService,
-        @Inject(MAT_DIALOG_DATA) data) {
+        @Inject(MAT_DIALOG_DATA) data: DisciplinaCurriculoDialoData) {
 
         this.titulo = data.titulo;
         this._fuseTranslationLoaderService.loadTranslations(portugues);
         this.eventClickSalvar = data.onClickSalvar;
-        this.disciplinaEditar = data.disciplina;
+        this.disciplinaEditar = data.disciplinaEditar;
+        this.codigoCurriculo = data.codigoCurriculo;
     }
 
     ngOnInit(): void {
@@ -53,7 +57,6 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
             disciplina: [null, [Validators.required]],
             aulasSemanaisTeorica: [null, [Validators.required]],
             aulasSemanaisPratica: [null, [Validators.required]],
-            credito: [null, [Validators.required]],
             preRequisitos: [null],
             periodo: [null, [Validators.required]]
         });
@@ -61,7 +64,6 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
         this._servicoDisciplina.listarTodos()
             .subscribe(data => {
                 this.disciplinas = data;
-                console.log(this.disciplinaEditar);
                 if (this.disciplinaEditar) {
                     this.adicionarDisciplinaForm.patchValue(this.disciplinaEditar);
                 }
@@ -73,16 +75,22 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
     }
 
     salvar(): void {
-        const dados = this.adicionarDisciplinaForm.getRawValue() as ICurriculoDisciplina;
-        dados.disciplina = this.disciplinas.filter(i => i.codigo == this.adicionarDisciplinaForm.get('disciplina').value)[0];
-        dados.preRequisitos = this.disciplinas.filter(dis => {
+        this.emProgresso = true;
+        const disciplinaAdicionar = this.adicionarDisciplinaForm.getRawValue() as ICurriculoDisciplina;
+        disciplinaAdicionar.disciplina = this.disciplinas.filter(i => i.codigo === this.adicionarDisciplinaForm.get('disciplina').value)[0];
+        disciplinaAdicionar.preRequisitos = this.disciplinas.filter(dis => {
             const preRequisitos = this.adicionarDisciplinaForm.get('preRequisitos').value;
             if (preRequisitos) {
-                return preRequisitos.filter(pre => pre == dis.codigo)[0];
+                return preRequisitos.filter(pre => pre === dis.codigo)[0];
             }
         });
-        dados.codigoDisciplina = dados.disciplina.codigo;
-        this.eventClickSalvar(dados, this.adicionarDisciplinaForm);
+
+        disciplinaAdicionar.codigoDisciplina = disciplinaAdicionar.disciplina.codigo;
+        disciplinaAdicionar.codigoCurriculo = this.codigoCurriculo;
+
+        this._curriculoService.adicionarDisciplina(disciplinaAdicionar)
+            .pipe(finalize(() => this.emProgresso = false))
+            .subscribe(() => this.eventClickSalvar(disciplinaAdicionar, this.adicionarDisciplinaForm));
     }
 
     filtrarDisciplinasPreRequisito(filtro: string): void {

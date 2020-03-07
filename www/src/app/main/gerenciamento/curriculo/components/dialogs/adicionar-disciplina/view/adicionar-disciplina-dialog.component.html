@@ -77,43 +77,10 @@
                                 .hasError('required')
                         "
                     >
-                        {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
+                        {{ "GERENCIAMENTO.CAMPO_OBRIGATORIO" | translate }}
                     </mat-error>
                 </mat-form-field>
                 <!-- PERIODO -->
-
-                <!-- CREDITO -->
-                <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Créditos</mat-label>
-                    <input
-                        required="true"
-                        required="true"
-                        matInput
-                        name="credito"
-                        mask="000"
-                        type="text"
-                        formControlName="credito"
-                    />
-                    <mat-error
-                        *ngIf="
-                            adicionarDisciplinaForm
-                                .get('credito')
-                                .hasError('required')
-                        "
-                    >
-                        {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
-                    </mat-error>
-                    <mat-error
-                        *ngIf="
-                            adicionarDisciplinaForm
-                                .get('credito')
-                                .hasError('pattern')
-                        "
-                    >
-                        {{ 'GERENCIAMENTO.ANO_INVALIDO' | translate }}
-                    </mat-error>
-                </mat-form-field>
-                <!-- CREDITO -->
             </div>
 
             <div fxLayout="row" fxLayoutGap="4px">
@@ -137,7 +104,7 @@
                                 "
                             >
                                 {{
-                                    'GERENCIAMENTO.CAMPO_OBRIGATORIO'
+                                    "GERENCIAMENTO.CAMPO_OBRIGATORIO"
                                         | translate
                                 }}
                             </mat-error>
@@ -148,7 +115,7 @@
                                         .hasError('pattern')
                                 "
                             >
-                                {{ 'GERENCIAMENTO.ANO_INVALIDO' | translate }}
+                                {{ "GERENCIAMENTO.ANO_INVALIDO" | translate }}
                             </mat-error>
                         </mat-form-field>
                         <!-- TEORICA -->
@@ -170,7 +137,7 @@
                                 "
                             >
                                 {{
-                                    'GERENCIAMENTO.CAMPO_OBRIGATORIO'
+                                    "GERENCIAMENTO.CAMPO_OBRIGATORIO"
                                         | translate
                                 }}
                             </mat-error>
@@ -181,7 +148,7 @@
                                         .hasError('pattern')
                                 "
                             >
-                                {{ 'GERENCIAMENTO.ANO_INVALIDO' | translate }}
+                                {{ "GERENCIAMENTO.ANO_INVALIDO" | translate }}
                             </mat-error>
                         </mat-form-field>
                         <!-- PRATICA -->
@@ -248,7 +215,17 @@
             class="mat-raised-button mat-accent"
             (click)="salvar()"
         >
-            <span>ADICIONAR</span>
+            <div
+                *ngIf="emProgresso"
+                fxLayout="row"
+                fxFlex="1 0 auto"
+                fxLayoutAlign="center center"
+                fxLayoutGap="8px"
+            >
+                <span>SALVANDO</span>
+                <mat-spinner diameter="20"></mat-spinner>
+            </div>
+            <span *ngIf="!emProgresso">SALVAR</span>
         </button>
     </div>
 </div>
