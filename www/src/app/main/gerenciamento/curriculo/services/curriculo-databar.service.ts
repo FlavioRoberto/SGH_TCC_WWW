@@ -21,7 +21,7 @@ export class CurriculoDataBarService implements IDatabarBindOnClickService<Curri
         private _dataSource: ApExpansivelTableDataSource<ICurriculoDisciplina>) {
 
         this.onClickEnter = new EventEmitter();
-        this.eventDatabar = new DatabarEventClickService((event: EEventoClick) => {});
+        this.eventDatabar = new DatabarEventClickService((event: EEventoClick) => { });
     }
 
     enviarFormComEnter(): void {
