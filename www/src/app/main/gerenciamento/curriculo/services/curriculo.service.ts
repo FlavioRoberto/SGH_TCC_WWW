@@ -24,6 +24,10 @@ export class CurriculoService extends BaseService<Curriculo>{
         return this.post<ICurriculoDisciplina>(disciplina, `${this._rotaDisciplina}`);
     }
 
+    editarDisciplina(disciplina: ICurriculoDisciplina): Observable<ICurriculoDisciplina> {
+        return this.put<ICurriculoDisciplina>(disciplina, `${this._rotaDisciplina}`);
+    }
+
     removerDisciplina(disciplinaId: number): Observable<boolean> {
         return this.delete(`${this._rotaDisciplina}/${disciplinaId}`);
     }

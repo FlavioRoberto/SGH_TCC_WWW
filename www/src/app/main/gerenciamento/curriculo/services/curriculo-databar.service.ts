@@ -70,25 +70,27 @@ export class CurriculoDataBarService implements IDatabarBindOnClickService<Curri
 
     private _constroiPreRequisitoDescricao(dados: ICurriculoDisciplina[]): void {
         dados.forEach(dis => {
-            if (dis.preRequisitos) {
-                dis.preRequisitoDescricao = '';
-                dis.preRequisitos.forEach((pr, i) => {
-                    if (i === 0 || i >= dis.preRequisitos.length) {
-                        dis.preRequisitoDescricao += pr.descricao;
-                    } else {
-                        dis.preRequisitoDescricao += ' - ' + pr.descricao;
-                    }
-                });
-            }
+            this.constroiPreRequisitosDescricao(dis);
         });
 
         this._dataSource.addRange(dados);
     }
 
+    public constroiPreRequisitosDescricao(disciplina: ICurriculoDisciplina): void {
+        if (disciplina.preRequisitos) {
+            disciplina.preRequisitoDescricao = '';
+            disciplina.preRequisitos.forEach((pr, i) => {
+                if (i === 0 || i >= disciplina.preRequisitos.length) {
+                    disciplina.preRequisitoDescricao += pr.descricaoDisciplina;
+                } else {
+                    disciplina.preRequisitoDescricao += ' - ' + pr.descricaoDisciplina;
+                }
+            });
+        }
+    }
+
     private _prepararEntidadeParaEnvio(): Curriculo {
         return this.getEntidade();
     }
-
-
-
+    
 }

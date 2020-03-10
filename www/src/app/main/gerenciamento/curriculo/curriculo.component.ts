@@ -127,12 +127,13 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
 
     private _editarDisciplina(itemEditar: ICurriculoDisciplina, index): void {
         const disciplina = {
+            codigo: itemEditar.codigo,
             disciplina: itemEditar.disciplina.codigo,
             aulasSemanaisPratica: itemEditar.aulasSemanaisPratica,
             aulasSemanaisTeorica: itemEditar.aulasSemanaisTeorica,
             credito: itemEditar.credito,
             periodo: itemEditar.periodo,
-            preRequisitos: itemEditar.preRequisitos?.map(i => i.codigo)
+            preRequisitos: itemEditar.preRequisitos?.map(i => i.codigoDisciplina)
         };
 
         this.abrirDialogAdicionarDisciplina(disciplina, index);
@@ -152,13 +153,13 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
                 }
 
                 if (disciplina && index >= 0) {
-                    this._removerDisicplina(dados, index);
-                    this.constroiPreRequisitos(dados);
+                    this.dataSource.removeByIndex(index);
+                    this.servicoDataBarBind.constroiPreRequisitosDescricao(dados);
                     this.dataSource.add(dados);
                     this._snackBar.exibirSnackBarSucesso('Disciplina atualizada.');
                 }
                 else {
-                    this.constroiPreRequisitos(dados);
+                    this.servicoDataBarBind.constroiPreRequisitosDescricao(dados);
                     this.dataSource.add(dados);
                     this._snackBar.exibirSnackBarSucesso('Disciplina adicionada.');
                     form.reset();
@@ -174,19 +175,6 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
             this.statusDataBar === EStatus.inserindo ||
             this.statusDataBar === EStatus.pesquisando) {
             this.dataSource.clear();
-        }
-    }
-
-    private constroiPreRequisitos(dados: ICurriculoDisciplina): void {
-        dados.preRequisitoDescricao = '';
-        if (dados.preRequisitos && dados.preRequisitos.length > 0) {
-            dados.preRequisitos.forEach((disciplinaPreRequsito, i) => {
-                let separador = ' - ';
-                if (i === 0) {
-                    separador = '';
-                }
-                dados.preRequisitoDescricao += separador + disciplinaPreRequsito.descricao;
-            });
         }
     }
 

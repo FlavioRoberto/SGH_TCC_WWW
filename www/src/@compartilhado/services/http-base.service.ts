@@ -32,7 +32,7 @@ export abstract class HttpBaseService<T> {
         );
     }
 
-    protected put(entidade: T, rota: string): Observable<T> {
+    protected put<T>(entidade: T, rota: string): Observable<T> {
         return this.http.put<T>(
             rota,
             JSON.stringify(entidade));

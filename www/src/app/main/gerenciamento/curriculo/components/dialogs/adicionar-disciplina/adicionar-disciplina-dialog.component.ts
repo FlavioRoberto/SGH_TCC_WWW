@@ -12,6 +12,7 @@ import { CurriculoService } from '../../../services/curriculo.service';
 import { SnackBarService } from 'app/shared/services/snack-bar.service';
 import { DisciplinaCurriculoDialoData } from '../../model/disciplina-curriculo-dialog-data';
 import { finalize } from 'rxjs/operators';
+import { CurriculoDisciplinaPreRequisitoModel } from '../../../model/curriculo-disciplina-pre-requisito.model';
 
 @Component({
     selector: 'adicionar-disciplina-dialog',
@@ -32,7 +33,7 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
     filtroDisciplinaPreRequisito = '';
     private codigoCurriculo: number;
     private eventClickSalvar;
-    private disciplinaEditar;
+    private disciplinaEditar: ICurriculoDisciplina;
 
     constructor(
         private dialogRef: MatDialogRef<AdicionarDisciplinaDialogComponent>,
@@ -76,21 +77,43 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
 
     salvar(): void {
         this.emProgresso = true;
+
         const disciplinaAdicionar = this.adicionarDisciplinaForm.getRawValue() as ICurriculoDisciplina;
+
         disciplinaAdicionar.disciplina = this.disciplinas.filter(i => i.codigo === this.adicionarDisciplinaForm.get('disciplina').value)[0];
-        disciplinaAdicionar.preRequisitos = this.disciplinas.filter(dis => {
+
+        const preRequisitosAdicionar = this.disciplinas.filter(dis => {
             const preRequisitos = this.adicionarDisciplinaForm.get('preRequisitos').value;
             if (preRequisitos) {
                 return preRequisitos.filter(pre => pre === dis.codigo)[0];
             }
         });
 
+        disciplinaAdicionar.preRequisitos = preRequisitosAdicionar.map(preRequisito => {
+            return {
+                codigoCurriculoDisciplina: this.disciplinaEditar?.codigo,
+                codigoDisciplina: preRequisito.codigo,
+                codigoTipo: preRequisito.codigoTipo,
+                descricaoDisciplina: preRequisito.descricao
+            } as CurriculoDisciplinaPreRequisitoModel;
+
+        });
+
         disciplinaAdicionar.codigoDisciplina = disciplinaAdicionar.disciplina.codigo;
         disciplinaAdicionar.codigoCurriculo = this.codigoCurriculo;
 
-        this._curriculoService.adicionarDisciplina(disciplinaAdicionar)
-            .pipe(finalize(() => this.emProgresso = false))
-            .subscribe(() => this.eventClickSalvar(disciplinaAdicionar, this.adicionarDisciplinaForm));
+        if (this.disciplinaEditar) {
+            disciplinaAdicionar.codigo = this.disciplinaEditar.codigo;
+            console.log(disciplinaAdicionar);
+            
+            this._curriculoService.editarDisciplina(disciplinaAdicionar)
+                .pipe(finalize(() => this.emProgresso = false))
+                .subscribe(() => this.eventClickSalvar(disciplinaAdicionar, this.adicionarDisciplinaForm));
+        } else {
+            this._curriculoService.adicionarDisciplina(disciplinaAdicionar)
+                .pipe(finalize(() => this.emProgresso = false))
+                .subscribe(() => this.eventClickSalvar(disciplinaAdicionar, this.adicionarDisciplinaForm));
+        }
     }
 
     filtrarDisciplinasPreRequisito(filtro: string): void {
