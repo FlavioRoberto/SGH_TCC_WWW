@@ -5,6 +5,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { TurnoComponent } from './turno.component';
 import { TurnoRoutingModule } from './turno.routes.module';
 import { DataBarFormModule } from 'app/shared/layout/components/databar-form/databar-form.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
     declarations: [TurnoComponent],
@@ -12,7 +13,8 @@ import { DataBarFormModule } from 'app/shared/layout/components/databar-form/dat
         TurnoRoutingModule,
         TranslateModule,
         FuseSharedModule,
-        DataBarFormModule
+        DataBarFormModule,
+        NgxMaskModule.forRoot()
     ],
     exports: [TurnoComponent]
 })

@@ -3,12 +3,10 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 
-import { CompartilhadoModule } from '@compartilhado/compartilhado.module';
-import { MaterialCoreModule } from '@compartilhado/material-core/material-core.module';
-
 import { DisciplinaTipoComponent } from './disciplina-tipo.component';
 import { DisciplinaTipoRoutingModule } from './disciplina-tipo.routes.module';
 import { DataBarFormModule } from 'app/shared/layout/components/databar-form/databar-form.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -17,7 +15,8 @@ import { DataBarFormModule } from 'app/shared/layout/components/databar-form/dat
         TranslateModule,
         FuseSharedModule,
         DisciplinaTipoRoutingModule,
-        DataBarFormModule
+        DataBarFormModule,
+        NgxMaskModule.forRoot()
     ],
     exports: [DisciplinaTipoComponent]
 })

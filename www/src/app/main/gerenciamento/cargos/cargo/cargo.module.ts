@@ -10,6 +10,7 @@ import { CargoService } from './services/cargo.service';
 import { CargoComponent } from './cargo.component';
 import { CargoExpansivelTableService } from './services/cargo.table.service';
 import { DisciplinaCargoDialogModule } from './components/disciplina-cargo-dialog/disciplina-cargo-dialog.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import { DisciplinaCargoDialogModule } from './components/disciplina-cargo-dialo
         FuseSharedModule,
         CargoRoutingModule,
         IcExpansivelTableModule,
-        DisciplinaCargoDialogModule
+        DisciplinaCargoDialogModule,
+        NgxMaskModule.forRoot()
     ],
     declarations: [CargoComponent],
     providers: [
