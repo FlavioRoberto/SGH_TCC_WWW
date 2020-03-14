@@ -6,15 +6,21 @@ import { Observable } from 'rxjs';
 import { ICurso } from '../model/curso.model';
 import { CursoPaginado } from '../model/curso.paginacao';
 import { CursoService } from './curso.service';
-import { IDataBarBindService, EStatus } from '@breaking_dev/ic-databar-lib';
+import { IDataBarBindService, EStatus, IDatabarBindOnClickService, DatabarEventClickService, EEventoClick } from '@breaking_dev/ic-databar-lib';
 
-export class CursoDataBarService implements IDataBarBindService<ICurso>{
+export class CursoDataBarService implements IDatabarBindOnClickService<ICurso>{
+    eventDatabar: DatabarEventClickService;
     status: EStatus;
 
     onClickEnter: EventEmitter<ICurso> = new EventEmitter();
 
     constructor(public formgroup: FormGroup, private _servico: CursoService) {
         this.onClickEnter = new EventEmitter();
+        this.eventDatabar = new DatabarEventClickService(evento => {
+            switch (evento) {
+                case EEventoClick.afterClickEditar: this.formgroup.get('codigo').disable(); break;
+            }
+        });
     }
 
     enviarFormComEnter(): void {

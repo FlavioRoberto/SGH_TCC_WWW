@@ -21,7 +21,11 @@ export class CurriculoDataBarService implements IDatabarBindOnClickService<Curri
         private _dataSource: ApExpansivelTableDataSource<ICurriculoDisciplina>) {
 
         this.onClickEnter = new EventEmitter();
-        this.eventDatabar = new DatabarEventClickService((event: EEventoClick) => { });
+        this.eventDatabar = new DatabarEventClickService((event: EEventoClick) => {
+            switch (event) {
+                case EEventoClick.afterClickEditar: this.formgroup.get('codigo').disable(); break;
+            }
+        });
     }
 
     enviarFormComEnter(): void {
@@ -92,5 +96,5 @@ export class CurriculoDataBarService implements IDatabarBindOnClickService<Curri
     private _prepararEntidadeParaEnvio(): Curriculo {
         return this.getEntidade();
     }
-    
+
 }
