@@ -9,7 +9,6 @@ export class ICurriculoDisciplina {
     codigoCurriculo: number;
     aulasSemanaisTeorica: number;
     aulasSemanaisPratica: number;
-    credito: number;
     preRequisitos: CurriculoDisciplinaPreRequisitoModel[];
     preRequisitoDescricao: string;
 

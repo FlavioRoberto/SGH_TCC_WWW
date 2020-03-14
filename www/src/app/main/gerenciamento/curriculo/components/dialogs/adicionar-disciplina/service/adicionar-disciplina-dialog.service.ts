@@ -15,12 +15,16 @@ export class AdicionarDisciplinaDialogService {
     abrirDialog(codigoCurriculo: number, titulo: string, onClickSalvar: (dados: ICurriculoDisciplina, form: FormGroup) => void, disciplinaEditar): void {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.panelClass = 'adicionar-disciplina-dialog';
+        dialogConfig.disableClose = true;
+
         dialogConfig.data = {
             codigoCurriculo,
             titulo,
             onClickSalvar: onClickSalvar,
             disciplinaEditar
         } as DisciplinaCurriculoDialoData;
+
+
         this.dialogRef = this.dialog.open(AdicionarDisciplinaDialogComponent, dialogConfig);
 
         // return this.dialogRef.afterClosed();
