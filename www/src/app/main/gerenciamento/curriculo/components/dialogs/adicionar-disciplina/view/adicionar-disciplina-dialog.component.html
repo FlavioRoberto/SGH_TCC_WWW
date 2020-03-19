@@ -85,75 +85,67 @@
 
             <div fxLayout="row" fxLayoutGap="4px">
                 <!-- CARGA_HORARIA SEMANAL -->
-                <lib-ic-fieldset label="Quantidade de aulas semanal" fxFlex>
-                    <div fxLayout="row wrap" fxLayoutGap="4px">
-                        <!-- TEORICA -->
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Teórica</mat-label>
-                            <input
-                                required="true"
-                                matInput
-                                mask="000"
-                                formControlName="aulasSemanaisTeorica"
-                            />
-                            <mat-error
-                                *ngIf="
-                                    adicionarDisciplinaForm
-                                        .get('aulasSemanaisTeorica')
-                                        .hasError('required')
-                                "
-                            >
-                                {{
-                                    "GERENCIAMENTO.CAMPO_OBRIGATORIO"
-                                        | translate
-                                }}
-                            </mat-error>
-                            <mat-error
-                                *ngIf="
-                                    adicionarDisciplinaForm
-                                        .get('aulasSemanaisTeorica')
-                                        .hasError('pattern')
-                                "
-                            >
-                                {{ "GERENCIAMENTO.ANO_INVALIDO" | translate }}
-                            </mat-error>
-                        </mat-form-field>
-                        <!-- TEORICA -->
+                <div fxLayout="row" fxFlex="1 0 auto" fxLayoutGap="4px">
+                    <!-- TEORICA -->
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Quantidade de aula teórica</mat-label>
+                        <input
+                            required="true"
+                            matInput
+                            mask="000"
+                            formControlName="aulasSemanaisTeorica"
+                        />
+                        <mat-error
+                            *ngIf="
+                                adicionarDisciplinaForm
+                                    .get('aulasSemanaisTeorica')
+                                    .hasError('required')
+                            "
+                        >
+                            {{ "GERENCIAMENTO.CAMPO_OBRIGATORIO" | translate }}
+                        </mat-error>
+                        <mat-error
+                            *ngIf="
+                                adicionarDisciplinaForm
+                                    .get('aulasSemanaisTeorica')
+                                    .hasError('pattern')
+                            "
+                        >
+                            {{ "GERENCIAMENTO.ANO_INVALIDO" | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                    <!-- TEORICA -->
 
-                        <!-- PRATICA -->
-                        <mat-form-field appearance="outline" fxFlex>
-                            <mat-label>Pratica</mat-label>
-                            <input
-                                required="true"
-                                matInput
-                                mask="000"
-                                formControlName="aulasSemanaisPratica"
-                            />
-                            <mat-error
-                                *ngIf="
-                                    adicionarDisciplinaForm
-                                        .get('aulasSemanaisPratica')
-                                        .hasError('required')
-                                "
-                            >
-                                {{
-                                    "GERENCIAMENTO.CAMPO_OBRIGATORIO"
-                                        | translate
-                                }}
-                            </mat-error>
-                            <mat-error
-                                *ngIf="
-                                    adicionarDisciplinaForm
-                                        .get('aulasSemanaisPratica')
-                                        .hasError('pattern')
-                                "
-                            >
-                                {{ "GERENCIAMENTO.ANO_INVALIDO" | translate }}
-                            </mat-error>
-                        </mat-form-field>
-                        <!-- PRATICA -->
-                    </div>
-                </lib-ic-fieldset>
+                    <!-- PRATICA -->
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Quantidade de aula pratica</mat-label>
+                        <input
+                            required="true"
+                            matInput
+                            mask="000"
+                            formControlName="aulasSemanaisPratica"
+                        />
+                        <mat-error
+                            *ngIf="
+                                adicionarDisciplinaForm
+                                    .get('aulasSemanaisPratica')
+                                    .hasError('required')
+                            "
+                        >
+                            {{ "GERENCIAMENTO.CAMPO_OBRIGATORIO" | translate }}
+                        </mat-error>
+                        <mat-error
+                            *ngIf="
+                                adicionarDisciplinaForm
+                                    .get('aulasSemanaisPratica')
+                                    .hasError('pattern')
+                            "
+                        >
+                            {{ "GERENCIAMENTO.ANO_INVALIDO" | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                    <!-- PRATICA -->
+                </div>
             </div>
 
             <!-- DISCIPLINA_PREREQUISITO -->

@@ -2,19 +2,25 @@ import { FormGroup } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 
 import { Observable } from 'rxjs';
+import { EStatus, IDatabarBindOnClickService, DatabarEventClickService, EEventoClick } from '@breaking_dev/ic-databar-lib';
 
 import { TurnoService } from './turno.service';
 import { TurnoPaginado } from '../model/turno.paginacao';
 import { ITurno } from '../model/turno.interface';
-import { IDataBarBindService, EStatus } from '@breaking_dev/ic-databar-lib';
 
-export class TurnoDataBarService implements IDataBarBindService<ITurno>{
+export class TurnoDataBarService implements IDatabarBindOnClickService<ITurno>{
+    eventDatabar: DatabarEventClickService;
     status: EStatus;
 
     onClickEnter: EventEmitter<ITurno>;
 
     constructor(public formgroup: FormGroup, private _turnoService: TurnoService) {
         this.onClickEnter = new EventEmitter();
+        this.eventDatabar = new DatabarEventClickService(evento => {
+            switch (evento) {
+                case EEventoClick.afterClickEditar: this.formgroup.get('codigo').disable(); break;
+            }
+        });
     }
 
     enviarFormComEnter(): void {
@@ -22,7 +28,7 @@ export class TurnoDataBarService implements IDataBarBindService<ITurno>{
     }
 
     getEntidade(): ITurno {
-        return this.formgroup.getRawValue() as ITurno
+        return this.formgroup.getRawValue() as ITurno;
     }
 
     criar(): Observable<ITurno> {

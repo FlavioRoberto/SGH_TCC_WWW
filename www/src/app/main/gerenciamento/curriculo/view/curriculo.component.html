@@ -24,10 +24,7 @@
             >
                 <mat-label>Código</mat-label>
                 <input
-                    [disabled]="
-                        statusDataBar == EStatus.inserindo ||
-                        statusDataBar == EStatus.editando
-                    "
+                    mask="9{6}"
                     matInput
                     class="primary-color-input border-radius-4"
                     name="primary color"

@@ -1,18 +1,26 @@
 import { FormGroup } from '@angular/forms';
-import { DisciplinaService } from './disciplina.service';
-import { Observable } from 'rxjs';
-import { DisciplinaPaginado } from '../model/disciplina.paginacao';
 import { EventEmitter } from '@angular/core';
-import { IDataBarBindService, EStatus } from '@breaking_dev/ic-databar-lib';
+import { Observable } from 'rxjs';
+
+import { EStatus, IDatabarBindOnClickService, DatabarEventClickService, EEventoClick } from '@breaking_dev/ic-databar-lib';
+
+import { DisciplinaService } from './disciplina.service';
+import { DisciplinaPaginado } from '../model/disciplina.paginacao';
 import { Disciplina } from '../model/disciplina';
 
-export class DisciplinaDataBarService implements IDataBarBindService<Disciplina> {
+export class DisciplinaDataBarService implements IDatabarBindOnClickService<Disciplina> {
+    eventDatabar: DatabarEventClickService;
     status: EStatus;
 
     onClickEnter: EventEmitter<Disciplina>;
 
     constructor(public formgroup: FormGroup, private _servicoDisciplina: DisciplinaService) {
         this.onClickEnter = new EventEmitter();
+        this.eventDatabar = new DatabarEventClickService(evento => {
+            switch (evento) {
+                case EEventoClick.afterClickEditar: this.formgroup.get('codigo').disable(); break;
+            }
+        });
     }
 
     enviarFormComEnter(): void {

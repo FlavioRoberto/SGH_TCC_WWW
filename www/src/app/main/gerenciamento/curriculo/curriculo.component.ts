@@ -143,12 +143,6 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
                 const disciplinaAdicionada = this.dataSource.data.filter(item => {
                     return item.codigoDisciplina === dados.codigoDisciplina;
                 });
-
-                if (disciplinaAdicionada.length > 0 && index == null) {
-                    this._snackBar.exibirSnackBarErro('Disciplina já adicionada.');
-                    return;
-                }
-
                 if (disciplina && index >= 0) {
                     this.dataSource.removeByIndex(index);
                     this.servicoDataBarBind.constroiPreRequisitosDescricao(dados);
