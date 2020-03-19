@@ -80,6 +80,20 @@ export const navigation: FuseNavigation[] = [
                         type: 'item',
                         icon: 'account_box',
                         url: '/gerenciamento/usuarios'
+                    },
+                    {
+                        id: 'salas',
+                        title: 'Salas',
+                        icon: 'meeting_room',
+                        type: 'collapsable',
+                        children: [
+                            {
+                                id: 'bloco',
+                                title: 'Bloco',
+                                type: 'item',
+                                url: '/gerenciamento/salas/bloco'
+                            }
+                        ]
                     }
                 ]
             }
