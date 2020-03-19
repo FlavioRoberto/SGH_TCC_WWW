@@ -33,6 +33,11 @@ const routes: Routes = [
         loadChildren: () => import('./cargos/cargos.module').then(m => m.CargoModule),
         canActivate: [AuthGuard]
     },
+    {
+        path: 'salas',
+        loadChildren: () => import('./salas/salas.module').then(m => m.SalasModule),
+        canActivate: [AuthGuard]
+    }
 ];
 
 

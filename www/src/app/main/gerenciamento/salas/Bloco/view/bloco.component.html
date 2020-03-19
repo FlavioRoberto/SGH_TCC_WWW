@@ -1,0 +1,18 @@
+<databar-form
+    class="inner-scroll"
+    fxLayout="column"
+    fxFlex
+    [servicoBind]="servicoDataBarBind"
+    [entidadePaginada]="entidadePaginada"
+    [form]="form"
+    (statusChanged)="statusChanged($event)"
+    [navegacao]="['Salas', 'Bloco']"
+    fxFlex
+>
+    <!-- FORM -->
+    <form [formGroup]="form" fxLayout="column">
+        hello there
+    </form>
+
+    <!-- FORM -->
+</databar-form>

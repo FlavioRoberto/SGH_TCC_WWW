@@ -19,7 +19,6 @@ import { NgxMaskModule } from 'ngx-mask';
         UsuariosRoutingModule,
         DataBarFormModule,
         NgxMaskModule.forChild()
-
     ],
     providers: [
         PerfilResolver

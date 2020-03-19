@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Platform } from '@angular/cdk/platform';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 
@@ -46,7 +45,6 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     displayedColumns: ColumnDef[] = [
         new ColumnDef('Disciplina', 'disciplina', 'descricao'),
         new ColumnDef('Período', 'periodo'),
-        new ColumnDef('Crédito', 'credito')
     ];
 
     displayedExpansivelColumns = [
@@ -70,7 +68,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     }];
 
     dataSource: ApExpansivelTableDataSource<ICurriculoDisciplina>;
-    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
     constructor(
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
@@ -131,7 +129,6 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
             disciplina: itemEditar.disciplina.codigo,
             aulasSemanaisPratica: itemEditar.aulasSemanaisPratica,
             aulasSemanaisTeorica: itemEditar.aulasSemanaisTeorica,
-            credito: itemEditar.credito,
             periodo: itemEditar.periodo,
             preRequisitos: itemEditar.preRequisitos?.map(i => i.codigoDisciplina)
         };
