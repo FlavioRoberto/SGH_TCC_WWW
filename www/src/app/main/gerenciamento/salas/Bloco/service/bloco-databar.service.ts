@@ -11,9 +11,8 @@ export class BlocoDatabarService implements IDatabarBindOnClickService<BlocoMode
     onClickEnter: EventEmitter<BlocoModel>;
     status: EStatus;
     eventDatabar: DatabarEventClickService;
-    formgroup: FormGroup;
 
-    constructor(public formGroup: FormGroup, private _servico: BlocoService) {
+    constructor(public formgroup: FormGroup, private _servico: BlocoService) {
         this.onClickEnter = new EventEmitter();
 
         this.eventDatabar = new DatabarEventClickService(evento => {
@@ -24,7 +23,7 @@ export class BlocoDatabarService implements IDatabarBindOnClickService<BlocoMode
     }
 
     getEntidade(): BlocoModel {
-        return this.formGroup.getRawValue() as BlocoModel;
+        return this.formgroup.getRawValue() as BlocoModel;
     }
 
     criar(): Observable<BlocoModel> {

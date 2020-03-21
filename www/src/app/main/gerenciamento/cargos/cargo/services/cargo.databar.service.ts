@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable, Inject, Injector } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { IDataBarBindService, EStatus } from '@breaking_dev/ic-databar-lib';
+import { IDataBarBindService, EStatus, IDatabarBindOnClickService, DatabarEventClickService, EEventoClick } from '@breaking_dev/ic-databar-lib';
 import { Cargo } from '../models/cargo.model';
 import { CargoService } from './cargo.service';
 import { CargoPaginado } from '../models/cargo-paginado';
@@ -9,10 +9,11 @@ import { CargoExpansivelTableService } from './cargo.table.service';
 import { ErrorDialogService } from 'app/shared/components/dialogs/error-dialog/service/error-dialog.service';
 
 @Injectable()
-export class CargoDataBarBindService implements IDataBarBindService<Cargo>{
+export class CargoDataBarBindService implements IDatabarBindOnClickService<Cargo>{
 
     status: EStatus;
     onClickEnter: EventEmitter<Cargo>;
+    eventDatabar: DatabarEventClickService;
     private _servico: CargoService;
     private _servicoExpansivelTable: CargoExpansivelTableService;
     private _errorDialogService: ErrorDialogService;
@@ -24,6 +25,11 @@ export class CargoDataBarBindService implements IDataBarBindService<Cargo>{
         this._servicoExpansivelTable = this._injector.get(CargoExpansivelTableService);
         this._errorDialogService = this._injector.get(ErrorDialogService);
         this.onClickEnter = new EventEmitter();
+        this.eventDatabar = new DatabarEventClickService(evento => {
+            switch (evento) {
+                case EEventoClick.onClickEditar: this.formgroup.get('codigo').disable(); break;
+            }
+        });
     }
 
     getEntidade(): Cargo {
