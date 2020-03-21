@@ -1,39 +1,47 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Injector } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { IDataBarBindService, EStatus, IDataEntidadePaginada } from '@breaking_dev/ic-databar-lib';
+import { EStatus, IDataEntidadePaginada, IDatabarBindOnClickService, DatabarEventClickService, EEventoClick } from '@breaking_dev/ic-databar-lib';
 import { BlocoModel } from '../model/bloco.model';
 import { Observable } from 'rxjs';
+import { BlocoService } from './bloco.service';
 
-export class BlocoDatabarService implements IDataBarBindService<BlocoModel> {
+export class BlocoDatabarService implements IDatabarBindOnClickService<BlocoModel> {
 
     onClickEnter: EventEmitter<BlocoModel>;
     status: EStatus;
-
-    constructor(public formGroup: FormGroup) {
-        this.onClickEnter = new EventEmitter();
-    }
-    
+    eventDatabar: DatabarEventClickService;
     formgroup: FormGroup;
 
+    constructor(public formGroup: FormGroup, private _servico: BlocoService) {
+        this.onClickEnter = new EventEmitter();
+
+        this.eventDatabar = new DatabarEventClickService(evento => {
+            switch (evento) {
+                case EEventoClick.afterClickEditar: this.formgroup.get('codigo').disable(); break;
+            }
+        });
+    }
+
     getEntidade(): BlocoModel {
-        throw new Error("Method not implemented.");
+        return this.formGroup.getRawValue() as BlocoModel;
     }
 
     criar(): Observable<BlocoModel> {
-        throw new Error("Method not implemented.");
+        return this._servico.criar(this.getEntidade());
     }
 
     editar(): Observable<BlocoModel> {
-        throw new Error("Method not implemented.");
+        return this._servico.editar(this.getEntidade());
     }
 
     remover(): Observable<BlocoModel> {
-        throw new Error("Method not implemented.");
+        return this._servico.remover(this.getEntidade().codigo);
     }
 
     listarPaginacao(entidadePaginada: IDataEntidadePaginada<BlocoModel>): Observable<IDataEntidadePaginada<BlocoModel>> {
-        throw new Error("Method not implemented.");
+        console.log(this._servico);
+        return this._servico.listarPaginacao(entidadePaginada);
     }
 
 }

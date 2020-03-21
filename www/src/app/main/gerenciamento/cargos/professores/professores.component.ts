@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Professor } from './models/professor.model';
 import { ProfessorPaginado } from './models/professor-paginado.model';
@@ -24,7 +24,8 @@ export class ProfessoresComponent implements IDataBarBindComponent<Professor> {
 
     constructor(private _formBuilder: FormBuilder,
         private _servico: ProfessorService,
-        private _route: ActivatedRoute) {
+        private _route: ActivatedRoute,
+        private _changeDetector: ChangeDetectorRef) {
     }
 
     ngOnInit(): void {
@@ -32,7 +33,7 @@ export class ProfessoresComponent implements IDataBarBindComponent<Professor> {
         this.entidadePaginada = new ProfessorPaginado();
         this.servicoDataBarBind = new ProfessorDataBarService(this.form, this._servico);
         this.cursos = this._route.snapshot.data['cursos'];
-
+        this._changeDetector.detectChanges();
     }
 
     get condicaoDataBar(): boolean {

@@ -51,7 +51,8 @@ export class routesApi {
             usuario: this.construirRotaUsuario(),
             curriculo: this.construirRotaPadrao('curriculo'),
             professor: this.construirRotaProfessor(),
-            cargo: this.construirRotaPadrao('cargo')
+            cargo: this.construirRotaPadrao('cargo'),
+            bloco: this.construirRotaPadrao('bloco')
         };
 
     }

@@ -6,4 +6,10 @@ export class BlocoPaginadoModel implements IDataEntidadePaginada<BlocoModel> {
     posicao: number;
     entidade: BlocoModel[];
     quantidade: number;
+
+    constructor() {
+        this.quantidade = 1;
+        this.total = 0;
+        this.posicao = 0;
+    }
 }

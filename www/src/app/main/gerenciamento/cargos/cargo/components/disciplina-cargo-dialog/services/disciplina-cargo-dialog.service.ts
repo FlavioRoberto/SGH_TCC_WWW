@@ -24,7 +24,8 @@ export class DisciplinaCargoDialogService {
         const dialogConfig = new MatDialogConfig();
 
         dialogConfig.panelClass = 'disciplina-cargo-dialog';
-
+        dialogConfig.disableClose = true;
+        
         dialogConfig.data = {
             onClickSalvar: onClickSalvar,
             onClickFechar: this.fecharDialog,

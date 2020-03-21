@@ -4,6 +4,7 @@ import { Inject, Component } from '@angular/core';
 @Component({
     selector: 'confirma-dialog',
     templateUrl: './view/error-dialog.html',
+    styleUrls: ['./view/error-dialog.scss']
 })
 export class ErrorDialogComponent {
 
