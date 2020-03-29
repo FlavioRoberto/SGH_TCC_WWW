@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '@compartilhado/core/auth/auth.guard';
 import { SalaComponent } from './sala.component';
+import { BlocoResolver } from '../../../../shared/resolvers/bloco.resolver';
 
 const routes: Routes = [
     {
         path: '',
         component: SalaComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        resolve: {
+            blocos: BlocoResolver
+        }
     }
 ];
 
@@ -15,4 +19,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class SalaRoutingModule {}
+export class SalaRoutingModule { }

@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { CurriculoComponent } from './curriculo.component';
-import { TurnoResolver } from '../resolvers/turno.resolver';
-import { CursoResolver } from '../resolvers/curso.resolver';
+import { TurnoResolver } from '../../../shared/resolvers/turno.resolver';
+import { CursoResolver } from '../../../shared/resolvers/curso.resolver';
 import { LoginGuard } from '@compartilhado/core/auth/login.guard';
 import { AuthGuard } from '@compartilhado/core/auth/auth.guard';
 

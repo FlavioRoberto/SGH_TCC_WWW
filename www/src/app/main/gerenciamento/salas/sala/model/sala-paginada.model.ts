@@ -11,5 +11,6 @@ export class SalaPaginada implements IDataEntidadePaginada<SalaModel>  {
         this.quantidade = 1;
         this.total = 0;
         this.posicao = 0;
+        this.entidade = [];
     }
 }

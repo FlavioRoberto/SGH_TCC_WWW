@@ -1,11 +1,11 @@
 import { Component, ChangeDetectorRef, Injector } from '@angular/core';
 import { OnInitDataBar, EStatus } from '@breaking_dev/ic-databar-lib';
 import { SalaModel } from './model/sala.model';
-import { ThrowStmt } from '@angular/compiler';
 import { FormBuilder, Validators } from '@angular/forms';
 import { BlocoModel } from '../bloco/model/bloco.model';
 import { SalaPaginada } from './model/sala-paginada.model';
 import { SalaDatabarService } from './services/sala-databar.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     templateUrl: './view/sala.component.html'
@@ -16,14 +16,16 @@ export class SalaComponent extends OnInitDataBar<SalaModel>  {
 
     constructor(private _formBuilder: FormBuilder,
         private _changeDetector: ChangeDetectorRef,
-        private _injector: Injector) {
+        private _injector: Injector,
+        private _route: ActivatedRoute) {
         super();
     }
 
     onInit(): void {
-        this.entidadePaginada = new SalaPaginada();
-        this.servicoDataBarBind = new SalaDatabarService(this.form, this._injector);
         this._construirFormulario();
+        this.entidadePaginada = new SalaPaginada();
+        this.blocos = this._route.snapshot.data['blocos'];
+        this.servicoDataBarBind = new SalaDatabarService(this.form, this._injector);
         this._changeDetector.detectChanges();
     }
 
@@ -37,7 +39,7 @@ export class SalaComponent extends OnInitDataBar<SalaModel>  {
             numero: [null, [Validators.required]],
             descricao: [null, [Validators.required]],
             laboratorio: [null],
-            codigoBloco: [null, Validators.required]
+            codigoBloco: [null, [Validators.required]]
         });
     }
 

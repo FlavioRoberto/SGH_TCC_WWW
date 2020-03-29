@@ -12,6 +12,7 @@
           fxLayout="column"
           fxLayoutGap.gt-sm="12px">
 
+
         <div fxLayout.gt-sm="row"
              fxLayout="column"
              fxFlex.gt-sm="100"
@@ -39,7 +40,7 @@
                        [required]="inserindoOuEditando"
                        class="primary-color-input border-radius-4"
                        name="primary color"
-                       formControlName="codigo" />
+                       formControlName="numero" />
             </mat-form-field>
             <!-- NUMERO -->
 
@@ -50,6 +51,9 @@
                 <mat-select fxLayout="column"
                             formControlName="codigoBloco"
                             [required]="inserindoOuEditando">
+                    <mat-option *ngIf="blocos.length <= 0">
+                        Nenhum bloco encontrado
+                    </mat-option>
                     <div *ngFor="let bloco of blocos">
                         <mat-option [value]="bloco.codigo">
                             {{bloco.descricao}}

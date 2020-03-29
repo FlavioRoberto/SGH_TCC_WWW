@@ -1,8 +1,8 @@
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
 
-import { IPerfil } from '../usuarios/models/iperfil';
-import { PerfilService } from '../usuarios/services/perfil.service';
+import { IPerfil } from '../../main/gerenciamento/usuarios/models/iperfil';
+import { PerfilService } from '../../main/gerenciamento/usuarios/services/perfil.service';
 import { Observable } from 'rxjs';
 
 @Injectable()

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '@compartilhado/core/auth/auth.guard';
 import { ProfessoresComponent } from './professores.component';
-import { CursoResolver } from '../../resolvers/curso.resolver';
+import { CursoResolver } from '../../../../shared/resolvers/curso.resolver';
 
 const routes: Routes = [
     {

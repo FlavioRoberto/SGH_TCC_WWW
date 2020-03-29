@@ -8,7 +8,7 @@ import { MaterialCoreModule } from '@compartilhado/material-core/material-core.m
 import { UsuariosRoutingModule } from './usuarios.routes.module';
 import { UsuariosComponent } from './usuarios.component';
 import { DataBarFormModule } from 'app/shared/layout/components/databar-form/databar-form.module';
-import { PerfilResolver } from '../resolvers/perfil.resolver';
+import { PerfilResolver } from '../../../shared/resolvers/perfil.resolver';
 import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({

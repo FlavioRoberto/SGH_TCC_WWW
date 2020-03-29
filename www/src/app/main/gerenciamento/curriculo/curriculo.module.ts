@@ -9,8 +9,8 @@ import { MaterialCoreModule } from '@compartilhado/material-core/material-core.m
 
 import { CurriculoComponent } from './curriculo.component';
 import { CurriculoRoutingModule } from './curriculo.routes.module';
-import { TurnoResolver } from '../resolvers/turno.resolver';
-import { CursoResolver } from '../resolvers/curso.resolver';
+import { TurnoResolver } from '../../../shared/resolvers/turno.resolver';
+import { CursoResolver } from '../../../shared/resolvers/curso.resolver';
 import { DataBarFormModule } from 'app/shared/layout/components/databar-form/databar-form.module';
 import { AdicionarDisciplinaDialogService } from './components/dialogs/adicionar-disciplina/service/adicionar-disciplina-dialog.service';
 import { AdicionarDisciplinaDialogModule } from './components/dialogs/adicionar-disciplina/adicionar-disciplina-dialog.module';
