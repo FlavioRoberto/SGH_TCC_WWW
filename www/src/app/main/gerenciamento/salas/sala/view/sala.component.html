@@ -1,0 +1,100 @@
+<databar-form class="inner-scroll"
+              fxLayout="column"
+              fxFlex
+              [servicoBind]="servicoDataBarBind"
+              [entidadePaginada]="entidadePaginada"
+              [form]="form"
+              (statusChanged)="statusChanged($event)"
+              [navegacao]="['Salas', 'Bloco']"
+              fxFlex>
+    <!-- FORM -->
+    <form [formGroup]="form"
+          fxLayout="column"
+          fxLayoutGap.gt-sm="12px">
+
+        <div fxLayout.gt-sm="row"
+             fxLayout="column"
+             fxFlex.gt-sm="100"
+             fxLayoutGap="12px">
+
+            <!-- CODIGO -->
+            <mat-form-field *ngIf="statusDataBar != EStatus.inserindo"
+                            appearance="outline"
+                            fxFlex.gt-sm="20">
+                <mat-label>Código</mat-label>
+                <input mask="9{6}"
+                       matInput
+                       class="primary-color-input border-radius-4"
+                       name="primary color"
+                       formControlName="codigo" />
+            </mat-form-field>
+            <!-- CODIGO -->
+
+            <!-- NUMERO -->
+            <mat-form-field appearance="outline"
+                            fxFlex.gt-sm="20">
+                <mat-label>Número</mat-label>
+                <input mask="9{6}"
+                       matInput
+                       [required]="inserindoOuEditando"
+                       class="primary-color-input border-radius-4"
+                       name="primary color"
+                       formControlName="codigo" />
+            </mat-form-field>
+            <!-- NUMERO -->
+
+            <!-- BLOCO -->
+            <mat-form-field appearance="outline"
+                            fxFlex="1 0 auto">
+                <mat-label>Bloco</mat-label>
+                <mat-select fxLayout="column"
+                            formControlName="codigoBloco"
+                            [required]="inserindoOuEditando">
+                    <div *ngFor="let bloco of blocos">
+                        <mat-option [value]="bloco.codigo">
+                            {{bloco.descricao}}
+                        </mat-option>
+                    </div>
+                </mat-select>
+            </mat-form-field>
+            <!-- BLOCO -->
+
+            <!-- LABORATORIO -->
+            <div fxLayoutAlign.gt-sm="center center"
+                 class="mat-form-field pb-16"
+                 fxFlex.gt-sm="20"
+                 fxFlex>
+                <mat-checkbox formControlName="laboratorio">Laboratório</mat-checkbox>
+            </div>
+            <!-- LABORATORIO -->
+        </div>
+
+        <div fxLayout.gt-sm="row"
+             fxLayout="column"
+             fxFlex.gt-sm="100"
+             fxLayoutGap="12px">
+
+            <!-- DESCRICAO -->
+            <mat-form-field appearance="outline"
+                            fxFlex.gt-sm="100">
+                <mat-label>Descrição</mat-label>
+                <input #input_descricao
+                       [required]="inserindoOuEditando"
+                       matInput
+                       maxlength="30"
+                       type="text"
+                       class="primary-color-input border-radius-4"
+                       formControlName="descricao" />
+                <mat-hint align="end">
+                    {{ input_descricao.value?.length || 0 }}/30</mat-hint>
+                <mat-error *ngIf="form.get('descricao').hasError('required')">
+                    Campo obrigatório!
+                </mat-error>
+            </mat-form-field>
+            <!-- DESCRICAO -->
+
+        </div>
+    </form>
+
+    <!-- FORM -->
+</databar-form>

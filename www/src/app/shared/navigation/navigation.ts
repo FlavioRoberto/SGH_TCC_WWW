@@ -92,6 +92,12 @@ export const navigation: FuseNavigation[] = [
                                 title: 'Bloco',
                                 type: 'item',
                                 url: '/gerenciamento/salas/bloco'
+                            },
+                            {
+                                id: 'sala',
+                                title: 'Sala',
+                                type: 'item',
+                                url: '/gerenciamento/salas/sala'
                             }
                         ]
                     }

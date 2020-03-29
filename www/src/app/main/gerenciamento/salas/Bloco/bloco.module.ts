@@ -10,7 +10,6 @@ import { BlocoRoutingModule } from './bloco.routes.module';
         DataBarFormModule,
         BlocoRoutingModule
     ],
-    declarations: [BlocoComponent],
-    exports: [BlocoComponent]
+    declarations: [BlocoComponent]
 })
 export class BlocoModule { }

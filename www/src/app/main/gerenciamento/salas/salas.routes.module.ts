@@ -5,7 +5,12 @@ import { AuthGuard } from '@compartilhado/core/auth/auth.guard';
 const routes: Routes = [
     {
         path: 'bloco',
-        loadChildren: () => import('./Bloco/bloco.module').then(m => m.BlocoModule),
+        loadChildren: () => import('./bloco/bloco.module').then(m => m.BlocoModule),
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'sala',
+        loadChildren: () => import('./sala/sala.module').then(m => m.SalaModule),
         canActivate: [AuthGuard]
     }
 ];
