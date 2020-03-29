@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, Injector } from '@angular/core';
 import { OnInitDataBar, EStatus } from '@breaking_dev/ic-databar-lib';
 import { SalaModel } from './model/sala.model';
 import { ThrowStmt } from '@angular/compiler';
@@ -14,13 +14,15 @@ export class SalaComponent extends OnInitDataBar<SalaModel>  {
 
     blocos: BlocoModel[] = [];
 
-    constructor(private _formBuilder: FormBuilder, private _changeDetector: ChangeDetectorRef) {
+    constructor(private _formBuilder: FormBuilder,
+        private _changeDetector: ChangeDetectorRef,
+        private _injector: Injector) {
         super();
     }
 
     onInit(): void {
         this.entidadePaginada = new SalaPaginada();
-        this.servicoDataBarBind = new SalaDatabarService();
+        this.servicoDataBarBind = new SalaDatabarService(this.form, this._injector);
         this._construirFormulario();
         this._changeDetector.detectChanges();
     }

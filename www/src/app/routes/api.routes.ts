@@ -52,7 +52,8 @@ export class routesApi {
             curriculo: this.construirRotaPadrao('curriculo'),
             professor: this.construirRotaProfessor(),
             cargo: this.construirRotaPadrao('cargo'),
-            bloco: this.construirRotaPadrao('bloco')
+            bloco: this.construirRotaPadrao('bloco'),
+            sala: this.construirRotaPadrao('sala')
         };
 
     }

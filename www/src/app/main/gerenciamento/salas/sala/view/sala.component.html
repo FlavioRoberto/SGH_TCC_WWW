@@ -81,12 +81,12 @@
                 <input #input_descricao
                        [required]="inserindoOuEditando"
                        matInput
-                       maxlength="30"
+                       maxlength="60"
                        type="text"
                        class="primary-color-input border-radius-4"
                        formControlName="descricao" />
                 <mat-hint align="end">
-                    {{ input_descricao.value?.length || 0 }}/30</mat-hint>
+                    {{ input_descricao.value?.length || 0 }}/60</mat-hint>
                 <mat-error *ngIf="form.get('descricao').hasError('required')">
                     Campo obrigatório!
                 </mat-error>

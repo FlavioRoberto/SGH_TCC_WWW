@@ -6,4 +6,10 @@ export class SalaPaginada implements IDataEntidadePaginada<SalaModel>  {
     posicao: number;
     entidade: SalaModel[];
     quantidade: number;
+
+    constructor() {
+        this.quantidade = 1;
+        this.total = 0;
+        this.posicao = 0;
+    }
 }
