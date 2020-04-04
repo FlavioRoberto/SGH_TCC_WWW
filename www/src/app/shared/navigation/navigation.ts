@@ -102,6 +102,21 @@ export const navigation: FuseNavigation[] = [
                         ]
                     }
                 ]
+            },
+            {
+                id: 'gerenciamento',
+                title: 'Gerenciamento',
+                type: 'collapsable',
+                icon: 'assignment',
+                children: [
+                    {
+                        id: 'curriculo',
+                        title: 'Currículos',
+                        type: 'item',
+                        icon: 'list_alt',
+                        url: '/gerenciamento/curriculo'
+                    }
+                ]
             }
         ]
     }
