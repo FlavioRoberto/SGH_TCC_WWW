@@ -1,15 +1,13 @@
 import { NgModule } from '@angular/core';
-import { NgxMaskModule } from 'ngx-mask';
 import { TranslateModule } from '@ngx-translate/core';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { HorariosRoutingModule } from './horarios.routes.module';
 import { MaterialCoreModule } from 'app/core/modules/material-core.module';
+import { HorariosComponent } from './horarios.component';
 
 @NgModule({
-    declarations: [],
+    declarations: [HorariosComponent],
     imports: [
-        NgxMaskModule.forRoot(),
-        TranslateModule,
         FuseSharedModule,
         MaterialCoreModule,
         HorariosRoutingModule

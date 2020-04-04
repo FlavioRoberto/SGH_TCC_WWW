@@ -1,1 +1,137 @@
-<mat-dialog>Teste</mat-dialog>
+<div
+    class="page-layout simple card fullwidth inner-scroll p-12"
+    fxLayout="column"
+    fxLayoutGap="12px"
+>
+    <!-- FILTRO -->
+    <mat-card fxLayoutGap="12px">
+        <!-- CURRICULO -->
+        <mat-form-field appearance="outline" fxFlex="1 0 auto">
+            <mat-label>Currículo</mat-label>
+            <mat-select fxLayout="column">
+                <div *ngFor="let curriculo of curriculos">
+                    <mat-option *ngIf="curriculos.length <= 0" disabled>
+                        <span>Nenhum registro encontrado</span>
+                    </mat-option>
+                    <mat-option [value]="curriculo">
+                        {{ curriculo.descricaoCurso }} - {{ curriculo.ano }}
+                    </mat-option>
+                </div>
+            </mat-select>
+        </mat-form-field>
+        <!-- CURRICULO -->
+
+        <!-- TURNOS -->
+        <!-- <mat-form-field appearance="outline" fxFlex.gt-sm="20">
+            <mat-label>Turnos </mat-label>
+            <mat-select fxLayout="column" formControlName="turno">
+                <div *ngFor="let turno of turnos">
+                    <mat-option [value]="turno">{{
+                        turno.descricao
+                    }}</mat-option>
+                </div>
+            </mat-select>
+        </mat-form-field> -->
+        <!-- TURNOS -->
+
+        <!-- PERIODO -->
+        <mat-form-field fxFlex.gt-sm="12" appearance="outline">
+            <mat-select placeholder="Período">
+                <mat-option
+                    *ngFor="let periodo of periodos"
+                    [value]="periodo.codigo"
+                >
+                    {{ periodo.descricao }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <!-- PERIODO -->
+
+        <!-- SEMESTRE -->
+        <mat-form-field
+            appearance="outline"
+            fxFlex.gt-sm="12"
+            fxFlex="1 0 auto"
+        >
+            <mat-label>Semestre</mat-label>
+            <mat-select fxLayout="column">
+                <div *ngFor="let semestre of semestres">
+                    <mat-option [value]="semestre">
+                        {{ retornarDescricaoSemestre(semestre) }}
+                    </mat-option>
+                </div>
+            </mat-select>
+        </mat-form-field>
+        <!-- SEMESTRE -->
+
+        <!-- ANO -->
+        <mat-form-field fxFlex.gt-sm="12" appearance="outline">
+            <mat-label>Ano</mat-label>
+            <input
+                matInput
+                class="primary-color-input border-radius-4"
+                name="primary color"
+                mask="0000"
+            />
+        </mat-form-field>
+        <!-- ANO -->
+    </mat-card>
+    <!-- FILTRO -->
+
+    <!-- HORARIOS -->
+    <mat-card fxLayout="column" fxFlex="100">
+        <div
+            fxLayout.gt-sm="row wrap"
+            style="overflow-y: scroll;"
+            fxLayoutAlign.gt-sm="space-around"
+        >
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">
+                <mat-card-header>
+                    <mat-card-title> 2020 - 2° semestre </mat-card-title>
+                    <mat-card-title>
+                        Engenharia da computação
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        Décimo período - Matutino
+                    </mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+            <mat-card class="m-12" fxFlex.gt-sm="25" flex="100">Teste</mat-card>
+        </div>
+    </mat-card>
+    <!-- HORARIOS -->
+</div>
