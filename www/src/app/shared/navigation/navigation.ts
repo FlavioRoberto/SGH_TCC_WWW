@@ -43,7 +43,7 @@ export const navigation: FuseNavigation[] = [
                                 id: 'disciplina.cadastrar',
                                 title: 'Disciplina',
                                 type: 'item',
-                                url: '/cadastros/disciplinas/cadastro',
+                                url: '/cadastros/disciplinas/disciplina',
                             }
                         ]
                     },
