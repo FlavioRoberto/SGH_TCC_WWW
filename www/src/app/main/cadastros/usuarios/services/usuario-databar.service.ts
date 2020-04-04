@@ -1,17 +1,17 @@
-import { IUsuario } from '@compartilhado/core/usuario/model/IUsuario.model';
 import { UsuarioPaginado } from '../models/usuario-paginado';
 import { Observable } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 import { UsuarioService } from './usuario.service';
-import { AutenticacaoService } from '@compartilhado/core/auth/autenticacao.service';
 import { tap } from 'rxjs/operators';
 import { IDataBarBindService, EStatus } from '@breaking_dev/ic-databar-lib';
+import { UsuarioModel } from '../models/iusuario';
+import { AutenticacaoService } from 'app/core/auth/autenticacao.service';
 
-export class UsuarioDataBarService implements IDataBarBindService<IUsuario>{
+export class UsuarioDataBarService implements IDataBarBindService<UsuarioModel>{
     status: EStatus;
 
-    onClickEnter: EventEmitter<IUsuario>;
+    onClickEnter: EventEmitter<UsuarioModel>;
 
     constructor(public formgroup: FormGroup,
         private _servicoUsuario: UsuarioService,
@@ -19,19 +19,19 @@ export class UsuarioDataBarService implements IDataBarBindService<IUsuario>{
         this.onClickEnter = new EventEmitter();
     }
 
-    getEntidade(): IUsuario {
+    getEntidade(): UsuarioModel {
         return this.formgroup.getRawValue();
     }
 
-    criar(): Observable<IUsuario> {
+    criar(): Observable<UsuarioModel> {
         return this._servicoUsuario.criar(this.getEntidade());
     }
 
-    editar(): Observable<IUsuario> {
+    editar(): Observable<UsuarioModel> {
         return this._servicoUsuario.editar(this.getEntidade());
     }
 
-    remover(): Observable<IUsuario> {
+    remover(): Observable<UsuarioModel> {
         const codigoUsuarioLogado = this._authService.getUsuario().codigo;
         const codigoUsuario = this.getEntidade().codigo;
 

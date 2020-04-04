@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DisciplinaComponent } from './disciplina.component';
 import { TipoResolver } from '../../../../shared/resolvers/tipo.resolver';
-import { AuthGuard } from '@compartilhado/core/auth/auth.guard';
+import { AuthGuard } from 'app/core/auth/auth.guard';
 
 const routes: Routes = [
     {

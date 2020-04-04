@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UsuariosComponent } from './usuarios.component';
 import { PerfilResolver } from '../../../shared/resolvers/perfil.resolver';
-import { AuthGuard } from '@compartilhado/core/auth/auth.guard';
+import { AuthGuard } from 'app/core/auth/auth.guard';
 
 const routes: Routes = [
     {

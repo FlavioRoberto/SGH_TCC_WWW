@@ -10,7 +10,7 @@ import {
     HttpUserEvent
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TokenStorageService } from '@compartilhado/core/token/token-storage.service';
+import { TokenStorageService } from '../auth/token/token-storage.service';
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {

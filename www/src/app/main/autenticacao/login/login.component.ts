@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { FuseConfigService } from '@fuse/services/config.service';
-import { fuseAnimations } from '@fuse/animations';
 import { ILogin } from './models/ilogin';
 import { LoginService } from './services/login.service';
-import { AutenticacaoService } from '@compartilhado/core/auth/autenticacao.service';
 import { Router } from '@angular/router';
+import { AutenticacaoService } from 'app/core/auth/autenticacao.service';
 
 @Component({
     selector: 'login',
@@ -31,7 +29,7 @@ export class LoginComponent implements OnInit {
         this._servico.autenticar(dados).subscribe(success => {
             this._autenticacaoServico.setToken(success);
             this._router.navigate(['/inicio']);
-        }, error => {
+        }, () => {
             this.emProgresso = false;
         });
     }

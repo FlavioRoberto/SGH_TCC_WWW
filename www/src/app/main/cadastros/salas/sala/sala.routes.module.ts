@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from '@compartilhado/core/auth/auth.guard';
+import { AuthGuard } from 'app/core/auth/auth.guard';
 import { SalaComponent } from './sala.component';
 import { BlocoResolver } from '../../../../shared/resolvers/bloco.resolver';
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpBaseService } from '@compartilhado/core/services/http-base.service';
+import { HttpBaseService } from 'app/core/services/http-base.service';
 import { routesApi } from 'app/routes/api.routes';
 import { Observable } from 'rxjs';
 

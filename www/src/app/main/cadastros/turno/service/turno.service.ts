@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TurnoModel } from '../model/turno.interface';
 import { routesApi } from 'app/routes/api.routes';
-import { BaseService } from '@compartilhado/core/services/base.service';
+import { BaseService } from 'app/core/services/base.service';
 
 @Injectable({
     providedIn: 'root'

@@ -1,9 +1,9 @@
-import { HttpBaseService } from '@compartilhado/core/services/http-base.service';
 import { Observable } from 'rxjs';
 
 import { ILogin } from '../models/ilogin';
 import { routesApi } from 'app/routes/api.routes';
 import { Injectable } from '@angular/core';
+import { HttpBaseService } from 'app/core/services/http-base.service';
 
 @Injectable()
 export class LoginService extends HttpBaseService<any> {

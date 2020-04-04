@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BaseService } from '@compartilhado/core/services/base.service';
+import { BaseService } from 'app/core/services/base.service';
 import { Cargo } from '../models/cargo.model';
 import { routesApi } from 'app/routes/api.routes';
 import { ESemestre } from 'app/shared/enums/esemestre.enum';

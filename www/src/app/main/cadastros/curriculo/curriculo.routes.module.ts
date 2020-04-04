@@ -4,8 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { CurriculoComponent } from './curriculo.component';
 import { TurnoResolver } from '../../../shared/resolvers/turno.resolver';
 import { CursoResolver } from '../../../shared/resolvers/curso.resolver';
-import { LoginGuard } from '@compartilhado/core/auth/login.guard';
-import { AuthGuard } from '@compartilhado/core/auth/auth.guard';
+import { LoginGuard } from 'app/core/auth/login.guard';
+import { AuthGuard } from 'app/core/auth/auth.guard';
 
 const routes: Routes = [
     {

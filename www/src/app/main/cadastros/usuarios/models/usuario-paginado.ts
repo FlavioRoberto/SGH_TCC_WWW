@@ -1,11 +1,11 @@
-import { IUsuario } from '@compartilhado/core/usuario/model/IUsuario.model';
 import { IDataEntidadePaginada } from '@breaking_dev/ic-databar-lib';
+import { UsuarioModel } from './iusuario';
 
-export class UsuarioPaginado implements IDataEntidadePaginada<IUsuario>{
+export class UsuarioPaginado implements IDataEntidadePaginada<UsuarioModel>{
     quantidade: number;
     total: number;
     posicao: number;
-    entidade: IUsuario[];
+    entidade: UsuarioModel[];
 
     constructor() {
         this.quantidade = 1;

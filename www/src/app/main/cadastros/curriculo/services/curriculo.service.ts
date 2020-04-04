@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { routesApi } from 'app/routes/api.routes';
-import { BaseService } from '@compartilhado/core/services/base.service';
+import { BaseService } from 'app/core/services/base.service';
 import { Observable } from 'rxjs';
 import { CurriculoModel } from '../model/curriculo.model';
 import { CurriculoDisciplinaModel } from '../model/curriculo-disciplina.model';

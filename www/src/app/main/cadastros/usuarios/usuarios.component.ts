@@ -4,7 +4,6 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { locale as portugues } from './../i18n/pt-br';
 
-import { IUsuario } from '@compartilhado/core/usuario/model/IUsuario.model';
 
 import { UsuarioPaginado } from './models/usuario-paginado';
 import { UsuarioDataBarService } from './services/usuario-databar.service';
@@ -12,14 +11,15 @@ import { UsuarioService } from './services/usuario.service';
 import { PerfilModel } from './models/iperfil';
 import { ActivatedRoute } from '@angular/router';
 import { celularRegex } from 'app/shared/regex/input-regex';
-import { AutenticacaoService } from '@compartilhado/core/auth/autenticacao.service';
 import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
+import { UsuarioModel } from './models/iusuario';
+import { AutenticacaoService } from 'app/core/auth/autenticacao.service';
 
 
 @Component({
     templateUrl: './view/usuario.component.html'
 })
-export class UsuariosComponent implements IDataBarBindComponent<IUsuario>, OnInit {
+export class UsuariosComponent implements IDataBarBindComponent<UsuarioModel>, OnInit {
     statusDataBar: EStatus;
     form: FormGroup;
     entidadePaginada: UsuarioPaginado;

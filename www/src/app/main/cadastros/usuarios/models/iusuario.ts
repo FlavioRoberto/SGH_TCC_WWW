@@ -1,4 +1,5 @@
-export interface IUsuario {
+export interface UsuarioModel {
+    codigo: number;
     nome: string;
     telefone: string;
     login: string;
