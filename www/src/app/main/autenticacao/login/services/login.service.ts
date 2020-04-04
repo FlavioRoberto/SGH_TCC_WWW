@@ -1,4 +1,4 @@
-import { HttpBaseService } from '@compartilhado/services/http-base.service';
+import { HttpBaseService } from '@compartilhado/core/services/http-base.service';
 import { Observable } from 'rxjs';
 
 import { ILogin } from '../models/ilogin';

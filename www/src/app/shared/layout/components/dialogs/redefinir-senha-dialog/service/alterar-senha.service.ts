@@ -1,5 +1,5 @@
 import { IAtualizarSenha } from '../models/IAtualizarSenha';
-import { HttpBaseService } from '@compartilhado/services/http-base.service';
+import { HttpBaseService } from '@compartilhado/core/services/http-base.service';
 import { Observable } from 'rxjs';
 import { routesApi } from 'app/routes/api.routes';
 import { Injectable } from '@angular/core';

@@ -8,8 +8,8 @@ export const navigation: FuseNavigation[] = [
         icon: 'apps',
         children: [
             {
-                id: 'gerenciamento',
-                title: 'Gerenciamento',
+                id: 'cadastros',
+                title: 'Cadastros',
                 type: 'collapsable',
                 icon: 'library_add',
                 children: [
@@ -18,17 +18,17 @@ export const navigation: FuseNavigation[] = [
                         title: 'Cursos',
                         type: 'item',
                         icon: 'school',
-                        url: '/gerenciamento/curso'
+                        url: '/cadastros/curso'
                     },
                     {
                         id: 'turno',
                         title: 'Turnos',
                         type: 'item',
                         icon: 'access_time',
-                        url: '/gerenciamento/turno'
+                        url: '/cadastros/turno'
                     },
                     {
-                        id: 'disciplina',
+                        id: 'disciplinas',
                         title: 'Disciplinas',
                         icon: 'collections_bookmark',
                         type: 'collapsable',
@@ -37,13 +37,13 @@ export const navigation: FuseNavigation[] = [
                                 id: 'disciplina.tipo',
                                 title: 'Tipo',
                                 type: 'item',
-                                url: '/gerenciamento/disciplina/tipo',
+                                url: '/cadastros/disciplinas/tipo',
                             },
                             {
                                 id: 'disciplina.cadastrar',
-                                title: 'Cadastro',
+                                title: 'Disciplina',
                                 type: 'item',
-                                url: '/gerenciamento/disciplina/cadastro',
+                                url: '/cadastros/disciplinas/cadastro',
                             }
                         ]
                     },
@@ -52,7 +52,7 @@ export const navigation: FuseNavigation[] = [
                         title: 'Currículos',
                         type: 'item',
                         icon: 'list_alt',
-                        url: '/gerenciamento/curriculo'
+                        url: '/cadastros/curriculo'
                     },
                     {
                         id: 'cargos',
@@ -64,13 +64,13 @@ export const navigation: FuseNavigation[] = [
                                 id: 'professor',
                                 title: 'Professores',
                                 type: 'item',
-                                url: '/gerenciamento/cargos/professores'
+                                url: '/cadastros/cargos/professores'
                             },
                             {
                                 id: 'cargo',
                                 title: 'Cargo',
                                 type: 'item',
-                                url: '/gerenciamento/cargos/cargo'
+                                url: '/cadastros/cargos/cargo'
                             },
                         ]
                     },
@@ -79,7 +79,7 @@ export const navigation: FuseNavigation[] = [
                         title: 'Usuarios',
                         type: 'item',
                         icon: 'account_box',
-                        url: '/gerenciamento/usuarios'
+                        url: '/cadastros/usuarios'
                     },
                     {
                         id: 'salas',
@@ -91,13 +91,13 @@ export const navigation: FuseNavigation[] = [
                                 id: 'bloco',
                                 title: 'Bloco',
                                 type: 'item',
-                                url: '/gerenciamento/salas/bloco'
+                                url: '/cadastros/salas/bloco'
                             },
                             {
                                 id: 'sala',
                                 title: 'Sala',
                                 type: 'item',
-                                url: '/gerenciamento/salas/sala'
+                                url: '/cadastros/salas/sala'
                             }
                         ]
                     }

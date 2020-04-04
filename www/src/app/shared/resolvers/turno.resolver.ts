@@ -1,11 +1,11 @@
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { TurnoModel } from 'app/main/cadastros/turno/model/turno.interface';
+import { TurnoService } from 'app/main/cadastros/turno/service/turno.service';
 
-import { TurnoService } from '../../main/gerenciamento/turno/service/turno.service';
-import { ITurno } from '../../main/gerenciamento/turno/model/turno.interface';
 
 @Injectable()
-export class TurnoResolver implements Resolve<ITurno[]> {
+export class TurnoResolver implements Resolve<TurnoModel[]> {
 
     constructor(private turnoService: TurnoService) { }
 

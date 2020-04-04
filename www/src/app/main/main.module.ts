@@ -7,10 +7,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import { CompartilhadoModule } from '@compartilhado/compartilhado.module';
-import { RequestInterceptor } from '@compartilhado/interceptors/request.interceptor';
+import { RequestInterceptor } from '@compartilhado/core/interceptors/request.interceptor';
 
 import { MainRoutingModule } from './main.routes.module';
-import { RequestErrorInterceptor } from '@compartilhado/interceptors/request.error.interceptor';
+import { RequestErrorInterceptor } from '@compartilhado/core/interceptors/request.error.interceptor';
 import { SharedModule } from 'app/shared/shared.module';
 
 

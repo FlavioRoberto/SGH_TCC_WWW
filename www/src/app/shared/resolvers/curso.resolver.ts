@@ -1,8 +1,8 @@
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { ICurso } from 'app/main/cadastros/curso/model/curso.model';
+import { CursoService } from 'app/main/cadastros/curso/service/curso.service';
 
-import { ICurso } from '../../main/gerenciamento/curso/model/curso.model';
-import { CursoService } from '../../main/gerenciamento/curso/service/curso.service';
 
 @Injectable()
 export class CursoResolver implements Resolve<ICurso[]> {
