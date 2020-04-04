@@ -3,6 +3,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { TranslateModule } from '@ngx-translate/core';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { CurriculoRoutingModule } from './curriculo.routes.module';
+import { MaterialCoreModule } from 'app/core/modules/material-core.module';
 
 @NgModule({
     declarations: [],
@@ -10,6 +11,7 @@ import { CurriculoRoutingModule } from './curriculo.routes.module';
         NgxMaskModule.forRoot(),
         TranslateModule,
         FuseSharedModule,
+        MaterialCoreModule,
         CurriculoRoutingModule
     ],
     exports: []
