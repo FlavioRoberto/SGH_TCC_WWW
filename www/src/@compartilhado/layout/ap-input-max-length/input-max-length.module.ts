@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 
-import { MaterialCoreModule } from '@compartilhado/material-core/material-core.module';
+import { MaterialCoreModule } from 'app/core/modules/material-core.module';
 
 import { ApInputMaxLength } from './input-max-length.component';
 

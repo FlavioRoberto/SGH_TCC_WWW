@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 
-import { MaterialCoreModule } from '@compartilhado/material-core/material-core.module';
+import { MaterialCoreModule } from 'app/core/modules/material-core.module';
 import { ExpansivelTableComponent } from './expansivel-table.component';
 
 

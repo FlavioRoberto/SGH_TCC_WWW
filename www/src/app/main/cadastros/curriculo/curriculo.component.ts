@@ -20,7 +20,7 @@ import { CurriculoDataBarService } from './services/curriculo-databar.service';
 import { AdicionarDisciplinaDialogService } from './components/dialogs/adicionar-disciplina/service/adicionar-disciplina-dialog.service';
 
 import { CurriculoService } from './services/curriculo.service';
-import { anoRegex } from '@compartilhado/util/input-regex/input-regex';
+import { anoRegex } from 'app/shared/regex/input-regex';
 import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
 import { SnackBarService } from 'app/shared/services/snack-bar.service';
 import { finalize } from 'rxjs/operators';

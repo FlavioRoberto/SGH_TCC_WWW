@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MaterialCoreModule } from '@compartilhado/material-core/material-core.module';
+import { MaterialCoreModule } from 'app/core/modules/material-core.module';
 import { DisciplinaCargoDialogComponent } from './disciplina-cargo-dialog.component';
 import { DisciplinaCargoDialogService } from './services/disciplina-cargo-dialog.service';
 import { CompartilhadoModule } from '@compartilhado/compartilhado.module';

@@ -11,7 +11,7 @@ import { UsuarioDataBarService } from './services/usuario-databar.service';
 import { UsuarioService } from './services/usuario.service';
 import { PerfilModel } from './models/iperfil';
 import { ActivatedRoute } from '@angular/router';
-import { celularRegex } from '@compartilhado/util/input-regex/input-regex';
+import { celularRegex } from 'app/shared/regex/input-regex';
 import { AutenticacaoService } from '@compartilhado/core/auth/autenticacao.service';
 import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
 

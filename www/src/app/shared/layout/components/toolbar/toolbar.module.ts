@@ -10,7 +10,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 
 import { ToolbarComponent } from 'app/shared/layout/components/toolbar/toolbar.component';
 import { AlterarSenhaDialogModule } from '../dialogs/redefinir-senha-dialog/alterar-senha-dialog.module';
-import { MaterialCoreModule } from '@compartilhado/material-core/material-core.module';
+import { MaterialCoreModule } from 'app/core/modules/material-core.module';
 
 @NgModule({
     declarations: [

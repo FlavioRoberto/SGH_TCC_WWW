@@ -4,7 +4,7 @@ import { Professor } from './models/professor.model';
 import { ProfessorPaginado } from './models/professor-paginado.model';
 import { ProfessorDataBarService } from './services/professor.databar.service';
 import { ProfessorService } from './services/professor.service';
-import { celularRegex, matriculaRegex } from '@compartilhado/util/input-regex/input-regex';
+import { celularRegex, matriculaRegex } from 'app/shared/regex/input-regex';
 import { ActivatedRoute } from '@angular/router';
 import { ICurso } from '../../curso/model/curso.model';
 import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';

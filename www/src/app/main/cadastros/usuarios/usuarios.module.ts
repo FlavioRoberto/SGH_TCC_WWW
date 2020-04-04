@@ -3,7 +3,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { CompartilhadoModule } from '@compartilhado/compartilhado.module';
-import { MaterialCoreModule } from '@compartilhado/material-core/material-core.module';
+import { MaterialCoreModule } from 'app/core/modules/material-core.module';
 
 import { UsuariosRoutingModule } from './usuarios.routes.module';
 import { UsuariosComponent } from './usuarios.component';

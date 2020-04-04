@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUsuario } from './model/IUsuario.model';
+import { UsuarioModel } from './model/IUsuario.model';
 
 const KEY = 'usuario';
 
@@ -11,12 +11,12 @@ export class UsuarioStorageService {
         return !!this.getUsuario();
     }
 
-    setUsuario(usuario: IUsuario): void {
+    setUsuario(usuario: UsuarioModel): void {
         window.localStorage.setItem(KEY, JSON.stringify(usuario));
     }
 
-    getUsuario(): IUsuario {
-        return  JSON.parse(window.localStorage.getItem(KEY)) as IUsuario;
+    getUsuario(): UsuarioModel {
+        return  JSON.parse(window.localStorage.getItem(KEY)) as UsuarioModel;
     }
 
     removerUsuario(): void {

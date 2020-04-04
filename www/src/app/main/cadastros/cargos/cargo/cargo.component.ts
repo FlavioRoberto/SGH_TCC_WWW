@@ -4,7 +4,7 @@ import { Component, Injectable, Injector, OnDestroy, ChangeDetectorRef } from '@
 import { EStatus, OnInitDataBar } from '@breaking_dev/ic-databar-lib';
 import { ColumnDef, AcoesExpansivelTable } from '@breaking_dev/ic-expansivel-table';
 
-import { anoRegex } from '@compartilhado/util/input-regex/input-regex';
+import { anoRegex } from 'app/shared/regex/input-regex';
 
 import { ESemestre, ESemestreLabel } from 'app/shared/enums/esemestre.enum';
 import { ProfessorService } from '../professores/services/professor.service';

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FuseSharedModule } from '@fuse/shared.module';
-import { MaterialCoreModule } from '@compartilhado/material-core/material-core.module';
+import { MaterialCoreModule } from 'app/core/modules/material-core.module';
 import { AdicionarDisciplinaDialogComponent } from './adicionar-disciplina-dialog.component';
 import { AdicionarDisciplinaDialogService } from './service/adicionar-disciplina-dialog.service';
 import { CompartilhadoModule } from '@compartilhado/compartilhado.module';

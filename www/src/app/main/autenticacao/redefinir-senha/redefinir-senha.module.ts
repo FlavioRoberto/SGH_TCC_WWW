@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import { CompartilhadoModule } from '@compartilhado/compartilhado.module';
-import { MaterialCoreModule } from '@compartilhado/material-core/material-core.module';
+import { MaterialCoreModule } from 'app/core/modules/material-core.module';
 
 import { RedefinirSenhaComponent } from './redefinir-senha.component';
 import { RedefinirSenhaRoutingModule } from './redefinir-senha.routes.module';

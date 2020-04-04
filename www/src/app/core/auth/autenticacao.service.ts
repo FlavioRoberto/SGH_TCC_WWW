@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { TokenStorageService } from '../token/token-storage.service';
+import { TokenStorageService } from './token/token-storage.service';
 import { UsuarioStorageService } from '../usuario/usuario-storage.service';
-import { IUsuario } from '../usuario/model/IUsuario.model';
+import { UsuarioModel } from '../usuario/model/IUsuario.model';
 
 
 
@@ -20,7 +20,7 @@ export class AutenticacaoService {
 
     setToken(token: string): void {
         this.tokenStorageService.setToken(token);
-        const usuarioDoToken = this.jwtHelper.decodeToken(token) as IUsuario;
+        const usuarioDoToken = this.jwtHelper.decodeToken(token) as UsuarioModel;
         this.usuarioStorage.setUsuario(usuarioDoToken);
     }
 
@@ -28,11 +28,11 @@ export class AutenticacaoService {
         return this.tokenStorageService.getToken();
     }
 
-    setUsuario(usuario: IUsuario): void {
+    setUsuario(usuario: UsuarioModel): void {
         this.usuarioStorage.setUsuario(usuario);
     }
 
-    getUsuario(): IUsuario {
+    getUsuario(): UsuarioModel {
         return this.usuarioStorage.getUsuario();
     }
 
