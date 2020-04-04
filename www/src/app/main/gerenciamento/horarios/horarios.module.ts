@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { NgxMaskModule } from 'ngx-mask';
 import { TranslateModule } from '@ngx-translate/core';
 import { FuseSharedModule } from '@fuse/shared.module';
-import { CurriculoRoutingModule } from './curriculo.routes.module';
+import { HorariosRoutingModule } from './horarios.routes.module';
 import { MaterialCoreModule } from 'app/core/modules/material-core.module';
 
 @NgModule({
@@ -12,8 +12,8 @@ import { MaterialCoreModule } from 'app/core/modules/material-core.module';
         TranslateModule,
         FuseSharedModule,
         MaterialCoreModule,
-        CurriculoRoutingModule
+        HorariosRoutingModule
     ],
     exports: []
 })
-export class CurriculoModule { }
+export class HorariosModule { }

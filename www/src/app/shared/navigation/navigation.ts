@@ -111,10 +111,10 @@ export const navigation: FuseNavigation[] = [
                 children: [
                     {
                         id: 'curriculo',
-                        title: 'Currículos',
+                        title: 'Horários de aula',
                         type: 'item',
-                        icon: 'list_alt',
-                        url: '/gerenciamento/curriculo'
+                        icon: 'access_time',
+                        url: '/gerenciamento/horarios'
                     }
                 ]
             }

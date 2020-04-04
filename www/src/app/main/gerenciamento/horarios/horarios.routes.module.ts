@@ -1,13 +1,13 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AuthGuard } from 'app/core/auth/auth.guard';
-import { CurriculoComponent } from './curriculo.component';
+import { HorariosComponent } from './horarios.component';
 
 
 const routes: Routes = [
     {
         path: '',
-        component: CurriculoComponent,
+        component: HorariosComponent,
         canActivate: [AuthGuard]
     }
 ];
@@ -17,4 +17,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class CurriculoRoutingModule { }
+export class HorariosRoutingModule { }

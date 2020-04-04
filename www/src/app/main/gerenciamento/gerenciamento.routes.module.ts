@@ -4,8 +4,8 @@ import { AuthGuard } from 'app/core/auth/auth.guard';
 
 const routes: Routes = [
     {
-        path: 'curriculo',
-        loadChildren: () => import('./curriculo/curriculo.module').then(m => m.CurriculoModule),
+        path: 'horarios',
+        loadChildren: () => import('./horarios/horarios.module').then(m => m.HorariosModule),
         canActivate: [AuthGuard]
     }
 ];
