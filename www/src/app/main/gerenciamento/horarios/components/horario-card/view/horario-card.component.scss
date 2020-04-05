@@ -1,0 +1,24 @@
+.mat-card-title {
+    font-size: 1.25em;
+}
+
+.card-horario {
+    cursor: pointer;
+}
+
+.card-horario:hover {
+    transform: translateY(-4px);
+    transition: all 0.2s;
+    background-color: #557f94;
+    color: white;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2) !important;
+    .mat-card-subtitle {
+        color: white;
+    }
+}
+
+.card-horario:active {
+    transform: translateY(-1px);
+    transition: all 0.1s;
+    box-shadow: 0 10px 5px rgba(0, 0, 0, 0.2) !important;
+}

@@ -12,7 +12,7 @@ import { ApExpansivelTableDataSource } from '@compartilhado/layout/expansivel-ta
 import { locale as portugues } from './../i18n/pt-br';
 
 import { CurriculoPaginado } from './model/curriculo.paginacao';
-import { ICurso } from '../curso/model/curso.model';
+import { CursoModel } from '../curso/model/curso.model';
 import { TurnoModel } from '../turno/model/turno.interface';
 import { CurriculoDisciplinaModel } from './model/curriculo-disciplina.model';
 import { CurriculoModule } from './curriculo.module';
@@ -36,7 +36,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     servicoDataBarBind: CurriculoDataBarService;
     form: FormGroup;
     entidadePaginada: CurriculoPaginado;
-    cursos: ICurso[] = [];
+    cursos: CursoModel[] = [];
     turnos: TurnoModel[] = [];
     EStatus = EStatus;
     isMobile = false;

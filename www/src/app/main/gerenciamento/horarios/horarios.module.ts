@@ -4,9 +4,10 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { HorariosRoutingModule } from './horarios.routes.module';
 import { MaterialCoreModule } from 'app/core/modules/material-core.module';
 import { HorariosComponent } from './horarios.component';
+import { HorarioCardComponent } from './components/horario-card/horario-card.component';
 
 @NgModule({
-    declarations: [HorariosComponent],
+    declarations: [HorariosComponent, HorarioCardComponent],
     imports: [
         FuseSharedModule,
         MaterialCoreModule,

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { locale as portugues } from './../i18n/pt-br';
-import { ICurso } from './model/curso.model';
+import { CursoModel } from './model/curso.model';
 import { CursoPaginado } from './model/curso.paginacao';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CursoService } from './service/curso.service';
@@ -13,7 +13,7 @@ import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
     templateUrl: './view/curso.component.html',
     styleUrls: ['./view/curso.component.scss']
 })
-export class CursoComponent implements IDataBarBindComponent<ICurso>{
+export class CursoComponent implements IDataBarBindComponent<CursoModel>{
     statusDataBar: EStatus;
     servicoDataBarBind: CursoDataBarService;
     statusNavBar: string;

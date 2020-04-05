@@ -6,7 +6,7 @@ import { ProfessorDataBarService } from './services/professor.databar.service';
 import { ProfessorService } from './services/professor.service';
 import { celularRegex, matriculaRegex } from 'app/shared/regex/input-regex';
 import { ActivatedRoute } from '@angular/router';
-import { ICurso } from '../../curso/model/curso.model';
+import { CursoModel } from '../../curso/model/curso.model';
 import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
 
 @Component({
@@ -20,7 +20,7 @@ export class ProfessoresComponent implements IDataBarBindComponent<Professor> {
     servicoDataBarBind: ProfessorDataBarService;
     status: EStatus;
     EStatus = EStatus;
-    cursos: ICurso[];
+    cursos: CursoModel[];
 
     constructor(private _formBuilder: FormBuilder,
         private _servico: ProfessorService,

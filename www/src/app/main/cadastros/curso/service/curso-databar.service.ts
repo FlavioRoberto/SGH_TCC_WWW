@@ -3,16 +3,16 @@ import { EventEmitter } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { ICurso } from '../model/curso.model';
+import { CursoModel } from '../model/curso.model';
 import { CursoPaginado } from '../model/curso.paginacao';
 import { CursoService } from './curso.service';
 import { IDataBarBindService, EStatus, IDatabarBindOnClickService, DatabarEventClickService, EEventoClick } from '@breaking_dev/ic-databar-lib';
 
-export class CursoDataBarService implements IDatabarBindOnClickService<ICurso>{
+export class CursoDataBarService implements IDatabarBindOnClickService<CursoModel>{
     eventDatabar: DatabarEventClickService;
     status: EStatus;
 
-    onClickEnter: EventEmitter<ICurso> = new EventEmitter();
+    onClickEnter: EventEmitter<CursoModel> = new EventEmitter();
 
     constructor(public formgroup: FormGroup, private _servico: CursoService) {
         this.onClickEnter = new EventEmitter();
@@ -27,11 +27,11 @@ export class CursoDataBarService implements IDatabarBindOnClickService<ICurso>{
         this.onClickEnter.emit(this.getEntidade());
     }
 
-    getEntidade(): ICurso {
-        return this.formgroup.getRawValue() as ICurso;
+    getEntidade(): CursoModel {
+        return this.formgroup.getRawValue() as CursoModel;
     }
 
-    criar(): Observable<ICurso> {
+    criar(): Observable<CursoModel> {
         return this._servico.criar(this.getEntidade());
     }
 
@@ -39,7 +39,7 @@ export class CursoDataBarService implements IDatabarBindOnClickService<ICurso>{
         return this._servico.listarPaginacao(paginacao);
     }
 
-    editar(): Observable<ICurso> {
+    editar(): Observable<CursoModel> {
         return this._servico.editar(this.getEntidade());
     }
 

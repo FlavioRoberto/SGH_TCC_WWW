@@ -1,4 +1,4 @@
-export interface ICurso {
+export interface CursoModel {
     codigo: number;
     descricao: string;
 }

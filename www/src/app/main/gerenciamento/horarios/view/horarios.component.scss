@@ -1,3 +1,8 @@
-.mat-card-title {
-    font-size: 1.25em;
+
+.botao-flutuante {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 24px!important;
+    z-index: 10;
 }
