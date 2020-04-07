@@ -1,16 +1,16 @@
-<div
-    class="page-layout simple card fullwidth inner-scroll p-12"
-    fxLayout="column"
-    fxLayoutGap="12px"
->
+<div class="page-layout simple card fullwidth inner-scroll p-12"
+     fxLayout="column"
+     fxLayoutGap="12px">
     <!-- FILTRO -->
     <mat-card fxLayoutGap="12px">
         <!-- CURRICULO -->
-        <mat-form-field appearance="outline" fxFlex="1 0 auto">
+        <mat-form-field appearance="outline"
+                        fxFlex="1 0 auto">
             <mat-label>Currículo</mat-label>
             <mat-select fxLayout="column">
                 <div *ngFor="let curriculo of curriculos">
-                    <mat-option *ngIf="curriculos.length <= 0" disabled>
+                    <mat-option *ngIf="curriculos.length <= 0"
+                                disabled>
                         <span>Nenhum registro encontrado</span>
                     </mat-option>
                     <mat-option [value]="curriculo">
@@ -35,12 +35,11 @@
         <!-- TURNOS -->
 
         <!-- PERIODO -->
-        <mat-form-field fxFlex.gt-sm="12" appearance="outline">
+        <mat-form-field fxFlex.gt-sm="12"
+                        appearance="outline">
             <mat-select placeholder="Período">
-                <mat-option
-                    *ngFor="let periodo of periodos"
-                    [value]="periodo.codigo"
-                >
+                <mat-option *ngFor="let periodo of periodos"
+                            [value]="periodo.codigo">
                     {{ periodo.descricao }}
                 </mat-option>
             </mat-select>
@@ -48,11 +47,9 @@
         <!-- PERIODO -->
 
         <!-- SEMESTRE -->
-        <mat-form-field
-            appearance="outline"
-            fxFlex.gt-sm="12"
-            fxFlex="1 0 auto"
-        >
+        <mat-form-field appearance="outline"
+                        fxFlex.gt-sm="12"
+                        fxFlex="1 0 auto">
             <mat-label>Semestre</mat-label>
             <mat-select fxLayout="column">
                 <div *ngFor="let semestre of semestres">
@@ -65,28 +62,27 @@
         <!-- SEMESTRE -->
 
         <!-- ANO -->
-        <mat-form-field fxFlex.gt-sm="12" appearance="outline">
+        <mat-form-field fxFlex.gt-sm="12"
+                        appearance="outline">
             <mat-label>Ano</mat-label>
-            <input
-                matInput
-                class="primary-color-input border-radius-4"
-                name="primary color"
-                mask="0000"
-            />
+            <input matInput
+                   class="primary-color-input border-radius-4"
+                   name="primary color"
+                   mask="0000" />
         </mat-form-field>
         <!-- ANO -->
     </mat-card>
     <!-- FILTRO -->
 
     <!-- HORARIOS -->
-    <mat-card fxLayout="column" fxFlex="100">
-        <div
-            fxFlex="80"
-            fxLayout.gt-sm="row wrap"
-            style="overflow-y: scroll;"
-            fxLayoutAlign.gt-sm="space-around"
-        >
-            <span class="texto-informativo" *ngIf="horarios.length <= 0">
+    <mat-card fxLayout="column"
+              fxFlex="100">
+        <div fxFlex="80"
+             fxLayout.gt-sm="row wrap"
+             style="overflow-y: scroll;"
+             fxLayoutAlign.gt-sm="space-around">
+            <span class="texto-informativo"
+                  *ngIf="horarios.length <= 0">
                 <p>
                     Clique em adicionar horários (+) para adicionar um novo
                     horário.
@@ -94,26 +90,21 @@
             </span>
 
             <ng-container *ngFor="let horario of horarios">
-                <horario-card
-                    fxFlex.gt-sm="25"
-                    fxFlex="100"
-                    class="m-12"
-                    [ano]="horario.ano"
-                    [semestre]="horario.semestre"
-                    [cursoDescricao]="horario.curso?.descricao"
-                    [periodo]="horario.periodo"
-                    [turno]="horario.turno?.descricao"
-                ></horario-card>
+                <horario-card fxFlex.gt-sm="25"
+                              fxFlex="100"
+                              class="m-12"
+                              ($editar)="editarHorario($event)"
+                              ($remover)="removerHorario($event)"
+                              ($selecionar)="selecionarHorario($event)"
+                              [horario]="horario"></horario-card>
             </ng-container>
         </div>
     </mat-card>
 
-    <button
-        class="botao-flutuante"
-        mat-fab
-        matTooltip="Adicionar novo horário"
-        aria-label="Example icon-button with a heart icon"
-    >
+    <button class="botao-flutuante"
+            mat-fab
+            matTooltip="Adicionar novo horário"
+            aria-label="Example icon-button with a heart icon">
         <mat-icon>add</mat-icon>
     </button>
     <!-- HORARIOS -->

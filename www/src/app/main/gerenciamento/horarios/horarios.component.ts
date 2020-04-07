@@ -28,4 +28,16 @@ export class HorariosComponent implements OnInit {
     retornarDescricaoSemestre(semestre: ESemestre): string {
         return ESemestreLabel.get(semestre);
     }
+
+    removerHorario(horario: HorarioModel): void {
+        alert('removendo...');
+    }
+
+    editarHorario(horario: HorarioModel): void {
+        alert('editando...');
+    }
+
+    selecionarHorario(horario: HorarioModel): void {
+        alert('selecionando...');
+    }
 }
