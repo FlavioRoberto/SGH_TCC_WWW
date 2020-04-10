@@ -5,13 +5,15 @@ import { HorariosRoutingModule } from './horarios.routes.module';
 import { MaterialCoreModule } from 'app/core/modules/material-core.module';
 import { HorariosComponent } from './horarios.component';
 import { HorarioCardComponent } from './components/horario-card/horario-card.component';
+import { CadastroHorarioDialogModule } from './components/dialogs/cadastro-horario/cadastro-horario.module';
 
 @NgModule({
     declarations: [HorariosComponent, HorarioCardComponent],
     imports: [
         FuseSharedModule,
         MaterialCoreModule,
-        HorariosRoutingModule
+        HorariosRoutingModule,
+        CadastroHorarioDialogModule
     ],
     exports: []
 })

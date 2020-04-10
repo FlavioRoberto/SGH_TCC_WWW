@@ -1,25 +1,40 @@
-<div
-    class="page-layout simple card fullwidth inner-scroll p-12"
-    fxLayout="column"
-    fxLayoutGap="12px"
->
-    <!-- FILTRO -->
-    <mat-card>
-        <form [formGroup]="form" novalidate fxLayoutGap="12px">
+<div fxLayout="column" fxFlex="1 0 auto" class="dialog-content-wrapper">
+    <mat-toolbar class="mat-accent m-0">
+        <mat-toolbar-row
+            fxFlex
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <span class="title dialog-title">{{ data.titulo }}</span>
+            <button
+                mat-icon-button
+                (click)="fecharDialog()"
+                aria-label="Fechar dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div fxFlex="100" class="p-16 pb-0 m-0 noPadding" fusePerfectScrollbar>
+        <!-- FORM -->
+        <form
+            name="adicionarDisciplinaForm"
+            fxLayout="column"
+            [formGroup]="form"
+            novalidate
+        >
             <!-- CURRICULO -->
             <mat-form-field appearance="outline" fxFlex="1 0 auto">
                 <mat-label>Currículo</mat-label>
                 <mat-select fxLayout="column" formControlName="curriculo">
                     <mat-option
-                        *ngIf="curriculos.length <= 0 && !carregandoCurriculos"
+                        *ngIf="!data.curriculos || data.curriculos?.length <= 0"
                         disabled
                     >
                         <span>Nenhum registro encontrado</span>
                     </mat-option>
-                    <mat-option *ngIf="carregandoCurriculos" disabled>
-                        <span>Carregando currículos...</span>
-                    </mat-option>
-                    <div *ngFor="let curriculo of curriculos">
+                    <div *ngFor="let curriculo of data.curriculos">
                         <mat-option [value]="curriculo">
                             {{ curriculo.descricaoCurso }} - {{ curriculo.ano }}
                         </mat-option>
@@ -45,7 +60,7 @@
             <mat-form-field fxFlex.gt-sm="12" appearance="outline">
                 <mat-select placeholder="Período" formControlName="periodo">
                     <mat-option
-                        *ngFor="let periodo of periodos"
+                        *ngFor="let periodo of data.periodos"
                         [value]="periodo.codigo"
                     >
                         {{ periodo.descricao }}
@@ -62,7 +77,7 @@
             >
                 <mat-label>Semestre</mat-label>
                 <mat-select fxLayout="column" formControlName="semestre">
-                    <div *ngFor="let semestre of semestres">
+                    <div *ngFor="let semestre of data.semestres">
                         <mat-option [value]="semestre">
                             {{ retornarDescricaoSemestre(semestre) }}
                         </mat-option>
@@ -84,46 +99,27 @@
             </mat-form-field>
             <!-- ANO -->
         </form>
-    </mat-card>
-    <!-- FILTRO -->
+        <!-- FORM -->
+    </div>
 
-    <!-- HORARIOS -->
-    <mat-card fxLayout="column" fxFlex="100">
-        <div
-            fxFlex="80"
-            fxLayout.gt-sm="row wrap"
-            style="overflow-y: scroll;"
-            fxLayoutAlign.gt-sm="space-around"
-        >
-            <span class="texto-informativo" *ngIf="horarios.length <= 0">
-                <p>
-                    Clique em adicionar horários (+) para adicionar um novo
-                    horário.
-                </p>
-            </span>
-
-            <ng-container *ngFor="let horario of horarios">
-                <horario-card
-                    fxFlex.gt-sm="25"
-                    fxFlex="100"
-                    class="m-12"
-                    ($editar)="editarHorario($event)"
-                    ($remover)="removerHorario($event)"
-                    ($selecionar)="selecionarHorario($event)"
-                    [horario]="horario"
-                ></horario-card>
-            </ng-container>
-        </div>
-    </mat-card>
-
-    <button
-        class="botao-flutuante"
-        (click)="adicionarHorarios()"
-        mat-fab
-        matTooltip="Adicionar novo horário"
-        aria-label="Example icon-button with a heart icon"
+    <div
+        mat-dialog-actions
+        class="m-0 p-16"
+        fxLayout="row"
+        fxLayoutAlign="end center"
     >
-        <mat-icon>add</mat-icon>
-    </button>
-    <!-- HORARIOS -->
+        <button class="mat-raised-button mat-accent" (click)="salvar()">
+            <div
+                fxLayout="row"
+                fxFlex="1 0 auto"
+                fxLayoutAlign="center center"
+                fxLayoutGap="8px"
+                *ngIf="emProgresso"
+            >
+                <span>SALVANDO</span>
+                <mat-spinner diameter="20"></mat-spinner>
+            </div>
+            <span *ngIf="!emProgresso">SALVAR</span>
+        </button>
+    </div>
 </div>

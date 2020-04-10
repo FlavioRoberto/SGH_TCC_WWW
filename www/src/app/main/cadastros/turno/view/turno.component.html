@@ -16,7 +16,12 @@
         class="turno-form"
     >
         <!-- CODIGO -->
-        <mat-form-field appearance="outline" class="pr-sm-8" fxFlex="20">
+        <mat-form-field
+            appearance="outline"
+            class="pr-sm-8"
+            fxFlex="20"
+            *ngIf="statusDataBar != EStatus.inserindo"
+        >
             <mat-label>Código</mat-label>
             <input
                 mask="9{6}"
