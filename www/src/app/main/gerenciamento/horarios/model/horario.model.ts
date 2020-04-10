@@ -3,7 +3,6 @@ import { CursoModel } from 'app/main/cadastros/curso/model/curso.model';
 
 export class HorarioModel {
     codigoCurriculo: number;
-    curso: CursoModel;
     periodo: number;
     semestre: number;
     ano: number;

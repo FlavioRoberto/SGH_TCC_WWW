@@ -59,13 +59,14 @@ export class HorariosComponent implements OnInit {
             curriculos: this.curriculos,
             periodos: this.periodos,
             semestres: this.semestres,
-            horarioFiltrado: this.form.getRawValue() as HorarioModel
+            horarioFiltrado: this.form.getRawValue() as HorarioModel,
+            salvar: this._executarAoSalvarHorario
         });
     }
 
     private _carregarCurriculos(): void {
         this.carregandoCurriculos = true;
-        
+
         this._curriculoService.listarTodos()
             .pipe(finalize(() => this.carregandoCurriculos = false))
             .subscribe(curriculos => this.curriculos = curriculos);
@@ -73,10 +74,14 @@ export class HorariosComponent implements OnInit {
 
     private _inicializarFormulario(): void {
         this.form = this._formBuilder.group({
-            curriculo: [null],
+            codigoCurriculo: [null],
             periodo: [null],
             semestre: [null],
             ano: [null]
         });
+    }
+
+    private _executarAoSalvarHorario(horario: HorarioModel): void {
+        alert(`salvou o horário ${horario.codigoCurriculo}`);
     }
 }

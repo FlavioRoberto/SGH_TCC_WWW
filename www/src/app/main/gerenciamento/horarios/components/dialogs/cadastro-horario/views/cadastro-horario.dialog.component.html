@@ -27,7 +27,7 @@
             <!-- CURRICULO -->
             <mat-form-field appearance="outline" fxFlex="1 0 auto">
                 <mat-label>Currículo</mat-label>
-                <mat-select fxLayout="column" formControlName="curriculo">
+                <mat-select fxLayout="column" formControlName="codigoCurriculo">
                     <mat-option
                         *ngIf="!data.curriculos || data.curriculos?.length <= 0"
                         disabled
@@ -35,7 +35,7 @@
                         <span>Nenhum registro encontrado</span>
                     </mat-option>
                     <div *ngFor="let curriculo of data.curriculos">
-                        <mat-option [value]="curriculo">
+                        <mat-option [value]="curriculo.codigo">
                             {{ curriculo.descricaoCurso }} - {{ curriculo.ano }}
                         </mat-option>
                     </div>
@@ -58,6 +58,7 @@
 
             <!-- PERIODO -->
             <mat-form-field fxFlex.gt-sm="12" appearance="outline">
+                <mat-label>Períodos</mat-label>
                 <mat-select placeholder="Período" formControlName="periodo">
                     <mat-option
                         *ngFor="let periodo of data.periodos"

@@ -6,6 +6,7 @@ import { MaterialCoreModule } from 'app/core/modules/material-core.module';
 import { HorariosComponent } from './horarios.component';
 import { HorarioCardComponent } from './components/horario-card/horario-card.component';
 import { CadastroHorarioDialogModule } from './components/dialogs/cadastro-horario/cadastro-horario.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
     declarations: [HorariosComponent, HorarioCardComponent],
@@ -13,7 +14,8 @@ import { CadastroHorarioDialogModule } from './components/dialogs/cadastro-horar
         FuseSharedModule,
         MaterialCoreModule,
         HorariosRoutingModule,
-        CadastroHorarioDialogModule
+        CadastroHorarioDialogModule,
+        NgxMaskModule.forChild()
     ],
     exports: []
 })

@@ -6,7 +6,7 @@ import { CadastroHorarioDataModel } from '../model/cadastro-horario-data';
 @Injectable()
 export class CadastroHorarioDialogService {
 
-    private _dialogRef: MatDialogRef<CadastroHorarioDialogComponent>;
+    private static _dialogRef: MatDialogRef<CadastroHorarioDialogComponent>;
 
     constructor(private _dialog: MatDialog) { }
 
@@ -16,12 +16,12 @@ export class CadastroHorarioDialogService {
         dialogConfig.panelClass = 'cadastrar-horario-dialog';
         dialogConfig.disableClose = true;
         dialogConfig.data = data;
-       
-        this._dialogRef = this._dialog.open(CadastroHorarioDialogComponent, dialogConfig);
+
+        CadastroHorarioDialogService._dialogRef = this._dialog.open(CadastroHorarioDialogComponent, dialogConfig);
     }
 
     fecharDialog(): void {
-        this._dialogRef.close();
+        CadastroHorarioDialogService._dialogRef.close();
     }
 
 }

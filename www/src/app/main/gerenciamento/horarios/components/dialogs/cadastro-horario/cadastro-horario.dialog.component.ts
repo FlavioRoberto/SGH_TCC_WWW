@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CadastroHorarioDataModel } from './model/cadastro-horario-data';
 import { ESemestre, ESemestreLabel } from 'app/shared/enums/esemestre.enum';
+import { HorarioModel } from '../../../model/horario.model';
 
 @Component({
     templateUrl: './views/cadastro-horario.dialog.component.html',
@@ -22,6 +23,10 @@ export class CadastroHorarioDialogComponent implements OnInit {
         this.data = data;
     }
 
+    get horario(): HorarioModel {
+        return this.form.getRawValue() as HorarioModel;
+    }
+
     ngOnInit(): void {
         this._construirFormulario();
         this._iniciarValoresFiltrados();
@@ -32,7 +37,8 @@ export class CadastroHorarioDialogComponent implements OnInit {
     }
 
     salvar(): void {
-
+        this.data.salvar(this.horario);
+        this.dialogRef.close();
     }
 
     fecharDialog(): void {
@@ -45,7 +51,7 @@ export class CadastroHorarioDialogComponent implements OnInit {
 
     private _construirFormulario(): void {
         this.form = this._formBuilder.group({
-            curriculo: [null],
+            codigoCurriculo: [null],
             ano: [new Date().getFullYear()],
             periodo: [null],
             semestre: [null],

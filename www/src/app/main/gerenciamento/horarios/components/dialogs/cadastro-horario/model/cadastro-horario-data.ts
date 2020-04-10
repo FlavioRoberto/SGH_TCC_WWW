@@ -8,5 +8,6 @@ export class CadastroHorarioDataModel {
     semestres: ESemestre[];
     titulo: string;
     horarioFiltrado: HorarioModel;
+    salvar: (horarioSalvo: HorarioModel) => void;
 }
 
