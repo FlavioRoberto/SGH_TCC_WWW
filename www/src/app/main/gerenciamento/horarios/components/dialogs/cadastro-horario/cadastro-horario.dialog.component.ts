@@ -7,24 +7,28 @@ import { HorarioModel } from '../../../model/horario.model';
 import { TurnoModel } from 'app/main/cadastros/turno/model/turno.interface';
 import { TurnoService } from 'app/main/cadastros/turno/service/turno.service';
 import { finalize } from 'rxjs/operators';
+import { HorarioService } from '../../../services/horario.service';
+import { SnackBarService } from 'app/shared/services/snack-bar.service';
 
 @Component({
     templateUrl: './views/cadastro-horario.dialog.component.html',
-    styleUrls: ['./views/cadastrar-horario.dialog.component.scss'],
+    styleUrls: ['./views/cadastrar-horario.dialog.component.scss', '../../../../../../shared/styles/toast.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class CadastroHorarioDialogComponent implements OnInit {
 
     form: FormGroup;
     data: CadastroHorarioDataModel;
-    emProgresso = false;
     turnos: TurnoModel[];
     carregandoTurnos = false;
+    salvando = false;
 
     constructor(
         private dialogRef: MatDialogRef<CadastroHorarioDialogComponent>,
         private _formBuilder: FormBuilder,
         private _turnoService: TurnoService,
+        private _horarioService: HorarioService,
+        private _snackBarService: SnackBarService,
         @Inject(MAT_DIALOG_DATA) data: CadastroHorarioDataModel) {
         this.data = data;
     }
@@ -34,7 +38,7 @@ export class CadastroHorarioDialogComponent implements OnInit {
     }
 
     get desabilitarBotaoSalvar(): boolean {
-        return this.form.invalid;
+        return this.form.invalid || this.salvando;
     }
 
     ngOnInit(): void {
@@ -48,8 +52,10 @@ export class CadastroHorarioDialogComponent implements OnInit {
     }
 
     salvar(): void {
-        const acaoSalvar = () => {
-            this.data.salvar(this.horario);
+        this.salvando = true;
+
+        const acaoSalvar = (horario: HorarioModel) => {
+            this.data.salvar(horario);
             this.dialogRef.close();
         };
 
@@ -63,29 +69,21 @@ export class CadastroHorarioDialogComponent implements OnInit {
         this.dialogRef.close();
     }
 
-    private _inserir(acao: () => void): void {
-        acao();
-        console.log('inserindo');
+    private _inserir(acao: (horario: HorarioModel) => void): void {
+        this._horarioService.criar(this.horario)
+            .pipe(finalize(() => {
+                this.salvando = false;
+                this._snackBarService.exibirSnackBarSucesso('Horário adicionado com sucesso!');
+            }))
+            .subscribe(horario => acao(horario));
     }
 
-    private _editar(acao: () => void): void {
-        acao();
-        console.log('editando');
+    private _editar(acao: (horario: HorarioModel) => void): void {
+        acao(this.horario);
     }
 
     private _iniciarValoresFiltrados(): void {
         this.form.patchValue(this.data.horarioFiltrado);
-    }
-
-    private _construirFormulario(): void {
-        this.form = this._formBuilder.group({
-            codigo: [null],
-            codigoCurriculo: [null, [Validators.required]],
-            ano: [new Date().getFullYear(), [Validators.required, Validators.minLength(4)]],
-            periodo: [null, [Validators.required]],
-            semestre: [null, [Validators.required]],
-            turno: [null, [Validators.required]]
-        });
     }
 
     private _carregarTurnos(): void {
@@ -98,4 +96,16 @@ export class CadastroHorarioDialogComponent implements OnInit {
                     this.form.get('turno').setValue(turnos[0].codigo);
             });
     }
+
+    private _construirFormulario(): void {
+        this.form = this._formBuilder.group({
+            codigo: [null],
+            codigoCurriculo: [null, [Validators.required]],
+            ano: [new Date().getFullYear(), [Validators.required, Validators.minLength(4)]],
+            periodo: [null, [Validators.required]],
+            semestre: [null, [Validators.required]],
+            codigoTurno: [null, [Validators.required]]
+        });
+    }
+
 }

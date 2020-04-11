@@ -6,5 +6,5 @@ export class HorarioModel {
     periodo: number;
     semestre: number;
     ano: number;
-    turno: TurnoModel;
+    codigoTurno: TurnoModel;
 }

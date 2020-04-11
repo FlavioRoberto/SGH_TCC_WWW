@@ -1,4 +1,4 @@
-::ng-deep .sucesso {
+.sucesso {
     @media (min-width: 960px) {
         max-width: 384px !important;
     }
@@ -10,8 +10,7 @@
     }
 }
 
-
-::ng-deep .erro {
+.erro {
     @media (min-width: 960px) {
         max-width: 384px !important;
     }
@@ -23,7 +22,7 @@
     }
 }
 
-::ng-deep .info {
+.info {
     @media (min-width: 960px) {
         max-width: 384px !important;
     }

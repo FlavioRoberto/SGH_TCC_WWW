@@ -50,7 +50,7 @@
             <!-- TURNOS -->
             <mat-form-field appearance="outline" fxFlex.gt-sm="20">
                 <mat-label>Turnos </mat-label>
-                <mat-select fxLayout="column" formControlName="turno">
+                <mat-select fxLayout="column" formControlName="codigoTurno">
                     <mat-option
                         disabled
                         *ngIf="turnos?.length <= 0 && !carregandoTurnos"
@@ -135,12 +135,12 @@
                 fxFlex="1 0 auto"
                 fxLayoutAlign="center center"
                 fxLayoutGap="8px"
-                *ngIf="emProgresso"
+                *ngIf="salvando"
             >
                 <span>SALVANDO</span>
                 <mat-spinner diameter="20"></mat-spinner>
             </div>
-            <span *ngIf="!emProgresso">SALVAR</span>
+            <span *ngIf="!salvando">SALVAR</span>
         </button>
     </div>
 </div>
