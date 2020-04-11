@@ -1,7 +1,7 @@
 import { TurnoModel } from 'app/main/cadastros/turno/model/turno.interface';
-import { CursoModel } from 'app/main/cadastros/curso/model/curso.model';
 
 export class HorarioModel {
+    codigo: number;
     codigoCurriculo: number;
     periodo: number;
     semestre: number;

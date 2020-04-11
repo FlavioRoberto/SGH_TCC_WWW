@@ -16,9 +16,10 @@ export class HorarioService extends HttpBaseService<HorarioModel> {
     private _listarHorarios(): HorarioModel[] {
         const horarios = [];
 
-        for (let i = 0; i < 30; i++) {
+        for (let i = 1; i < 30; i++) {
             horarios.push(
                 {
+                    codigo: i,
                     ano: 2020,
                     codigoCurriculo: 1,
                     curso: {

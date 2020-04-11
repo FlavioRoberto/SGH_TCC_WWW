@@ -22,7 +22,6 @@
             name="adicionarDisciplinaForm"
             fxLayout="column"
             [formGroup]="form"
-            novalidate
         >
             <!-- CURRICULO -->
             <mat-form-field appearance="outline" fxFlex="1 0 auto">
@@ -40,20 +39,34 @@
                         </mat-option>
                     </div>
                 </mat-select>
+                <mat-error
+                    *ngIf="form.get('codigoCurriculo').hasError('required')"
+                >
+                    Campo obrigatório!
+                </mat-error>
             </mat-form-field>
             <!-- CURRICULO -->
 
             <!-- TURNOS -->
-            <!-- <mat-form-field appearance="outline" fxFlex.gt-sm="20">
-            <mat-label>Turnos </mat-label>
-            <mat-select fxLayout="column" formControlName="turno">
-                <div *ngFor="let turno of turnos">
-                    <mat-option [value]="turno">{{
-                        turno.descricao
-                    }}</mat-option>
-                </div>
-            </mat-select>
-        </mat-form-field> -->
+            <mat-form-field appearance="outline" fxFlex.gt-sm="20">
+                <mat-label>Turnos </mat-label>
+                <mat-select fxLayout="column" formControlName="turno">
+                    <mat-option
+                        disabled
+                        *ngIf="turnos?.length <= 0 && !carregandoTurnos"
+                    >
+                        Nenhum turno encontrado.
+                    </mat-option>
+                    <mat-option disabled *ngIf="carregandoTurnos">
+                        Carregando turnos...
+                    </mat-option>
+                    <div *ngFor="let turno of turnos">
+                        <mat-option [value]="turno.codigo">{{
+                            turno.descricao
+                        }}</mat-option>
+                    </div>
+                </mat-select>
+            </mat-form-field>
             <!-- TURNOS -->
 
             <!-- PERIODO -->
@@ -67,6 +80,9 @@
                         {{ periodo.descricao }}
                     </mat-option>
                 </mat-select>
+                <mat-error *ngIf="form.get('periodo').hasError('required')">
+                    Campo obrigatório!
+                </mat-error>
             </mat-form-field>
             <!-- PERIODO -->
 
@@ -84,19 +100,19 @@
                         </mat-option>
                     </div>
                 </mat-select>
+                <mat-error *ngIf="form.get('semestre').hasError('required')">
+                    Campo obrigatório!
+                </mat-error>
             </mat-form-field>
             <!-- SEMESTRE -->
 
             <!-- ANO -->
             <mat-form-field fxFlex.gt-sm="12" appearance="outline">
                 <mat-label>Ano</mat-label>
-                <input
-                    formControlName="ano"
-                    matInput
-                    class="primary-color-input border-radius-4"
-                    name="primary color"
-                    mask="0000"
-                />
+                <input formControlName="ano" matInput mask="0000" />
+                <mat-error *ngIf="form.get('ano').hasError('required')">
+                    Campo obrigatório!
+                </mat-error>
             </mat-form-field>
             <!-- ANO -->
         </form>
@@ -109,7 +125,11 @@
         fxLayout="row"
         fxLayoutAlign="end center"
     >
-        <button class="mat-raised-button mat-accent" (click)="salvar()">
+        <button
+            class="mat-raised-button mat-accent"
+            [disabled]="desabilitarBotaoSalvar"
+            (click)="salvar()"
+        >
             <div
                 fxLayout="row"
                 fxFlex="1 0 auto"

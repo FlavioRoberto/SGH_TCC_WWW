@@ -46,7 +46,8 @@ export class HorariosComponent implements OnInit {
     }
 
     editarHorario(horario: HorarioModel): void {
-        alert('editando...');
+        alert(`editando horário ${horario.codigo}`);
+        this._abrirDialogCadastroHorario('Editar horário', horario);
     }
 
     selecionarHorario(horario: HorarioModel): void {
@@ -54,14 +55,8 @@ export class HorariosComponent implements OnInit {
     }
 
     adicionarHorarios(): void {
-        this._cadastroHorarioDialogService.abrirDialog({
-            titulo: 'Cadastrar novo horário',
-            curriculos: this.curriculos,
-            periodos: this.periodos,
-            semestres: this.semestres,
-            horarioFiltrado: this.form.getRawValue() as HorarioModel,
-            salvar: this._executarAoSalvarHorario
-        });
+        const horarioFiltrado = this.form.getRawValue() as HorarioModel;
+        this._abrirDialogCadastroHorario('Cadastrar horário', horarioFiltrado);
     }
 
     private _carregarCurriculos(): void {
@@ -81,7 +76,18 @@ export class HorariosComponent implements OnInit {
         });
     }
 
+    private _abrirDialogCadastroHorario(titulo: string, horario: HorarioModel): void {
+        this._cadastroHorarioDialogService.abrirDialog({
+            titulo: titulo,
+            curriculos: this.curriculos,
+            periodos: this.periodos,
+            semestres: this.semestres,
+            horarioFiltrado: horario,
+            salvar: this._executarAoSalvarHorario
+        });
+    }
+
     private _executarAoSalvarHorario(horario: HorarioModel): void {
-        alert(`salvou o horário ${horario.codigoCurriculo}`);
+        alert(`salvou o horário ${horario.codigo}`);
     }
 }

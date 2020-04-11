@@ -1,5 +1,4 @@
-<mat-card class="card-horario"
-          (click)="selecionar($event)">
+<mat-card class="card-horario" (click)="selecionar($event)">
     <mat-card-header>
         <mat-card-title>
             {{ horario?.ano }} - {{ horario?.semestre }} semestre
@@ -12,16 +11,20 @@
         </mat-card-subtitle>
     </mat-card-header>
     <mat-card-actions align="end">
-        <button matSuffix
-                mat-icon-button
-                (click)="editar($event)"
-                matTooltip="Editar">
+        <button
+            matSuffix
+            mat-icon-button
+            (click)="editar($event)"
+            matTooltip="Editar"
+        >
             <mat-icon>edit</mat-icon>
         </button>
-        <button matSuffix
-                mat-icon-button
-                (click)="remover($event)"
-                matTooltip="Remover">
+        <button
+            matSuffix
+            mat-icon-button
+            (click)="remover($event)"
+            matTooltip="Remover"
+        >
             <mat-icon>delete</mat-icon>
         </button>
     </mat-card-actions>
