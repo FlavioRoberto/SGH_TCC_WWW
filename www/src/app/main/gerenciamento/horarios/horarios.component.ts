@@ -32,9 +32,9 @@ export class HorariosComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this._horarioServico.listar().subscribe(dados => this.horarios = dados);
         this._inicializarFormulario();
         this._carregarCurriculos();
+        this._horarioServico.listar(this.form.getRawValue()).subscribe(dados => this.horarios = dados);
     }
 
     retornarDescricaoSemestre(semestre: ESemestre): string {

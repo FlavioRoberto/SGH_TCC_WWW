@@ -13,37 +13,11 @@ export class HorarioService extends HttpBaseService<HorarioModel> {
 
     private _rota = new routesApi().getRoutes().horario;
 
-    listar(): Observable<HorarioModel[]> {
-        return of(this._listarHorarios());
+    listar(filtro: HorarioModel): Observable<HorarioModel[]> {
+        return this.post(filtro, this._rota.listar);
     }
 
     criar(horario: HorarioModel): Observable<HorarioModel> {
         return this.post(horario, this._rota.criar);
-    }
-
-    private _listarHorarios(): HorarioModel[] {
-        const horarios = [];
-
-        for (let i = 1; i < 30; i++) {
-            horarios.push(
-                {
-                    codigo: i,
-                    ano: 2020,
-                    codigoCurriculo: 1,
-                    curso: {
-                        codigo: 1,
-                        descricao: 'Engenharia da computação'
-                    },
-                    periodo: EPeriodos[0].codigo,
-                    semestre: ESemestre.Primeiro,
-                    turno: {
-                        codigo: 1,
-                        descricao: 'Matutino'
-                    }
-                }
-            );
-        }
-
-        return horarios;
     }
 }

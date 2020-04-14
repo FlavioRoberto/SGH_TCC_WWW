@@ -39,6 +39,7 @@ export class routesApi {
         return rota;
     }
 
+
     getRoutes(): any {
         return {
             turno: this.construirRotaPadrao('turno'),
@@ -54,7 +55,10 @@ export class routesApi {
             cargo: this.construirRotaPadrao('cargo'),
             bloco: this.construirRotaPadrao('bloco'),
             sala: this.construirRotaPadrao('sala'),
-            horario: this.construirRotaPadrao('horario-aula')
+            horario: {
+                criar: `${this.API}/horario-aula/criar`,
+                listar: `${this.API}/horario-aula/listar`
+            }
         };
 
     }
