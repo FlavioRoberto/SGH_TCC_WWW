@@ -44,7 +44,6 @@ export class CadastroHorarioDialogComponent implements OnInit {
     ngOnInit(): void {
         this._construirFormulario();
         this._iniciarValoresFiltrados();
-        this._carregarTurnos();
     }
 
     retornarDescricaoSemestre(semestre: ESemestre): string {

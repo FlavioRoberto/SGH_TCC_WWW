@@ -1,23 +1,22 @@
-<div class="page-layout simple card fullwidth inner-scroll p-12"
-     fxLayout="column"
-     fxLayoutGap="12px">
+<div
+    class="page-layout simple card fullwidth inner-scroll p-12"
+    fxLayout="column"
+    fxLayoutGap="12px"
+>
     <!-- FILTRO -->
     <mat-card>
-        <form [formGroup]="form"
-              novalidate
-              fxLayoutGap="12px">
+        <form [formGroup]="form" novalidate fxLayoutGap="12px">
             <!-- CURRICULO -->
-            <mat-form-field appearance="outline"
-                            fxFlex="1 0 auto">
+            <mat-form-field appearance="outline" fxFlex="1 0 auto">
                 <mat-label>Currículo</mat-label>
-                <mat-select fxLayout="column"
-                            formControlName="codigoCurriculo">
-                    <mat-option *ngIf="curriculos.length <= 0 && !carregandoCurriculos"
-                                disabled>
+                <mat-select fxLayout="column" formControlName="codigoCurriculo">
+                    <mat-option
+                        *ngIf="curriculos.length <= 0 && !carregandoCurriculos"
+                        disabled
+                    >
                         <span>Nenhum registro encontrado</span>
                     </mat-option>
-                    <mat-option *ngIf="carregandoCurriculos"
-                                disabled>
+                    <mat-option *ngIf="carregandoCurriculos" disabled>
                         <span>Carregando currículos...</span>
                     </mat-option>
                     <div *ngFor="let curriculo of curriculos">
@@ -43,13 +42,13 @@
             <!-- TURNOS -->
 
             <!-- PERIODO -->
-            <mat-form-field fxFlex.gt-sm="12"
-                            appearance="outline">
+            <mat-form-field fxFlex.gt-sm="12" appearance="outline">
                 <mat-label>Períodos</mat-label>
-                <mat-select placeholder="Período"
-                            formControlName="periodo">
-                    <mat-option *ngFor="let periodo of periodos"
-                                [value]="periodo.codigo">
+                <mat-select placeholder="Período" formControlName="periodo">
+                    <mat-option
+                        *ngFor="let periodo of periodos"
+                        [value]="periodo.codigo"
+                    >
                         {{ periodo.descricao }}
                     </mat-option>
                 </mat-select>
@@ -57,12 +56,13 @@
             <!-- PERIODO -->
 
             <!-- SEMESTRE -->
-            <mat-form-field appearance="outline"
-                            fxFlex.gt-sm="12"
-                            fxFlex="1 0 auto">
+            <mat-form-field
+                appearance="outline"
+                fxFlex.gt-sm="12"
+                fxFlex="1 0 auto"
+            >
                 <mat-label>Semestre</mat-label>
-                <mat-select fxLayout="column"
-                            formControlName="semestre">
+                <mat-select fxLayout="column" formControlName="semestre">
                     <div *ngFor="let semestre of semestres">
                         <mat-option [value]="semestre">
                             {{ retornarDescricaoSemestre(semestre) }}
@@ -73,37 +73,62 @@
             <!-- SEMESTRE -->
 
             <!-- ANO -->
-            <mat-form-field fxFlex.gt-sm="12"
-                            appearance="outline">
+            <mat-form-field fxFlex.gt-sm="12" appearance="outline">
                 <mat-label>Ano</mat-label>
-                <input formControlName="ano"
-                       matInput
-                       class="primary-color-input border-radius-4"
-                       name="primary color"
-                       mask="0000" />
+                <input
+                    formControlName="ano"
+                    matInput
+                    class="primary-color-input border-radius-4"
+                    name="primary color"
+                    mask="0000"
+                />
             </mat-form-field>
             <!-- ANO -->
-            <div class="mat-form-field-wrapper"
-                 fxLayoutAlign="center center">
-                <button mat-raised-button
-                        color="primary"
-                        matTooltip="Pesquisar horários">
-                    <mat-icon>search</mat-icon>
+
+            <!-- BOTOES PESQUISA -->
+            <div
+                class="mat-form-field-wrapper"
+                fxLayoutAlign="center center"
+                fxLayoutGap="12px"
+            >
+                <button
+                    mat-raised-button
+                    color="accent"
+                    [disabled]="pesquisandoHorarios"
+                    (click)="pesquisarHorarios()"
+                    class="p-8"
+                    fxLayoutAlign="center center"
+                    matTooltip="Pesquisar horários"
+                >
+                    <mat-spinner
+                        *ngIf="pesquisandoHorarios"
+                        diameter="20"
+                    ></mat-spinner>
+                    <mat-icon *ngIf="!pesquisandoHorarios">search</mat-icon>
+                </button>
+
+                {{ filtroInformado }}
+                <button
+                    *ngIf="habilitarBotaoLimpar"
+                    mat-raised-button
+                    (click)="limparPesquisa()"
+                    matTooltip="Pesquisar horários"
+                >
+                    Limpar
                 </button>
             </div>
+            <!-- BOTOES PESQUISA -->
         </form>
     </mat-card>
     <!-- FILTRO -->
 
     <!-- HORARIOS -->
-    <mat-card fxLayout="column"
-              fxFlex="100">
-        <div fxFlex="80"
-             fxLayout.gt-sm="row wrap"
-             style="overflow-y: scroll;"
-             fxLayoutAlign.gt-sm="space-evenly">
-            <span class="texto-informativo"
-                  *ngIf="horarios.length <= 0">
+    <mat-card fxLayout="column" fxFlex="100" style="overflow-y: scroll;">
+        <div
+            fxLayout.gt-sm="row wrap"
+            fxLayoutAlign.gt-sm="center space-between"
+        >
+            <span class="texto-informativo" *ngIf="horarios.length <= 0">
                 <p>
                     Clique em adicionar horários (+) para adicionar um novo
                     horário.
@@ -111,21 +136,25 @@
             </span>
 
             <ng-container *ngFor="let horario of horarios">
-                <horario-card fxFlex.gt-sm="25"
-                              fxFlex="100"
-                              class="m-12"
-                              ($editar)="editarHorario($event)"
-                              ($remover)="removerHorario($event)"
-                              ($selecionar)="selecionarHorario($event)"
-                              [horario]="horario"></horario-card>
+                <horario-card
+                    fxFlex.gt-sm="25"
+                    fxFlex="100"
+                    class="m-24"
+                    ($editar)="editarHorario($event)"
+                    ($remover)="removerHorario($event)"
+                    ($selecionar)="selecionarHorario($event)"
+                    [horario]="horario"
+                ></horario-card>
             </ng-container>
         </div>
     </mat-card>
 
-    <button class="botao-flutuante"
-            (click)="adicionarHorarios()"
-            mat-fab
-            matTooltip="Adicionar novo horário">
+    <button
+        class="botao-flutuante"
+        (click)="adicionarHorarios()"
+        mat-fab
+        matTooltip="Adicionar novo horário"
+    >
         <mat-icon>add</mat-icon>
     </button>
     <!-- HORARIOS -->

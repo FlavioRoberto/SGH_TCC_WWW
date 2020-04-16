@@ -9,6 +9,7 @@ import { CadastroHorarioDialogService } from './components/dialogs/cadastro-hora
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CurriculoService } from 'app/main/cadastros/curriculo/services/curriculo.service';
 import { finalize } from 'rxjs/operators';
+import { HorarioFiltroModel } from './model/horario-filtro.model';
 
 @Component({
     templateUrl: './view/horarios.component.html',
@@ -23,6 +24,8 @@ export class HorariosComponent implements OnInit {
     periodos = EPeriodos;
     semestres = [ESemestre.Primeiro, ESemestre.Segundo];
     carregandoCurriculos = false;
+    pesquisandoHorarios = false;
+    pesquisaAtiva = false;
 
     constructor(
         private _horarioServico: HorarioService,
@@ -34,7 +37,10 @@ export class HorariosComponent implements OnInit {
     ngOnInit(): void {
         this._inicializarFormulario();
         this._carregarCurriculos();
-        this._horarioServico.listar(this.form.getRawValue()).subscribe(dados => this.horarios = dados);
+    }
+
+    get habilitarBotaoLimpar(): boolean {
+        return this.horarios.length > 0;
     }
 
     retornarDescricaoSemestre(semestre: ESemestre): string {
@@ -57,6 +63,26 @@ export class HorariosComponent implements OnInit {
     adicionarHorarios(): void {
         const horarioFiltrado = this.form.getRawValue() as HorarioModel;
         this._abrirDialogCadastroHorario('Cadastrar horário', horarioFiltrado);
+    }
+
+    pesquisarHorarios(): void {
+        this.pesquisandoHorarios = true;
+
+        const filtro = {
+            ano: this.form.get('ano').value,
+            codigoCurriculo: this.form.get('codigoCurriculo').value,
+            periodo: this.form.get('periodo').value,
+            semestre: this.form.get('semestre').value
+        } as HorarioFiltroModel;
+
+        this._horarioServico.listar(filtro)
+            .pipe(finalize(() => this.pesquisandoHorarios = false))
+            .subscribe(dados => this.horarios = dados);
+    }
+
+    limparPesquisa(): void {
+        this.horarios = [];
+        this.form.reset();
     }
 
     private _carregarCurriculos(): void {
