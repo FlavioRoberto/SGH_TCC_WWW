@@ -44,6 +44,7 @@ export class CadastroHorarioDialogComponent implements OnInit {
     ngOnInit(): void {
         this._construirFormulario();
         this._iniciarValoresFiltrados();
+        this._carregarTurnos();
     }
 
     retornarDescricaoSemestre(semestre: ESemestre): string {
@@ -55,7 +56,7 @@ export class CadastroHorarioDialogComponent implements OnInit {
 
         const acaoSalvar = (horario: HorarioModel) => {
             this.data.salvar(horario);
-            this.dialogRef.close();
+            this.fecharDialog();
         };
 
         if (this.data.horarioFiltrado.codigo)
@@ -74,7 +75,7 @@ export class CadastroHorarioDialogComponent implements OnInit {
                 this.salvando = false;
                 this._snackBarService.exibirSnackBarSucesso('Horário adicionado com sucesso!');
             }))
-            .subscribe(horario => acao(horario));
+            .subscribe(horarioSalvo => acao(horarioSalvo));
     }
 
     private _editar(acao: (horario: HorarioModel) => void): void {
@@ -92,7 +93,7 @@ export class CadastroHorarioDialogComponent implements OnInit {
             .subscribe(turnos => {
                 this.turnos = turnos;
                 if (turnos.length > 0)
-                    this.form.get('turno').setValue(turnos[0].codigo);
+                    this.form.get('codigoTurno').setValue(turnos[0].codigo);
             });
     }
 

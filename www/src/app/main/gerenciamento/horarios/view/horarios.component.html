@@ -28,19 +28,6 @@
             </mat-form-field>
             <!-- CURRICULO -->
 
-            <!-- TURNOS -->
-            <!-- <mat-form-field appearance="outline" fxFlex.gt-sm="20">
-            <mat-label>Turnos </mat-label>
-            <mat-select fxLayout="column" formControlName="turno">
-                <div *ngFor="let turno of turnos">
-                    <mat-option [value]="turno">{{
-                        turno.descricao
-                    }}</mat-option>
-                </div>
-            </mat-select>
-        </mat-form-field> -->
-            <!-- TURNOS -->
-
             <!-- PERIODO -->
             <mat-form-field fxFlex.gt-sm="12" appearance="outline">
                 <mat-label>Períodos</mat-label>
@@ -107,7 +94,6 @@
                     <mat-icon *ngIf="!pesquisandoHorarios">search</mat-icon>
                 </button>
 
-                {{ filtroInformado }}
                 <button
                     *ngIf="habilitarBotaoLimpar"
                     mat-raised-button

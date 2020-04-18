@@ -10,6 +10,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { CurriculoService } from 'app/main/cadastros/curriculo/services/curriculo.service';
 import { finalize } from 'rxjs/operators';
 import { HorarioFiltroModel } from './model/horario-filtro.model';
+import { SnackBarService } from 'app/shared/services/snack-bar.service';
+import { ConfirmaDialogService } from 'app/shared/components/dialogs/confirma-dialog/service/confirma-dialog.service';
 
 @Component({
     templateUrl: './view/horarios.component.html',
@@ -31,12 +33,15 @@ export class HorariosComponent implements OnInit {
         private _horarioServico: HorarioService,
         private _cadastroHorarioDialogService: CadastroHorarioDialogService,
         private _curriculoService: CurriculoService,
-        private _formBuilder: FormBuilder) {
+        private _formBuilder: FormBuilder,
+        private _snackBarService: SnackBarService,
+        private _confirmaDialogService: ConfirmaDialogService) {
     }
 
     ngOnInit(): void {
         this._inicializarFormulario();
         this._carregarCurriculos();
+        this.pesquisarHorarios();
     }
 
     get habilitarBotaoLimpar(): boolean {
@@ -48,7 +53,20 @@ export class HorariosComponent implements OnInit {
     }
 
     removerHorario(horario: HorarioModel): void {
-        alert('removendo...');
+
+        this._confirmaDialogService.mensagemCarregando = 'Removendo o horário...';
+        this._confirmaDialogService.acaoCancelar = this._confirmaDialogService.fecharDialog;
+        this._confirmaDialogService.acaoOk = () => {
+            this._horarioServico.remover(horario.codigo)
+                .subscribe(() => {
+                    this._snackBarService.exibirSnackBarSucesso('Removido com sucesso!');
+                    this._removerHorarioDaLista(horario);
+                    this._confirmaDialogService.fecharDialog();
+                });
+        };
+
+        this._confirmaDialogService.abrirDialog('Atenção', 'Deseja remover o horário?');
+
     }
 
     editarHorario(horario: HorarioModel): void {
@@ -109,11 +127,15 @@ export class HorariosComponent implements OnInit {
             periodos: this.periodos,
             semestres: this.semestres,
             horarioFiltrado: horario,
-            salvar: this._executarAoSalvarHorario
+            salvar: (horarioAdicionado: HorarioModel) => this._executarAoSalvarHorario(horarioAdicionado)
         });
     }
 
+    private _removerHorarioDaLista(horario: HorarioModel): void {
+        this.horarios = this.horarios.filter(item => item.codigo !== horario.codigo);
+    }
+
     private _executarAoSalvarHorario(horario: HorarioModel): void {
-        alert(`salvou o horário ${horario.codigo}`);
+        this.pesquisarHorarios();
     }
 }

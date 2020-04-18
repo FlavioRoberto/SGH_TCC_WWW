@@ -57,7 +57,8 @@ export class routesApi {
             sala: this.construirRotaPadrao('sala'),
             horario: {
                 criar: `${this.API}/horario-aula/criar`,
-                listar: `${this.API}/horario-aula/listar`
+                listar: `${this.API}/horario-aula/listar`,
+                remover: `${this.API}/horario-aula/remover`
             }
         };
 
