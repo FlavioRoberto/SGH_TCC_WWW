@@ -45,7 +45,9 @@ export class HorariosComponent implements OnInit {
     }
 
     get habilitarBotaoLimpar(): boolean {
-        return this.horarios.length > 0;
+        const filtro = this.form.getRawValue() as HorarioFiltroModel;
+        return this.horarios.length > 0 || filtro.ano > 0 || filtro.codigoCurriculo > 0
+            || filtro.periodo > 0 || filtro.semestre > 0;
     }
 
     retornarDescricaoSemestre(semestre: ESemestre): string {
