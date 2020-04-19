@@ -67,7 +67,7 @@ export class HorariosComponent implements OnInit {
                 });
         };
 
-        this._confirmaDialogService.abrirDialog('Atenção', 'Deseja remover o horário?');
+        this._confirmaDialogService.abrirDialog('Atenção', 'Deseja remover o horário? Ao remover todas as aulas vinculadas serão excluídas.');
 
     }
 
