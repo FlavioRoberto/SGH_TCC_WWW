@@ -58,7 +58,8 @@ export class routesApi {
             horario: {
                 criar: `${this.API}/horario-aula/criar`,
                 listar: `${this.API}/horario-aula/listar`,
-                remover: `${this.API}/horario-aula/remover`
+                remover: `${this.API}/horario-aula/remover`,
+                editar: `${this.API}/horario-aula/editar`
             }
         };
 

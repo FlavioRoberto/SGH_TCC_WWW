@@ -79,7 +79,12 @@ export class CadastroHorarioDialogComponent implements OnInit {
     }
 
     private _editar(acao: (horario: HorarioModel) => void): void {
-        acao(this.horario);
+        this._horarioService.editar(this.horario)
+            .pipe(finalize(() => {
+                this.salvando = false;
+                this._snackBarService.exibirSnackBarSucesso('Horário atualizado com sucesso!');
+            }))
+            .subscribe(horarioSalvo => acao(horarioSalvo));
     }
 
     private _iniciarValoresFiltrados(): void {

@@ -22,6 +22,10 @@ export class HorarioService extends HttpBaseService<HorarioModel> {
         return this.post(horario, this._rota.criar);
     }
 
+    editar(horario: HorarioModel): Observable<HorarioModel> {
+        return this.put(horario, this._rota.editar);
+    }
+
     remover(codigoHorario: number): Observable<HorarioModel> {
         return this.delete(`${this._rota.remover}?codigo=${codigoHorario}`);
     }
