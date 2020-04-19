@@ -3,16 +3,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CadastroHorarioDataModel } from './model/cadastro-horario-data';
 import { ESemestre, ESemestreLabel } from 'app/shared/enums/esemestre.enum';
-import { HorarioModel } from '../../../model/horario.model';
 import { TurnoModel } from 'app/main/cadastros/turno/model/turno.interface';
 import { TurnoService } from 'app/main/cadastros/turno/service/turno.service';
 import { finalize } from 'rxjs/operators';
-import { HorarioService } from '../../../services/horario.service';
 import { SnackBarService } from 'app/shared/services/snack-bar.service';
+import { HorarioService } from '../../../services/horario.service';
+import { HorarioModel } from '../../../model/horario.model';
 
 @Component({
     templateUrl: './views/cadastro-horario.dialog.component.html',
-    styleUrls: ['./views/cadastrar-horario.dialog.component.scss', '../../../../../../shared/styles/toast.scss'],
+    styleUrls: ['./views/cadastrar-horario.dialog.component.scss', '../../../../../../../shared/styles/toast.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class CadastroHorarioDialogComponent implements OnInit {

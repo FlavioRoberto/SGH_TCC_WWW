@@ -1,11 +1,13 @@
-import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
 import { AuthGuard } from 'app/core/auth/auth.guard';
+import { QuadroHorarioAulaComponent } from './quadro-horario-aula.component';
+
 
 const routes: Routes = [
     {
-        path: 'horarios',
-        loadChildren: () => import('./horarios/horario/horarios.module').then(m => m.HorariosModule),
+        path: '',
+        component: QuadroHorarioAulaComponent,
         canActivate: [AuthGuard]
     }
 ];
@@ -15,4 +17,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class GerenciamentoRoutingModule { }
+export class QuadroHorarioAulasRoutingModule { }

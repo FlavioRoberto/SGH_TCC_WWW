@@ -5,13 +5,14 @@ import { CurriculoModel } from 'app/main/cadastros/curriculo/model/curriculo.mod
 import { TurnoModel } from 'app/main/cadastros/turno/model/turno.interface';
 import { HorarioModel } from './model/horario.model';
 import { HorarioService } from './services/horario.service';
-import { CadastroHorarioDialogService } from './components/dialogs/cadastro-horario/services/cadastro-horario.dialog.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CurriculoService } from 'app/main/cadastros/curriculo/services/curriculo.service';
 import { finalize } from 'rxjs/operators';
 import { HorarioFiltroModel } from './model/horario-filtro.model';
 import { SnackBarService } from 'app/shared/services/snack-bar.service';
 import { ConfirmaDialogService } from 'app/shared/components/dialogs/confirma-dialog/service/confirma-dialog.service';
+import { Router } from '@angular/router';
+import { CadastroHorarioDialogService } from './components/dialogs/cadastro-horario/services/cadastro-horario.dialog.service';
 
 @Component({
     templateUrl: './view/horarios.component.html',
@@ -35,7 +36,8 @@ export class HorariosComponent implements OnInit {
         private _curriculoService: CurriculoService,
         private _formBuilder: FormBuilder,
         private _snackBarService: SnackBarService,
-        private _confirmaDialogService: ConfirmaDialogService) {
+        private _confirmaDialogService: ConfirmaDialogService,
+        private _router: Router) {
     }
 
     ngOnInit(): void {
@@ -77,7 +79,7 @@ export class HorariosComponent implements OnInit {
     }
 
     selecionarHorario(horario: HorarioModel): void {
-        alert('selecionando...');
+        this._router.navigate([`/gerenciamento/horarios/${horario.codigo}/quadro-de-horario`]);
     }
 
     adicionarHorarios(): void {

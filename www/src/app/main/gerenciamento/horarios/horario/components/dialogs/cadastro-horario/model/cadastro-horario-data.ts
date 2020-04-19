@@ -1,5 +1,5 @@
 import { CurriculoModel } from 'app/main/cadastros/curriculo/model/curriculo.model';
-import { HorarioModel } from 'app/main/gerenciamento/horarios/model/horario.model';
+import { HorarioModel } from 'app/main/gerenciamento/horarios/horario/model/horario.model';
 import { ESemestre } from 'app/shared/enums/esemestre.enum';
 
 export class CadastroHorarioDataModel {
