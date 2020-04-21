@@ -1,1 +1,44 @@
-Ola horarios
+<div
+    class="page-layout simple card fullwidth inner-scroll p-12"
+    fxLayout="column"
+    fxLayoutGap="12px"
+>
+    <table fxFlex="100">
+        <thead>
+            <th></th>
+            <th *ngFor="let diaSemana of diasDaSemana">
+                {{ diaSemana }}
+            </th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let horario of horarios">
+                <td>
+                    {{ horario }}
+                </td>
+
+                <td *ngFor="let diaSemana of diasDaSemana">
+                    <ng-container
+                        *ngFor="let aula of retornarAulas(horario, diaSemana)"
+                    >
+                        <mat-card
+                            *ngIf="aula.horario == horario"
+                            style="text-align: center;"
+                        >
+                            {{ aula.professor }}
+                        </mat-card>
+                    </ng-container>
+
+                    <mat-card
+                        *ngIf="
+                            !existeHorario(horario, diaSemana) &&
+                            horario != 'Intervalo'
+                        "
+                        style="text-align: center;"
+                    >
+                        Disponível
+                    </mat-card>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
