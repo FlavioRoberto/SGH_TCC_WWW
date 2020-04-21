@@ -3,42 +3,47 @@
     fxLayout="column"
     fxLayoutGap="12px"
 >
-    <table fxFlex="100">
-        <thead>
-            <th></th>
-            <th *ngFor="let diaSemana of diasDaSemana">
-                {{ diaSemana }}
-            </th>
-        </thead>
-        <tbody>
-            <tr *ngFor="let horario of horarios">
-                <td>
-                    {{ horario }}
-                </td>
-
-                <td *ngFor="let diaSemana of diasDaSemana">
-                    <ng-container
-                        *ngFor="let aula of retornarAulas(horario, diaSemana)"
-                    >
-                        <mat-card
-                            *ngIf="aula.horario == horario"
-                            style="text-align: center;"
-                        >
-                            {{ aula.professor }}
-                        </mat-card>
-                    </ng-container>
-
-                    <mat-card
-                        *ngIf="
-                            !existeHorario(horario, diaSemana) &&
-                            horario != 'Intervalo'
-                        "
-                        style="text-align: center;"
-                    >
-                        Disponível
+    <mat-card>
+        <table fxFlex="100">
+            <thead>
+                <th></th>
+                <th *ngFor="let diaSemana of diasDaSemana" class="m-12">
+                    <mat-card class="titulo-tabela">
+                        {{ diaSemana }}
                     </mat-card>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                </th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let horario of horarios">
+                    <td>
+                        <mat-card class="titulo-tabela">
+                            {{ horario }}
+                        </mat-card>
+                    </td>
+
+                    <td *ngFor="let diaSemana of diasDaSemana">
+                        <ng-container
+                            *ngFor="
+                                let aula of retornarAulas(horario, diaSemana)
+                            "
+                        >
+                            <mat-card
+                                *ngIf="aula.horario == horario"
+                                class="aula"
+                            >
+                                {{ aula.professor }}
+                            </mat-card>
+                        </ng-container>
+
+                        <mat-card
+                            *ngIf="!existeHorario(horario, diaSemana)"
+                            class="aula"
+                        >
+                            Disponível
+                        </mat-card>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card>
 </div>

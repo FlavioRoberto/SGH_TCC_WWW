@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    templateUrl: './views/quadro-horario-aula.component.html'
+    templateUrl: './views/quadro-horario-aula.component.html',
+    styleUrls: ['./views/quadro-horario-aula.component.scss']
 })
 export class QuadroHorarioAulaComponent implements OnInit {
 
-    horarios = ['07:00', '08:00', '09:00', 'Intervalo', '10:00', '11:00', '12:00'];
+    horarios = ['07:00', '08:00', '09:00', '10:00', '11:00', '12:00'];
 
     diasDaSemana = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
 
