@@ -1,10 +1,10 @@
 .aula {
     text-align: center;
     cursor: pointer;
-    font-size: 0.8em;
+    font-size: 0.7em;
     transform: all 0.3s;
     transition: all 0.2s ease-in-out;
-    z-index: 1;
+    z-index: 0;
 }
 
 mat-card.titulo-tabela {
@@ -14,7 +14,7 @@ mat-card.titulo-tabela {
 }
 
 .aula:hover {
-    transform: scale(1.3);
+    transform: scale(1.4);
     z-index: 2;
     background-color: #557f94;
     color: white;
