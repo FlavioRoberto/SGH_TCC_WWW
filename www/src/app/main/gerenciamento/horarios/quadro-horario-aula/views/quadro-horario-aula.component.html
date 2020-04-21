@@ -3,10 +3,10 @@
     fxLayout="column"
     fxLayoutGap="12px"
 >
-    <mat-card>
-        <table fxFlex="100" fxLayout="column">
+    <mat-card style="overflow-y: scroll;" fusePerfectScrollbar>
+        <table fxFlex="100" fxLayout="column" fxLayoutGap="4px">
             <thead fxFlex="100">
-                <th fxFlex></th>
+                <th fxFlex="8"></th>
                 <th *ngFor="let diaSemana of diasDaSemana" fxFlex>
                     <mat-card class="titulo-tabela">
                         {{ diaSemana }}
@@ -15,7 +15,7 @@
             </thead>
             <tbody fxFlex="100">
                 <tr *ngFor="let horario of horarios">
-                    <td fxFlex>
+                    <td fxFlex="8">
                         <mat-card
                             fxFill
                             fxLayoutAlign="center center"
@@ -32,14 +32,21 @@
                             "
                         >
                             <mat-card
+                                fxFill
                                 fxLayoutAlign="center center"
                                 *ngIf="aula.horario == horario"
                                 class="aula"
                             >
                                 <div fxLayout="column">
-                                    <span> {{ aula.disciplina }}</span>
-                                    <span> {{ aula.professor }} </span>
-                                    <span> {{ aula.sala }} </span>
+                                    <span>
+                                        <strong>
+                                            {{ aula.disciplina }}</strong
+                                        ></span
+                                    >
+                                    <span> ({{ aula.professor }}) </span>
+                                    <span>
+                                        <strong> {{ aula.sala }} </strong>
+                                    </span>
                                 </div>
                             </mat-card>
                         </ng-container>
