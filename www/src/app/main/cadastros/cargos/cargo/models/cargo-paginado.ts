@@ -1,11 +1,11 @@
-import { Cargo } from './cargo.model';
+import { CargoModel } from './cargo.model';
 import { IDataEntidadePaginada } from '@breaking_dev/ic-databar-lib';
 
-export class CargoPaginado implements IDataEntidadePaginada<Cargo>{
+export class CargoPaginado implements IDataEntidadePaginada<CargoModel>{
     quantidade: number;
     total: number;
     posicao: number;
-    entidade: Cargo[];
+    entidade: CargoModel[];
 
     constructor() {
         this.quantidade = 1;

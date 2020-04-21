@@ -4,38 +4,49 @@
     fxLayoutGap="12px"
 >
     <mat-card>
-        <table fxFlex="100">
-            <thead>
-                <th></th>
-                <th *ngFor="let diaSemana of diasDaSemana" class="m-12">
+        <table fxFlex="100" fxLayout="column">
+            <thead fxFlex="100">
+                <th fxFlex></th>
+                <th *ngFor="let diaSemana of diasDaSemana" fxFlex>
                     <mat-card class="titulo-tabela">
                         {{ diaSemana }}
                     </mat-card>
                 </th>
             </thead>
-            <tbody>
+            <tbody fxFlex="100">
                 <tr *ngFor="let horario of horarios">
-                    <td>
-                        <mat-card class="titulo-tabela">
+                    <td fxFlex>
+                        <mat-card
+                            fxFill
+                            fxLayoutAlign="center center"
+                            class="titulo-tabela"
+                        >
                             {{ horario }}
                         </mat-card>
                     </td>
 
-                    <td *ngFor="let diaSemana of diasDaSemana">
+                    <td *ngFor="let diaSemana of diasDaSemana" fxFlex>
                         <ng-container
                             *ngFor="
                                 let aula of retornarAulas(horario, diaSemana)
                             "
                         >
                             <mat-card
+                                fxLayoutAlign="center center"
                                 *ngIf="aula.horario == horario"
                                 class="aula"
                             >
-                                {{ aula.professor }}
+                                <div fxLayout="column">
+                                    <span> {{ aula.disciplina }}</span>
+                                    <span> {{ aula.professor }} </span>
+                                    <span> {{ aula.sala }} </span>
+                                </div>
                             </mat-card>
                         </ng-container>
 
                         <mat-card
+                            fxFill
+                            fxLayoutAlign="center center"
                             *ngIf="!existeHorario(horario, diaSemana)"
                             class="aula"
                         >

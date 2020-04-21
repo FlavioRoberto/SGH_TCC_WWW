@@ -2,17 +2,17 @@ import { EventEmitter, Injectable, Inject, Injector } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { IDataBarBindService, EStatus, IDatabarBindOnClickService, DatabarEventClickService, EEventoClick } from '@breaking_dev/ic-databar-lib';
-import { Cargo } from '../models/cargo.model';
+import { CargoModel } from '../models/cargo.model';
 import { CargoService } from './cargo.service';
 import { CargoPaginado } from '../models/cargo-paginado';
 import { CargoExpansivelTableService } from './cargo.table.service';
 import { ErrorDialogService } from 'app/shared/components/dialogs/error-dialog/service/error-dialog.service';
 
 @Injectable()
-export class CargoDataBarBindService implements IDatabarBindOnClickService<Cargo>{
+export class CargoDataBarBindService implements IDatabarBindOnClickService<CargoModel>{
 
     status: EStatus;
-    onClickEnter: EventEmitter<Cargo>;
+    onClickEnter: EventEmitter<CargoModel>;
     eventDatabar: DatabarEventClickService;
     private _servico: CargoService;
     private _servicoExpansivelTable: CargoExpansivelTableService;
@@ -32,19 +32,19 @@ export class CargoDataBarBindService implements IDatabarBindOnClickService<Cargo
         });
     }
 
-    getEntidade(): Cargo {
-        return this.formgroup.getRawValue() as Cargo;
+    getEntidade(): CargoModel {
+        return this.formgroup.getRawValue() as CargoModel;
     }
 
-    criar(): Observable<Cargo> {
+    criar(): Observable<CargoModel> {
         return this._servico.criar(this.getEntidade());
     }
 
-    editar(): Observable<Cargo> {
+    editar(): Observable<CargoModel> {
         return this._servico.editar(this.getEntidade());
     }
 
-    remover(): Observable<Cargo> {
+    remover(): Observable<CargoModel> {
         return this._servico.remover(this.getEntidade().codigo);
     }
 
@@ -62,7 +62,7 @@ export class CargoDataBarBindService implements IDatabarBindOnClickService<Cargo
         });
     }
 
-    private _adicionarDisciplinasNaTabela(cargo: Cargo, acaoSucesso: () => void, acaoErro: (erro: string) => void, acaoComplete: () => void): void {
+    private _adicionarDisciplinasNaTabela(cargo: CargoModel, acaoSucesso: () => void, acaoErro: (erro: string) => void, acaoComplete: () => void): void {
 
         if (!cargo) {
             const erro = 'Não foram encontrados cargos cadastrados.';

@@ -12,7 +12,7 @@ import { Professor } from '../professores/models/professor.model';
 import { CurriculoDisciplinaModel } from '../../curriculo/model/curriculo-disciplina.model';
 import { CargoService } from './services/cargo.service';
 import { CargoPaginado } from './models/cargo-paginado';
-import { Cargo } from './models/cargo.model';
+import { CargoModel } from './models/cargo.model';
 import { CargoDataBarBindService } from './services/cargo.databar.service';
 import { CargoExpansivelTableService } from './services/cargo.table.service';
 import { DisciplinaCargoDialogService } from './components/disciplina-cargo-dialog/services/disciplina-cargo-dialog.service';
@@ -21,7 +21,7 @@ import { DisciplinaCargoDialogService } from './components/disciplina-cargo-dial
     templateUrl: './view/cargo.component.html',
     styleUrls: ['./view/cargo.component.scss']
 })
-export class CargoComponent extends OnInitDataBar<Cargo> implements OnDestroy {
+export class CargoComponent extends OnInitDataBar<CargoModel> implements OnDestroy {
 
     semestres: ESemestre[];
     professores: Professor[] = [];

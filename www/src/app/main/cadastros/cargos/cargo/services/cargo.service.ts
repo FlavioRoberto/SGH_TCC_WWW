@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from 'app/core/services/base.service';
-import { Cargo } from '../models/cargo.model';
+import { CargoModel } from '../models/cargo.model';
 import { routesApi } from 'app/routes/api.routes';
 import { ESemestre } from 'app/shared/enums/esemestre.enum';
 import { CargoDisciplina } from '../models/cargo-disciplina';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class CargoService extends BaseService<Cargo>{
+export class CargoService extends BaseService<CargoModel>{
 
     private _rotaDisciplina = `${this.getRota().base}/disciplinas`;
 

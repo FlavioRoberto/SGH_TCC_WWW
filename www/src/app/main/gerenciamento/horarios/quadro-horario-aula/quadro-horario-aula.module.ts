@@ -6,6 +6,7 @@ import { CompartilhadoModule } from '@compartilhado/compartilhado.module';
 import { QuadroHorarioAulasRoutingModule } from './quadro-horario-aula.routes.module';
 import { MaterialCoreModule } from 'app/core/modules/material-core.module';
 import { QuadroHorarioAulaComponent } from './quadro-horario-aula.component';
+import { QuadroHorarioAulaService } from './services/quadro-horario-aula.service';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { QuadroHorarioAulaComponent } from './quadro-horario-aula.component';
         FuseSharedModule,
         MaterialCoreModule,
         QuadroHorarioAulasRoutingModule
-    ]
+    ],
+    providers: [QuadroHorarioAulaService]
 })
 export class QuadroHorarioAulaModule { }
