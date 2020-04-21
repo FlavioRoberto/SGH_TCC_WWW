@@ -4,7 +4,7 @@ import { QuadroHorarioModel } from '../model/quadro-horario-model';
 @Injectable()
 export class QuadroHorarioAulaService {
     listarHorarios(): string[] {
-        return ['07:00', '07:50', '08:40', '9:45', '10:35', '11:25'];
+        return ['07:00', '07:50', '08:40', '09:45', '10:35', '11:25'];
     }
 
     listarDiasSemana(): string[] {

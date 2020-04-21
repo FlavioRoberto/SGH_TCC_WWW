@@ -1,4 +1,5 @@
 .aula {
+    position: relative;
     text-align: center;
     cursor: pointer;
     font-size: 0.7em;
@@ -13,8 +14,20 @@ mat-card.titulo-tabela {
     text-align: center;
 }
 
+.horario {
+    text-align: start;
+    display: inline-block;
+    // position: absolute;
+    right: 0;
+    left: 0;
+    font-weight: 600;
+   // color: white;
+ //   background: #557f94;
+    // border-radius: .5em;
+}
+
 .aula:hover {
-    transform: scale(1.4);
+    transform: scale(1.18);
     z-index: 2;
     background-color: #557f94;
     color: white;

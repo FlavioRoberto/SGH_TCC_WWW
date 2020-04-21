@@ -33,6 +33,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
     imports: [CommonModule],
@@ -69,7 +70,8 @@ import { MatDividerModule } from '@angular/material/divider';
         MatChipsModule,
         MatExpansionModule,
         MatFormFieldModule,
-        MatDividerModule
+        MatDividerModule,
+        MatBadgeModule
     ]
 })
 export class MaterialCoreModule {}
