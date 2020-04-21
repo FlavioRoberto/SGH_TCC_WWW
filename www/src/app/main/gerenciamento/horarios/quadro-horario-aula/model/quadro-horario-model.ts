@@ -8,4 +8,5 @@ export class QuadroHorarioModel {
     sala: string;
     dia: string;
     horario: string;
+    descricaoDesdobramento: string;
 }

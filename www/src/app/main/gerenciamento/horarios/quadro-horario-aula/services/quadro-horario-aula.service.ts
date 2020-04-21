@@ -21,7 +21,8 @@ export class QuadroHorarioAulaService {
                 professor: 'Flávio Roberto Teixeira',
                 sala: '311',
                 dia: 'Segunda',
-                horario: '07:50'
+                horario: '07:50',
+                descricaoDesdobramento: 'Turma A'
             },
             {
                 codigo: 1,
@@ -31,7 +32,8 @@ export class QuadroHorarioAulaService {
                 professor: 'Cargo 42',
                 sala: '311',
                 dia: 'Quarta',
-                horario: '09:45'
+                horario: '09:45',
+                descricaoDesdobramento: 'Turma B'
             },
             {
                 codigo: 1,

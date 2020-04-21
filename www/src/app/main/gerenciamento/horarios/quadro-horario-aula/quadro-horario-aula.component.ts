@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { QuadroHorarioModel } from './model/quadro-horario-model';
 import { QuadroHorarioAulaService } from './services/quadro-horario-aula.service';
+import { HorarioModel } from '../horario/model/horario.model';
 
 @Component({
     templateUrl: './views/quadro-horario-aula.component.html',
@@ -29,6 +30,15 @@ export class QuadroHorarioAulaComponent implements OnInit {
 
     existeHorario(horario, dia): boolean {
         return this.aulas.filter(lnq => lnq.dia === dia && lnq.horario === horario).length > 0;
+    }
+
+
+    atualizarAula(horario: QuadroHorarioModel): void {
+        alert('atualizando...' + horario.codigo);
+    }
+
+    adicionarAula(): void {
+        alert('adicionando novo horário');
     }
 
     private _recuperarCodigoHorarioSelecionado(): void {

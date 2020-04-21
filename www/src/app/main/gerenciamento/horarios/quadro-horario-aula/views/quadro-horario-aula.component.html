@@ -6,7 +6,6 @@
     <mat-card style="overflow-y: scroll;" fusePerfectScrollbar class="p-12">
         <table fxFlex="100" fxLayout="column" fxLayoutGap="4px">
             <thead fxFlex="100">
-                <!-- <th fxFlex="8"></th> -->
                 <th *ngFor="let diaSemana of diasDaSemana" fxFlex>
                     <mat-card class="titulo-tabela">
                         {{ diaSemana }}
@@ -15,15 +14,6 @@
             </thead>
             <tbody fxFlex="100">
                 <div *ngFor="let horario of horarios" fxLayout="column">
-                    <!-- <td fxFlex="8">
-                        <mat-card
-                            fxFill
-                            fxLayoutAlign="center center"
-                            class="titulo-tabela"
-                        >
-                            {{ horario }}
-                        </mat-card>
-                    </td> -->
                     <div fxFlex class="horario">
                         {{ horario }}
                     </div>
@@ -43,19 +33,19 @@
                                     fxLayoutAlign="center center"
                                     *ngIf="aula.horario == horario"
                                     fxLayout="column"
+                                    (click)="atualizarAula(aula)"
                                     class="aula"
                                 >
-                                    <!-- <div style="margin-top: 16px;"> -->
-                                        <span>
-                                            <strong>
-                                                {{ aula.disciplina }}</strong
-                                            ></span
-                                        >
-                                        <span> ({{ aula.professor }}) </span>
-                                        <span>
-                                            <strong> {{ aula.sala }} </strong>
-                                        </span>
-                                    <!-- </div> -->
+                                    <span>
+                                        <strong>{{ aula.disciplina }}</strong>
+                                    </span>
+                                    <span>
+                                        {{ aula.descricaoDesdobramento }}
+                                    </span>
+                                    <span> ({{ aula.professor }}) </span>
+                                    <span>
+                                        <strong> {{ aula.sala }} </strong>
+                                    </span>
                                 </mat-card>
                             </ng-container>
 
@@ -64,11 +54,10 @@
                                 fxLayoutAlign="center center"
                                 fxLayout="column"
                                 *ngIf="!existeHorario(horario, diaSemana)"
+                                (click)="adicionarAula()"
                                 class="aula"
                             >
-                                <!-- <div style="margin-top: 16px;"> -->
-                                    <span>Disponível</span>
-                                <!-- </div> -->
+                                <span>Disponível</span>
                             </mat-card>
                         </td>
                     </tr>
