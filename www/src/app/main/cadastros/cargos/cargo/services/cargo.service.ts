@@ -11,7 +11,7 @@ export class CargoService extends BaseService<CargoModel>{
 
     private _rotaDisciplina = `${this.getRota().base}/disciplinas`;
 
-    getRota(): any {
+    protected getRota(): any {
         return new routesApi().getRoutes().cargo;
     }
 

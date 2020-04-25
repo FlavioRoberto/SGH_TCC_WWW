@@ -1,4 +1,6 @@
-export const EPeriodos = [
+import { PeriodoModel } from '../models/periodo.model';
+
+export const EPeriodos: PeriodoModel[] = [
     { codigo: 1, descricao: 'Primeiro' },
     { codigo: 2, descricao: 'Segundo' },
     { codigo: 3, descricao: 'Terceiro' },

@@ -79,7 +79,16 @@ export class HorariosComponent implements OnInit {
     }
 
     selecionarHorario(horario: HorarioModel): void {
-        this._router.navigate([`/gerenciamento/horarios/${horario.codigo}/quadro-de-horario`]);
+        const rota = `/gerenciamento/horarios/${horario.codigo}/quadro-de-horario`;
+        this._router.navigate([rota], {
+            queryParams: {
+                codigoCurriculo: horario.curriculo.codigo,
+                codigoTurno: horario.turno.codigo,
+                ano: horario.ano,
+                semestre: horario.semestre,
+                periodo: horario.periodo
+            }
+        });
     }
 
     adicionarHorarios(): void {

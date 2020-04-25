@@ -7,6 +7,8 @@ import { QuadroHorarioAulasRoutingModule } from './quadro-horario-aula.routes.mo
 import { MaterialCoreModule } from 'app/core/modules/material-core.module';
 import { QuadroHorarioAulaComponent } from './quadro-horario-aula.component';
 import { QuadroHorarioAulaService } from './services/quadro-horario-aula.service';
+import { AdicionarAulaDialogService } from './components/dialogs/adicionar-aula/adicionar-aula-dialog.service';
+import { AdicionarAulaDialogModule } from './components/dialogs/adicionar-aula/adicionar-aula-dialog.module';
 
 
 @NgModule({
@@ -16,8 +18,12 @@ import { QuadroHorarioAulaService } from './services/quadro-horario-aula.service
         TranslateModule,
         FuseSharedModule,
         MaterialCoreModule,
-        QuadroHorarioAulasRoutingModule
+        QuadroHorarioAulasRoutingModule,
+        AdicionarAulaDialogModule
     ],
-    providers: [QuadroHorarioAulaService]
+    providers: [
+        QuadroHorarioAulaService,
+        AdicionarAulaDialogService
+    ]
 })
 export class QuadroHorarioAulaModule { }

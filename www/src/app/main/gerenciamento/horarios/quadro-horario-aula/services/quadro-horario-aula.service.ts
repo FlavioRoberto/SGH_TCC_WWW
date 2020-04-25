@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { QuadroHorarioModel } from '../model/quadro-horario-model';
+import { AulaModel } from '../model/quadro-horario-model';
 
 @Injectable()
 export class QuadroHorarioAulaService {
@@ -11,7 +11,7 @@ export class QuadroHorarioAulaService {
         return ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
     }
 
-    listarAulas(): QuadroHorarioModel[] {
+    listarAulas(): AulaModel[] {
         return [
             {
                 codigo: 1,
@@ -22,7 +22,9 @@ export class QuadroHorarioAulaService {
                 sala: '311',
                 dia: 'Segunda',
                 horario: '07:50',
-                descricaoDesdobramento: 'Turma A'
+                descricaoDesdobramento: 'Turma A',
+                horarioExtrapolado: true,
+                pratica: false
             },
             {
                 codigo: 1,
@@ -85,6 +87,6 @@ export class QuadroHorarioAulaService {
                 dia: 'Terça',
                 horario: '10:35'
             }
-        ] as QuadroHorarioModel[];
+        ] as AulaModel[];
     }
 }

@@ -46,6 +46,13 @@
                                     <span>
                                         <strong> {{ aula.sala }} </strong>
                                     </span>
+
+                                    <mat-icon
+                                        *ngIf="aula.horarioExtrapolado"
+                                        color="warn"
+                                        matTooltip="Horário extrapolado"
+                                        >error</mat-icon
+                                    >
                                 </mat-card>
                             </ng-container>
 

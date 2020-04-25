@@ -39,6 +39,14 @@ export class routesApi {
         return rota;
     }
 
+    private construirRotaCargo():any{
+        const rota = this.construirRotaPadrao('cargo');
+        rota['disciplinas'] = {
+            listarPorCurriculo: `${this.API}/cargo/disciplinas/listar-por-curriculo`
+        };
+        return rota;
+    }
+
 
     getRoutes(): any {
         return {
@@ -52,7 +60,7 @@ export class routesApi {
             usuario: this.construirRotaUsuario(),
             curriculo: this.construirRotaPadrao('curriculo'),
             professor: this.construirRotaProfessor(),
-            cargo: this.construirRotaPadrao('cargo'),
+            cargo: this.construirRotaCargo(),
             bloco: this.construirRotaPadrao('bloco'),
             sala: this.construirRotaPadrao('sala'),
             horario: {

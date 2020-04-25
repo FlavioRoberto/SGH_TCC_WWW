@@ -9,7 +9,7 @@ import { IDataEntidadePaginada } from '@breaking_dev/ic-databar-lib';
 })
 export abstract class BaseService<T> extends HttpBaseService<T> {
 
-    abstract getRota(): any;
+    protected abstract getRota(): any;
 
     constructor(private httpInjection: HttpClient) {
         super(httpInjection);

@@ -1,5 +1,5 @@
 
-export class QuadroHorarioModel {
+export class AulaModel {
     codigo: number;
     codigoCargo: Number;
     codigoSala: number;
@@ -9,4 +9,6 @@ export class QuadroHorarioModel {
     dia: string;
     horario: string;
     descricaoDesdobramento: string;
+    pratica: boolean;
+    horarioExtrapolado: boolean;
 }

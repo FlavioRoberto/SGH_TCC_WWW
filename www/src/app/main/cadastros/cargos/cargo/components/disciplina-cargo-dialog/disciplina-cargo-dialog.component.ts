@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, Inject, OnChanges } from '@angular/core';
-import { IDisciplinaCargoDialogData } from './contratos/disciplina-cargo-dialog-data';
+import { DisciplinaCargoDialogData } from './contratos/disciplina-cargo-dialog-data';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CargoDisciplina } from '../../models/cargo-disciplina';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -10,6 +10,7 @@ import { CurriculoModel } from 'app/main/cadastros/curriculo/model/curriculo.mod
 import { TurnoModel } from 'app/main/cadastros/turno/model/turno.interface';
 import { CurriculoDisciplinaModel } from 'app/main/cadastros/curriculo/model/curriculo-disciplina.model';
 import { CurriculoService } from 'app/main/cadastros/curriculo/services/curriculo.service';
+import { TurnoService } from 'app/main/cadastros/turno/service/turno.service';
 
 @Component({
     selector: 'app-disciplina-cargo-dialog',
@@ -19,7 +20,7 @@ import { CurriculoService } from 'app/main/cadastros/curriculo/services/curricul
 })
 export class DisciplinaCargoDialogComponent implements OnInit {
 
-    private _data: IDisciplinaCargoDialogData;
+    private _data: DisciplinaCargoDialogData;
     form: FormGroup;
     curriculos: CurriculoModel[];
     turnos: TurnoModel[];
@@ -29,20 +30,21 @@ export class DisciplinaCargoDialogComponent implements OnInit {
     salvandoDisciplina = false;
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) data: IDisciplinaCargoDialogData,
+        @Inject(MAT_DIALOG_DATA) data: DisciplinaCargoDialogData,
         private _formBuilder: FormBuilder,
         private _curriculoService: CurriculoService,
         private _cargoService: CargoService,
-        private _snackBarService: SnackBarService
+        private _snackBarService: SnackBarService,
+        private _turnoService: TurnoService
     ) {
         this._data = data;
     }
 
     ngOnInit(): void {
         this._construirFormulario();
-        this.curriculos = this._data.curriculos;
-        this.turnos = this._data.turnos;
         this.form.valueChanges.subscribe(dados => this._desabilitarInputDescricao());
+        this._carregarTurnos();
+        this._carregarCurriculo();
     }
 
     get descricaoLabelDisciplinasCurriculo(): string {
@@ -121,4 +123,15 @@ export class DisciplinaCargoDialogComponent implements OnInit {
         else
             formDescricao.disable({ emitEvent: false });
     }
+
+    private _carregarTurnos(): void {
+        this._turnoService.listarTodos()
+            .subscribe(dados => this.turnos = dados);
+    }
+
+    private _carregarCurriculo(): void {
+        this._curriculoService.listarTodos()
+            .subscribe(dados => this.curriculos = dados);
+    }
+
 }
