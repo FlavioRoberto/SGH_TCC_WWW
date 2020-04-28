@@ -140,9 +140,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         this._dialog.abrirDialog(
             this.form.get('codigo').value,
             'Adicionar disciplina', (dados, form: FormGroup) => {
-                const disciplinaAdicionada = this.dataSource.data.filter(item => {
-                    return item.codigoDisciplina === dados.codigoDisciplina;
-                });
+                console.log(dados);
                 if (disciplina && index >= 0) {
                     this.dataSource.removeByIndex(index);
                     this.servicoDataBarBind.constroiPreRequisitosDescricao(dados);
@@ -155,7 +153,6 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
                     this._snackBar.exibirSnackBarSucesso('Disciplina adicionada.');
                     form.reset();
                 }
-                console.log(dados);
 
             }, disciplina);
     }

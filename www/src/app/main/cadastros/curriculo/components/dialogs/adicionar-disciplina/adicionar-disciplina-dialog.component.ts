@@ -104,14 +104,20 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
         if (this.disciplinaEditar) {
             disciplinaAdicionar.codigo = this.disciplinaEditar.codigo;
             console.log(disciplinaAdicionar);
-            
+
             this._curriculoService.editarDisciplina(disciplinaAdicionar)
                 .pipe(finalize(() => this.emProgresso = false))
-                .subscribe(() => this.eventClickSalvar(disciplinaAdicionar, this.adicionarDisciplinaForm));
+                .subscribe(disciplina => {
+                    disciplinaAdicionar.codigo = disciplina.codigo;
+                    this.eventClickSalvar(disciplinaAdicionar, this.adicionarDisciplinaForm);
+                });
         } else {
             this._curriculoService.adicionarDisciplina(disciplinaAdicionar)
                 .pipe(finalize(() => this.emProgresso = false))
-                .subscribe(() => this.eventClickSalvar(disciplinaAdicionar, this.adicionarDisciplinaForm));
+                .subscribe((disciplina) => {
+                    disciplinaAdicionar.codigo = disciplina.codigo;
+                    this.eventClickSalvar(disciplinaAdicionar, this.adicionarDisciplinaForm);
+                });
         }
     }
 
