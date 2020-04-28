@@ -1,5 +1,5 @@
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { OnInit, Inject, Component, ViewEncapsulation } from '@angular/core';
+import { OnInit, Inject, Component, ViewEncapsulation, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IFormAutocompleteAcao } from '@compartilhado/layout/ap-form-autocomplete/contrato/IFormAutocompleteAcao';
 import { locale as portugues } from './../../../../i18n/pt-br';
@@ -29,10 +29,12 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
     pesquisandoDisciplina: boolean;
     disciplinas: DisciplinaModel[];
     periodos: any;
-    filtroDisciplinaPreRequisito = '';
     private codigoCurriculo: number;
     private eventClickSalvar;
     private disciplinaEditar: CurriculoDisciplinaModel;
+
+    @ViewChild('filtroDisciplinaPreRequisito', { static: false }) filtroDisciplinaPreRequisito;
+    @ViewChild('filtroDisciplina', { static: false }) filtroDisciplina;
 
     constructor(
         private dialogRef: MatDialogRef<AdicionarDisciplinaDialogComponent>,
@@ -121,12 +123,18 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
         }
     }
 
-    filtrarDisciplinasPreRequisito(filtro: string): void {
-        this.filtroDisciplinaPreRequisito = filtro;
-    }
-
     onChangeDisciplina(): void {
         this.adicionarDisciplinaForm.get('preRequisitos').patchValue(null);
+    }
+
+    onOpenedChangeDisciplina(): void {
+        this.filtroDisciplina.nativeElement.value = '';
+        this.filtroDisciplina.nativeElement.focus();
+    }
+
+    onOpenedChangePreRequisito(): void {
+        this.filtroDisciplinaPreRequisito.nativeElement.value = '';
+        this.filtroDisciplinaPreRequisito.nativeElement.focus();
     }
 
 }

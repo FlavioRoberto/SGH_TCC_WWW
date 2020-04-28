@@ -32,27 +32,24 @@
                         fxLayout="column"
                         (selectionChange)="onChangeDisciplina($event.value)"
                         formControlName="disciplina"
+                        (openedChange)="onOpenedChangeDisciplina()"
                     >
                         <input
                             class="p-12"
                             placeholder="Pesquisar..."
                             matInput
-                            name="filtro"
-                            (keyup)="
-                                filtrarDisciplinasPreRequisito(
-                                    $event.target.value
-                                )
-                            "
+                            name="filtroDisciplina"
+                            #filtroDisciplina
                         />
                         <mat-divider></mat-divider>
                         <div
                             *ngFor="
-                                let itemDisciplina of disciplinas
-                                    | filter: filtroDisciplinaPreRequisito
+                                let disciplina of disciplinas
+                                    | filter: filtroDisciplina?.value
                             "
                         >
-                            <mat-option [value]="itemDisciplina.codigo">{{
-                                itemDisciplina.descricao
+                            <mat-option [value]="disciplina.codigo">{{
+                                disciplina.descricao
                             }}</mat-option>
                         </div>
                     </mat-select>
@@ -61,6 +58,7 @@
 
                 <!-- PERIODO -->
                 <mat-form-field fxFlex appearance="outline">
+                    <mat-label>Período</mat-label>
                     <mat-select placeholder="Período" formControlName="periodo">
                         <mat-option
                             *ngFor="let periodo of periodos"
@@ -155,6 +153,7 @@
                     <mat-select
                         fxLayout="column"
                         formControlName="preRequisitos"
+                        (openedChange)="onOpenedChangePreRequisito()"
                         multiple
                     >
                         <input
@@ -162,17 +161,14 @@
                             placeholder="Pesquisar..."
                             matInput
                             name="filtro"
-                            (keyup)="
-                                filtrarDisciplinasPreRequisito(
-                                    $event.target.value
-                                )
-                            "
+                            #filtroDisciplinaPreRequisito
                         />
                         <mat-divider></mat-divider>
                         <div
                             *ngFor="
                                 let disciplinaPreRequisito of disciplinas
-                                    | filter: filtroDisciplinaPreRequisito
+                                    | filter
+                                        : filtroDisciplinaPreRequisito?.value
                             "
                         >
                             <mat-option
