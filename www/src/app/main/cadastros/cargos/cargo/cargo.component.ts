@@ -92,7 +92,7 @@ export class CargoComponent extends OnInitDataBar<CargoModel> implements OnDestr
             edital: [null, [Validators.required]],
             ano: [null, [Validators.required, Validators.pattern(anoRegex)]],
             semestre: [null, [Validators.required]],
-            professor: [null]
+            codigoProfessor: [null]
         });
     }
 

@@ -85,9 +85,10 @@ export class DisciplinaCargoDialogComponent implements OnInit {
         this._cargoService.adicionarDisciplina(disciplinaCargo)
             .pipe(finalize(() => this.salvandoDisciplina = false))
             .subscribe(
-                () => {
+                disciplina => {
                     disciplinaCargo.cursoDescricao = `${disciplinaCargo.cursoDescricao} - ${curriculoSelecionado.ano}`;
                     disciplinaCargo.turnoDescricao = turno.descricao;
+                    disciplinaCargo.codigo = disciplina.codigo;
                     this._data.onClickSalvar(disciplinaCargo);
                     this._snackBarService.exibirSnackBarSucesso('Disciplina adicionada com sucesso');
                     this.form.get('disciplinasCurriculo').reset();

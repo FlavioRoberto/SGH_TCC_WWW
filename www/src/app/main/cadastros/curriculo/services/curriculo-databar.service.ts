@@ -5,7 +5,7 @@ import { EventEmitter } from '@angular/core';
 import { CurriculoService } from './curriculo.service';
 import { CurriculoModel } from '../model/curriculo.model';
 import { CurriculoDisciplinaModel } from '../model/curriculo-disciplina.model';
-import { tap, finalize } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { IDatabarBindOnClickService, EStatus, DatabarEventClickService, EEventoClick } from '@breaking_dev/ic-databar-lib';
 import { ApExpansivelTableDataSource } from '@compartilhado/layout/expansivel-table/ApExpansivelTableDataSource';
 
