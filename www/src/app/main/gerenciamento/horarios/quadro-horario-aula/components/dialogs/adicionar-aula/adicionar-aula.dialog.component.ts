@@ -4,6 +4,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AdicionarAulaDialogDataModel } from './models/adicionar-aula-dialog-data.model';
 import { AdicionarAulaService } from './services/adicionar-aula.service';
 import { finalize } from 'rxjs/operators';
+import { AdicionarAulaDisciplinaModel } from './models/adicionar-aula-disciplina..model';
+import { SalaModel } from 'app/main/cadastros/salas/sala/model/sala.model';
+import { SalaService } from 'app/main/cadastros/salas/sala/services/sala.service';
 
 @Component({
     templateUrl: './views/adicionar-aula-dialog.component.html',
@@ -16,19 +19,24 @@ export class AdicionarAulaDialogComponent implements OnInit {
     salvando = false;
     disciplinas: AdicionarAulaDisciplinaModel[];
     carregandoDisciplinas = false;
+    carregandoSalas = false;
+    salas: SalaModel[];
 
     @ViewChild('filtroDisciplina', { static: true }) filtroDisciplina;
+    @ViewChild('filtroSala', { static: true }) filtroSala;
 
     constructor(
         private dialogRef: MatDialogRef<AdicionarAulaDialogComponent>,
         @Inject(MAT_DIALOG_DATA) data: AdicionarAulaDialogDataModel,
         private _adicionarAulaService: AdicionarAulaService,
+        private _salaServico: SalaService,
         private _formBuilder: FormBuilder) {
         this.data = data;
     }
 
     ngOnInit(): void {
         this._listarDisciplinas();
+        this._listarSalas();
         this._construirFormulario();
     }
 
@@ -37,7 +45,17 @@ export class AdicionarAulaDialogComponent implements OnInit {
     }
 
     onOpenedChangeDisciplina(): void {
+        this.filtroDisciplina.nativeElement.value = '';
         this.filtroDisciplina.nativeElement.focus();
+    }
+
+    onOpenedChangeLista(): void {
+        this.filtroSala.nativeElement.value = '';
+        this.filtroSala.nativeElement.focus();
+    }
+
+    get possuiDesdobramento(): boolean {
+        return this.form.get('desdobramento').value;
     }
 
     private _listarDisciplinas(): void {
@@ -47,9 +65,21 @@ export class AdicionarAulaDialogComponent implements OnInit {
             .subscribe(disciplinas => this.disciplinas = disciplinas);
     }
 
+    private _listarSalas(): void {
+        this.carregandoSalas = true;
+
+        this._salaServico.listarTodos()
+            .pipe(finalize(() => this.carregandoSalas = false))
+            .subscribe(salas => this.salas = salas);
+    }
+
     private _construirFormulario(): void {
         this.form = this._formBuilder.group({
-            codigoDisciplina: []
+            codigoDisciplina: [null],
+            codigoSala: [null],
+            desdobramento: [false],
+            laboratorio: [null],
+            descricaoTurmaDesdobramento: [null]
         });
     }
 

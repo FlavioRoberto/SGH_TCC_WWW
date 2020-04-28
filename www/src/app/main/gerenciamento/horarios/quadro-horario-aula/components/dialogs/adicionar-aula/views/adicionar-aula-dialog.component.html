@@ -17,7 +17,7 @@
     </mat-toolbar>
 
     <div fxFlex="100" class="p-16 pb-0 m-0 noPadding" fusePerfectScrollbar>
-        <form [formGroup]="form">
+        <form [formGroup]="form" fxLayout="column">
             <!-- DISCIPLINA -->
             <mat-form-field appearance="outline" fxFlex>
                 <mat-label *ngIf="carregandoDisciplinas"
@@ -29,6 +29,7 @@
                 <mat-select
                     [disabled]="carregandoDisciplinas"
                     fxLayout="column"
+                    required
                     (openedChange)="onOpenedChangeDisciplina()"
                     formControlName="codigoDisciplina"
                 >
@@ -57,8 +58,112 @@
                         </mat-option>
                     </div>
                 </mat-select>
+                <mat-error
+                    *ngIf="form.get('codigoDisciplina').hasError('required')"
+                >
+                    Esse campo é obrigatório
+                </mat-error>
             </mat-form-field>
             <!-- DISCIPLINA -->
+
+            <!-- SALA -->
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label *ngIf="carregandoSalas"
+                    >Carregando salas...</mat-label
+                >
+                <mat-label *ngIf="!carregandoSalas">Salas</mat-label>
+                <mat-select
+                    required
+                    [disabled]="carregandoSalas"
+                    fxLayout="column"
+                    (openedChange)="onOpenedChangeLista()"
+                    formControlName="codigoSala"
+                >
+                    <input
+                        class="p-12"
+                        placeholder="Pesquisar..."
+                        matInput
+                        name="filtro"
+                        #filtroSala
+                    />
+                    <mat-divider></mat-divider>
+                    <mat-option disabled *ngIf="!salas || salas.length <= 0"
+                        >Não foram encontradas salas</mat-option
+                    >
+                    <div *ngFor="let sala of salas | filter: filtroSala?.value">
+                        <mat-option [value]="sala.codigo">
+                            {{ sala.descricao }}
+                        </mat-option>
+                    </div>
+                </mat-select>
+                <mat-error *ngIf="form.get('codigoSala').hasError('required')">
+                    Esse campo é obrigatório
+                </mat-error>
+            </mat-form-field>
+            <!-- SALA -->
+
+            <!-- LABORATORIO -->
+            <div
+                fxLayoutAlign.gt-sm="start center"
+                class="mat-form-field pb-16"
+                fxFlex
+            >
+                <mat-checkbox formControlName="laboratorio">
+                    Aula em laboratório
+                </mat-checkbox>
+            </div>
+            <!-- LABORATORIO -->
+
+            <!-- DESDOBRAMENTO -->
+            <div
+                fxLayoutAlign.gt-sm="start center"
+                class="mat-form-field pb-16"
+                fxFlex
+            >
+                <mat-checkbox formControlName="desdobramento"
+                    >Possui desdobramento</mat-checkbox
+                >
+            </div>
+            <!-- DESDOBRAMENTO -->
+
+            <ng-container *ngIf="possuiDesdobramento">
+                <!-- DESCRICAO -->
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Descrição da turma</mat-label>
+                    <input
+                        required
+                        matInput
+                        type="text"
+                        #input_descricao
+                        maxlength="30"
+                        formControlName="descricaoTurmaDesdobramento"
+                    />
+                    <mat-hint align="end">
+                        {{ input_descricao.value?.length || 0 }}/{{
+                            30
+                        }}</mat-hint
+                    >
+                    <mat-error
+                        *ngIf="
+                            form
+                                .get('descricaoTurmaDesdobramento')
+                                .hasError('maxlength')
+                        "
+                    >
+                        O campo pode ter no máximo 30 caracteres
+                    </mat-error>
+                    <mat-error
+                        *ngIf="
+                            form
+                                .get('descricaoTurmaDesdobramento')
+                                .hasError('required')
+                        "
+                    >
+                        Esse campo é obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <!-- DESCRICAO -->
+            </ng-container>
         </form>
     </div>
 

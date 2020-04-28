@@ -3,10 +3,6 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dial
 import { CargoDisciplina } from '../../../models/cargo-disciplina';
 import { DisciplinaCargoDialogComponent } from '../disciplina-cargo-dialog.component';
 import { DisciplinaCargoDialogData } from '../contratos/disciplina-cargo-dialog-data';
-import { TurnoModel } from 'app/main/cadastros/turno/model/turno.interface';
-import { CurriculoModel } from 'app/main/cadastros/curriculo/model/curriculo.model';
-import { TurnoService } from 'app/main/cadastros/turno/service/turno.service';
-import { CurriculoService } from 'app/main/cadastros/curriculo/services/curriculo.service';
 
 @Injectable()
 export class DisciplinaCargoDialogService {
@@ -25,9 +21,7 @@ export class DisciplinaCargoDialogService {
         dialogConfig.data = {
             onClickSalvar: onClickSalvar,
             onClickFechar: this.fecharDialog,
-            curriculos: this._curriculos,
-            codigoCargo: codigoCargo,
-            turnos: this._turnos
+            codigoCargo: codigoCargo
         } as DisciplinaCargoDialogData;
 
         DisciplinaCargoDialogService._dialogRef = this.dialog.open(DisciplinaCargoDialogComponent, dialogConfig);
