@@ -40,6 +40,14 @@ export class AdicionarAulaDialogComponent implements OnInit {
         this._construirFormulario();
     }
 
+    get possuiDesdobramento(): boolean {
+        return this.form.get('desdobramento').value;
+    }
+
+    get desabilitarBotaoSalvar(): boolean {
+        return this.form.invalid || this.form.errors?.length > 0;
+    }
+
     fecharDialog(): void {
         this.dialogRef.close();
     }
@@ -54,8 +62,8 @@ export class AdicionarAulaDialogComponent implements OnInit {
         this.filtroSala.nativeElement.focus();
     }
 
-    get possuiDesdobramento(): boolean {
-        return this.form.get('desdobramento').value;
+    salvar(): void {
+
     }
 
     private _listarDisciplinas(): void {
