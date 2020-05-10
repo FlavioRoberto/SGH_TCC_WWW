@@ -69,10 +69,8 @@ export class AdicionarAulaDialogComponent implements OnInit {
         this.salvando = true;
         const aula = this.form.getRawValue() as AulaModel;
         this._adicionarAulaService.criarAula(aula)
-            .pipe(finalize(() =>
-                this._exibirMensagemSucesso()
-            ))
-            .subscribe();
+            .pipe(finalize(() => this.salvando = false))
+            .subscribe(() => this._exibirMensagemSucesso());
     }
 
     private _exibirMensagemSucesso(): void {

@@ -89,8 +89,7 @@ export class QuadroHorarioAulaComponent implements OnInit {
             .pipe(finalize(() => {
                 this._carregarAulas();
                 acaoFinalizar();
-                this._snackBarService.exibirSnackBarSucesso('Aula removida com sucesso.');
             }))
-            .subscribe();
+            .subscribe(() => this._snackBarService.exibirSnackBarSucesso('Aula removida com sucesso.'));
     }
 }
