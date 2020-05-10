@@ -7,7 +7,6 @@ import { finalize } from 'rxjs/operators';
 import { AdicionarAulaDisciplinaModel } from './models/adicionar-aula-disciplina..model';
 import { SalaModel } from 'app/main/cadastros/salas/sala/model/sala.model';
 import { SalaService } from 'app/main/cadastros/salas/sala/services/sala.service';
-import { AulaService } from '../../../services/aula.service';
 import { AulaModel } from '../../../model/aula.model';
 import { SnackBarService } from 'app/shared/services/snack-bar.service';
 
@@ -34,7 +33,6 @@ export class AdicionarAulaDialogComponent implements OnInit {
         private _adicionarAulaService: AdicionarAulaService,
         private _salaServico: SalaService,
         private _formBuilder: FormBuilder,
-        private _aulaService: AulaService,
         private _snackBarService: SnackBarService) {
         this.data = data;
     }
@@ -70,7 +68,7 @@ export class AdicionarAulaDialogComponent implements OnInit {
     salvar(): void {
         this.salvando = true;
         const aula = this.form.getRawValue() as AulaModel;
-        this._aulaService.criar(aula)
+        this._adicionarAulaService.criarAula(aula)
             .pipe(finalize(() =>
                 this._exibirMensagemSucesso()
             ))

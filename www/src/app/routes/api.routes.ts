@@ -32,7 +32,7 @@ export class RoutesApi {
             },
             aula: {
                 criar: `${this.API}/aula/criar`,
-                remover: `${this.API}/aula/remover`
+                remover: `${this.API}/aula`
             }
         };
 

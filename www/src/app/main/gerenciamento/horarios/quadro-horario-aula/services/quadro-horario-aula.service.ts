@@ -8,6 +8,7 @@ import { RoutesApi } from 'app/routes/api.routes';
 export class QuadroHorarioAulaService extends HttpBaseService<any> {
 
     private _rotaHorario = new RoutesApi().getRoutes().horario;
+    private _rotaAula = new RoutesApi().getRoutes().aula;
 
     listarHorarios(): string[] {
         return ['07:00', '07:50', '08:40', '09:45', '10:35', '11:25'];
@@ -20,4 +21,13 @@ export class QuadroHorarioAulaService extends HttpBaseService<any> {
     listarAulas(codigoHorario: number): Observable<AulaModel[]> {
         return this.getAll(`${this._rotaHorario.base}/${codigoHorario}/listar-aulas`);
     }
+
+    criarAula(aula: AulaModel): Observable<AulaModel> {
+        return this.post(aula, this._rotaAula.criar);
+    }
+
+    removerAula(codigoAula: number): Observable<AulaModel> {
+        return this.delete(`${this._rotaAula.remover}/${codigoAula}`);
+    }
+
 }

@@ -6,6 +6,7 @@ import { AdicionarAulaDialogDataModel } from './components/dialogs/adicionar-aul
 import { ConfirmaDialogService } from 'app/shared/components/dialogs/confirma-dialog/service/confirma-dialog.service';
 import { AulaModel } from './model/aula.model';
 import { finalize } from 'rxjs/operators';
+import { SnackBarService } from 'app/shared/services/snack-bar.service';
 
 @Component({
     templateUrl: './views/quadro-horario-aula.component.html',
@@ -24,7 +25,8 @@ export class QuadroHorarioAulaComponent implements OnInit {
         private _route: ActivatedRoute,
         private _quadroHorarioAulaService: QuadroHorarioAulaService,
         private _adicionarAulaDialogService: AdicionarAulaDialogService,
-        private _confirmaDialogService: ConfirmaDialogService) { }
+        private _confirmaDialogService: ConfirmaDialogService,
+        private _snackBarService: SnackBarService) { }
 
     ngOnInit(): void {
         this._recuperarCodigoHorarioSelecionado();
@@ -41,9 +43,9 @@ export class QuadroHorarioAulaComponent implements OnInit {
         return this.aulas.filter(lnq => lnq.reserva.diaSemana === dia && lnq.reserva.hora === horario).length > 0;
     }
 
-    removerAula(horario: AulaModel): void {
-        this._confirmaDialogService.acaoOk = () => this._removerAula();
-        this._confirmaDialogService.mensagemCarregando = `Removendo aula de ${horario.disciplina}...`;
+    removerAula(aula: AulaModel): void {
+        this._confirmaDialogService.acaoOk = () => this._removerAula(aula.codigo, () => this._confirmaDialogService.fecharDialog());
+        this._confirmaDialogService.mensagemCarregando = `Removendo aula de ${aula.disciplina}...`;
         this._confirmaDialogService.abrirDialog('Atenção', 'Existe uma aula reservada para o horário selecionado, deseja removê-la?');
     }
 
@@ -82,7 +84,13 @@ export class QuadroHorarioAulaComponent implements OnInit {
         this._data.executarAoSalvar = () => this._carregarAulas();
     }
 
-    private _removerAula(): void {
-        alert('Teste');
+    private _removerAula(codigoAula: number, acaoFinalizar: () => void): void {
+        this._quadroHorarioAulaService.removerAula(codigoAula)
+            .pipe(finalize(() => {
+                this._carregarAulas();
+                acaoFinalizar();
+                this._snackBarService.exibirSnackBarSucesso('Aula removida com sucesso.');
+            }))
+            .subscribe();
     }
 }
