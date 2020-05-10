@@ -1,4 +1,4 @@
 export class ReservaModel{
-    dia: string;
+    diaSemana: string;
     hora: string;
 }

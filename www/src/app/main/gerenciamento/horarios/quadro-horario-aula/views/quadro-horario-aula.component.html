@@ -3,13 +3,15 @@
     fxLayout="column"
     fxLayoutGap="12px"
 >
+    <!-- PROGRES_BAR -->
+    <mat-progress-bar
+        *ngIf="carregandoAulas"
+        mode="indeterminate"
+    ></mat-progress-bar>
+    <!-- PROGRES_BAR -->
+
     <mat-card style="overflow-y: scroll;" fusePerfectScrollbar class="p-12">
-        <table
-            fxFlex="100"
-            fxLayout="column"
-            fxLayoutGap="4px"
-            *ngIf="!carregandoAulas"
-        >
+        <table fxFlex="100" fxLayout="column" fxLayoutGap="4px">
             <thead fxFlex="100">
                 <th *ngFor="let diaSemana of diasDaSemana" fxFlex>
                     <mat-card class="titulo-tabela">
@@ -33,7 +35,6 @@
                                     )
                                 "
                             >
-                                {{ aula }}
                                 <mat-card
                                     fxFill
                                     fxLayoutAlign="center center"

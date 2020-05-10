@@ -10,4 +10,5 @@ export class AdicionarAulaDialogDataModel {
     semestre: ESemestre;
     periodo: number;
     reserva: ReservaModel;
+    executarAoSalvar: () => void;
 }

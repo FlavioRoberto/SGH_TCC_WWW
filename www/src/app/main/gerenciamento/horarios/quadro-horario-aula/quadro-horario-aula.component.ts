@@ -34,11 +34,11 @@ export class QuadroHorarioAulaComponent implements OnInit {
     }
 
     retornarAulas(horario: string, diaSemana: string): AulaModel[] {
-        return this.aulas.filter(lnq => lnq.reserva.dia === diaSemana && lnq.reserva.hora === horario);
+        return this.aulas.filter(lnq => lnq.reserva.diaSemana === diaSemana && lnq.reserva.hora === horario);
     }
 
     existeHorario(horario, dia): boolean {
-        return this.aulas.filter(lnq => lnq.reserva.dia === dia && lnq.reserva.hora === horario).length > 0;
+        return this.aulas.filter(lnq => lnq.reserva.diaSemana === dia && lnq.reserva.hora === horario).length > 0;
     }
 
     removerAula(horario: AulaModel): void {
@@ -50,7 +50,7 @@ export class QuadroHorarioAulaComponent implements OnInit {
     adicionarAula(horario: string, diaSemana: string): void {
         this._data.titulo = 'Adicionar aula';
         this._data.reserva = {
-            dia: diaSemana,
+            diaSemana: diaSemana,
             hora: horario
         };
         this._adicionarAulaDialogService.abrirDialog(this._data);
@@ -61,9 +61,7 @@ export class QuadroHorarioAulaComponent implements OnInit {
 
         this._quadroHorarioAulaService.listarAulas(this._data.codigoHorario)
             .pipe(finalize(() => this.carregandoAulas = false))
-            .subscribe(dados => {
-                dados.forEach(item => this.aulas.push(item));
-            });
+            .subscribe(aulas => this.aulas = aulas);
     }
 
     private _recuperarCodigoHorarioSelecionado(): void {
@@ -80,6 +78,8 @@ export class QuadroHorarioAulaComponent implements OnInit {
         this._route.params.subscribe(params => {
             this._data.codigoHorario = params['codigoHorario'] as number;
         });
+
+        this._data.executarAoSalvar = () => this._carregarAulas();
     }
 
     private _removerAula(): void {

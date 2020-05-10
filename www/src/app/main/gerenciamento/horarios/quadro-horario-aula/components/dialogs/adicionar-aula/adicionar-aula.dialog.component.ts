@@ -9,6 +9,7 @@ import { SalaModel } from 'app/main/cadastros/salas/sala/model/sala.model';
 import { SalaService } from 'app/main/cadastros/salas/sala/services/sala.service';
 import { AulaService } from '../../../services/aula.service';
 import { AulaModel } from '../../../model/aula.model';
+import { SnackBarService } from 'app/shared/services/snack-bar.service';
 
 @Component({
     templateUrl: './views/adicionar-aula-dialog.component.html',
@@ -33,7 +34,8 @@ export class AdicionarAulaDialogComponent implements OnInit {
         private _adicionarAulaService: AdicionarAulaService,
         private _salaServico: SalaService,
         private _formBuilder: FormBuilder,
-        private _aulaService: AulaService) {
+        private _aulaService: AulaService,
+        private _snackBarService: SnackBarService) {
         this.data = data;
     }
 
@@ -68,10 +70,17 @@ export class AdicionarAulaDialogComponent implements OnInit {
     salvar(): void {
         this.salvando = true;
         const aula = this.form.getRawValue() as AulaModel;
-        console.log(aula);
         this._aulaService.criar(aula)
-            .pipe(finalize(() => this.salvando = false))
+            .pipe(finalize(() =>
+                this._exibirMensagemSucesso()
+            ))
             .subscribe();
+    }
+
+    private _exibirMensagemSucesso(): void {
+        this._snackBarService.exibirSnackBarSucesso('Aula adicionada com sucesso');
+        this.fecharDialog();
+        this.data.executarAoSalvar();
     }
 
     private _listarDisciplinas(): void {
@@ -98,7 +107,7 @@ export class AdicionarAulaDialogComponent implements OnInit {
             desdobramento: [false],
             descricaoDesdobramento: [null],
             reserva: this._formBuilder.group({
-                diaSemana: [this.data.reserva.dia],
+                diaSemana: [this.data.reserva.diaSemana],
                 hora: [this.data.reserva.hora]
             })
         });
