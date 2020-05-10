@@ -7,6 +7,8 @@ import { finalize } from 'rxjs/operators';
 import { AdicionarAulaDisciplinaModel } from './models/adicionar-aula-disciplina..model';
 import { SalaModel } from 'app/main/cadastros/salas/sala/model/sala.model';
 import { SalaService } from 'app/main/cadastros/salas/sala/services/sala.service';
+import { AulaService } from '../../../services/aula.service';
+import { AulaModel } from '../../../model/aula.model';
 
 @Component({
     templateUrl: './views/adicionar-aula-dialog.component.html',
@@ -30,7 +32,8 @@ export class AdicionarAulaDialogComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) data: AdicionarAulaDialogDataModel,
         private _adicionarAulaService: AdicionarAulaService,
         private _salaServico: SalaService,
-        private _formBuilder: FormBuilder) {
+        private _formBuilder: FormBuilder,
+        private _aulaService: AulaService) {
         this.data = data;
     }
 
@@ -45,7 +48,7 @@ export class AdicionarAulaDialogComponent implements OnInit {
     }
 
     get desabilitarBotaoSalvar(): boolean {
-        return this.form.invalid || this.form.errors?.length > 0;
+        return this.form.invalid || this.form.errors?.length > 0 || this.salvando;
     }
 
     fecharDialog(): void {
@@ -63,7 +66,12 @@ export class AdicionarAulaDialogComponent implements OnInit {
     }
 
     salvar(): void {
-
+        this.salvando = true;
+        const aula = this.form.getRawValue() as AulaModel;
+        console.log(aula);
+        this._aulaService.criar(aula)
+            .pipe(finalize(() => this.salvando = false))
+            .subscribe();
     }
 
     private _listarDisciplinas(): void {
@@ -83,12 +91,17 @@ export class AdicionarAulaDialogComponent implements OnInit {
 
     private _construirFormulario(): void {
         this.form = this._formBuilder.group({
+            codigoHorario: [this.data.codigoHorario],
             codigoDisciplina: [null],
             codigoSala: [null],
+            laboratorio: [false],
             desdobramento: [false],
-            laboratorio: [null],
-            descricaoTurmaDesdobramento: [null]
+            descricaoDesdobramento: [null],
+            reserva: this._formBuilder.group({
+                diaSemana: [this.data.reserva.dia],
+                hora: [this.data.reserva.hora]
+            })
         });
     }
-
 }
+

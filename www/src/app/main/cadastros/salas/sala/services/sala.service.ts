@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { routesApi } from 'app/routes/api.routes';
+import { RoutesApi } from 'app/routes/api.routes';
 import { BaseService } from 'app/core/services/base.service';
 import { SalaModel } from '../model/sala.model';
 
@@ -8,6 +8,6 @@ import { SalaModel } from '../model/sala.model';
 })
 export class SalaService extends BaseService<SalaModel>{
     getRota(): string {
-        return new routesApi().getRoutes().sala;
+        return new RoutesApi().getRoutes().sala;
     }
 }

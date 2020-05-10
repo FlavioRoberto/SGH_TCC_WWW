@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, Inject, OnChanges } from '@angular/core';
 import { DisciplinaCargoDialogData } from './contratos/disciplina-cargo-dialog-data';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CargoDisciplina } from '../../models/cargo-disciplina';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { SnackBarService } from 'app/shared/services/snack-bar.service';
@@ -11,6 +10,7 @@ import { TurnoModel } from 'app/main/cadastros/turno/model/turno.interface';
 import { CurriculoDisciplinaModel } from 'app/main/cadastros/curriculo/model/curriculo-disciplina.model';
 import { CurriculoService } from 'app/main/cadastros/curriculo/services/curriculo.service';
 import { TurnoService } from 'app/main/cadastros/turno/service/turno.service';
+import { CargoDisciplinaModel } from '../../models/cargo-disciplina.model';
 
 @Component({
     selector: 'app-disciplina-cargo-dialog',
@@ -78,7 +78,7 @@ export class DisciplinaCargoDialogComponent implements OnInit {
             descricao: descricao ?? disciplinaSelecionada.disciplina.descricao,
             cursoDescricao: curriculoSelecionado.descricaoCurso,
             codigoTurno: turno.codigo,
-        } as CargoDisciplina;
+        } as CargoDisciplinaModel;
 
         this.salvandoDisciplina = true;
 

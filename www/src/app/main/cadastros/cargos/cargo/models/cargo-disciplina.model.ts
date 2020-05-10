@@ -1,4 +1,4 @@
-export class CargoDisciplina {
+export class CargoDisciplinaModel {
     codigo: number;
     codigoCargo: number;
     codigoTurno: number;

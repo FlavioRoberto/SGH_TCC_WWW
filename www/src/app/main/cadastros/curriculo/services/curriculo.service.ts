@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { routesApi } from 'app/routes/api.routes';
+import { RoutesApi } from 'app/routes/api.routes';
 import { BaseService } from 'app/core/services/base.service';
 import { Observable } from 'rxjs';
 import { CurriculoModel } from '../model/curriculo.model';
@@ -16,7 +16,7 @@ export class CurriculoService extends BaseService<CurriculoModel>{
     private _rotaDisciplina = `${this.getRota().base}/disciplinas`;
 
     protected getRota(): any {
-        return new routesApi().getRoutes().curriculo;
+        return new RoutesApi().getRoutes().curriculo;
     }
 
     listarDisciplinas(codigoCurriculo: number): Observable<CurriculoDisciplinaModel[]> {

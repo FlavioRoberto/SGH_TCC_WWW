@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-import { CargoDisciplina } from '../../../models/cargo-disciplina';
 import { DisciplinaCargoDialogComponent } from '../disciplina-cargo-dialog.component';
 import { DisciplinaCargoDialogData } from '../contratos/disciplina-cargo-dialog-data';
+import { CargoDisciplinaModel } from '../../../models/cargo-disciplina.model';
 
 @Injectable()
 export class DisciplinaCargoDialogService {
@@ -12,7 +12,7 @@ export class DisciplinaCargoDialogService {
     constructor(private dialog: MatDialog) {
     }
 
-    abrirDialog(codigoCargo: number, onClickSalvar: (dados: CargoDisciplina) => void): void {
+    abrirDialog(codigoCargo: number, onClickSalvar: (dados: CargoDisciplinaModel) => void): void {
         const dialogConfig = new MatDialogConfig();
 
         dialogConfig.panelClass = 'disciplina-cargo-dialog';

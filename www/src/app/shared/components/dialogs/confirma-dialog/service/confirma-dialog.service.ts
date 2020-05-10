@@ -14,7 +14,9 @@ export class ConfirmaDialogService {
     dialogRef: any;
     acaoCancelar: any;
 
-    constructor(private dialog: MatDialog) { }
+    constructor(private dialog: MatDialog) {
+        this.acaoCancelar = this.fecharDialog;
+    }
 
     abrirDialog(titulo: string, mensagem: string): void {
         const dialogConfig = new MatDialogConfig();

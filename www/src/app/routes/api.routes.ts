@@ -1,12 +1,43 @@
 import { environment } from 'environments/environment';
 
 
-export class routesApi {
+export class RoutesApi {
     private API: string;
 
     constructor() {
         this.API = `${environment.url}api`;
     }
+
+    getRoutes(): any {
+        return {
+            turno: this.construirRotaPadrao('turno'),
+            curso: this.construirRotaPadrao('curso'),
+            disciplina: {
+                tipo: this.construirRotaPadrao('disciplinaTipo'),
+                disciplina: this.construirRotaDisciplina()
+            },
+            perfil: this.construirRotaPadrao('perfil'),
+            usuario: this.construirRotaUsuario(),
+            curriculo: this.construirRotaPadrao('curriculo'),
+            professor: this.construirRotaProfessor(),
+            cargo: this.construirRotaCargo(),
+            bloco: this.construirRotaPadrao('bloco'),
+            sala: this.construirRotaPadrao('sala'),
+            horario: {
+                base: `${this.API}/horario-aula`,
+                criar: `${this.API}/horario-aula/criar`,
+                listar: `${this.API}/horario-aula/listar`,
+                remover: `${this.API}/horario-aula/remover`,
+                editar: `${this.API}/horario-aula/editar`,
+            },
+            aula: {
+                criar: `${this.API}/aula/criar`,
+                remover: `${this.API}/aula/remover`
+            }
+        };
+
+    }
+
 
     private construirRotaPadrao(rota: string): any {
         return {
@@ -39,7 +70,7 @@ export class routesApi {
         return rota;
     }
 
-    private construirRotaCargo():any{
+    private construirRotaCargo(): any {
         const rota = this.construirRotaPadrao('cargo');
         rota['disciplinas'] = {
             listarPorCurriculo: `${this.API}/cargo/disciplinas/listar-por-curriculo`
@@ -47,29 +78,4 @@ export class routesApi {
         return rota;
     }
 
-
-    getRoutes(): any {
-        return {
-            turno: this.construirRotaPadrao('turno'),
-            curso: this.construirRotaPadrao('curso'),
-            disciplina: {
-                tipo: this.construirRotaPadrao('disciplinaTipo'),
-                disciplina: this.construirRotaDisciplina()
-            },
-            perfil: this.construirRotaPadrao('perfil'),
-            usuario: this.construirRotaUsuario(),
-            curriculo: this.construirRotaPadrao('curriculo'),
-            professor: this.construirRotaProfessor(),
-            cargo: this.construirRotaCargo(),
-            bloco: this.construirRotaPadrao('bloco'),
-            sala: this.construirRotaPadrao('sala'),
-            horario: {
-                criar: `${this.API}/horario-aula/criar`,
-                listar: `${this.API}/horario-aula/listar`,
-                remover: `${this.API}/horario-aula/remover`,
-                editar: `${this.API}/horario-aula/editar`
-            }
-        };
-
-    }
 }

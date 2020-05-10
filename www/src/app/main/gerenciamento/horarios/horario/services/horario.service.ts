@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { HorarioModel } from '../model/horario.model';
 import { HttpBaseService } from 'app/core/services/http-base.service';
 import { Observable, of } from 'rxjs';
-import { EPeriodos } from 'app/shared/enums/eperiodos.enum';
-import { ESemestre, ESemestreLabel } from 'app/shared/enums/esemestre.enum';
-import { routesApi } from 'app/routes/api.routes';
+import { RoutesApi } from 'app/routes/api.routes';
 import { HorarioFiltroModel } from '../model/horario-filtro.model';
 
 @Injectable({
@@ -12,7 +10,7 @@ import { HorarioFiltroModel } from '../model/horario-filtro.model';
 })
 export class HorarioService extends HttpBaseService<HorarioModel> {
 
-    private _rota = new routesApi().getRoutes().horario;
+    private _rota = new RoutesApi().getRoutes().horario;
 
     listar(filtro: HorarioFiltroModel): Observable<HorarioModel[]> {
         return this.post(filtro, this._rota.listar);

@@ -1,9 +1,7 @@
-import { CargoDisciplina } from '../../../models/cargo-disciplina';
-import { TurnoModel } from 'app/main/cadastros/turno/model/turno.interface';
-import { CurriculoModel } from 'app/main/cadastros/curriculo/model/curriculo.model';
+import { CargoDisciplinaModel } from '../../../models/cargo-disciplina.model';
 
 export class DisciplinaCargoDialogData {
-    onClickSalvar: (dados: CargoDisciplina) => void;
+    onClickSalvar: (dados: CargoDisciplinaModel) => void;
     onClickFechar: () => void;
     codigoCargo: number;
 }

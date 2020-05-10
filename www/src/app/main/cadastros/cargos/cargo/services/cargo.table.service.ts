@@ -1,16 +1,16 @@
 import { IExpansivelTableServico, PaginacaoExpansivelTable, IcExpansivelTableDataSource, AcoesExpansivelTable } from '@breaking_dev/ic-expansivel-table';
 import { Injectable } from '@angular/core';
-import { CargoDisciplina } from '../models/cargo-disciplina';
 import { ColumnDef } from '@compartilhado/layout/expansivel-table/expansivel-table.component';
 import { CargoService } from './cargo.service';
 import { finalize } from 'rxjs/operators';
 import { ConfirmaDialogService } from 'app/shared/components/dialogs/confirma-dialog/service/confirma-dialog.service';
+import { CargoDisciplinaModel } from '../models/cargo-disciplina.model';
 
 @Injectable()
-export class CargoExpansivelTableService implements IExpansivelTableServico<CargoDisciplina>{
+export class CargoExpansivelTableService implements IExpansivelTableServico<CargoDisciplinaModel>{
 
     metodoPesquisa = this._pesquisar;
-    paginacaoExpansivelTable: PaginacaoExpansivelTable<CargoDisciplina>;
+    paginacaoExpansivelTable: PaginacaoExpansivelTable<CargoDisciplinaModel>;
     dataSource: IcExpansivelTableDataSource<any>;
     acoes: AcoesExpansivelTable[];
     colunas: ColumnDef[];
@@ -50,7 +50,7 @@ export class CargoExpansivelTableService implements IExpansivelTableServico<Carg
     private _pesquisar(filtro: PaginacaoExpansivelTable<any>, acaoFinalizar: () => void): void {
     }
 
-    private _removerDisciplina(disciplina: CargoDisciplina, posicao: number): void {
+    private _removerDisciplina(disciplina: CargoDisciplinaModel, posicao: number): void {
         this._confirmaDialogService.emProgresso = false;
 
         this._confirmaDialogService.acaoOk = () => {

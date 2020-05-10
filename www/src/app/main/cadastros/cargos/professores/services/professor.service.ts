@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from 'app/core/services/base.service';
 import { Professor } from '../models/professor.model';
-import { routesApi } from 'app/routes/api.routes';
+import { RoutesApi } from 'app/routes/api.routes';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export class ProfessorService extends BaseService<Professor>{
     public getRota(): any {
-        return new routesApi().getRoutes().professor;
+        return new RoutesApi().getRoutes().professor;
     }
 
     public listarAtivos(): Observable<Professor[]> {

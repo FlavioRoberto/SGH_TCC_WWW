@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TurnoModel } from '../model/turno.interface';
-import { routesApi } from 'app/routes/api.routes';
+import { RoutesApi } from 'app/routes/api.routes';
 import { BaseService } from 'app/core/services/base.service';
 
 @Injectable({
@@ -8,6 +8,6 @@ import { BaseService } from 'app/core/services/base.service';
 })
 export class TurnoService extends BaseService<TurnoModel>{
     getRota(): string {
-        return new routesApi().getRoutes().turno;
+        return new RoutesApi().getRoutes().turno;
     }
 }

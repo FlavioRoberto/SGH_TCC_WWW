@@ -1,3 +1,4 @@
+import { ReservaModel } from './reserva.model';
 
 export class AulaModel {
     codigo: number;
@@ -6,8 +7,7 @@ export class AulaModel {
     professor: string;
     disciplina: string;
     sala: string;
-    dia: string;
-    horario: string;
+    reserva: ReservaModel;
     descricaoDesdobramento: string;
     pratica: boolean;
     horarioExtrapolado: boolean;

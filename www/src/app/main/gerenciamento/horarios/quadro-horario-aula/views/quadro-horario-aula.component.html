@@ -4,7 +4,12 @@
     fxLayoutGap="12px"
 >
     <mat-card style="overflow-y: scroll;" fusePerfectScrollbar class="p-12">
-        <table fxFlex="100" fxLayout="column" fxLayoutGap="4px">
+        <table
+            fxFlex="100"
+            fxLayout="column"
+            fxLayoutGap="4px"
+            *ngIf="!carregandoAulas"
+        >
             <thead fxFlex="100">
                 <th *ngFor="let diaSemana of diasDaSemana" fxFlex>
                     <mat-card class="titulo-tabela">
@@ -28,12 +33,13 @@
                                     )
                                 "
                             >
+                                {{ aula }}
                                 <mat-card
                                     fxFill
                                     fxLayoutAlign="center center"
-                                    *ngIf="aula.horario == horario"
+                                    *ngIf="aula.reserva.hora == horario"
                                     fxLayout="column"
-                                    (click)="atualizarAula(aula)"
+                                    (click)="removerAula(aula)"
                                     class="aula"
                                 >
                                     <span>
@@ -61,7 +67,7 @@
                                 fxLayoutAlign="center center"
                                 fxLayout="column"
                                 *ngIf="!existeHorario(horario, diaSemana)"
-                                (click)="adicionarAula()"
+                                (click)="adicionarAula(horario, diaSemana)"
                                 class="aula"
                             >
                                 <span>Disponível</span>

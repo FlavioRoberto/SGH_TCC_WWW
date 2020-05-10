@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { routesApi } from 'app/routes/api.routes';
+import { RoutesApi } from 'app/routes/api.routes';
 import { BaseService } from 'app/core/services/base.service';
 import { BlocoModel } from '../model/bloco.model';
 
@@ -8,6 +8,6 @@ import { BlocoModel } from '../model/bloco.model';
 })
 export class BlocoService extends BaseService<BlocoModel>{
     getRota(): string {
-        return new routesApi().getRoutes().bloco;
+        return new RoutesApi().getRoutes().bloco;
     }
 }
