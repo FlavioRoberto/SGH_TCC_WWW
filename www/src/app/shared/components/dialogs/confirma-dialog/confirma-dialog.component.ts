@@ -17,7 +17,6 @@ export class ConfirmaDialogComponent implements OnInit {
     constructor(
         private dialogRef: MatDialogRef<ConfirmaDialogComponent>,
         @Inject(MAT_DIALOG_DATA) data) {
-        console.log(data);
         this.mensagem = data.mensagem;
         this.titulo = data.titulo;
         this.acaoOk = data.acaoOk;

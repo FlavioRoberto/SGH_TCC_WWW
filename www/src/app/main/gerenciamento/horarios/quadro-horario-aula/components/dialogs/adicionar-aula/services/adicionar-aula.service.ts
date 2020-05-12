@@ -21,7 +21,6 @@ export class AdicionarAulaService extends HttpBaseService<any> {
 
 
     listarDisciplinas(filtro: AdicionarAulaDialogDataModel): Observable<AdicionarAulaDisciplinaModel[]> {
-        console.log(this._rotaCargoDisciplina);
         return this.post(filtro, this._rotaCargoDisciplina.listarPorCurriculo);
     }
 

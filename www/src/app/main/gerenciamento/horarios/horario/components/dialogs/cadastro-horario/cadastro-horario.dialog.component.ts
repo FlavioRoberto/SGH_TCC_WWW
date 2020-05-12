@@ -109,7 +109,8 @@ export class CadastroHorarioDialogComponent implements OnInit {
             ano: [new Date().getFullYear(), [Validators.required, Validators.minLength(4)]],
             periodo: [null, [Validators.required]],
             semestre: [null, [Validators.required]],
-            codigoTurno: [null, [Validators.required]]
+            codigoTurno: [null, [Validators.required]],
+            mensagem: [null]
         });
     }
 

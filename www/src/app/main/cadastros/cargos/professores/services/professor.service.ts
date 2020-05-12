@@ -11,7 +11,6 @@ export class ProfessorService extends BaseService<Professor>{
     }
 
     public listarAtivos(): Observable<Professor[]> {
-        console.log(this.getRota());
         return this.getAll(this.getRota().listarAtivos);
     }
 }

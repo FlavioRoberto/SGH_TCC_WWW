@@ -105,7 +105,6 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
 
         if (this.disciplinaEditar) {
             disciplinaAdicionar.codigo = this.disciplinaEditar.codigo;
-            console.log(disciplinaAdicionar);
 
             this._curriculoService.editarDisciplina(disciplinaAdicionar)
                 .pipe(finalize(() => this.emProgresso = false))

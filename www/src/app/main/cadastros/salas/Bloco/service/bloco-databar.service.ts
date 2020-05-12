@@ -39,7 +39,6 @@ export class BlocoDatabarService implements IDatabarBindOnClickService<BlocoMode
     }
 
     listarPaginacao(entidadePaginada: IDataEntidadePaginada<BlocoModel>): Observable<IDataEntidadePaginada<BlocoModel>> {
-        console.log(this._servico);
         return this._servico.listarPaginacao(entidadePaginada);
     }
 

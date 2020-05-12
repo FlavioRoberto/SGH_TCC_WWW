@@ -74,7 +74,6 @@ export class HorariosComponent implements OnInit {
     }
 
     editarHorario(horario: HorarioModel): void {
-        alert(`editando horário ${horario.codigo}`);
         this._abrirDialogCadastroHorario('Editar horário', horario);
     }
 

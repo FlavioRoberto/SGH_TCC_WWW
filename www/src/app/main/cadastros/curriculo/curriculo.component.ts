@@ -140,7 +140,6 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         this._dialog.abrirDialog(
             this.form.get('codigo').value,
             'Adicionar disciplina', (dados, form: FormGroup) => {
-                console.log(dados);
                 if (disciplina && index >= 0) {
                     this.dataSource.removeByIndex(index);
                     this.servicoDataBarBind.constroiPreRequisitosDescricao(dados);
