@@ -8,4 +8,5 @@ export class HorarioModel {
     semestre: number;
     ano: number;
     turno: TurnoModel;
+    mensagem: string;
 }
