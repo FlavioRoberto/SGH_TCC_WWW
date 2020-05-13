@@ -11,7 +11,7 @@ export class CursoPaginado implements IDataEntidadePaginada<CursoModel>
     constructor() {
         this.quantidade = 1;
         this.total = 0;
-        this.posicao = 1;
+        this.posicao = 0;
     }
 
 }

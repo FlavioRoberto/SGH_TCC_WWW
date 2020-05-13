@@ -4,18 +4,19 @@ import { FormGroup } from '@angular/forms';
 import { ProfessorService } from './professor.service';
 import { Observable } from 'rxjs';
 import { ProfessorPaginado } from '../models/professor-paginado.model';
-import { IDataBarBindService, EStatus } from '@breaking_dev/ic-databar-lib';
+import { IDataBarBindService, EStatus, IDatabarBindOnClickService, DatabarEventClickService, EEventoClick } from '@breaking_dev/ic-databar-lib';
 
 @Injectable()
-export class ProfessorDataBarService implements IDataBarBindService<Professor>{
+export class ProfessorDataBarService implements IDatabarBindOnClickService<Professor>{
     status: EStatus;
-
+    eventDatabar: DatabarEventClickService;
     onClickEnter: EventEmitter<Professor>;
 
     constructor(
         public formgroup: FormGroup,
         private _servicoUsuario: ProfessorService) {
         this.onClickEnter = new EventEmitter();
+        this._inicializarEventoClick();
     }
 
     getEntidade(): Professor {
@@ -37,6 +38,18 @@ export class ProfessorDataBarService implements IDataBarBindService<Professor>{
 
     listarPaginacao(entidadePaginada: ProfessorPaginado): Observable<ProfessorPaginado> {
         return this._servicoUsuario.listarPaginacao(entidadePaginada);
+    }
+
+    private _inicializarEventoClick(): void {
+        this.eventDatabar = new DatabarEventClickService(evento => {
+            switch (evento) {
+                case EEventoClick.afterClickInserir: this._prepararFormularioParaInsercao(); break;
+            }
+        });
+    }
+
+    private _prepararFormularioParaInsercao(): void {
+        this.formgroup.get('ativo').setValue(true);
     }
 
 }
