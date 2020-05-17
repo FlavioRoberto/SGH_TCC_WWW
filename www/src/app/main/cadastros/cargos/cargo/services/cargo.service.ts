@@ -23,6 +23,10 @@ export class CargoService extends BaseService<CargoModel>{
         return this.post<CargoDisciplinaModel>(disciplina, `${this._rotaDisciplina}`);
     }
 
+    editarDisciplina(disciplina: CargoDisciplinaModel): Observable<CargoDisciplinaModel> {
+        return this.put<CargoDisciplinaModel>(disciplina, `${this._rotaDisciplina}`);
+    }
+    
     removerDisciplina(disciplinaId: number): Observable<boolean> {
         return this.delete(`${this._rotaDisciplina}/${disciplinaId}`);
     }

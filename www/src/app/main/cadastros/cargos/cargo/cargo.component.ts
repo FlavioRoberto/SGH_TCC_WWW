@@ -101,11 +101,10 @@ export class CargoComponent extends OnInitDataBar<CargoModel> implements OnDestr
     }
 
     abrirDialogAdicionarDisciplina(): void {
+        const codigoCargo = this.form.get('codigo').value;
         this._disciplinaCargoDialogService.abrirDialog(
-            this.form.get('codigo').value,
-            disciplinaAdicionada => {
-                this.servicoExpansivelTable.dataSource.add(disciplinaAdicionada);
-            });
+            codigoCargo,
+            () => this.servicoExpansivelTable.carregarDisciplinas(codigoCargo).subscribe());
     }
 
     private _carregarProfessoresAtivos(): void {

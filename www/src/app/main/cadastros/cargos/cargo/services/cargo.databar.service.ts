@@ -1,12 +1,14 @@
 import { EventEmitter, Injectable, Inject, Injector } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, of, Subscriber } from 'rxjs';
 import { IDataBarBindService, EStatus, IDatabarBindOnClickService, DatabarEventClickService, EEventoClick } from '@breaking_dev/ic-databar-lib';
 import { CargoModel } from '../models/cargo.model';
 import { CargoService } from './cargo.service';
 import { CargoPaginado } from '../models/cargo-paginado';
 import { CargoExpansivelTableService } from './cargo.table.service';
 import { ErrorDialogService } from 'app/shared/components/dialogs/error-dialog/service/error-dialog.service';
+import { tap } from 'rxjs/operators';
+import { CargoDisciplinaModel } from '../models/cargo-disciplina.model';
 
 @Injectable()
 export class CargoDataBarBindService implements IDatabarBindOnClickService<CargoModel>{
@@ -71,10 +73,7 @@ export class CargoDataBarBindService implements IDatabarBindOnClickService<Cargo
             return;
         }
 
-        this._servico.listarDisciplinas(cargo.codigo)
-            .subscribe(disciplinas => {
-                this._servicoExpansivelTable.dataSource.addRange(disciplinas);
-                acaoSucesso();
-            }, erro => acaoErro(erro), acaoComplete);
+        this._servicoExpansivelTable.carregarDisciplinas(cargo.codigo)
+            .subscribe(() => acaoSucesso(), erro => acaoErro(erro), acaoComplete);
     }
 }

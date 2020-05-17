@@ -11,6 +11,7 @@ import { CurriculoDisciplinaModel } from 'app/main/cadastros/curriculo/model/cur
 import { CurriculoService } from 'app/main/cadastros/curriculo/services/curriculo.service';
 import { TurnoService } from 'app/main/cadastros/turno/service/turno.service';
 import { CargoDisciplinaModel } from '../../models/cargo-disciplina.model';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-disciplina-cargo-dialog',
@@ -42,9 +43,10 @@ export class DisciplinaCargoDialogComponent implements OnInit {
 
     ngOnInit(): void {
         this._construirFormulario();
-        this.form.valueChanges.subscribe(dados => this._desabilitarInputDescricao());
+        this.form.valueChanges.subscribe(() => this._desabilitarInputDescricao());
         this._carregarTurnos();
         this._carregarCurriculo();
+        this._carregarDisciplinaFormulario();
     }
 
     get descricaoLabelDisciplinasCurriculo(): string {
@@ -52,7 +54,7 @@ export class DisciplinaCargoDialogComponent implements OnInit {
             return 'Carregando disciplinas do currículo...';
         }
 
-        if (!this.form.get('curriculo').value) {
+        if (!this.form.get('codigoCurriculo').value) {
             return 'Selecione um currículo para carregar as disciplinas.';
         }
 
@@ -67,35 +69,21 @@ export class DisciplinaCargoDialogComponent implements OnInit {
     }
 
     salvar(): void {
-        const disciplinaSelecionada = this.form.get('disciplinasCurriculo').value as CurriculoDisciplinaModel;
-        const curriculoSelecionado = this.form.get('curriculo').value as CurriculoModel;
-        const turno = this.form.get('turno').value as TurnoModel;
-        const descricao = this.form.get('descricao').value;
+        const disciplinaCargo = this.form.getRawValue() as CargoDisciplinaModel;
 
-        const disciplinaCargo = {
-            codigoCargo: this._data.codigoCargo,
-            codigoCurriculoDisciplina: disciplinaSelecionada.codigo,
-            descricao: descricao ?? disciplinaSelecionada.disciplina.descricao,
-            cursoDescricao: curriculoSelecionado.descricaoCurso,
-            codigoTurno: turno.codigo,
-        } as CargoDisciplinaModel;
+        disciplinaCargo.codigoCargo = this._data.codigoCargo;
 
         this.salvandoDisciplina = true;
 
-        this._cargoService.adicionarDisciplina(disciplinaCargo)
-            .pipe(finalize(() => this.salvandoDisciplina = false))
-            .subscribe(
-                disciplina => {
-                    disciplinaCargo.cursoDescricao = `${disciplinaCargo.cursoDescricao} - ${curriculoSelecionado.ano}`;
-                    disciplinaCargo.turnoDescricao = turno.descricao;
-                    disciplinaCargo.codigo = disciplina.codigo;
-                    this._data.onClickSalvar(disciplinaCargo);
-                    this._snackBarService.exibirSnackBarSucesso('Disciplina adicionada com sucesso');
-                    this.form.get('disciplinasCurriculo').reset();
-                    this.form.get('turno').reset();
-                    this.form.get('descrição').reset();
-                }
-            );
+        let requisicao: Observable<CargoDisciplinaModel> = null;
+
+        if (this._data.disciplina == null)
+            requisicao = this._criar(disciplinaCargo);
+        else
+            requisicao = this._editar(disciplinaCargo);
+
+        requisicao.pipe(finalize(() => this.salvandoDisciplina = false))
+            .subscribe(() => this._limparFormularioAposSalvar());
     }
 
     fecharDialog(): void {
@@ -106,18 +94,35 @@ export class DisciplinaCargoDialogComponent implements OnInit {
         this.filtroDisciplinaCurriculo = filtro;
     }
 
+    private _editar(disciplinaCargo: CargoDisciplinaModel): Observable<CargoDisciplinaModel> {
+        return this._cargoService.editarDisciplina(disciplinaCargo);
+    }
+
+    private _criar(disciplinaCargo: CargoDisciplinaModel): Observable<CargoDisciplinaModel> {
+        return this._cargoService.adicionarDisciplina(disciplinaCargo);
+    }
+
     private _construirFormulario(): void {
         this.form = this._formBuilder.group({
-            curriculo: [null, Validators.required],
-            disciplinasCurriculo: [null, Validators.required],
-            turno: [null, Validators.required],
+            codigo: [null],
+            codigoCurriculo: [null, Validators.required],
+            codigoCurriculoDisciplina: [null, Validators.required],
+            codigoTurno: [null, Validators.required],
             descricao: [{ value: null, disabled: true }, [Validators.maxLength(30)]]
         });
     }
 
+    private _limparFormularioAposSalvar(): void {
+        this._data.onClickSalvar();
+        this._snackBarService.exibirSnackBarSucesso('Disciplina adicionada com sucesso');
+        this.form.get('codigoCurriculoDisciplina').reset();
+        this.form.get('codigoTurno').reset();
+        this.form.get('descricao').reset();
+    }
+
     private _desabilitarInputDescricao(): void {
         const formDescricao = this.form.get('descricao');
-        const disciplinaSelecionada = this.form.get('disciplinasCurriculo').value;
+        const disciplinaSelecionada = this.form.get('codigoCurriculoDisciplina').value;
 
         if (disciplinaSelecionada)
             formDescricao.enable({ emitEvent: false });
@@ -135,4 +140,11 @@ export class DisciplinaCargoDialogComponent implements OnInit {
             .subscribe(dados => this.curriculos = dados);
     }
 
+    private _carregarDisciplinaFormulario(): void {
+        const disciplina = this._data.disciplina;
+        if (disciplina != null) {
+            console.log(disciplina);
+            this.form.patchValue(disciplina);
+        }
+    }
 }

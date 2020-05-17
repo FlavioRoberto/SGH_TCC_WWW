@@ -22,13 +22,13 @@
             <!-- CURRICULO -->
             <mat-form-field appearance="outline" fxFlex="1 0 auto">
                 <mat-label>Currículo</mat-label>
-                <mat-select fxLayout="column" formControlName="curriculo">
+                <mat-select fxLayout="column" formControlName="codigoCurriculo">
                     <div *ngFor="let curriculo of curriculos">
                         <mat-option *ngIf="curriculos.length <= 0" disabled>
                             <span>Nenhum registro encontrado</span>
                         </mat-option>
                         <mat-option
-                            [value]="curriculo"
+                            [value]="curriculo.codigo"
                             (onSelectionChange)="
                                 aoSelecionarCurriculo(curriculo)
                             "
@@ -45,8 +45,8 @@
                 <mat-label>{{ descricaoLabelDisciplinasCurriculo }} </mat-label>
                 <mat-select
                     fxLayout="column"
-                    [disabled]="!form.get('curriculo').value"
-                    formControlName="disciplinasCurriculo"
+                    [disabled]="!form.get('codigoCurriculo').value"
+                    formControlName="codigoCurriculoDisciplina"
                 >
                     <input
                         class="p-12"
@@ -64,7 +64,7 @@
                                 | filter: filtroDisciplinaCurriculo
                         "
                     >
-                        <mat-option [value]="disciplinaCurriculo">{{
+                        <mat-option [value]="disciplinaCurriculo.codigo">{{
                             disciplinaCurriculo.disciplina.descricao
                         }}</mat-option>
                     </div>
@@ -95,9 +95,9 @@
             <!-- TURNOS -->
             <mat-form-field appearance="outline" fxFlex="1 0 auto">
                 <mat-label>Turnos </mat-label>
-                <mat-select fxLayout="column" formControlName="turno">
+                <mat-select fxLayout="column" formControlName="codigoTurno">
                     <div *ngFor="let turno of turnos">
-                        <mat-option [value]="turno">{{
+                        <mat-option [value]="turno.codigo">{{
                             turno.descricao
                         }}</mat-option>
                     </div>

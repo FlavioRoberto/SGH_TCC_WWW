@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dial
 import { DisciplinaCargoDialogComponent } from '../disciplina-cargo-dialog.component';
 import { DisciplinaCargoDialogData } from '../contratos/disciplina-cargo-dialog-data';
 import { CargoDisciplinaModel } from '../../../models/cargo-disciplina.model';
+import { DisciplinaModel } from 'app/main/cadastros/disciplinas/disciplina/model/disciplina';
 
 @Injectable()
 export class DisciplinaCargoDialogService {
@@ -12,16 +13,17 @@ export class DisciplinaCargoDialogService {
     constructor(private dialog: MatDialog) {
     }
 
-    abrirDialog(codigoCargo: number, onClickSalvar: (dados: CargoDisciplinaModel) => void): void {
+    abrirDialog(codigoCargo: number, onClickSalvar: () => void, disciplina?: CargoDisciplinaModel): void {
         const dialogConfig = new MatDialogConfig();
 
         dialogConfig.panelClass = 'disciplina-cargo-dialog';
         dialogConfig.disableClose = true;
-        
+
         dialogConfig.data = {
             onClickSalvar: onClickSalvar,
             onClickFechar: this.fecharDialog,
-            codigoCargo: codigoCargo
+            codigoCargo: codigoCargo,
+            disciplina: disciplina
         } as DisciplinaCargoDialogData;
 
         DisciplinaCargoDialogService._dialogRef = this.dialog.open(DisciplinaCargoDialogComponent, dialogConfig);
