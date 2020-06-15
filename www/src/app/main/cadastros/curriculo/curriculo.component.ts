@@ -50,6 +50,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     displayedExpansivelColumns = [
         { titulo: 'Aulas semanais teóricas', def: 'aulasSemanaisTeorica' },
         { titulo: 'Aulas semanais práticas', def: 'aulasSemanaisPratica' },
+        { titulo: 'Quantidade de aula total', def: 'quantidadeAulaTotal' },
         { titulo: 'Pré-requisito', def: 'preRequisitoDescricao' },
     ];
 
@@ -129,6 +130,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
             disciplina: itemEditar.disciplina.codigo,
             aulasSemanaisPratica: itemEditar.aulasSemanaisPratica,
             aulasSemanaisTeorica: itemEditar.aulasSemanaisTeorica,
+            quantidadeAulaTotal: itemEditar.quantidadeAulaTotal,
             periodo: itemEditar.periodo,
             preRequisitos: itemEditar.preRequisitos?.map(i => i.codigoDisciplina)
         };

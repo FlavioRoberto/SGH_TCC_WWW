@@ -39,7 +39,7 @@ export class DisciplinaComponent implements IDataBarBindComponent<DisciplinaMode
             codigo: [null],
             descricao: [null, [
                 Validators.required,
-                Validators.maxLength(50),
+                Validators.maxLength(100),
                 Validators.minLength(1)]
             ],
             codigoTipo: [null, Validators.required]

@@ -59,6 +59,7 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
             disciplina: [null, [Validators.required]],
             aulasSemanaisTeorica: [null, [Validators.required]],
             aulasSemanaisPratica: [null, [Validators.required]],
+            quantidadeAulaTotal: [null, [Validators.required]],
             preRequisitos: [null],
             periodo: [null, [Validators.required]]
         });

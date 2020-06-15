@@ -11,6 +11,7 @@ export class CurriculoDisciplinaModel {
     aulasSemanaisPratica: number;
     preRequisitos: CurriculoDisciplinaPreRequisitoModel[];
     preRequisitoDescricao: string;
+    quantidadeAulaTotal: number;
 
     constructor() {
         this.codigo = 0;

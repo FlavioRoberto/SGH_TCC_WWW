@@ -142,6 +142,27 @@
                         </mat-error>
                     </mat-form-field>
                     <!-- PRATICA -->
+
+                    <!-- TOTAL -->
+                    <mat-form-field appearance="outline" fxFlex>
+                        <mat-label>Quantidade de aula total</mat-label>
+                        <input
+                            required="true"
+                            matInput
+                            mask="000"
+                            formControlName="quantidadeAulaTotal"
+                        />
+                        <mat-error
+                            *ngIf="
+                                adicionarDisciplinaForm
+                                    .get('quantidadeAulaTotal')
+                                    .hasError('required')
+                            "
+                        >
+                            {{ "GERENCIAMENTO.CAMPO_OBRIGATORIO" | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                    <!-- TOTAL -->
                 </div>
             </div>
 
