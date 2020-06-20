@@ -33,6 +33,9 @@ export class RoutesApi {
             aula: {
                 criar: `${this.API}/aula/criar`,
                 remover: `${this.API}/aula`
+            },
+            relatorios: {
+                horarioGeral: `${this.API}/relatorios/horario-geral`
             }
         };
 

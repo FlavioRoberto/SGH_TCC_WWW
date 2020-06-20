@@ -1,0 +1,123 @@
+<div
+    class="page-layout simple card fullwidth inner-scroll p-12"
+    fxLayout="column"
+    fxLayoutGap="12px"
+>
+    <form [formGroup]="form" novalidate>
+        <!-- FILTRO -->
+        <mat-card fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="12px">
+            <!-- CURSO -->
+            <mat-form-field fxFlex appearance="outline">
+                <mat-label>Curso</mat-label>
+                <mat-select placeholder="Curso" formControlName="codigoCurso">
+                    <mat-option
+                        *ngFor="let curso of cursos"
+                        [value]="curso.codigo"
+                    >
+                        {{ curso.descricao }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('codigoCurso').hasError('required')">
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <!-- CURSO -->
+
+            <!-- TURNO -->
+            <mat-form-field appearance="outline" fxFlex.gt-sm="24">
+                <mat-label>Turnos </mat-label>
+                <mat-select fxLayout="column" formControlName="codigoTurno">
+                    <div *ngFor="let turno of turnos">
+                        <mat-option [value]="turno.codigo">{{
+                            turno.descricao
+                        }}</mat-option>
+                    </div>
+                </mat-select>
+                <mat-error *ngIf="form.get('codigoCurso').hasError('required')">
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <!-- TURNO -->
+
+            <!-- ANO -->
+            <mat-form-field appearance="outline" fxFlex.gt-sm="12" fxFlex="100">
+                <mat-label>Ano</mat-label>
+                <input
+                    #input_ano
+                    matInput
+                    mask="9{4}"
+                    maxlength="4"
+                    type="text"
+                    class="primary-color-input border-radius-4"
+                    formControlName="ano"
+                />
+                <mat-hint align="end">
+                    {{ input_ano.value?.length || 0 }}/4</mat-hint
+                >
+                <mat-error *ngIf="form.get('ano').hasError('pattern')">
+                    Ano inválido
+                </mat-error>
+                <mat-error *ngIf="form.get('ano').hasError('required')">
+                    Campo obrigatório!
+                </mat-error>
+            </mat-form-field>
+            <!-- ANO -->
+
+            <!-- SEMESTRE -->
+            <mat-form-field
+                appearance="outline"
+                fxFlex.gt-sm="12"
+                fxFlex="1 0 auto"
+            >
+                <mat-label>Semestre</mat-label>
+                <mat-select fxLayout="column" formControlName="semestre">
+                    <div *ngFor="let semestre of semestres">
+                        <mat-option [value]="semestre">
+                            {{ retornarDescricaoSemestre(semestre) }}
+                        </mat-option>
+                    </div>
+                </mat-select>
+                <mat-error *ngIf="form.get('semestre').hasError('required')">
+                    Campo obrigatório!
+                </mat-error>
+            </mat-form-field>
+            <!-- SEMESTRE -->
+
+            <!-- BOTOES PESQUISA -->
+            <div
+                class="mat-form-field-wrapper m-12"
+                fxLayoutAlign="center center"
+                fxFlex="1 0 auto"
+                fxFlex.gt-sm="4"
+            >
+                <button
+                    fxFlex
+                    mat-raised-button
+                    color="accent"
+                    [disabled]="desabilitarBotao"
+                    (click)="gerarRelatorio()"
+                    class="p-8"
+                    fxLayoutAlign="center center"
+                    matTooltip="Pesquisar horários"
+                >
+                    <mat-spinner
+                        *ngIf="gerandoRelatorio"
+                        diameter="20"
+                    ></mat-spinner>
+                    <mat-icon *ngIf="!gerandoRelatorio">search</mat-icon>
+                </button>
+            </div>
+            <!-- BOTOES PESQUISA -->
+        </mat-card>
+        <!-- FILTRO -->
+    </form>
+
+    <div>
+        <pdf-viewer
+            style="display: block; height: 100vh;"
+            [src]="relatorio"
+            [fit-to-page]="true"
+            [render-text]="true"
+        ></pdf-viewer>
+    </div>
+</div>

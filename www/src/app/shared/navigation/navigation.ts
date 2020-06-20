@@ -110,11 +110,25 @@ export const navigation: FuseNavigation[] = [
                 icon: 'assignment',
                 children: [
                     {
-                        id: 'curriculo',
+                        id: 'horarios_aula',
                         title: 'Horários de aula',
                         type: 'item',
                         icon: 'access_time',
                         url: '/gerenciamento/horarios'
+                    },
+                    {
+                        id: 'relatorios',
+                        title: 'Relatórios',
+                        type: 'collapsable',
+                        icon: 'list_alt',
+                        children: [
+                            {
+                                id: 'relatorio_horario_geral',
+                                title: 'Horário geral',
+                                type: 'item',
+                                url: '/gerenciamento/relatorios/horario-geral'
+                            }
+                        ]
                     }
                 ]
             }

@@ -7,6 +7,11 @@ const routes: Routes = [
         path: 'horarios',
         loadChildren: () => import('./horarios/horario/horarios.module').then(m => m.HorariosModule),
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'relatorios',
+        loadChildren: () => import('./Relatorios/relatorios.module').then(m => m.RelatoriosModule),
+        canActivate: [AuthGuard]
     }
 ];
 
