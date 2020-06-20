@@ -112,6 +112,7 @@
         <!-- FILTRO -->
     </form>
 
+    <!-- CANVAS_PDF -->
     <div>
         <pdf-viewer
             style="display: block; height: 100vh;"
@@ -120,4 +121,19 @@
             [render-text]="true"
         ></pdf-viewer>
     </div>
+    <!-- CANVAS_PDF -->
+
+    <!-- BOTAO_BAIXAR_PDF -->
+    <button
+        *ngIf="relatorio"
+        (click)="baixarPdf()"
+        matTooltip="Baixar relatório"
+        style="position: absolute; bottom: 10px; right: 10px; z-index: 1;"
+        mat-fab
+        color="accent"
+        aria-label="Baixar arquivo pdf"
+    >
+        <mat-icon>get_app</mat-icon>
+    </button>
+    <!-- BOTAO_BAIXAR_PDF -->
 </div>

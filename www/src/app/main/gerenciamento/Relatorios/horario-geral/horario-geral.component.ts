@@ -20,7 +20,7 @@ export class HorarioGeralComponent implements OnInit {
     turnos: TurnoModel[];
     semestres: ESemestre[];
     gerandoRelatorio: boolean;
-    relatorio: SafeUrl;
+    relatorio: string;
 
     constructor(private _formBuilder: FormBuilder,
         private _cursoService: CursoService,
@@ -59,6 +59,13 @@ export class HorarioGeralComponent implements OnInit {
                 this.relatorio = `data:application/pdf;base64,${base64}`;
                 console.log(this.relatorio);
             });
+    }
+
+    baixarPdf(): void {
+        const downloadLink = document.createElement('a');
+        downloadLink.href = this.relatorio;
+        downloadLink.download = 'horario-geral.pdf';
+        downloadLink.click();
     }
 
     private _carregarCursos(): void {
