@@ -49,7 +49,6 @@ export class HorarioGeralComponent implements OnInit {
         this.gerandoRelatorio = true;
         this.form.disable();
         const filtro = this.form.getRawValue() as HorarioGeralRelatorioModel;
-        console.log(filtro);
         this._horarioGeralService.gerarRelatorio(filtro)
             .pipe(finalize(() => {
                 this.gerandoRelatorio = false;
@@ -57,7 +56,6 @@ export class HorarioGeralComponent implements OnInit {
             }))
             .subscribe(base64 => {
                 this.relatorio = `data:application/pdf;base64,${base64}`;
-                console.log(this.relatorio);
             });
     }
 
