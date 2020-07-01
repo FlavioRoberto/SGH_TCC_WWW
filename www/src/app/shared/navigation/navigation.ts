@@ -127,6 +127,12 @@ export const navigation: FuseNavigation[] = [
                                 title: 'Horário geral',
                                 type: 'item',
                                 url: '/gerenciamento/relatorios/horario-geral'
+                            },
+                            {
+                                id: 'relatorio_individual',
+                                title: 'Horário individual',
+                                type: 'item',
+                                url: '/gerenciamento/relatorios/horario-individual'
                             }
                         ]
                     }

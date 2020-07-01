@@ -35,7 +35,8 @@ export class RoutesApi {
                 remover: `${this.API}/aula`
             },
             relatorios: {
-                horarioGeral: `${this.API}/relatorios/horario-geral`
+                horarioGeral: `${this.API}/relatorios/horario-geral`,
+                horarioIndividual: `${this.API}/relatorios/horario-individual`
             }
         };
 

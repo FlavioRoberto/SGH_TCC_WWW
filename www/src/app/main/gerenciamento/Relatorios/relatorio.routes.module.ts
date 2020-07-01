@@ -7,6 +7,11 @@ const routes: Routes = [
         path: 'horario-geral',
         loadChildren: () => import('./horario-geral/horario-geral.module').then(m => m.HorarioGeralModule),
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'horario-individual',
+        loadChildren: () => import('./horario-individual/horario-individual.module').then(m => m.HorarioIndividualModule),
+        canActivate: [AuthGuard]
     }
 ];
 
