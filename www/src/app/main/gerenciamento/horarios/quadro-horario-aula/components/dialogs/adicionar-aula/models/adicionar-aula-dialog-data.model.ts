@@ -6,6 +6,7 @@ export class AdicionarAulaDialogDataModel {
     titulo: string;
     codigoCurriculo: number;
     codigoTurno: number;
+    horariosTurno: string[];
     ano: number;
     semestre: ESemestre;
     periodo: number;

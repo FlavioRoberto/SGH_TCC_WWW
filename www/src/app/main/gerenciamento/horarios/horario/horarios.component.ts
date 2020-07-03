@@ -85,7 +85,8 @@ export class HorariosComponent implements OnInit {
                 codigoTurno: horario.turno.codigo,
                 ano: horario.ano,
                 semestre: horario.semestre,
-                periodo: horario.periodo
+                periodo: horario.periodo,
+                horariosTurno: horario.turno.horarios
             }
         });
     }

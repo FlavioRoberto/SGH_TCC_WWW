@@ -1,43 +1,40 @@
-<div class="page-layout simple card fullwidth inner-scroll p-12"
-     fxLayout="column"
-     fxLayoutGap="12px">
-    <form [formGroup]="form"
-          novalidate>
+<div
+    class="page-layout simple card fullwidth inner-scroll p-12"
+    fxLayout="column"
+    fxLayoutGap="12px"
+>
+    <form [formGroup]="form" novalidate>
         <!-- FILTRO -->
-        <mat-card fxLayout="column"
-                  fxLayout.gt-sm="row"
-                  fxLayoutGap="12px">
-
+        <mat-card fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="12px">
             <!-- PROFESSOR -->
-            <mat-form-field appearance="outline"
-                            fxFlex="1 0 auto">
+            <mat-form-field appearance="outline" fxFlex="1 0 auto">
                 <mat-label>Professor</mat-label>
-                <mat-select fxLayout="column"
-                            formControlName="codigoProfessor">
-                    <mat-option *ngIf="
-                            professores?.length <= 0
-                        ">Nenhum professor encontrado</mat-option>
-                    <div *ngFor="
-                            let professor of professores                              
-                        ">
+                <mat-select fxLayout="column" formControlName="codigoProfessor">
+                    <mat-option *ngIf="professores?.length <= 0"
+                        >Nenhum professor encontrado</mat-option
+                    >
+                    <div *ngFor="let professor of professores">
                         <mat-option [value]="professor.codigo">{{
                             professor.nome
                         }}</mat-option>
                     </div>
                 </mat-select>
-                <mat-error *ngIf="form.get('codigoProfessor').hasError('required')">
+                <mat-error
+                    *ngIf="form.get('codigoProfessor').hasError('required')"
+                >
                     Campo obrigatório!
                 </mat-error>
             </mat-form-field>
             <!-- PROFESSOR -->
 
             <!-- SEMESTRE -->
-            <mat-form-field appearance="outline"
-                            fxFlex.gt-sm="12"
-                            fxFlex="1 0 auto">
+            <mat-form-field
+                appearance="outline"
+                fxFlex.gt-sm="12"
+                fxFlex="1 0 auto"
+            >
                 <mat-label>Semestre</mat-label>
-                <mat-select fxLayout="column"
-                            formControlName="semestre">
+                <mat-select fxLayout="column" formControlName="semestre">
                     <div *ngFor="let semestre of semestres">
                         <mat-option [value]="semestre">
                             {{ retornarDescricaoSemestre(semestre) }}
@@ -51,17 +48,17 @@
             <!-- SEMESTRE -->
 
             <!-- ANO -->
-            <mat-form-field appearance="outline"
-                            fxFlex.gt-sm="12"
-                            fxFlex="100">
+            <mat-form-field appearance="outline" fxFlex.gt-sm="12" fxFlex="100">
                 <mat-label>Ano</mat-label>
-                <input #input_ano
-                       matInput
-                       mask="9{4}"
-                       maxlength="4"
-                       type="text"
-                       class="primary-color-input border-radius-4"
-                       formControlName="ano" />
+                <input
+                    #input_ano
+                    matInput
+                    mask="9{4}"
+                    maxlength="4"
+                    type="text"
+                    class="primary-color-input border-radius-4"
+                    formControlName="ano"
+                />
                 <mat-error *ngIf="form.get('ano').hasError('pattern')">
                     Ano inválido
                 </mat-error>
@@ -72,18 +69,24 @@
             <!-- ANO -->
 
             <!-- BOTOES PESQUISA -->
-            <div class="mat-form-field-wrapper m-12"
-                 fxLayoutAlign="center center">
-                <button fxFlex
-                        mat-raised-button
-                        color="accent"
-                        [disabled]="desabilitarBotao"
-                        (click)="gerarRelatorio()"
-                        class="p-8"
-                        fxLayoutAlign="center center"
-                        matTooltip="Pesquisar horários">
-                    <mat-spinner *ngIf="gerandoRelatorio"
-                                 diameter="20"></mat-spinner>
+            <div
+                class="mat-form-field-wrapper m-12"
+                fxLayoutAlign="center center"
+            >
+                <button
+                    fxFlex
+                    mat-raised-button
+                    color="accent"
+                    [disabled]="desabilitarBotao"
+                    (click)="gerarRelatorio()"
+                    class="p-8"
+                    fxLayoutAlign="center center"
+                    matTooltip="Pesquisar horários"
+                >
+                    <mat-spinner
+                        *ngIf="gerandoRelatorio"
+                        diameter="20"
+                    ></mat-spinner>
                     <mat-icon *ngIf="!gerandoRelatorio">search</mat-icon>
                 </button>
             </div>
@@ -93,22 +96,25 @@
     </form>
 
     <!-- CANVAS_PDF -->
-    <div>
-        <pdf-viewer style="display: block; height: 90vh;"
-                    [src]="relatorio"
-                    [fit-to-page]="true"
-                    [render-text]="true"></pdf-viewer>
+    <div style="overflow-y: scroll;">
+        <pdf-viewer
+            [src]="relatorio"
+            [fit-to-page]="true"
+            [render-text]="true"
+        ></pdf-viewer>
     </div>
     <!-- CANVAS_PDF -->
 
     <!-- BOTAO_BAIXAR_PDF -->
-    <button *ngIf="relatorio"
-            (click)="baixarPdf()"
-            matTooltip="Baixar relatório"
-            style="position: absolute; bottom: 10px; right: 10px; z-index: 1;"
-            mat-fab
-            color="accent"
-            aria-label="Baixar arquivo pdf">
+    <button
+        *ngIf="relatorio"
+        (click)="baixarPdf()"
+        matTooltip="Baixar relatório"
+        style="position: absolute; bottom: 10px; right: 10px; z-index: 1;"
+        mat-fab
+        color="accent"
+        aria-label="Baixar arquivo pdf"
+    >
         <mat-icon>get_app</mat-icon>
     </button>
     <!-- BOTAO_BAIXAR_PDF -->

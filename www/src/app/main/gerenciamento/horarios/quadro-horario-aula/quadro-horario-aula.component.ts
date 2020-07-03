@@ -30,7 +30,7 @@ export class QuadroHorarioAulaComponent implements OnInit {
 
     ngOnInit(): void {
         this._recuperarCodigoHorarioSelecionado();
-        this.horarios = this._quadroHorarioAulaService.listarHorarios();
+        this.horarios = this._data.horariosTurno;
         this.diasDaSemana = this._quadroHorarioAulaService.listarDiasSemana();
         this._carregarAulas();
     }
@@ -72,6 +72,7 @@ export class QuadroHorarioAulaComponent implements OnInit {
         this._route.queryParams.subscribe(params => {
             this._data.codigoCurriculo = params['codigoCurriculo'] as number;
             this._data.codigoTurno = params['codigoTurno'] as number;
+            this._data.horariosTurno = (params['horariosTurno'] as string).split(',');
             this._data.ano = params['ano'] as number;
             this._data.semestre = params['semestre'] as number;
             this._data.periodo = params['periodo'] as number;

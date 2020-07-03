@@ -12,40 +12,58 @@
     <form
         (Keydown.enter)="servicoDataBarBind.enviarFormComEnter()"
         [formGroup]="form"
-        fxLayout.xs="column"
+        fxLayout="column"
         class="turno-form"
     >
-        <!-- CODIGO -->
-        <mat-form-field
-            appearance="outline"
-            class="pr-sm-8"
-            fxFlex="20"
-            *ngIf="statusDataBar != EStatus.inserindo"
-        >
-            <mat-label>Código</mat-label>
-            <input
-                mask="9{6}"
-                matInput
-                class="primary-color-input border-radius-4"
-                name="primary color"
-                formControlName="codigo"
-            />
-        </mat-form-field>
-        <!-- CODIGO -->
+        <div fxLayout.gt-sm="row" fxLayout="column">
+            <!-- CODIGO -->
+            <mat-form-field
+                appearance="outline"
+                class="pr-sm-8"
+                fxFlex="20"
+                *ngIf="statusDataBar != EStatus.inserindo"
+            >
+                <mat-label>Código</mat-label>
+                <input
+                    mask="9{6}"
+                    matInput
+                    class="primary-color-input border-radius-4"
+                    name="primary color"
+                    formControlName="codigo"
+                />
+            </mat-form-field>
+            <!-- CODIGO -->
 
-        <!-- DESCRICAO -->
-        <ap-input-max-length
-            fxFlex
-            [maxlength]="50"
-            label="Descrição"
-            [minlength]="1"
-            controlName="descricao"
-            [form]="form"
-            name="descricao"
-            [condicaoErro]="form.get('descricao').errors?.required"
-        >
-        </ap-input-max-length>
-        <!-- DESCRICAO -->
+            <!-- DESCRICAO -->
+            <ap-input-max-length
+                fxFlex
+                [maxlength]="50"
+                label="Descrição"
+                [minlength]="1"
+                controlName="descricao"
+                [form]="form"
+                name="descricao"
+                [condicaoErro]="form.get('descricao').errors?.required"
+            >
+            </ap-input-max-length>
+            <!-- DESCRICAO -->
+        </div>
+
+        <!-- HORARIOS -->
+        <mat-form-field appearance="outline" fxFlex="100">
+            <mat-label>Horarios</mat-label>
+            <mat-select formControlName="horarios" multiple>
+                <mat-option
+                    *ngFor="let horario of horarios"
+                    [value]="horario"
+                    >{{ horario }}</mat-option
+                >
+            </mat-select>
+            <mat-error *ngIf="form.get('horarios').hasError('required')">
+                Campo obrigatório!
+            </mat-error>
+        </mat-form-field>
+        <!-- HORARIOS -->
     </form>
     <!-- / CONTENT -->
 </databar-form>

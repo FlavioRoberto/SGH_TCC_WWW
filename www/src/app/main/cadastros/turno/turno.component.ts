@@ -18,6 +18,7 @@ export class TurnoComponent implements IDataBarBindComponent<TurnoModel> {
     servicoDataBarBind: TurnoDataBarService;
     form: FormGroup;
     entidadePaginada: TurnoPaginado;
+    horarios = [];
     public EStatus = EStatus;
 
     constructor(
@@ -34,13 +35,15 @@ export class TurnoComponent implements IDataBarBindComponent<TurnoModel> {
                 Validators.required,
                 Validators.maxLength(50),
                 Validators.minLength(1)]
-            ]
+            ],
+            horarios: [null, [Validators.required]]
         });
 
         this.servicoDataBarBind = new TurnoDataBarService(this.form, this._turnoService);
 
         this.entidadePaginada = new TurnoPaginado();
 
+        this.horarios = this._turnoService.getHorarios();
     }
 
     statusChanged(status: EStatus): void {

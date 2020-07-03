@@ -10,10 +10,6 @@ export class QuadroHorarioAulaService extends HttpBaseService<any> {
     private _rotaHorario = new RoutesApi().getRoutes().horario;
     private _rotaAula = new RoutesApi().getRoutes().aula;
 
-    listarHorarios(): string[] {
-        return ['07:00', '07:50', '08:40', '09:45', '10:35', '11:25'];
-    }
-
     listarDiasSemana(): string[] {
         return ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
     }
