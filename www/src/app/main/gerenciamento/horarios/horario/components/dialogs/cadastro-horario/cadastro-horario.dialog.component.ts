@@ -73,18 +73,22 @@ export class CadastroHorarioDialogComponent implements OnInit {
         this._horarioService.criar(this.horario)
             .pipe(finalize(() => {
                 this.salvando = false;
-                this._snackBarService.exibirSnackBarSucesso('Horário adicionado com sucesso!');
             }))
-            .subscribe(horarioSalvo => acao(horarioSalvo));
+            .subscribe(horarioSalvo => {
+                acao(horarioSalvo);
+                this._snackBarService.exibirSnackBarSucesso('Horário adicionado com sucesso!');
+            });
     }
 
     private _editar(acao: (horario: HorarioModel) => void): void {
         this._horarioService.editar(this.horario)
             .pipe(finalize(() => {
                 this.salvando = false;
-                this._snackBarService.exibirSnackBarSucesso('Horário atualizado com sucesso!');
             }))
-            .subscribe(horarioSalvo => acao(horarioSalvo));
+            .subscribe(horarioSalvo => {
+                acao(horarioSalvo);
+                this._snackBarService.exibirSnackBarSucesso('Horário atualizado com sucesso!');
+            });
     }
 
     private _iniciarValoresFiltrados(): void {
