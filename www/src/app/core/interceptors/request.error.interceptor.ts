@@ -11,8 +11,16 @@ export class RequestErrorInterceptor implements HttpInterceptor {
     constructor(private dialogService: ErrorDialogService, private _authService: AutenticacaoService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+        request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
+
+        request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
+
         return next.handle(request)
             .pipe(
+                map((event: HttpEvent<any>) => {
+                    return event;
+                }),
                 catchError((err: any) => {
                     if (err instanceof HttpErrorResponse) {
                         let mensagem = '';
@@ -36,7 +44,7 @@ export class RequestErrorInterceptor implements HttpInterceptor {
                                 mensagem = 'Você não tem permissão para executar esta ação!';
                             }
 
-                            if (err.status === 401) {
+                            if (err.status === 401){
                                 this._authService.logout();
                                 mensagem = 'O prazo da autenticação expirou, realize o login novamente!';
                             }
