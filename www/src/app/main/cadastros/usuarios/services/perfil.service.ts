@@ -1,5 +1,5 @@
 import { BaseService } from 'app/core/services/base.service';
-import { PerfilModel } from '../models/iperfil';
+import { PerfilModel } from '../models/perfil.model.ts';
 import { RoutesApi } from 'app/routes/api.routes';
 import { Injectable } from '@angular/core';
 

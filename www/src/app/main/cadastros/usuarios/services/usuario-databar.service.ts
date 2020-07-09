@@ -5,7 +5,7 @@ import { EventEmitter } from '@angular/core';
 import { UsuarioService } from './usuario.service';
 import { tap } from 'rxjs/operators';
 import { IDataBarBindService, EStatus } from '@breaking_dev/ic-databar-lib';
-import { UsuarioModel } from '../models/iusuario';
+import { UsuarioModel } from '../models/usuario.model';
 import { AutenticacaoService } from 'app/core/auth/autenticacao.service';
 
 export class UsuarioDataBarService implements IDataBarBindService<UsuarioModel>{

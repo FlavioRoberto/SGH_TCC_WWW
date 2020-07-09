@@ -10,6 +10,7 @@ import { UsuariosComponent } from './usuarios.component';
 import { DataBarFormModule } from 'app/shared/layout/components/databar-form/databar-form.module';
 import { PerfilResolver } from '../../../shared/resolvers/perfil.resolver';
 import { NgxMaskModule } from 'ngx-mask';
+import { CursoResolver } from 'app/shared/resolvers/curso.resolver';
 
 @NgModule({
     declarations: [UsuariosComponent],
@@ -21,7 +22,8 @@ import { NgxMaskModule } from 'ngx-mask';
         NgxMaskModule.forChild()
     ],
     providers: [
-        PerfilResolver
+        PerfilResolver,
+        CursoResolver
     ]
 })
 export class UsuariosModule { }

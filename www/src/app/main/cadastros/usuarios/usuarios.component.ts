@@ -8,12 +8,13 @@ import { locale as portugues } from './../i18n/pt-br';
 import { UsuarioPaginado } from './models/usuario-paginado';
 import { UsuarioDataBarService } from './services/usuario-databar.service';
 import { UsuarioService } from './services/usuario.service';
-import { PerfilModel } from './models/iperfil';
+import { PerfilModel } from './models/perfil.model.ts';
 import { ActivatedRoute } from '@angular/router';
 import { celularRegex } from 'app/shared/regex/input-regex';
 import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
-import { UsuarioModel } from './models/iusuario';
+import { UsuarioModel } from './models/usuario.model';
 import { AutenticacaoService } from 'app/core/auth/autenticacao.service';
+import { CursoModel } from '../curso/model/curso.model';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class UsuariosComponent implements IDataBarBindComponent<UsuarioModel>, O
     servicoDataBarBind: UsuarioDataBarService;
     status: EStatus;
     perfis: PerfilModel[];
+    cursos: CursoModel[];
 
     constructor(private _formBuilder: FormBuilder,
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
@@ -34,12 +36,18 @@ export class UsuariosComponent implements IDataBarBindComponent<UsuarioModel>, O
         private _authService: AutenticacaoService) {
     }
 
+    get exibirSelectCurso(): boolean {
+        const perfil = this.form?.get('perfilCodigo')?.value;
+        return perfil === 3;
+    }
+
     ngOnInit(): void {
         this._fuseTranslationLoaderService.loadTranslations(portugues);
         this.form = this._construirFormulario();
         this.entidadePaginada = new UsuarioPaginado();
         this.servicoDataBarBind = new UsuarioDataBarService(this.form, this._servicoUsuario, this._authService);
         this.perfis = this._route.snapshot.data['perfis'];
+        this.cursos = this._route.snapshot.data['cursos'];
     }
 
     statusChanged(status: EStatus): void {
@@ -55,15 +63,16 @@ export class UsuariosComponent implements IDataBarBindComponent<UsuarioModel>, O
 
     private _construirFormulario(): FormGroup {
         return this._formBuilder.group({
-            codigo: new FormControl(null),
-            nome: new FormControl(null, [Validators.required, Validators.maxLength(45)]),
-            telefone: new FormControl(null, [Validators.maxLength(20), Validators.required, Validators.pattern(celularRegex)]),
-            login: new FormControl(null, [Validators.maxLength(30), Validators.required]),
-            senha: new FormControl(null),
-            email: new FormControl(null, [Validators.maxLength(45), Validators.required, Validators.email]),
-            foto: new FormControl(null),
-            perfilCodigo: new FormControl(null, [Validators.required]),
-            ativo: new FormControl(false)
+            codigo: [null],
+            nome: [null, [Validators.required, Validators.maxLength(45)]],
+            telefone: [null, [Validators.maxLength(20), Validators.required, Validators.pattern(celularRegex)]],
+            login: [null, [Validators.maxLength(30), Validators.required]],
+            senha: [null],
+            email: [null, [Validators.maxLength(45), Validators.required, Validators.email]],
+            foto: [null],
+            perfilCodigo: [null, [Validators.required]],
+            ativo: [false],
+            cursoCodigo: [null]
         });
     }
 }

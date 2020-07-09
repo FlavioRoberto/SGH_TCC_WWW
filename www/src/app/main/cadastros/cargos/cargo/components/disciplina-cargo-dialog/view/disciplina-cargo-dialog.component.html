@@ -29,9 +29,7 @@
                         </mat-option>
                         <mat-option
                             [value]="curriculo.codigo"
-                            (onSelectionChange)="
-                                aoSelecionarCurriculo(curriculo)
-                            "
+                            (click)="aoSelecionarCurriculo(curriculo)"
                         >
                             {{ curriculo.descricaoCurso }} - {{ curriculo.ano }}
                         </mat-option>

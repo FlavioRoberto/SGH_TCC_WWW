@@ -9,7 +9,7 @@ import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
 import { navigation } from 'app/shared/navigation/navigation';
 import { AlterarSenhaDialogService } from '../dialogs/redefinir-senha-dialog/service/alterar-senha-dialog.service';
-import { UsuarioModel } from 'app/main/cadastros/usuarios/models/iusuario';
+import { UsuarioModel } from 'app/main/cadastros/usuarios/models/usuario.model';
 import { AutenticacaoService } from 'app/core/auth/autenticacao.service';
 import { UsuarioAutenticacaoModel } from 'app/core/auth/usuario/model/IUsuario.model';
 

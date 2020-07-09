@@ -8,4 +8,5 @@ export interface UsuarioModel {
     foto: string;
     perfil: number;
     ativo: boolean;
+    cursoCodigo: number;
 }

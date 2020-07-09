@@ -1,5 +1,5 @@
 import { IDataEntidadePaginada } from '@breaking_dev/ic-databar-lib';
-import { UsuarioModel } from './iusuario';
+import { UsuarioModel } from './usuario.model';
 
 export class UsuarioPaginado implements IDataEntidadePaginada<UsuarioModel>{
     quantidade: number;

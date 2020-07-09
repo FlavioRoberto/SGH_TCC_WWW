@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { PerfilService } from 'app/main/cadastros/usuarios/services/perfil.service';
-import { PerfilModel } from 'app/main/cadastros/usuarios/models/iperfil';
+import { PerfilModel } from 'app/main/cadastros/usuarios/models/perfil.model.ts';
 
 @Injectable()
 export class PerfilResolver implements Resolve<PerfilModel[]> {

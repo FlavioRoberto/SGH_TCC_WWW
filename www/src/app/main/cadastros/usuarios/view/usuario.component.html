@@ -12,9 +12,9 @@
     <!-- FORM -->
     <form [formGroup]="form" fxLayout="column">
         <!-- LINHA 1 -->
-        <div fxLayout="column" fxLayout.gt-sm="row">
+        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="12px">
             <!-- PERFIL -->
-            <mat-form-field fxFlex appearance="outline" class="pr-sm-8">
+            <mat-form-field fxFlex appearance="outline">
                 <mat-select placeholder="Perfil" formControlName="perfilCodigo">
                     <mat-option
                         *ngFor="let perfil of perfis"
@@ -26,7 +26,7 @@
                 <mat-error
                     *ngIf="form.get('perfilCodigo').hasError('required')"
                 >
-                    {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
+                    {{ "GERENCIAMENTO.CAMPO_OBRIGATORIO" | translate }}
                 </mat-error>
             </mat-form-field>
             <!-- PERFIL -->
@@ -63,9 +63,34 @@
         <!-- LINHA 1 -->
 
         <!-- LINHA 2 -->
-        <div fxLayout="column" fxLayout.gt-sm="row">
+        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="12px">
+            <!-- CURSO -->
+            <mat-form-field
+                fxFlex="100"
+                appearance="outline"
+                *ngIf="exibirSelectCurso"
+            >
+                <mat-label>Curso</mat-label>
+                <mat-select
+                    placeholder="Curso"
+                    formControlName="cursoCodigo"
+                    [required]="exibirSelectCurso"
+                >
+                    <mat-option
+                        *ngFor="let curso of cursos"
+                        [value]="curso.codigo"
+                    >
+                        {{ curso.descricao }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('cursoCodigo').hasError('required')">
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <!-- CURSO -->
+
             <!-- LOGIN -->
-            <mat-form-field appearance="outline" fxFlex="100" class="pr-sm-8">
+            <mat-form-field appearance="outline" fxFlex="100">
                 <mat-label>Login</mat-label>
                 <input
                     (keydown.space)="preventEspacos($event)"
@@ -82,7 +107,7 @@
                     {{ login.value?.length || 0 }}/30</mat-hint
                 >
                 <mat-error *ngIf="form.get('email').hasError('required')">
-                    {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
+                    {{ "GERENCIAMENTO.CAMPO_OBRIGATORIO" | translate }}
                 </mat-error>
             </mat-form-field>
             <!-- LOGIN -->
@@ -104,7 +129,7 @@
             </ap-input-max-length> -->
             <!-- SENHA -->
             <!-- EMAIL -->
-            <mat-form-field appearance="outline" fxFlex="100" class="pr-sm-8">
+            <mat-form-field appearance="outline" fxFlex="100">
                 <mat-label>E-mail</mat-label>
                 <input
                     matInput
@@ -121,7 +146,7 @@
                     {{ input.value?.length || 0 }}/30</mat-hint
                 >
                 <mat-error *ngIf="form.get('email').hasError('required')">
-                    {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
+                    {{ "GERENCIAMENTO.CAMPO_OBRIGATORIO" | translate }}
                 </mat-error>
                 <mat-error *ngIf="form.get('email').hasError('email')">
                     E-mail inválido!
@@ -144,7 +169,7 @@
                     Telefone inválido!
                 </mat-error>
                 <mat-error *ngIf="form.get('telefone').hasError('required')">
-                    {{ 'GERENCIAMENTO.CAMPO_OBRIGATORIO' | translate }}
+                    {{ "GERENCIAMENTO.CAMPO_OBRIGATORIO" | translate }}
                 </mat-error>
             </mat-form-field>
             <!-- TELEFONE -->

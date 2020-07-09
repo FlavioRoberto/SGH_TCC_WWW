@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { UsuariosComponent } from './usuarios.component';
 import { PerfilResolver } from '../../../shared/resolvers/perfil.resolver';
 import { AuthGuard } from 'app/core/auth/auth.guard';
+import { CursoResolver } from 'app/shared/resolvers/curso.resolver';
 
 const routes: Routes = [
     {
@@ -10,7 +11,8 @@ const routes: Routes = [
         component: UsuariosComponent,
         canActivate: [AuthGuard],
         resolve: {
-            perfis: PerfilResolver
+            perfis: PerfilResolver,
+            cursos: CursoResolver
         }
     }
 ];

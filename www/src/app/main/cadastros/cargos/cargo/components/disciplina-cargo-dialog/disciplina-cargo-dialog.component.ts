@@ -63,9 +63,8 @@ export class DisciplinaCargoDialogComponent implements OnInit {
 
     aoSelecionarCurriculo(curriculoSelecionado: CurriculoModel): void {
         this.carregandoDisciplinasCurriculo = true;
-        this._curriculoService.listarDisciplinas(curriculoSelecionado.codigo)
-            .pipe(finalize(() => this.carregandoDisciplinasCurriculo = false))
-            .subscribe(disciplinas => this.disciplinasCurriculo = disciplinas);
+        this.form.get('codigoCurriculoDisciplina').setValue(null);
+        this._carregarDisciplinasCurriculo(curriculoSelecionado.codigo);
     }
 
     salvar(): void {
@@ -92,6 +91,14 @@ export class DisciplinaCargoDialogComponent implements OnInit {
 
     filtrarDisciplinasCurriculo(filtro: string): void {
         this.filtroDisciplinaCurriculo = filtro;
+    }
+
+    private _carregarDisciplinasCurriculo(codigoCurriculo: number): void {
+        this._curriculoService.listarDisciplinas(codigoCurriculo)
+            .pipe(finalize(() => this.carregandoDisciplinasCurriculo = false))
+            .subscribe(disciplinas => {
+                this.disciplinasCurriculo = disciplinas;
+            });
     }
 
     private _editar(disciplinaCargo: CargoDisciplinaModel): Observable<CargoDisciplinaModel> {
@@ -143,8 +150,8 @@ export class DisciplinaCargoDialogComponent implements OnInit {
     private _carregarDisciplinaFormulario(): void {
         const disciplina = this._data.disciplina;
         if (disciplina != null) {
-            console.log(disciplina);
             this.form.patchValue(disciplina);
+            this._carregarDisciplinasCurriculo(disciplina.codigoCurriculo);
         }
     }
 }
