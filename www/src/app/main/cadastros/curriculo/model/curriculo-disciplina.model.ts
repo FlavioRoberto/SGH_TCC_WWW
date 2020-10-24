@@ -23,5 +23,4 @@ export class CurriculoDisciplinaModel {
         this.codigoCurriculo = 0;
         this.preRequisitos = new Array<CurriculoDisciplinaPreRequisitoModel>();
     }
-
 }

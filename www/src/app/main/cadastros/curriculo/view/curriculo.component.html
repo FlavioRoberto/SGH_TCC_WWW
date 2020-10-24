@@ -1,7 +1,6 @@
 <databar-form
     class="inner-scroll"
     fxLayout="column"
-    fxFlex
     [servicoBind]="servicoDataBarBind"
     [entidadePaginada]="entidadePaginada"
     [form]="form"
@@ -90,7 +89,6 @@
             <!-- TABELA -->
             <ap-expansivel-table
                 *ngIf="dataSource.data.length > 0"
-                fxFlex
                 [displayedColumns]="displayedColumns"
                 [columnDefExpansivel]="displayedExpansivelColumns"
                 [dataSource]="dataSource"

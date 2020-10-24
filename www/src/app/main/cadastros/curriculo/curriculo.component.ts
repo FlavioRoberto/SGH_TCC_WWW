@@ -45,11 +45,11 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     displayedColumns: ColumnDef[] = [
         new ColumnDef('Disciplina', 'disciplina', 'descricao'),
         new ColumnDef('Período', 'periodo'),
+        new ColumnDef('Quant. Teórica', 'aulasSemanaisTeorica'),
+        new ColumnDef('Quant. Prática', 'aulasSemanaisPratica')
     ];
 
     displayedExpansivelColumns = [
-        { titulo: 'Aulas semanais teóricas', def: 'aulasSemanaisTeorica' },
-        { titulo: 'Aulas semanais práticas', def: 'aulasSemanaisPratica' },
         { titulo: 'Quantidade de aula total', def: 'quantidadeAulaTotal' },
         { titulo: 'Pré-requisito', def: 'preRequisitoDescricao' },
     ];

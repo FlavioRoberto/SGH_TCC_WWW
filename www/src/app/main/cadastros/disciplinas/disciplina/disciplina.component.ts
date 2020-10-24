@@ -10,6 +10,7 @@ import { DisciplinaDataBarService } from './service/disciplina-databar.service';
 import { ActivatedRoute } from '@angular/router';
 import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
 import { DisciplinaModel } from './model/disciplina';
+import { DisciplinaFormularioService } from './service/disciplina-formulario.service';
 
 @Component({
     selector: 'disciplina',
@@ -18,7 +19,6 @@ import { DisciplinaModel } from './model/disciplina';
 })
 export class DisciplinaComponent implements IDataBarBindComponent<DisciplinaModel> {
     statusDataBar: EStatus;
-    servicoDataBarBind: DisciplinaDataBarService;
     form: FormGroup;
     entidadePaginada: DisciplinaPaginado;
     EStatus = EStatus;
@@ -26,26 +26,16 @@ export class DisciplinaComponent implements IDataBarBindComponent<DisciplinaMode
 
     constructor(
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
-        private _formBuilder: FormBuilder,
-        private _servicoTipo: DisciplinaTipoService,
-        private _servicoDisciplina: DisciplinaService,
-        private _route: ActivatedRoute
+        private _formularioService: DisciplinaFormularioService,
+        private _route: ActivatedRoute,
+        public servicoDataBarBind: DisciplinaDataBarService
     ) {
     }
 
     ngOnInit(): void {
         this._fuseTranslationLoaderService.loadTranslations(portugues);
-        this.form = this._formBuilder.group({
-            codigo: [null],
-            descricao: [null, [
-                Validators.required,
-                Validators.maxLength(100),
-                Validators.minLength(1)]
-            ],
-            codigoTipo: [null, Validators.required]
-        });
 
-        this.servicoDataBarBind = new DisciplinaDataBarService(this.form, this._servicoDisciplina);
+        this.form = this._formularioService.form;
 
         this.entidadePaginada = new DisciplinaPaginado();
 
@@ -54,6 +44,8 @@ export class DisciplinaComponent implements IDataBarBindComponent<DisciplinaMode
 
     statusChanged(status: EStatus): void {
         this.statusDataBar = status;
-    }
 
+        if (status === EStatus.inserindo)
+            this._formularioService.tipoDisciplina = this.tipos[0];
+    }
 }

@@ -68,9 +68,17 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
             .subscribe(data => {
                 this.disciplinas = data;
                 if (this.disciplinaEditar) {
-                    this.adicionarDisciplinaForm.patchValue(this.disciplinaEditar);
+                    this.adicionarDisciplinaForm.patchValue(this.disciplinaEditar, { emitEvent: false });
                 }
             });
+
+        this.adicionarDisciplinaForm
+            .get('aulasSemanaisTeorica')
+            .valueChanges.subscribe(() => this._calcularValorTotal());
+
+        this.adicionarDisciplinaForm
+            .get('aulasSemanaisPratica')
+            .valueChanges.subscribe(() => this._calcularValorTotal());
     }
 
     fecharDialog(): void {
@@ -124,7 +132,7 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
     }
 
     onChangeDisciplina(): void {
-        this.adicionarDisciplinaForm.get('preRequisitos').patchValue(null);
+        this.adicionarDisciplinaForm.get('preRequisitos').patchValue(null, { emitEvent: false });
     }
 
     onOpenedChangeDisciplina(): void {
@@ -135,6 +143,21 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
     onOpenedChangePreRequisito(): void {
         this.filtroDisciplinaPreRequisito.nativeElement.value = '';
         this.filtroDisciplinaPreRequisito.nativeElement.focus();
+    }
+
+    private _calcularValorTotal(): void {
+        const aulaPratica = this._retornarValorControl('aulasSemanaisPratica');
+        const aulaTeorica = this._retornarValorControl('aulasSemanaisTeorica');
+        const aulasTotais = aulaPratica + aulaTeorica;
+
+        console.log(`${aulaPratica} - ${aulaTeorica} - ${aulasTotais}`);
+
+        this.adicionarDisciplinaForm.get('quantidadeAulaTotal')
+            .patchValue(aulasTotais, { emitEvent: false, onlySelf: true });
+    }
+
+    private _retornarValorControl(controlName: string): number {
+        return Number(this.adicionarDisciplinaForm.get(controlName)?.value);
     }
 
 }
