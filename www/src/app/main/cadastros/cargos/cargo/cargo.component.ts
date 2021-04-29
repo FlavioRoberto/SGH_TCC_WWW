@@ -9,13 +9,13 @@ import { anoRegex } from 'app/shared/regex/input-regex';
 import { ESemestre, ESemestreLabel } from 'app/shared/enums/esemestre.enum';
 import { ProfessorService } from '../professores/services/professor.service';
 import { Professor } from '../professores/models/professor.model';
-import { CurriculoDisciplinaModel } from '../../curriculo/model/curriculo-disciplina.model';
 import { CargoService } from './services/cargo.service';
 import { CargoPaginado } from './models/cargo-paginado';
 import { CargoModel } from './models/cargo.model';
 import { CargoDataBarBindService } from './services/cargo.databar.service';
 import { CargoExpansivelTableService } from './services/cargo.table.service';
 import { DisciplinaCargoDialogService } from './components/disciplina-cargo-dialog/services/disciplina-cargo-dialog.service';
+import { CurriculoDisciplinaModel } from '../../curriculo/model/curriculo-disciplina.model';
 
 @Component({
     templateUrl: './view/cargo.component.html',

@@ -6,7 +6,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { HorarioIndividualRelatorioService } from './services/horario-individual.service';
 import { HorarioIndividualRoutingModule } from './horario-individual.routes.module';
 import { HorarioIndividualComponent } from './horario-individual.component';
-import { ProfessorService } from '../../../cadastros/cargos/professores/services/professor.service';
+import { ProfessorService } from 'app/main/cadastros/cargos/professores/services/professor.service';
 
 @NgModule({
     declarations: [HorarioIndividualComponent],

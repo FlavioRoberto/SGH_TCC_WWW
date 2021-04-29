@@ -7,7 +7,7 @@ import { ProfessorDataBarService } from './services/professor.databar.service';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { DataBarFormModule } from 'app/shared/layout/components/databar-form/databar-form.module';
 import { NgxMaskModule } from 'ngx-mask';
-import { CursoResolver } from '../../../../shared/resolvers/curso.resolver';
+import { CursoResolver } from 'app/shared/resolvers/curso.resolver';
 
 
 @NgModule({

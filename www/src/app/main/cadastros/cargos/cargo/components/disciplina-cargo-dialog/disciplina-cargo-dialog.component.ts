@@ -10,8 +10,8 @@ import { TurnoModel } from 'app/main/cadastros/turno/model/turno.interface';
 import { CurriculoDisciplinaModel } from 'app/main/cadastros/curriculo/model/curriculo-disciplina.model';
 import { CurriculoService } from 'app/main/cadastros/curriculo/services/curriculo.service';
 import { TurnoService } from 'app/main/cadastros/turno/service/turno.service';
-import { CargoDisciplinaModel } from '../../models/cargo-disciplina.model';
 import { Observable } from 'rxjs';
+import { CargoDisciplinaModel } from '../../models/cargo-disciplina.model';
 
 @Component({
     selector: 'app-disciplina-cargo-dialog',
