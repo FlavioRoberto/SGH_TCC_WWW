@@ -1,16 +1,14 @@
 import { Component } from '@angular/core';
-import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
-import { locale as portugues } from '../../i18n/pt-br';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DisciplinaPaginado } from './model/disciplina.paginacao';
-import { TipoModel } from '../tipo/model/ITipo';
-import { DisciplinaTipoService } from '../tipo/service/disciplina.tipo.service';
-import { DisciplinaService } from './service/disciplina.service';
-import { DisciplinaDataBarService } from './service/disciplina-databar.service';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
+import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
+import { locale as portugues } from '../../i18n/pt-br';
+import { DisciplinaPaginado } from './model/disciplina.paginacao';
+import { DisciplinaDataBarService } from './service/disciplina-databar.service';
 import { DisciplinaModel } from './model/disciplina';
 import { DisciplinaFormularioService } from './service/disciplina-formulario.service';
+import { TipoModel } from 'app/main/cadastros/disciplinas/tipo/model/ITipo';
 
 @Component({
     selector: 'disciplina',
