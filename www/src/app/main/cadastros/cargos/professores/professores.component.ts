@@ -1,13 +1,13 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Professor } from './models/professor.model';
 import { ProfessorPaginado } from './models/professor-paginado.model';
 import { ProfessorDataBarService } from './services/professor.databar.service';
 import { ProfessorService } from './services/professor.service';
 import { celularRegex, matriculaRegex } from 'app/shared/regex/input-regex';
-import { ActivatedRoute } from '@angular/router';
 import { CursoModel } from '../../curso/model/curso.model';
-import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
 
 @Component({
     templateUrl: './view/professores.component.html',

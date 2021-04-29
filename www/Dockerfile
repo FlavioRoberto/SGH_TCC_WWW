@@ -1,13 +1,15 @@
-FROM node:12.22-alpine as angular
-WORKDIR /www
-COPY package.json /www
-RUN npm install
-COPY . .
-RUN npm run build-prod
+# Dockerfile
+# FROM node AS build
+# WORKDIR /usr/src/app
+# COPY package.json /usr/src/app/
+# RUN npm install --legacy-peer-deps
+# RUN npm install -g @angular/cli
+# COPY ./ /usr/src/app
+# RUN ng build --configuration=production
 
 FROM nginx:alpine
 VOLUME /var/cache/nginx
-COPY --from=angular www/dist /usr/share/nginx/html
+COPY  ./dist /usr/share/nginx/html
 COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf
 
 #docker build -t sgh-front
