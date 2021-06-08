@@ -96,7 +96,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         this.cursos = this._route.snapshot.data['cursos'];
 
         this.turnos = this._route.snapshot.data['turnos'];
-        
+
         this.tiposDisciplinas = this._route.snapshot.data['tipos'];
 
         if (this._platform.ANDROID || this._platform.IOS) {
