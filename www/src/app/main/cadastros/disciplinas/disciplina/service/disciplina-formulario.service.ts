@@ -14,10 +14,8 @@ export class DisciplinaFormularioService {
                 Validators.required,
                 Validators.maxLength(100),
                 Validators.minLength(1)]
-            ],
-            codigoTipo: [null, Validators.required]
+            ]
         });
-
     }
 
     get form(): FormGroup {

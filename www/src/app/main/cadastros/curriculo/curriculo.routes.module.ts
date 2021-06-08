@@ -6,6 +6,7 @@ import { TurnoResolver } from '../../../shared/resolvers/turno.resolver';
 import { CursoResolver } from '../../../shared/resolvers/curso.resolver';
 import { LoginGuard } from 'app/core/auth/login.guard';
 import { AuthGuard } from 'app/core/auth/auth.guard';
+import { TipoResolver } from 'app/shared/resolvers/tipo.resolver';
 
 const routes: Routes = [
     {
@@ -14,7 +15,8 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         resolve: {
             turnos: TurnoResolver,
-            cursos: CursoResolver
+            cursos: CursoResolver,
+            tipos: TipoResolver
         }
     }
 ];

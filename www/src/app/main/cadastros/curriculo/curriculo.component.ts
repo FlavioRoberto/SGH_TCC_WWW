@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Platform } from '@angular/cdk/platform';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -25,6 +25,7 @@ import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
 import { SnackBarService } from 'app/shared/services/snack-bar.service';
 import { finalize } from 'rxjs/operators';
 import { ConfirmaDialogService } from 'app/shared/components/dialogs/confirma-dialog/service/confirma-dialog.service';
+import { TipoModel } from '../disciplinas/tipo/model/iTipo';
 
 @Component({
     selector: 'curriculo',
@@ -41,6 +42,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     EStatus = EStatus;
     isMobile = false;
     removendoDisciplina = false;
+    private tiposDisciplinas: TipoModel[];
 
     displayedColumns: ColumnDef[] = [
         new ColumnDef('Disciplina', 'disciplina', 'descricao'),
@@ -79,7 +81,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         private _snackBar: SnackBarService,
         private _servicoConfirmaDialog: ConfirmaDialogService,
         private _platform: Platform,
-        private _servico: CurriculoService
+        private _servico: CurriculoService,
     ) {
         this.dataSource = new ApExpansivelTableDataSource<CurriculoDisciplinaModel>();
     }
@@ -94,6 +96,8 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         this.cursos = this._route.snapshot.data['cursos'];
 
         this.turnos = this._route.snapshot.data['turnos'];
+        
+        this.tiposDisciplinas = this._route.snapshot.data['tipos'];
 
         if (this._platform.ANDROID || this._platform.IOS) {
             this.isMobile = true;
@@ -127,6 +131,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     private _editarDisciplina(itemEditar: CurriculoDisciplinaModel, index): void {
         const disciplina = {
             codigo: itemEditar.codigo,
+            codigoTipo: itemEditar.codigoTipo,
             disciplina: itemEditar.disciplina.codigo,
             aulasSemanaisPratica: itemEditar.aulasSemanaisPratica,
             aulasSemanaisTeorica: itemEditar.aulasSemanaisTeorica,
@@ -141,7 +146,9 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     abrirDialogAdicionarDisciplina(disciplina = null, index = null): void {
         this._dialog.abrirDialog(
             this.form.get('codigo').value,
-            'Adicionar disciplina', (dados, form: FormGroup) => {
+            'Adicionar disciplina',
+            this.tiposDisciplinas,
+            (dados, form: FormGroup) => {
                 if (disciplina && index >= 0) {
                     this.dataSource.removeByIndex(index);
                     this.servicoDataBarBind.constroiPreRequisitosDescricao(dados);

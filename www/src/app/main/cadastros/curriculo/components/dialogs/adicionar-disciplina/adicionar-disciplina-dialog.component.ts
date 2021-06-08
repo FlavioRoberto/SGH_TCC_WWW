@@ -12,6 +12,7 @@ import { finalize } from 'rxjs/operators';
 import { CurriculoDisciplinaPreRequisitoModel } from '../../../model/curriculo-disciplina-pre-requisito.model';
 import { DisciplinaModel } from 'app/main/cadastros/disciplinas/disciplina/model/disciplina';
 import { DisciplinaService } from 'app/main/cadastros/disciplinas/disciplina/service/disciplina.service';
+import { TipoModel } from 'app/main/cadastros/disciplinas/tipo/model/iTipo';
 
 @Component({
     selector: 'adicionar-disciplina-dialog',
@@ -28,6 +29,7 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
     acaoAutoCompleteDisciplina: IFormAutocompleteAcao;
     pesquisandoDisciplina: boolean;
     disciplinas: DisciplinaModel[];
+    tiposDisciplina: TipoModel[];
     periodos: any;
     private codigoCurriculo: number;
     private eventClickSalvar;
@@ -49,6 +51,7 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
         this.eventClickSalvar = data.onClickSalvar;
         this.disciplinaEditar = data.disciplinaEditar;
         this.codigoCurriculo = data.codigoCurriculo;
+        this.tiposDisciplina = data.tiposDisciplina;
     }
 
     ngOnInit(): void {
@@ -60,6 +63,7 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
             aulasSemanaisTeorica: [null, [Validators.required]],
             aulasSemanaisPratica: [null, [Validators.required]],
             quantidadeAulaTotal: [null, [Validators.required]],
+            codigoTipo: [null, [Validators.required]],
             preRequisitos: [null],
             periodo: [null, [Validators.required]]
         });
@@ -68,6 +72,7 @@ export class AdicionarDisciplinaDialogComponent implements OnInit {
             .subscribe(data => {
                 this.disciplinas = data;
                 if (this.disciplinaEditar) {
+                    console.log(this.disciplinaEditar);
                     this.adicionarDisciplinaForm.patchValue(this.disciplinaEditar, { emitEvent: false });
                 }
             });

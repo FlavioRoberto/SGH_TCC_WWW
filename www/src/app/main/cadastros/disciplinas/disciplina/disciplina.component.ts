@@ -37,7 +37,6 @@ export class DisciplinaComponent implements IDataBarBindComponent<DisciplinaMode
 
         this.entidadePaginada = new DisciplinaPaginado();
 
-        this.tipos = this._route.snapshot.data['tipos'];
     }
 
     statusChanged(status: EStatus): void {

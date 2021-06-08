@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
     hmr: false,
-    url: 'http://3.138.33.43:5000/'
+    url: 'http://54.176.34.25:5000/'
 };

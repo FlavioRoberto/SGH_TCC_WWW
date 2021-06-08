@@ -166,6 +166,21 @@
                 </div>
             </div>
 
+            <mat-form-field appearance="outline">
+                <mat-label>Tipo</mat-label>
+                <mat-select placeholder="Tipo" formControlName="codigoTipo">
+                    <mat-option
+                        *ngFor="let tipo of tiposDisciplina"
+                        [value]="tipo.codigo"
+                    >
+                        {{ tipo.descricao }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="adicionarDisciplinaForm.get('codigoTipo').errors?.required">
+                    {{ "GERENCIAMENTO.CAMPO_OBRIGATORIO" | translate }}
+                </mat-error>
+            </mat-form-field>
+
             <!-- DISCIPLINA_PREREQUISITO -->
 
             <div fxLayout="column">
@@ -206,7 +221,6 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-
             <!-- DISCIPLINA_PREREQUISITO -->
         </form>
         <!-- FORM -->

@@ -3,6 +3,7 @@ import { DisciplinaModel } from '../../disciplinas/disciplina/model/disciplina';
 
 export class CurriculoDisciplinaModel {
     codigo: number;
+    codigoTipo:number;
     periodo: number;
     disciplina: DisciplinaModel;
     codigoDisciplina: number;

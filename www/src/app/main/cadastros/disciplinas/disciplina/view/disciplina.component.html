@@ -50,7 +50,7 @@
             <!-- DESCRICAO -->
         </div>
 
-        <mat-form-field appearance="outline">
+        <!-- <mat-form-field appearance="outline">
             <mat-label>Tipo</mat-label>
             <mat-select placeholder="Tipo" formControlName="codigoTipo">
                 <mat-option *ngFor="let tipo of tipos" [value]="tipo.codigo">
@@ -60,6 +60,6 @@
             <mat-error *ngIf="form.get('codigoTipo').errors?.required">
                 {{ "GERENCIAMENTO.CAMPO_OBRIGATORIO" | translate }}
             </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
     </form>
 </databar-form>

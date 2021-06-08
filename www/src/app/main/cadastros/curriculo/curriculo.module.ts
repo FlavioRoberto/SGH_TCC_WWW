@@ -12,6 +12,7 @@ import { AdicionarDisciplinaDialogService } from './components/dialogs/adicionar
 import { AdicionarDisciplinaDialogModule } from './components/dialogs/adicionar-disciplina/adicionar-disciplina-dialog.module';
 import { TurnoResolver } from 'app/shared/resolvers/turno.resolver';
 import { CursoResolver } from 'app/shared/resolvers/curso.resolver';
+import { TipoResolver } from 'app/shared/resolvers/tipo.resolver';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { CursoResolver } from 'app/shared/resolvers/curso.resolver';
     providers: [
         TurnoResolver,
         CursoResolver,
+        TipoResolver,
         AdicionarDisciplinaDialogService
     ]
 })
