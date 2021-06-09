@@ -107,7 +107,6 @@
             <mat-form-field appearance="outline" fxFlex.gt-sm="18" fxFlex="100">
                 <mat-label>Celular</mat-label>
                 <input
-                    [required]="condicaoDataBar"
                     matInput
                     mask="(00) 000000000"
                     type="text"
@@ -117,9 +116,6 @@
                 />
                 <mat-error *ngIf="form.get('telefone').hasError('pattern')">
                     Telefone inválido!
-                </mat-error>
-                <mat-error *ngIf="form.get('telefone').hasError('required')">
-                    Campo obrigatório!
                 </mat-error>
             </mat-form-field>
             <!-- TELEFONE -->

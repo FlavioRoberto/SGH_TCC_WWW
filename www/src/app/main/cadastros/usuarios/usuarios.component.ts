@@ -65,7 +65,7 @@ export class UsuariosComponent implements IDataBarBindComponent<UsuarioModel>, O
         return this._formBuilder.group({
             codigo: [null],
             nome: [null, [Validators.required, Validators.maxLength(45)]],
-            telefone: [null, [Validators.maxLength(20), Validators.required, Validators.pattern(celularRegex)]],
+            telefone: [null, [Validators.maxLength(20), Validators.pattern(celularRegex)]],
             login: [null, [Validators.maxLength(30), Validators.required]],
             senha: [null],
             email: [null, [Validators.maxLength(45), Validators.required, Validators.email]],
