@@ -30,7 +30,7 @@ export class TurnoService extends BaseService<TurnoModel>{
             '20:10',
             '20:25',
             '21:15',
-            '22:25'
+            '22:05'
         ];
     }
 }
