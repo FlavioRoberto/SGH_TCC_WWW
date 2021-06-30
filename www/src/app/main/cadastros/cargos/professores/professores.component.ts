@@ -50,7 +50,7 @@ export class ProfessoresComponent implements IDataBarBindComponent<Professor> {
             nome: new FormControl(null, [Validators.required, Validators.maxLength(45)]),
             telefone: new FormControl(null, [Validators.maxLength(20), Validators.pattern(celularRegex)]),
             email: new FormControl(null, [Validators.maxLength(45), Validators.required, Validators.email]),
-            matricula: new FormControl(null, [Validators.required, Validators.maxLength(10), Validators.pattern(matriculaRegex)]),
+            matricula: new FormControl(null, [Validators.required, Validators.maxLength(11), Validators.pattern(matriculaRegex)]),
             ativo: new FormControl(null)
         });
     }
