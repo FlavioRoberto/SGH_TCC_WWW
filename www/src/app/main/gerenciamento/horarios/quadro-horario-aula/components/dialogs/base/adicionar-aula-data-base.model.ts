@@ -9,4 +9,5 @@ export class AdicionarAulaBaseDataModel {
     ano: number;
     semestre: ESemestre;
     periodo: number;
+    executarAoSalvar: () => void;
 }

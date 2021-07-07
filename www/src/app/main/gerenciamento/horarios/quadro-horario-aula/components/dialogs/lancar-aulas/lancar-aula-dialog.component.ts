@@ -1,8 +1,10 @@
-import { Component, ViewEncapsulation, OnInit, Inject } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { Component, ViewEncapsulation, Inject } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { SalaService } from "app/main/cadastros/salas/sala/services/sala.service";
+import { ErrorDialogService } from "app/shared/components/dialogs/error-dialog/service/error-dialog.service";
 import { SnackBarService } from "app/shared/services/snack-bar.service";
+import { finalize } from "rxjs/operators";
 import { ReservaModel } from "../../../model/reserva.model";
 import { AdicionarAulaDialogComponent } from "../adicionar-aula/adicionar-aula.dialog.component";
 import { AdicionarAulaBaseComponent } from "../base/adicionar-aula-base.component";
@@ -19,6 +21,7 @@ import { LancarAulaService } from "./services/lancar-aulas.service";
 export class LancarAulaDialogComponent extends AdicionarAulaBaseComponent<LancarAulaDialogDataModel> {
     constructor(
         @Inject(MAT_DIALOG_DATA) data: LancarAulaDialogDataModel,
+        private _errorDialog: ErrorDialogService,
         private _service: LancarAulaService,
         private _snackBar: SnackBarService,
         private _dialogRef: MatDialogRef<AdicionarAulaDialogComponent>,
@@ -40,17 +43,39 @@ export class LancarAulaDialogComponent extends AdicionarAulaBaseComponent<Lancar
     }
 
     salvar(): void {
+        this.salvando = true;
         const lancamento = this._prepararLancamento();
-        this._service.lancarAula(lancamento).subscribe();
+        this._service
+            .lancarAula(lancamento)
+            .pipe(finalize(() => (this.salvando = false)))
+            .subscribe(
+                (data: string[]) => {
+                    if (data.length > 0) {
+                        let erros = "";
+
+                        data.forEach((erro) => {
+                            erros += `${erro}`;
+                        });
+
+                        this._errorDialog.openDialog("Atenção", erros);
+                    } else {
+                        this._snackBar.exibirSnackBarSucesso(
+                            "Aulas lançadas com sucesso!"
+                        );
+                    }
+                    this.data.executarAoSalvar();
+                },
+                (error) => console.log(error)
+            );
     }
 
     protected _construirFormulario(): void {
         this.form = this._formBuilder.group({
-            codigoDisciplina: [null],
-            codigoSala: [null],
+            codigoDisciplina: [null, [Validators.required]],
+            codigoSala: [null, [Validators.required]],
             laboratorio: [false],
-            diasLancados: [null],
-            horariosLancados: [null],
+            diasLancados: [null, [Validators.required]],
+            horariosLancados: [null, [Validators.required]],
         });
     }
 

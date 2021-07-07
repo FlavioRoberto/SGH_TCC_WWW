@@ -105,26 +105,40 @@
             <!-- DIAS_SEMANA -->
             <mat-form-field appearance="outline">
                 <mat-label>Dias</mat-label>
-                <mat-select multiple formControlName="diasLancados">
+                <mat-select required multiple formControlName="diasLancados">
                     <mat-option
                         *ngFor="let dia of data.diasDaSemana"
                         [value]="dia"
                         >{{ dia }}</mat-option
                     >
                 </mat-select>
+                <mat-error
+                    *ngIf="form.get('diasLancados').hasError('required')"
+                >
+                    Esse campo é obrigatório
+                </mat-error>
             </mat-form-field>
             <!-- DIAS_SEMANA -->
 
             <!-- HORARIOS -->
             <mat-form-field appearance="outline">
                 <mat-label>Horarios</mat-label>
-                <mat-select multiple formControlName="horariosLancados">
+                <mat-select
+                    required
+                    multiple
+                    formControlName="horariosLancados"
+                >
                     <mat-option
                         *ngFor="let horario of data.horarios"
                         [value]="horario"
                         >{{ horario }}</mat-option
                     >
                 </mat-select>
+                <mat-error
+                    *ngIf="form.get('horariosLancados').hasError('required')"
+                >
+                    Esse campo é obrigatório
+                </mat-error>
             </mat-form-field>
             <!-- HORARIOS -->
 
@@ -149,7 +163,8 @@
         fxLayoutAlign="end center"
     >
         <button
-            class="mat-raised-button mat-accent"
+            mat-raised-button
+            color="accent"
             [disabled]="desabilitarBotaoSalvar"
             (click)="salvar()"
         >

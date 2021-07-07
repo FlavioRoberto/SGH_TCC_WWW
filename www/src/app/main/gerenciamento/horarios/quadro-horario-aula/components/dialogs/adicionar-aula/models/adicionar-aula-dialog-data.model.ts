@@ -3,5 +3,4 @@ import { AdicionarAulaBaseDataModel } from '../../base/adicionar-aula-data-base.
 
 export class AdicionarAulaDialogDataModel extends AdicionarAulaBaseDataModel {
     reserva: ReservaModel;
-    executarAoSalvar: () => void;
 }

@@ -12,6 +12,7 @@ export abstract class AdicionarAulaBaseComponent<
     T extends AdicionarAulaBaseDataModel
 > implements OnInit
 {
+    salvando = false;
     form: FormGroup;
     carregandoDisciplinas = false;
     carregandoSalas = false;
@@ -36,6 +37,12 @@ export abstract class AdicionarAulaBaseComponent<
         this._listarDisciplinas();
         this._listarSalas();
         this._construirFormulario();
+    }
+
+    get desabilitarBotaoSalvar(): boolean {
+        return (
+            this.form.invalid || this.form.errors?.length > 0 || this.salvando
+        );
     }
 
     onOpenedChangeDisciplina(): void {

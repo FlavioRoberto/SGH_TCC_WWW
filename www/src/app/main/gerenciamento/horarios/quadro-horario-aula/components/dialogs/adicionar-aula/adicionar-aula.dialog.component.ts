@@ -16,7 +16,6 @@ import { AdicionarAulaBaseService } from "../base/adicionar-aula-base.service";
     encapsulation: ViewEncapsulation.None,
 })
 export class AdicionarAulaDialogComponent extends AdicionarAulaBaseComponent<AdicionarAulaDialogDataModel> {
-    salvando = false;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) data: AdicionarAulaDialogDataModel,
@@ -32,12 +31,6 @@ export class AdicionarAulaDialogComponent extends AdicionarAulaBaseComponent<Adi
 
     get possuiDesdobramento(): boolean {
         return this.form.get("desdobramento").value;
-    }
-
-    get desabilitarBotaoSalvar(): boolean {
-        return (
-            this.form.invalid || this.form.errors?.length > 0 || this.salvando
-        );
     }
 
     salvar(): void {

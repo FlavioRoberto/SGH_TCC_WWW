@@ -10,9 +10,16 @@
     ></mat-progress-bar>
     <!-- PROGRES_BAR -->
 
-    <button mat-raised-button color="accent" (click)="lancarAulas()">Lançar aulas</button>
+    <button
+        [disabled]="carregandoAulas"
+        mat-raised-button
+        color="accent"
+        (click)="lancarAulas()"
+    >
+        Lançar aulas
+    </button>
 
-    <mat-card style="overflow-y: scroll;" fusePerfectScrollbar class="p-12">
+    <mat-card style="overflow-y: scroll" fusePerfectScrollbar class="p-12">
         <table fxFlex="100" fxLayout="column" fxLayoutGap="4px">
             <thead fxFlex="100">
                 <th *ngFor="let diaSemana of diasDaSemana" fxFlex>
