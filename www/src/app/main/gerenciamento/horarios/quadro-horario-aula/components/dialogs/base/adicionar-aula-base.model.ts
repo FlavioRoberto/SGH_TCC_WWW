@@ -1,4 +1,4 @@
-export class AdicionarAulaDisciplinaModel {
+export class AdicionarAulaBaseModel {
     codigo: number;
     codigoCargo: number;
     codigoTurno: number;

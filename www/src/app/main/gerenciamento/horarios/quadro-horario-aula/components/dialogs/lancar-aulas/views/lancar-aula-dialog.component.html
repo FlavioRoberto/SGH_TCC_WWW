@@ -1,0 +1,169 @@
+<div fxLayout="column" fxFlex="1 0 auto" class="dialog-content-wrapper">
+    <mat-toolbar class="mat-accent m-0">
+        <mat-toolbar-row
+            fxFlex
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+        >
+            <span class="title dialog-title">Lançamento de aulas</span>
+            <button
+                mat-icon-button
+                (click)="fecharDialog()"
+                aria-label="Fechar dialog"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div fxFlex="100" class="p-16 pb-0 m-0 noPadding" fusePerfectScrollbar>
+        <form [formGroup]="form" fxLayout="column">
+            <!-- DISCIPLINA -->
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label *ngIf="carregandoDisciplinas"
+                    >Carregando disciplinas...</mat-label
+                >
+                <mat-label *ngIf="!carregandoDisciplinas"
+                    >Disciplinas</mat-label
+                >
+                <mat-select
+                    [disabled]="carregandoDisciplinas"
+                    fxLayout="column"
+                    required
+                    (openedChange)="onOpenedChangeDisciplina()"
+                    formControlName="codigoDisciplina"
+                >
+                    <input
+                        class="p-12"
+                        placeholder="Pesquisar..."
+                        matInput
+                        name="filtro"
+                        #filtroDisciplina
+                    />
+                    <mat-divider></mat-divider>
+                    <mat-option
+                        disabled
+                        *ngIf="!disciplinas || disciplinas.length <= 0"
+                        >Não foram encontradas disciplinas</mat-option
+                    >
+                    <div
+                        *ngFor="
+                            let disciplina of disciplinas
+                                | filter: filtroDisciplina?.value
+                        "
+                    >
+                        <mat-option [value]="disciplina.codigo">
+                            {{ disciplina.professor }} -
+                            {{ disciplina.descricao }}
+                        </mat-option>
+                    </div>
+                </mat-select>
+                <mat-error
+                    *ngIf="form.get('codigoDisciplina').hasError('required')"
+                >
+                    Esse campo é obrigatório
+                </mat-error>
+            </mat-form-field>
+            <!-- DISCIPLINA -->
+
+            <!-- SALA -->
+            <mat-form-field appearance="outline" fxFlex>
+                <mat-label *ngIf="carregandoSalas"
+                    >Carregando salas...</mat-label
+                >
+                <mat-label *ngIf="!carregandoSalas">Salas</mat-label>
+                <mat-select
+                    required
+                    [disabled]="carregandoSalas"
+                    fxLayout="column"
+                    (openedChange)="onOpenedChangeLista()"
+                    formControlName="codigoSala"
+                >
+                    <input
+                        class="p-12"
+                        placeholder="Pesquisar..."
+                        matInput
+                        name="filtro"
+                        #filtroSala
+                    />
+                    <mat-divider></mat-divider>
+                    <mat-option disabled *ngIf="!salas || salas.length <= 0"
+                        >Não foram encontradas salas</mat-option
+                    >
+                    <div *ngFor="let sala of salas | filter: filtroSala?.value">
+                        <mat-option [value]="sala.codigo">
+                            {{ sala.descricao }}
+                        </mat-option>
+                    </div>
+                </mat-select>
+                <mat-error *ngIf="form.get('codigoSala').hasError('required')">
+                    Esse campo é obrigatório
+                </mat-error>
+            </mat-form-field>
+            <!-- SALA -->
+
+            <!-- DIAS_SEMANA -->
+            <mat-form-field appearance="outline">
+                <mat-label>Dias</mat-label>
+                <mat-select multiple formControlName="diasLancados">
+                    <mat-option
+                        *ngFor="let dia of data.diasDaSemana"
+                        [value]="dia"
+                        >{{ dia }}</mat-option
+                    >
+                </mat-select>
+            </mat-form-field>
+            <!-- DIAS_SEMANA -->
+
+            <!-- HORARIOS -->
+            <mat-form-field appearance="outline">
+                <mat-label>Horarios</mat-label>
+                <mat-select multiple formControlName="horariosLancados">
+                    <mat-option
+                        *ngFor="let horario of data.horarios"
+                        [value]="horario"
+                        >{{ horario }}</mat-option
+                    >
+                </mat-select>
+            </mat-form-field>
+            <!-- HORARIOS -->
+
+            <!-- LABORATORIO -->
+            <div
+                fxLayoutAlign.gt-sm="start center"
+                class="mat-form-field pb-16"
+                fxFlex
+            >
+                <mat-checkbox formControlName="laboratorio">
+                    Aula em laboratório
+                </mat-checkbox>
+            </div>
+            <!-- LABORATORIO -->
+        </form>
+    </div>
+
+    <div
+        mat-dialog-actions
+        class="m-0 p-16"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+    >
+        <button
+            class="mat-raised-button mat-accent"
+            [disabled]="desabilitarBotaoSalvar"
+            (click)="salvar()"
+        >
+            <div
+                fxLayout="row"
+                fxFlex="1 0 auto"
+                fxLayoutAlign="center center"
+                fxLayoutGap="8px"
+                *ngIf="salvando"
+            >
+                <span>SALVANDO</span>
+                <mat-spinner diameter="20"></mat-spinner>
+            </div>
+            <span *ngIf="!salvando">SALVAR</span>
+        </button>
+    </div>
+</div>

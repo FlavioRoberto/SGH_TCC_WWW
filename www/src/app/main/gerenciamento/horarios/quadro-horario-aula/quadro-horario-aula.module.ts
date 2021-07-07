@@ -9,6 +9,7 @@ import { QuadroHorarioAulaComponent } from './quadro-horario-aula.component';
 import { QuadroHorarioAulaService } from './services/quadro-horario-aula.service';
 import { AdicionarAulaDialogService } from './components/dialogs/adicionar-aula/adicionar-aula-dialog.service';
 import { AdicionarAulaDialogModule } from './components/dialogs/adicionar-aula/adicionar-aula-dialog.module';
+import { LancarAulaDialogModule } from './components/dialogs/lancar-aulas/lancar-aula-dialog.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { AdicionarAulaDialogModule } from './components/dialogs/adicionar-aula/a
         FuseSharedModule,
         MaterialCoreModule,
         QuadroHorarioAulasRoutingModule,
-        AdicionarAulaDialogModule
+        AdicionarAulaDialogModule,
+        LancarAulaDialogModule
     ],
     providers: [
         QuadroHorarioAulaService,
