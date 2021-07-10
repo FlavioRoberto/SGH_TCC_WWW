@@ -27,7 +27,7 @@ export class ProfessoresComponent implements IDataBarBindComponent<Professor> {
     status: EStatus;
     EStatus = EStatus;
     cursos: CursoModel[];
-    tiposContratacao = econtratacao.filter;
+    tiposContratacao = econtratacao;
 
     constructor(
         private _formBuilder: FormBuilder,

@@ -65,7 +65,7 @@
                 <mat-select
                     fxLayout="column"
                     formControlName="contratacao"
-                    [required]="inserindoOuEditando"
+                    [required]="condicaoDataBar"
                 >
                     <div *ngFor="let tipo of tiposContratacao">
                         <mat-option [value]="tipo.value">
