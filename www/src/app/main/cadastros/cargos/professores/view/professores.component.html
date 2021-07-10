@@ -12,14 +12,9 @@
     <!-- FORM -->
     <form [formGroup]="form" fxLayout="column">
         <!-- LINHA 1 -->
-        <div fxLayout="column" fxLayout.gt-sm="row">
+        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="8px">
             <!-- MATRICULA -->
-            <mat-form-field
-                appearance="outline"
-                fxFlex.gt-sm="18"
-                fxFlex="100"
-                class="pr-sm-8"
-            >
+            <mat-form-field appearance="outline" fxFlex.gt-sm="18" fxFlex="100">
                 <mat-label>Matrícula</mat-label>
                 <input
                     [required]="condicaoDataBar"
@@ -39,7 +34,7 @@
             <!-- MATRICULA -->
 
             <!-- NOME -->
-            <mat-form-field appearance="outline" fxFlex="100">
+            <mat-form-field appearance="outline" fxFlex="1 0 auto">
                 <mat-label>Nome</mat-label>
                 <input
                     [required]="condicaoDataBar"
@@ -60,6 +55,27 @@
             </mat-form-field>
             <!-- NOME -->
 
+            <!-- TIPO_CONTRATACAO -->
+            <mat-form-field
+                appearance="outline"
+                fxFlex.gt-sm="20"
+                fxFlex="1 0 auto"
+            >
+                <mat-label>Tipo de contratação</mat-label>
+                <mat-select
+                    fxLayout="column"
+                    formControlName="contratacao"
+                    [required]="inserindoOuEditando"
+                >
+                    <div *ngFor="let tipo of tiposContratacao">
+                        <mat-option [value]="tipo.value">
+                            {{ tipo.descricao }}
+                        </mat-option>
+                    </div>
+                </mat-select>
+            </mat-form-field>
+            <!-- TIPO_CONTRATACAO -->
+
             <!-- ATIVO -->
             <div
                 fxFlex.gt-sm="20"
@@ -77,9 +93,9 @@
         <!-- LINHA 1 -->
 
         <!-- LINHA 2 -->
-        <div fxLayout="column" fxLayout.gt-sm="row">
+        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="8px">
             <!-- EMAIL -->
-            <mat-form-field appearance="outline" fxFlex="100" class="pr-sm-8">
+            <mat-form-field appearance="outline" fxFlex="100">
                 <mat-label>E-mail</mat-label>
                 <input
                     [required]="condicaoDataBar"

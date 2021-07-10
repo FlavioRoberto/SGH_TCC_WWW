@@ -1,4 +1,4 @@
-import { Inject, OnInit, ViewChild } from "@angular/core";
+import { Inject, Injectable, OnInit, ViewChild } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { SalaModel } from "app/main/cadastros/salas/sala/model/sala.model";
@@ -8,6 +8,7 @@ import { finalize } from "rxjs/operators";
 import { AdicionarAulaBaseService } from "./adicionar-aula-base.service";
 import { AdicionarAulaBaseDataModel } from "./adicionar-aula-data-base.model";
 
+@Injectable()
 export abstract class AdicionarAulaBaseComponent<
     T extends AdicionarAulaBaseDataModel
 > implements OnInit

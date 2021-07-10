@@ -6,4 +6,5 @@ export class Professor {
     nome: string;
     telefone: string;
     email: string;
+    contratacao: number
 }
