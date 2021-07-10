@@ -130,9 +130,10 @@
                                 | filter: professorFiltro
                         "
                     >
-                        <mat-option [value]="professor.codigo">{{
-                            professor.nome
-                        }}</mat-option>
+                        <mat-option [value]="professor.codigo"
+                            >{{ professor.nome }} -
+                            {{ getDescricaoContratacao(professor.contratacao) }}</mat-option
+                        >
                     </div>
                 </mat-select>
             </mat-form-field>

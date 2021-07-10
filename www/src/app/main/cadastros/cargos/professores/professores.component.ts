@@ -13,6 +13,7 @@ import { ProfessorDataBarService } from "./services/professor.databar.service";
 import { ProfessorService } from "./services/professor.service";
 import { celularRegex, matriculaRegex } from "app/shared/regex/input-regex";
 import { CursoModel } from "../../curso/model/curso.model";
+import { econtratacao } from "app/shared/enums/econtratacao.enum";
 
 @Component({
     templateUrl: "./view/professores.component.html",
@@ -26,16 +27,7 @@ export class ProfessoresComponent implements IDataBarBindComponent<Professor> {
     status: EStatus;
     EStatus = EStatus;
     cursos: CursoModel[];
-    tiposContratacao = [
-        {
-            value: 1,
-            descricao: "Efetivo",
-        },
-        {
-            value: 2,
-            descricao: "Designado",
-        },
-    ];
+    tiposContratacao = econtratacao.filter;
 
     constructor(
         private _formBuilder: FormBuilder,
