@@ -1,10 +1,9 @@
-@import 'src/@fuse/scss/fuse';
+@import "src/@fuse/scss/fuse";
 @import "src/app/shared/styles/toast";
 
 .aula {
     position: relative;
     text-align: center;
-    cursor: pointer;
     font-size: 0.7em;
     transform: all 0.3s;
     transition: all 0.2s ease-in-out;
@@ -33,5 +32,11 @@ mat-card.titulo-tabela {
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.342) !important;
     .mat-card-subtitle {
         color: white;
+    }
+    #button-remover-aula {
+        color: white;
+    }
+    #button-remover-aula:hover {
+        box-shadow: rgba(0, 0, 0, 0.116) 0px 5px 15px;
     }
 }

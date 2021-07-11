@@ -49,9 +49,18 @@
                                     fxLayoutAlign="center center"
                                     *ngIf="aula.reserva.hora == horario"
                                     fxLayout="column"
-                                    (click)="removerAula(aula)"
                                     class="aula"
                                 >
+                                    <button
+                                        id="button-remover-aula"
+                                        (click)="removerAula(aula)"
+                                        color="accent"
+                                        mat-icon-button
+                                        aria-label="remover aula"
+                                    >
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+
                                     <span>
                                         <strong>{{ aula.disciplina }}</strong>
                                     </span>

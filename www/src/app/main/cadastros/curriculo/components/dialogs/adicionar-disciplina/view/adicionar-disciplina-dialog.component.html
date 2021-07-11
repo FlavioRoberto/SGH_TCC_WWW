@@ -176,7 +176,12 @@
                         {{ tipo.descricao }}
                     </mat-option>
                 </mat-select>
-                <mat-error *ngIf="adicionarDisciplinaForm.get('codigoTipo').errors?.required">
+                <mat-error
+                    *ngIf="
+                        adicionarDisciplinaForm.get('codigoTipo').errors
+                            ?.required
+                    "
+                >
                     {{ "GERENCIAMENTO.CAMPO_OBRIGATORIO" | translate }}
                 </mat-error>
             </mat-form-field>
@@ -234,7 +239,8 @@
     >
         <button
             [disabled]="emProgresso || adicionarDisciplinaForm.invalid"
-            class="mat-raised-button mat-accent"
+            mat-raised-button
+            color="accent"
             (click)="salvar()"
         >
             <div
