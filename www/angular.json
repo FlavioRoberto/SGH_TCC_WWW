@@ -26,11 +26,14 @@
                             "src/favicon.ico",
                             "src/assets",
                             "src/Dockerfile",
-                            "src/default.conf"
+                            "src/default.conf",
+                            "src/manifest.webmanifest"
                         ],
                         "styles": ["src/styles.scss"],
                         "scripts": [],
-                        "showCircularDependencies": false
+                        "showCircularDependencies": false,
+                        "serviceWorker": true,
+                        "ngswConfigPath": "ngsw-config.json"
                     },
                     "configurations": {
                         "production": {
@@ -121,7 +124,7 @@
                         "karmaConfig": "src/karma.conf.js",
                         "styles": ["src/styles.scss"],
                         "scripts": [],
-                        "assets": ["src/favicon.ico", "src/assets"]
+                        "assets": ["src/favicon.ico", "src/assets", "src/manifest.webmanifest"]
                     }
                 },
                 "lint": {

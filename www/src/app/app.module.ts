@@ -15,6 +15,8 @@ import { LayoutModule } from 'app/shared/layout/layout.module';
 import { MainModule } from './main/main.module';
 import { NgxMaskModule } from 'ngx-mask';
 import { fuseConfig } from './shared/config/fuse-config';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const routes = [
     {
@@ -39,7 +41,13 @@ const routes = [
         FuseThemeOptionsModule,
         // App modules
         LayoutModule,
-        MainModule
+        MainModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+          enabled: environment.production,
+          // Register the ServiceWorker as soon as the app is stable
+          // or after 30 seconds (whichever comes first).
+          registrationStrategy: 'registerWhenStable:30000'
+        })
     ],
     bootstrap: [AppComponent]
 })

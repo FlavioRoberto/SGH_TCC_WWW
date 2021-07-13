@@ -32,6 +32,7 @@
     "@angular/platform-browser": "11.2.12",
     "@angular/platform-browser-dynamic": "11.2.12",
     "@angular/router": "11.2.12",
+    "@angular/service-worker": "11.2.12",
     "@auth0/angular-jwt": "5.0.2",
     "@breaking_dev/ic-databar-lib": "0.1.1",
     "@breaking_dev/ic-expansivel-table": "0.0.5",
