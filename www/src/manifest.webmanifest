@@ -1,6 +1,6 @@
 {
-  "name": "fuse",
-  "short_name": "fuse",
+  "name": "Sistema de gerenciamento de horários",
+  "short_name": "SGH",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
