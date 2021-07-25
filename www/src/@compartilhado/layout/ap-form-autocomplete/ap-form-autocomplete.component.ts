@@ -32,7 +32,7 @@ export class ApFormAutocompleteComponent implements OnInit, OnDestroy {
     @Output() itemSelecionado = new EventEmitter<any>();
     @Output() alteracoesFormulario = new EventEmitter<any>();
     @Output() novaPesquisa = new EventEmitter<any>();
-    @Output() onBlur = new EventEmitter<any>();
+    @Output() blur = new EventEmitter<any>();
 
     timeoutPesquisa$: Subject<string> = new Subject<string>();
     itens$: Observable<any[]>;
@@ -67,7 +67,7 @@ export class ApFormAutocompleteComponent implements OnInit, OnDestroy {
     }
 
     onBlurEvent(event): void {
-        this.onBlur.emit(event);
+        this.blur.emit(event);
     }
 
     private _filtrarEntidade(filtro: string): void {

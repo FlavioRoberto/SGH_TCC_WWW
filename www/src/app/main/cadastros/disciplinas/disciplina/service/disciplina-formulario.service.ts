@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { TipoModel } from '../../tipo/model/ITipo';
+import { TipoModel } from '../../tipo/model/iTipo';
 
 @Injectable()
 export class DisciplinaFormularioService {

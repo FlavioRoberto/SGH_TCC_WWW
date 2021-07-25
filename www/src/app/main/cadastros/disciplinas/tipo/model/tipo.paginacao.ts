@@ -1,5 +1,5 @@
-import { TipoModel } from './ITipo';
 import { IDataEntidadePaginada } from '@breaking_dev/ic-databar-lib';
+import { TipoModel } from './iTipo';
 
 export class TipoPaginado implements IDataEntidadePaginada<TipoModel>{
     quantidade: number;

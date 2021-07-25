@@ -8,7 +8,7 @@ import { DisciplinaPaginado } from './model/disciplina.paginacao';
 import { DisciplinaDataBarService } from './service/disciplina-databar.service';
 import { DisciplinaModel } from './model/disciplina';
 import { DisciplinaFormularioService } from './service/disciplina-formulario.service';
-import { TipoModel } from 'app/main/cadastros/disciplinas/tipo/model/ITipo';
+import { TipoModel } from '../tipo/model/iTipo';
 
 @Component({
     selector: 'disciplina',

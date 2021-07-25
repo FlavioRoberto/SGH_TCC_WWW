@@ -2,9 +2,9 @@ import { FormGroup } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EStatus, IDatabarBindOnClickService, DatabarEventClickService, EEventoClick } from '@breaking_dev/ic-databar-lib';
-import { TipoModel } from '../model/ITipo';
 import { DisciplinaTipoService } from './disciplina.tipo.service';
 import { TipoPaginado } from '../model/tipo.paginacao';
+import { TipoModel } from '../model/iTipo';
 
 export class DisciplinaTipoDataBarService implements IDatabarBindOnClickService<TipoModel>{
     eventDatabar: DatabarEventClickService;

@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
 
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 
 import { locale as portugues } from '../../i18n/pt-br';
-import { TipoModel } from './model/ITipo';
 import { TipoPaginado } from './model/tipo.paginacao';
 import { DisciplinaTipoService } from './service/disciplina.tipo.service';
 import { DisciplinaTipoDataBarService } from './service/disciplina.tipo-databar.service';
-import { IDataBarBindComponent, EStatus } from '@breaking_dev/ic-databar-lib';
+import { TipoModel } from './model/iTipo';
 
 
 @Component({

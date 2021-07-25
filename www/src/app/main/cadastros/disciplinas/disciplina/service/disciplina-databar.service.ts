@@ -1,16 +1,23 @@
-import { FormGroup } from '@angular/forms';
-import { EventEmitter, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { FormGroup } from "@angular/forms";
+import { EventEmitter, Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 
-import { EStatus, IDatabarBindOnClickService, DatabarEventClickService, EEventoClick } from '@breaking_dev/ic-databar-lib';
+import {
+    EStatus,
+    IDatabarBindOnClickService,
+    DatabarEventClickService,
+    EEventoClick,
+} from "@breaking_dev/ic-databar-lib";
 
-import { DisciplinaService } from './disciplina.service';
-import { DisciplinaPaginado } from '../model/disciplina.paginacao';
-import { DisciplinaModel } from '../model/disciplina';
-import { DisciplinaFormularioService } from './disciplina-formulario.service';
+import { DisciplinaService } from "./disciplina.service";
+import { DisciplinaPaginado } from "../model/disciplina.paginacao";
+import { DisciplinaModel } from "../model/disciplina";
+import { DisciplinaFormularioService } from "./disciplina-formulario.service";
 
 @Injectable()
-export class DisciplinaDataBarService implements IDatabarBindOnClickService<DisciplinaModel> {
+export class DisciplinaDataBarService
+    implements IDatabarBindOnClickService<DisciplinaModel>
+{
     eventDatabar: DatabarEventClickService;
     status: EStatus;
     formgroup: FormGroup;
@@ -18,13 +25,15 @@ export class DisciplinaDataBarService implements IDatabarBindOnClickService<Disc
 
     constructor(
         private _formularioService: DisciplinaFormularioService,
-        private _servicoDisciplina: DisciplinaService) {
-
+        private _servicoDisciplina: DisciplinaService
+    ) {
         this.onClickEnter = new EventEmitter();
         this.formgroup = this._formularioService.form;
-        this.eventDatabar = new DatabarEventClickService(evento => {
+        this.eventDatabar = new DatabarEventClickService((evento) => {
             switch (evento) {
-                case EEventoClick.afterClickEditar: this._formularioService.PrepararCampoAposEdicao(); break;
+                case EEventoClick.afterClickEditar:
+                    this._formularioService.PrepararCampoAposEdicao();
+                    break;
             }
         });
     }
@@ -38,10 +47,12 @@ export class DisciplinaDataBarService implements IDatabarBindOnClickService<Disc
     }
 
     criar(): Observable<DisciplinaModel> {
-        return this._servicoDisciplina.criar(this.getEntidade())
+        return this._servicoDisciplina.criar(this.getEntidade());
     }
 
-    listarPaginacao(paginacao: DisciplinaPaginado): Observable<DisciplinaPaginado> {
+    listarPaginacao(
+        paginacao: DisciplinaPaginado
+    ): Observable<DisciplinaPaginado> {
         return this._servicoDisciplina.listarPaginacao(paginacao);
     }
 

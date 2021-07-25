@@ -5,6 +5,7 @@ import { SalaComponent } from './sala.component';
 import { DataBarFormModule } from '../../../../shared/layout/components/databar-form/databar-form.module';
 import { NgxMaskModule } from 'ngx-mask';
 import { BlocoResolver } from 'app/shared/resolvers/bloco.resolver';
+import { BlocoService } from '../bloco/service/bloco.service';
 
 @NgModule({
     imports: [
@@ -14,6 +15,6 @@ import { BlocoResolver } from 'app/shared/resolvers/bloco.resolver';
         NgxMaskModule.forRoot()
     ],
     declarations: [SalaComponent],
-    providers: [BlocoResolver]
+    providers: [BlocoService, BlocoResolver]
 })
 export class SalaModule { }

@@ -1,10 +1,10 @@
 import { Component, ChangeDetectorRef, Injector } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { OnInitDataBar, EStatus } from '@breaking_dev/ic-databar-lib';
 import { SalaModel } from './model/sala.model';
-import { FormBuilder, Validators } from '@angular/forms';
 import { SalaPaginada } from './model/sala-paginada.model';
 import { SalaDatabarService } from './services/sala-databar.service';
-import { ActivatedRoute } from '@angular/router';
 import { BlocoModel } from '../bloco/model/bloco.model';
 
 @Component({

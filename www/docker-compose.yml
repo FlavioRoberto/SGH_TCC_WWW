@@ -2,9 +2,9 @@ version: '3.4'
 
 services:
   sgh-www:
-    image: sgh-www
+    image: kenobirt/sgh.www
     build:
       context: .
       dockerfile: ./Dockerfile
     ports:
-      - 8081:80
+      - 80:80

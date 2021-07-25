@@ -1,6 +1,6 @@
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { TipoModel } from 'app/main/cadastros/disciplinas/tipo/model/ITipo';
+import { TipoModel } from 'app/main/cadastros/disciplinas/tipo/model/iTipo';
 import { DisciplinaTipoService } from 'app/main/cadastros/disciplinas/tipo/service/disciplina.tipo.service';
 
 @Injectable()
