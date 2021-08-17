@@ -73,7 +73,6 @@
                 >
                 <mat-label *ngIf="!carregandoSalas">Salas</mat-label>
                 <mat-select
-                    required
                     [disabled]="carregandoSalas"
                     fxLayout="column"
                     (openedChange)="onOpenedChangeLista()"

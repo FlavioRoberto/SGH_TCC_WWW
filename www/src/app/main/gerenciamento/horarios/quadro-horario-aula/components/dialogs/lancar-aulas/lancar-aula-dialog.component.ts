@@ -72,7 +72,7 @@ export class LancarAulaDialogComponent extends AdicionarAulaBaseComponent<Lancar
     protected _construirFormulario(): void {
         this.form = this._formBuilder.group({
             codigoDisciplina: [null, [Validators.required]],
-            codigoSala: [null, [Validators.required]],
+            codigoSala: [null],
             laboratorio: [false],
             diasLancados: [null, [Validators.required]],
             horariosLancados: [null, [Validators.required]],
