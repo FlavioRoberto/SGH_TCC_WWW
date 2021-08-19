@@ -99,7 +99,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         this._construirForm();
 
         this.servicoDataBarBind = new CurriculoDataBarService(this.form, this._servico, this.dataSource);
-     
+
         this.tiposDisciplinas = this._route.snapshot.data['tipos'];
 
         if (this._platform.ANDROID || this._platform.IOS) {
@@ -186,7 +186,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
         });
 
         this.parametroFiltroCurso = {
-            atributoExibicao: 'descricao',
+            textoExibicao: (curso: CursoModel) => curso.descricao,
             atributoValue: 'codigo',
             control: this.form.get('codigoCurso') as FormControl,
             dados: this.cursos,

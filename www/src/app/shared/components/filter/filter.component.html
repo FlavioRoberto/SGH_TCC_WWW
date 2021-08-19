@@ -18,7 +18,7 @@
         }}</mat-option>
         <div *ngFor="let dado of parametros.dados | filter: filtro">
             <mat-option [value]="dado[parametros.atributoValue]">
-                {{ dado[parametros.atributoExibicao] }}
+                {{ parametros.textoExibicao(dado) }}
             </mat-option>
         </div>
     </mat-select>

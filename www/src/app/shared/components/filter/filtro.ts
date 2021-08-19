@@ -7,7 +7,7 @@ export interface Filtro {
     mensagemCarregamento: string;
     mensgemNaoEncontrado: string;
     atributoValue: string;
-    atributoExibicao: string;
+    textoExibicao: (item: any) => string;
 }
 
  
