@@ -41,15 +41,10 @@
                     #input_edital
                     [required]="inserindoOuEditando"
                     matInput
-                    mask="9*"
-                    maxlength="6"
                     type="text"
                     class="primary-color-input border-radius-4"
                     formControlName="edital"
                 />
-                <mat-hint align="end">
-                    {{ input_edital.value?.length || 0 }}/6</mat-hint
-                >
                 <mat-error *ngIf="form.get('edital').hasError('required')">
                     Campo obrigatório!
                 </mat-error>

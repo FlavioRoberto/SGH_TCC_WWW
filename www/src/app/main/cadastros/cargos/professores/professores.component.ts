@@ -70,7 +70,6 @@ export class ProfessoresComponent implements IDataBarBindComponent<Professor> {
                 Validators.pattern(celularRegex),
             ]),
             email: new FormControl(null, [
-                Validators.maxLength(45),
                 Validators.required,
                 Validators.email,
             ]),

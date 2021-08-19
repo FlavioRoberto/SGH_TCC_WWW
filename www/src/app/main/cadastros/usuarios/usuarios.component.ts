@@ -68,7 +68,7 @@ export class UsuariosComponent implements IDataBarBindComponent<UsuarioModel>, O
             telefone: [null, [Validators.maxLength(20), Validators.pattern(celularRegex)]],
             login: [null, [Validators.maxLength(30), Validators.required]],
             senha: [null],
-            email: [null, [Validators.maxLength(45), Validators.required, Validators.email]],
+            email: [null, [Validators.required, Validators.email]],
             foto: [null],
             perfilCodigo: [null, [Validators.required]],
             ativo: [false],

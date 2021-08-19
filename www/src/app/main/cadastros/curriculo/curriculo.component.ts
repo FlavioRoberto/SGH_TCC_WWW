@@ -191,7 +191,6 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
             control: this.form.get('codigoCurso') as FormControl,
             dados: this.cursos,
             label: 'Curso',
-            mensagemCarregamento: 'Pesquisando curso...',
             mensgemNaoEncontrado: 'Curso não encontrado'
         }
     }

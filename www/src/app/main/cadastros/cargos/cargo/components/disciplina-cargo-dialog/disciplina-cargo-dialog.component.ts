@@ -115,7 +115,7 @@ export class DisciplinaCargoDialogComponent implements OnInit {
             codigoCurriculo: [null, Validators.required],
             codigoCurriculoDisciplina: [null, Validators.required],
             codigoTurno: [null, Validators.required],
-            descricao: [{ value: null, disabled: true }, [Validators.maxLength(30)]]
+            descricao: [{ value: null, disabled: true }]
         });
     }
 
