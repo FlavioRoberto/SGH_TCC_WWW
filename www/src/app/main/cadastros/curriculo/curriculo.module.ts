@@ -13,6 +13,7 @@ import { AdicionarDisciplinaDialogModule } from './components/dialogs/adicionar-
 import { TurnoResolver } from 'app/shared/resolvers/turno.resolver';
 import { CursoResolver } from 'app/shared/resolvers/curso.resolver';
 import { TipoResolver } from 'app/shared/resolvers/tipo.resolver';
+import { SharedModule } from '../../../shared/shared.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { TipoResolver } from 'app/shared/resolvers/tipo.resolver';
         FuseSharedModule,
         CurriculoRoutingModule,
         DataBarFormModule,
-        AdicionarDisciplinaDialogModule
+        AdicionarDisciplinaDialogModule,
+        SharedModule
     ],
     exports: [CurriculoComponent],
     providers: [

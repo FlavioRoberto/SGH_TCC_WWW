@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Platform } from '@angular/cdk/platform';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
@@ -26,6 +26,7 @@ import { SnackBarService } from 'app/shared/services/snack-bar.service';
 import { finalize } from 'rxjs/operators';
 import { ConfirmaDialogService } from 'app/shared/components/dialogs/confirma-dialog/service/confirma-dialog.service';
 import { TipoModel } from '../disciplinas/tipo/model/iTipo';
+import { Filtro } from '../../../shared/components/filter/filtro';
 
 @Component({
     selector: 'curriculo',
@@ -42,6 +43,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     EStatus = EStatus;
     isMobile = false;
     removendoDisciplina = false;
+    parametroFiltroCurso: Filtro;
     private tiposDisciplinas: TipoModel[];
 
     displayedColumns: ColumnDef[] = [
@@ -89,14 +91,15 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     ngOnInit(): void {
         this._fuseTranslationLoaderService.loadTranslations(portugues);
         this.entidadePaginada = new CurriculoPaginado();
-        this._construirForm();
-
-        this.servicoDataBarBind = new CurriculoDataBarService(this.form, this._servico, this.dataSource);
 
         this.cursos = this._route.snapshot.data['cursos'];
 
         this.turnos = this._route.snapshot.data['turnos'];
 
+        this._construirForm();
+
+        this.servicoDataBarBind = new CurriculoDataBarService(this.form, this._servico, this.dataSource);
+     
         this.tiposDisciplinas = this._route.snapshot.data['tipos'];
 
         if (this._platform.ANDROID || this._platform.IOS) {
@@ -181,6 +184,16 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
             codigoCurso: [null, [Validators.required]],
             disciplinas: [null]
         });
+
+        this.parametroFiltroCurso = {
+            atributoExibicao: 'descricao',
+            atributoValue: 'codigo',
+            control: this.form.get('codigoCurso') as FormControl,
+            dados: this.cursos,
+            label: 'Curso',
+            mensagemCarregamento: 'Pesquisando curso...',
+            mensgemNaoEncontrado: 'Curso não encontrado'
+        }
     }
 
 }

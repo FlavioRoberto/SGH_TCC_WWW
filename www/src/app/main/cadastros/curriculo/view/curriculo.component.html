@@ -52,7 +52,9 @@
             <!-- ANO -->
 
             <!-- CURSO -->
-            <mat-form-field fxFlex appearance="outline">
+            <sgh-filter [parametros]="parametroFiltroCurso" fxFlex></sgh-filter>
+            
+            <!-- <mat-form-field fxFlex appearance="outline">
                 <mat-label>Curso</mat-label>
                 <mat-select placeholder="Período" formControlName="codigoCurso">
                     <mat-option
@@ -65,7 +67,7 @@
                 <mat-error *ngIf="form.get('codigoCurso').hasError('required')">
                     {{ "GERENCIAMENTO.CAMPO_OBRIGATORIO" | translate }}
                 </mat-error>
-            </mat-form-field>
+            </mat-form-field> -->
             <!-- CURSO -->
         </div>
         <!-- TABLE DISCIPLINAS -->
