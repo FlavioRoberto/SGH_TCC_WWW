@@ -43,7 +43,7 @@ export class HorariosComponent implements OnInit {
     ngOnInit(): void {
         this._inicializarFormulario();
         this._carregarCurriculos();
-        this.pesquisarHorarios();
+      //  this.pesquisarHorarios();
     }
 
     get habilitarBotaoLimpar(): boolean {
