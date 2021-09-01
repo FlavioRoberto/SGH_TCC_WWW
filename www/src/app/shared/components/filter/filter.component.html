@@ -16,10 +16,11 @@
             (keyup)="filtrar($event.target.value)"
         />
         <mat-divider></mat-divider>
-        <mat-option *ngIf="parametros.carregando">
+        <mat-option disabled *ngIf="parametros.carregando">
             {{ parametros.mensagemCarregamento }}
         </mat-option>
         <mat-option
+            disabled
             *ngIf="!parametros.carregando && parametros.dados?.length <= 0"
             >{{ parametros.mensgemNaoEncontrado }}</mat-option
         >
