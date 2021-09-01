@@ -4,6 +4,7 @@ export class AdicionarAulaBaseDataModel {
     codigoHorario: number;
     titulo: string;
     codigoCurriculo: number;
+    codigoCurriculoDisciplina: number;
     codigoTurno: number;
     horariosTurno: string[];
     ano: number;

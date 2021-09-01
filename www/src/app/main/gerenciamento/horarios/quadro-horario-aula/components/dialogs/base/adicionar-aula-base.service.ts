@@ -19,4 +19,5 @@ export class AdicionarAulaBaseService extends HttpBaseService<any> {
     ): Observable<T[]> {
         return this.post(filtro, this._rotaCargoDisciplina.listarPorCurriculo);
     }
+    
 }

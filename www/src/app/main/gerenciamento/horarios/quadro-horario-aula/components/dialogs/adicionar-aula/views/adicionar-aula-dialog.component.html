@@ -19,7 +19,7 @@
     <div fxFlex="100" class="p-16 pb-0 m-0 noPadding" fusePerfectScrollbar>
         <form [formGroup]="form" fxLayout="column">
             <!-- DISCIPLINA -->
-            <sgh-filter [parametros]="parametroFiltroDisciplina"></sgh-filter>
+            <sgh-filter (valorSelecionado)="selecionarDisciplina($event)" [parametros]="parametroFiltroDisciplina"></sgh-filter>
             <!-- DISCIPLINA -->
 
             <!-- DISCIPLINA_Auxiliar -->

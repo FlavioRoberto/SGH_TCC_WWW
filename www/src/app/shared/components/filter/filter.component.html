@@ -2,8 +2,10 @@
     <mat-label>{{ parametros.label }}</mat-label>
     <mat-select
         fxLayout="column"
+        [disabled]="parametros.desabilitar"
         [multiple]="parametros.multiplo"
         [formControl]="parametros.control"
+        (valueChange)="selecionar($event)"
     >
         <input
             *ngIf="parametros.dados?.length > 0"

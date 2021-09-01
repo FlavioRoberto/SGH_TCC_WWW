@@ -17,6 +17,7 @@ export abstract class AdicionarAulaBaseComponent<
     carregandoDisciplinas = false;
     carregandoSalas = false;
     disciplinas: T[] = [];
+    disciplinasAuxiliares: T[] = [];
     salas: SalaModel[];
     data: T;
     @ViewChild("filtroDisciplina", { static: true }) filtroDisciplina;
@@ -67,6 +68,7 @@ export abstract class AdicionarAulaBaseComponent<
             .pipe(finalize(() => (this.carregandoDisciplinas = false)))
             .subscribe((disciplinas) => {
                 this.disciplinas.length = 0;
+                this.disciplinasAuxiliares.length = 0;
                 disciplinas.forEach(dis => this.disciplinas.push(dis))
             });
     }

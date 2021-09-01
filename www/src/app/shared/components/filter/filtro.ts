@@ -7,6 +7,7 @@ export class Filtro<T> {
     mensgemNaoEncontrado: string;
     mensagemCarregamento: string;
     atributoValue: string;
+    desabilitar = false;
     carregando: boolean;
     multiplo = false;
     largura = "100%";

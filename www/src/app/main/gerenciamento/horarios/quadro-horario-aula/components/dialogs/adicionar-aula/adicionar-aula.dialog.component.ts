@@ -48,8 +48,9 @@ export class AdicionarAulaDialogComponent extends AdicionarAulaBaseComponent<Adi
             textoExibicao: (disciplina) => `${disciplina.professor} - ${disciplina.descricao}`,
             atributoValue: 'codigo',
             control: this.form.get('disciplinasAuxiliares') as FormControl,
-            dados: this.disciplinas,
+            dados: this.disciplinasAuxiliares,
             label: 'Disciplinas auxiliares',
+            desabilitar: true,
             mensgemNaoEncontrado: 'Disciplina não encontrada',
             multiplo: true,
             largura: '570px'
@@ -74,6 +75,18 @@ export class AdicionarAulaDialogComponent extends AdicionarAulaBaseComponent<Adi
 
     fecharDialog(): void {
         this.dialogRef.close();
+    }
+
+    selecionarDisciplina(codigoDisciplina: number): void {
+        this.form.get('disciplinasAuxiliares').setValue(null);
+        this.disciplinasAuxiliares.length = 0;
+        const disciplinaSelecionada = this.disciplinas.filter((dis: any) => dis.codigo === codigoDisciplina)[0];
+        this.disciplinas.filter(dis =>
+            dis.codigoCurriculoDisciplina === disciplinaSelecionada.codigoCurriculoDisciplina &&
+            (dis as any).codigo !== (disciplinaSelecionada as any).codigo)
+            .forEach(disAux => this.disciplinasAuxiliares.push(disAux));
+
+        this.parametroFiltroDisciplinaAuxiliares.desabilitar = false;
     }
 
     protected _construirFormulario(): void {
