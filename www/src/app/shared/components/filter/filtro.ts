@@ -1,12 +1,20 @@
-import { AbstractControl, FormControl } from "@angular/forms";
+import { AbstractControl } from "@angular/forms";
 
-export interface Filtro {
+export class Filtro<T> {
     label: string;
     control: AbstractControl;
-    dados: any[];
+    dados: T[];
     mensgemNaoEncontrado: string;
+    mensagemCarregamento: string;
     atributoValue: string;
+    carregando: boolean;
+    multiplo = false;
+    largura = "100%";
     textoExibicao: (item: any) => string;
+
+    constructor(init?: Partial<Filtro<T>>) {
+        Object.assign(this, init);
+    }
 }
 
- 
+

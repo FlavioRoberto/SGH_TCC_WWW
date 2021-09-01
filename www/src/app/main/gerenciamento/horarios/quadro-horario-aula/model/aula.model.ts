@@ -11,4 +11,10 @@ export class AulaModel {
     descricaoDesdobramento: string;
     pratica: boolean;
     horarioExtrapolado: boolean;
+    disciplinasAuxiliares: number[]
 }
+
+export class DisciplinaAuxiliar {
+    codigo: number;
+}
+

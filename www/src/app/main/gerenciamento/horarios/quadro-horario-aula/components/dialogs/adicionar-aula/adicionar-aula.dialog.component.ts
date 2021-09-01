@@ -1,14 +1,15 @@
-import { Component, Inject, ViewEncapsulation } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
+import { Component, Inject, ViewEncapsulation, OnInit } from '@angular/core';
+import { FormBuilder, FormControl } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { finalize } from "rxjs/operators";
 import { AdicionarAulaDialogDataModel } from "./models/adicionar-aula-dialog-data.model";
 import { AdicionarAulaService } from "./services/adicionar-aula.service";
-import { finalize } from "rxjs/operators";
 import { SalaService } from "app/main/cadastros/salas/sala/services/sala.service";
-import { AulaModel } from "../../../model/aula.model";
 import { SnackBarService } from "app/shared/services/snack-bar.service";
 import { AdicionarAulaBaseComponent } from "../base/adicionar-aula-base.component";
 import { AdicionarAulaBaseService } from "../base/adicionar-aula-base.service";
+import { Filtro } from '../../../../../../../shared/components/filter/filtro';
+import { AulaModel } from "../../../model/aula.model";
 
 @Component({
     templateUrl: "./views/adicionar-aula-dialog.component.html",
@@ -16,6 +17,9 @@ import { AdicionarAulaBaseService } from "../base/adicionar-aula-base.service";
     encapsulation: ViewEncapsulation.None,
 })
 export class AdicionarAulaDialogComponent extends AdicionarAulaBaseComponent<AdicionarAulaDialogDataModel> {
+
+    parametroFiltroDisciplina: Filtro<AdicionarAulaDialogDataModel>;
+    parametroFiltroDisciplinaAuxiliares: Filtro<AdicionarAulaDialogDataModel>;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) data: AdicionarAulaDialogDataModel,
@@ -27,6 +31,29 @@ export class AdicionarAulaDialogComponent extends AdicionarAulaBaseComponent<Adi
         private _sala: SalaService
     ) {
         super(data, _snackBar, _adicionarAulaBase, _sala);
+    }
+
+    ngOnInit(): void {
+        super.ngOnInit();
+        this.parametroFiltroDisciplina = new Filtro({
+            textoExibicao: (disciplina) => `${disciplina.professor} - ${disciplina.descricao}`,
+            atributoValue: 'codigo',
+            control: this.form.get('codigoDisciplina') as FormControl,
+            dados: this.disciplinas,
+            label: 'Disciplinas',
+            mensgemNaoEncontrado: 'Disciplina não encontrada'
+        });
+
+        this.parametroFiltroDisciplinaAuxiliares = new Filtro({
+            textoExibicao: (disciplina) => `${disciplina.professor} - ${disciplina.descricao}`,
+            atributoValue: 'codigo',
+            control: this.form.get('disciplinasAuxiliares') as FormControl,
+            dados: this.disciplinas,
+            label: 'Disciplinas auxiliares',
+            mensgemNaoEncontrado: 'Disciplina não encontrada',
+            multiplo: true,
+            largura: '570px'
+        });
     }
 
     get possuiDesdobramento(): boolean {
@@ -57,6 +84,7 @@ export class AdicionarAulaDialogComponent extends AdicionarAulaBaseComponent<Adi
             laboratorio: [false],
             desdobramento: [false],
             descricaoDesdobramento: [null],
+            disciplinasAuxiliares: [null],
             reserva: this._formBuilder.group({
                 diaSemana: [this.data.reserva.diaSemana],
                 hora: [this.data.reserva.hora],

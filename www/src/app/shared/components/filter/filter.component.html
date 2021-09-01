@@ -1,6 +1,10 @@
-<mat-form-field appearance="outline" fxFlex="1 0 auto">
+<mat-form-field appearance="outline" [style.width]="parametros.largura">
     <mat-label>{{ parametros.label }}</mat-label>
-    <mat-select fxLayout="column" [formControl]="parametros.control">
+    <mat-select
+        fxLayout="column"
+        [multiple]="parametros.multiplo"
+        [formControl]="parametros.control"
+    >
         <input
             *ngIf="parametros.dados?.length > 0"
             class="p-12"
@@ -10,16 +14,19 @@
             (keyup)="filtrar($event.target.value)"
         />
         <mat-divider></mat-divider>
-        <!-- <mat-option *ngIf="parametros.carregando">
+        <mat-option *ngIf="parametros.carregando">
             {{ parametros.mensagemCarregamento }}
-        </mat-option> -->
-        <mat-option *ngIf="parametros.dados?.length <= 0">{{
-            parametros.mensgemNaoEncontrado
-        }}</mat-option>
-        <div *ngFor="let dado of parametros.dados | filter: filtro">
-            <mat-option [value]="dado[parametros.atributoValue]">
-                {{ parametros.textoExibicao(dado) }}
-            </mat-option>
-        </div>
+        </mat-option>
+        <mat-option
+            *ngIf="!parametros.carregando && parametros.dados?.length <= 0"
+            >{{ parametros.mensgemNaoEncontrado }}</mat-option
+        >
+        <ng-container *ngIf="!parametros.carregando">
+            <div *ngFor="let dado of parametros.dados | filter: filtro">
+                <mat-option [value]="dado[parametros.atributoValue]">
+                    {{ parametros.textoExibicao(dado) }}
+                </mat-option>
+            </div>
+        </ng-container>
     </mat-select>
 </mat-form-field>

@@ -19,52 +19,15 @@
     <div fxFlex="100" class="p-16 pb-0 m-0 noPadding" fusePerfectScrollbar>
         <form [formGroup]="form" fxLayout="column">
             <!-- DISCIPLINA -->
-            <mat-form-field appearance="outline" fxFlex>
-                <mat-label *ngIf="carregandoDisciplinas"
-                    >Carregando disciplinas...</mat-label
-                >
-                <mat-label *ngIf="!carregandoDisciplinas"
-                    >Disciplinas</mat-label
-                >
-                <mat-select
-                    [disabled]="carregandoDisciplinas"
-                    fxLayout="column"
-                    required
-                    (openedChange)="onOpenedChangeDisciplina()"
-                    formControlName="codigoDisciplina"
-                >
-                    <input
-                        class="p-12"
-                        placeholder="Pesquisar..."
-                        matInput
-                        name="filtro"
-                        #filtroDisciplina
-                    />
-                    <mat-divider></mat-divider>
-                    <mat-option
-                        disabled
-                        *ngIf="!disciplinas || disciplinas.length <= 0"
-                        >Não foram encontradas disciplinas</mat-option
-                    >
-                    <div
-                        *ngFor="
-                            let disciplina of disciplinas
-                                | filter: filtroDisciplina?.value
-                        "
-                    >
-                        <mat-option [value]="disciplina.codigo">
-                            {{ disciplina.professor }} -
-                            {{ disciplina.descricao }}
-                        </mat-option>
-                    </div>
-                </mat-select>
-                <mat-error
-                    *ngIf="form.get('codigoDisciplina').hasError('required')"
-                >
-                    Esse campo é obrigatório
-                </mat-error>
-            </mat-form-field>
+            <sgh-filter [parametros]="parametroFiltroDisciplina"></sgh-filter>
             <!-- DISCIPLINA -->
+
+            <!-- DISCIPLINA_Auxiliar -->
+            <sgh-filter
+                fxFlex="100"
+                [parametros]="parametroFiltroDisciplinaAuxiliares"
+            ></sgh-filter>
+            <!-- DISCIPLINA_Auxiliar -->
 
             <!-- SALA -->
             <mat-form-field appearance="outline" fxFlex>

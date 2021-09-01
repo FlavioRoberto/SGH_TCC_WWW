@@ -43,7 +43,7 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
     EStatus = EStatus;
     isMobile = false;
     removendoDisciplina = false;
-    parametroFiltroCurso: Filtro;
+    parametroFiltroCurso: Filtro<any>;
     private tiposDisciplinas: TipoModel[];
 
     displayedColumns: ColumnDef[] = [
@@ -185,14 +185,16 @@ export class CurriculoComponent implements IDataBarBindComponent<CurriculoModule
             disciplinas: [null]
         });
 
-        this.parametroFiltroCurso = {
+        this.parametroFiltroCurso = new Filtro({
             textoExibicao: (curso: CursoModel) => curso.descricao,
             atributoValue: 'codigo',
             control: this.form.get('codigoCurso') as FormControl,
             dados: this.cursos,
             label: 'Curso',
-            mensgemNaoEncontrado: 'Curso não encontrado'
-        }
+            carregando: false,
+            mensgemNaoEncontrado: 'Curso não encontrado',
+            mensagemCarregamento: ''
+        })
     }
 
 }

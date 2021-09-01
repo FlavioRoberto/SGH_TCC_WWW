@@ -9,7 +9,7 @@ import { Filtro } from "./filtro";
 export class FilterComponent {
     filtro:string = '';
 
-    @Input() parametros: Filtro;
+    @Input() parametros: Filtro<any>;
 
     filtrar(filtro: string): void {
         this.filtro = filtro;
