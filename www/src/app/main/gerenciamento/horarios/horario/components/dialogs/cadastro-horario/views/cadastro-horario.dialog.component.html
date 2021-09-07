@@ -23,6 +23,23 @@
             fxLayout="column"
             [formGroup]="form"
         >
+            <!-- DESCRICAO -->
+            <mat-form-field appearance="outline" fxFlex.gt-sm="100">
+                <mat-label>Descrição</mat-label>
+                <input
+                    #input_descricao
+                    required
+                    matInput
+                    type="text"
+                    class="primary-color-input border-radius-4"
+                    formControlName="descricao"
+                />
+                <mat-error *ngIf="form.get('descricao').hasError('required')">
+                    Campo obrigatório!
+                </mat-error>
+            </mat-form-field>
+            <!-- DESCRICAO -->
+
             <!-- CURRICULO -->
             <mat-form-field appearance="outline" fxFlex="1 0 auto">
                 <mat-label>Currículo</mat-label>

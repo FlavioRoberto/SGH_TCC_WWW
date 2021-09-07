@@ -109,6 +109,7 @@ export class CadastroHorarioDialogComponent implements OnInit {
     private _construirFormulario(): void {
         this.form = this._formBuilder.group({
             codigo: [null],
+            descricao: [null, [Validators.required]],
             codigoCurriculo: [null, [Validators.required]],
             ano: [new Date().getFullYear(), [Validators.required, Validators.minLength(4)]],
             periodo: [null, [Validators.required]],

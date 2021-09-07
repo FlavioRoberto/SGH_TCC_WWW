@@ -1,7 +1,8 @@
 <mat-card class="card-horario" (click)="selecionar($event)">
     <mat-card-header>
         <mat-card-title>
-            {{ horario?.ano }} - {{ horario?.semestre }} semestre
+           <p> {{ horario?.ano }} - {{ horario?.semestre }} semestre</p>
+           <p>{{horario?.descricao}}</p>
         </mat-card-title>
         <mat-card-title>
             {{ horario?.curriculo?.curso?.descricao }}

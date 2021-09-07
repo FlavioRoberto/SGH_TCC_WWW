@@ -136,6 +136,7 @@ export class HorariosComponent implements OnInit {
     private _abrirDialogCadastroHorario(titulo: string, horario: HorarioModel): void {
         this._cadastroHorarioDialogService.abrirDialog({
             titulo: titulo,
+            descricao: horario.descricao,
             curriculos: this.curriculos,
             periodos: this.periodos,
             semestres: this.semestres,

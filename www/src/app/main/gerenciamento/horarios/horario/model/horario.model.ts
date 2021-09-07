@@ -3,6 +3,7 @@ import { CurriculoModel } from 'app/main/cadastros/curriculo/model/curriculo.mod
 
 export class HorarioModel {
     codigo: number;
+    descricao: string;
     curriculo: CurriculoModel;
     periodo: number;
     semestre: number;
