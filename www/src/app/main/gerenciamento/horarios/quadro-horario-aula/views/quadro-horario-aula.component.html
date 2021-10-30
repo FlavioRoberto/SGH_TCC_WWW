@@ -51,15 +51,33 @@
                                     fxLayout="column"
                                     class="aula"
                                 >
-                                    <button
-                                        id="button-remover-aula"
-                                        (click)="removerAula(aula)"
-                                        color="accent"
-                                        mat-icon-button
-                                        aria-label="remover aula"
-                                    >
-                                        <mat-icon>delete</mat-icon>
-                                    </button>
+                                    <div fxLayout="row">
+                                        <button
+                                            id="button-remover-aula"
+                                            matTooltip="Remover aula"
+                                            (click)="removerAula(aula)"
+                                            color="accent"
+                                            mat-icon-button
+                                            aria-label="remover aula"
+                                        >
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+
+                                        <button
+                                            id="button-remover-aula"
+                                            (click)="vincularSala(aula)"
+                                            matTooltip="Vincular sala de aula"
+                                            color="accent"
+                                            mat-icon-button
+                                            aria-label="Adicionar sala"
+                                        >
+                                            <span
+                                                class="material-icons-outlined"
+                                            >
+                                                meeting_room
+                                            </span>
+                                        </button>
+                                    </div>
 
                                     <span>
                                         <strong>{{ aula.disciplina }}</strong>

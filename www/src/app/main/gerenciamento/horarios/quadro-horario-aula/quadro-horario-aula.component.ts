@@ -10,6 +10,7 @@ import { SnackBarService } from "app/shared/services/snack-bar.service";
 import { LancarAulaDialogService } from "./components/dialogs/lancar-aulas/lancar-aula-dialog.service";
 import { AdicionarAulaBaseDataModel } from "./components/dialogs/base/adicionar-aula-data-base.model";
 import { LancarAulaDialogDataModel } from "./components/dialogs/lancar-aulas/models/lancar-aula-dialog.model";
+import { VincularSalaDialogService } from './components/dialogs/vincular-sala/vincular-sala-dialog.service';
 
 @Component({
     templateUrl: "./views/quadro-horario-aula.component.html",
@@ -29,8 +30,9 @@ export class QuadroHorarioAulaComponent implements OnInit {
         private _adicionarAulaDialogService: AdicionarAulaDialogService,
         private _lancarAulaDialogService: LancarAulaDialogService,
         private _confirmaDialogService: ConfirmaDialogService,
-        private _snackBarService: SnackBarService
-    ) {}
+        private _snackBarService: SnackBarService,
+        private _vincularSalaDialogService: VincularSalaDialogService
+    ) { }
 
     ngOnInit(): void {
         this._recuperarCodigoHorarioSelecionado();
@@ -67,6 +69,10 @@ export class QuadroHorarioAulaComponent implements OnInit {
             "Atenção",
             "Existe uma aula reservada para o horário selecionado, deseja removê-la?"
         );
+    }
+
+    vincularSala(aula: AulaModel): void {
+        this._vincularSalaDialogService.abrirDialog(aula);
     }
 
     adicionarAula(horario: string, diaSemana: string): void {

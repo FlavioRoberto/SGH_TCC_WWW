@@ -36,6 +36,8 @@
                         "ngswConfigPath": "ngsw-config.json"
                     },
                     "configurations": {
+                        "optimization": false,
+                        "buildOptimizer": false,
                         "production": {
                             "fileReplacements": [
                                 {
@@ -70,7 +72,7 @@
                                     "maximumWarning": "6kb"
                                 }
                             ],
-                            "sourceMap": true,
+                            "sourceMap": true
                         },
                         "hmr": {
                             "budgets": [
