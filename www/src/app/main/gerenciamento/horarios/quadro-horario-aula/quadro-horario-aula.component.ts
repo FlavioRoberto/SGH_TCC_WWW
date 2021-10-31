@@ -11,6 +11,7 @@ import { LancarAulaDialogService } from "./components/dialogs/lancar-aulas/lanca
 import { AdicionarAulaBaseDataModel } from "./components/dialogs/base/adicionar-aula-data-base.model";
 import { LancarAulaDialogDataModel } from "./components/dialogs/lancar-aulas/models/lancar-aula-dialog.model";
 import { VincularSalaDialogService } from './components/dialogs/vincular-sala/vincular-sala-dialog.service';
+import { VincularSalaModel } from "./components/dialogs/vincular-sala/models/vincular-sala.model";
 
 @Component({
     templateUrl: "./views/quadro-horario-aula.component.html",
@@ -72,7 +73,7 @@ export class QuadroHorarioAulaComponent implements OnInit {
     }
 
     vincularSala(aula: AulaModel): void {
-        this._vincularSalaDialogService.abrirDialog(aula);
+        this._vincularSalaDialogService.abrirDialog(new VincularSalaModel(aula, () => this._carregarAulas()));
     }
 
     adicionarAula(horario: string, diaSemana: string): void {

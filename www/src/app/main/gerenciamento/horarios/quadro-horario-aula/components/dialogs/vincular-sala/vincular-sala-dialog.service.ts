@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { VincularSalaDialogComponent } from './vincular-sala.component';
-import { AulaModel } from '../../../model/aula.model';
+import { VincularSalaModel } from './models/vincular-sala.model';
 
 
 @Injectable()
@@ -9,7 +9,7 @@ export class VincularSalaDialogService {
 
     constructor(private _dialog: MatDialog) { }
 
-    abrirDialog(data: AulaModel): void {
+    abrirDialog(data: VincularSalaModel): void {
         const dialogConfig = new MatDialogConfig();
 
         dialogConfig.panelClass = 'vincular-sala-dialog';

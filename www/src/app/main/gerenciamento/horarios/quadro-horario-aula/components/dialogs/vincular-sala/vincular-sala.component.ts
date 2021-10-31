@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SalaModel } from 'app/main/cadastros/salas/sala/model/sala.model';
@@ -6,6 +6,7 @@ import { SalaService } from 'app/main/cadastros/salas/sala/services/sala.service
 import { finalize } from 'rxjs/internal/operators/finalize';
 import { AulaModel } from '../../../model/aula.model';
 import { LancarAulaDialogComponent } from '../lancar-aulas/lancar-aula-dialog.component';
+import { VincularSalaModel } from './models/vincular-sala.model';
 import { VincularSalaService } from './services/vincular-sala.service';
 import { VincularSalaDialogService } from './vincular-sala-dialog.service';
 
@@ -23,7 +24,7 @@ export class VincularSalaDialogComponent implements OnInit {
     @ViewChild("filtroSala", { static: true }) filtroSala;
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) private data: AulaModel,
+        @Inject(MAT_DIALOG_DATA) private data: VincularSalaModel,
         private _dialogRef: MatDialogRef<LancarAulaDialogComponent>,
         private _salaServico: SalaService,
         private _vincularSalaServico: VincularSalaService,
@@ -49,9 +50,12 @@ export class VincularSalaDialogComponent implements OnInit {
 
     salvar(): void {
         this.salvando = true;
-        this._vincularSalaServico.vincular(this.salaSelecionada, this.data.codigo)
+        this._vincularSalaServico.vincular(this.salaSelecionada, this.data.aula.codigo)
             .pipe(finalize(() => this.salvando = false))
-            .subscribe()
+            .subscribe(() => {
+                this.data.salaVinculada();
+                this._dialogRef.close();
+            });
     }
 
     onOpenedChangeLista(): void {
